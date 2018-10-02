@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace KBSGame
 {
@@ -20,10 +21,23 @@ namespace KBSGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        DispatcherTimer countdownTimer;
+        TimeSpan playTime;
+
         public MainWindow()
         {
             InitializeComponent();
             initStartpoint();
+
+            playTime = TimeSpan.FromSeconds(10);
+
+            countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
+            {
+                TimerLabel.Content = playTime.ToString(@"mm\:ss");
+                if (playTime == TimeSpan.Zero) { countdownTimer.Stop(); GameOver(); }
+                playTime = playTime.Add(TimeSpan.FromSeconds(-1));
+            }, Application.Current.Dispatcher);
+
             initEndpoint();
         }
 
@@ -41,6 +55,23 @@ namespace KBSGame
         public void initEndpoint()
         {
 
+        }
+
+        public void GameOver()
+        {
+            TimerLabel.Content = "";
+            TextBlock textBlock = new TextBlock();
+            #region textBlock config
+            textBlock.VerticalAlignment = VerticalAlignment.Center;
+            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
+            textBlock.Text = "Game Over";
+            textBlock.Foreground = Brushes.Red;
+            textBlock.FontSize = 32;
+            textBlock.FontWeight = FontWeights.Bold;
+            #endregion
+            Canvas.SetLeft(textBlock, 312);
+            Canvas.SetTop(textBlock, 220);
+            GameCanvas.Children.Add(textBlock);
         }
     }
 }
