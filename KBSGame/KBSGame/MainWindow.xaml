@@ -15,7 +15,7 @@
     Width="802"
     Height="602">
         <Canvas x:Name="GameCanvas" Height="600" Width="800" Background="#FFEAEAE1" VerticalAlignment="Top" >
-            <Label x:Name="TimerLabel" Content="00:00" Canvas.Left="341" Height="30" Width="110" FontFamily="Microsoft Sans Serif" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16"/>
+            <Label x:Name="TimerLabel" Content="" Canvas.Left="341" Height="30" Width="110" FontFamily="Microsoft Sans Serif" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16"/>
         </Canvas>
     </Border>
 </Window>

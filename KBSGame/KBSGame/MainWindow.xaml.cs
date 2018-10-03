@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Media;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -21,44 +22,27 @@ namespace KBSGame
     /// </summary>
     public partial class MainWindow : Window
     {
+        Game game;
         DispatcherTimer countdownTimer;
         TimeSpan playTime;
 
         public MainWindow()
         {
             InitializeComponent();
-            initStartpoint();
-
+            game = new Game(GameCanvas);
             playTime = TimeSpan.FromSeconds(10);
-
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 TimerLabel.Content = playTime.ToString(@"mm\:ss");
                 if (playTime == TimeSpan.Zero) { countdownTimer.Stop(); GameOver(); }
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
-
-            initEndpoint();
-        }
-
-        public void initStartpoint()
-        {
-            Ellipse cirkel = new Ellipse();
-            cirkel.Fill = Brushes.Gray;
-            cirkel.Width = 50;
-            cirkel.Height = 50;
-            Canvas.SetLeft(cirkel, 0);
-            Canvas.SetTop(cirkel, 0);
-            GameCanvas.Children.Add(cirkel);
-        }
-
-        public void initEndpoint()
-        {
-
         }
 
         public void GameOver()
         {
+            SoundPlayer audio = new SoundPlayer(KBSGame.Properties.Resources.game_over_sound_effect); 
+            audio.Play();
             TimerLabel.Content = "";
             TextBlock textBlock = new TextBlock();
             #region textBlock config
@@ -72,6 +56,7 @@ namespace KBSGame
             Canvas.SetLeft(textBlock, 312);
             Canvas.SetTop(textBlock, 220);
             GameCanvas.Children.Add(textBlock);
+            
         }
     }
 }
