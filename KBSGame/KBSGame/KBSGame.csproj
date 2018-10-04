@@ -55,8 +55,15 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="EndPointModal.xaml.cs">
+      <DependentUpon>EndPointModal.xaml</DependentUpon>
+    </Compile>
     <Compile Include="GameObjects\EndPoint.cs" />
     <Compile Include="GameObjects\StartPoint.cs" />
+    <Page Include="EndPointModal.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

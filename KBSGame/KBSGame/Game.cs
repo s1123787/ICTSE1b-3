@@ -18,5 +18,13 @@ namespace KBSGame
             StartPoint = new StartPoint(canvas);
             EndPoint = new EndPoint(canvas);
         }
+
+        public void CheckEndPoint(double x, double y)
+        {
+            if(x == 755 && y == 555)
+            {
+                
+            }
+        }
     }
 }

@@ -32,6 +32,9 @@ namespace KBSGame
         {
             InitializeComponent();
             game = new Game(GameCanvas);
+
+            //timer
+            /*
             playTime = TimeSpan.FromSeconds(10);
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -39,6 +42,7 @@ namespace KBSGame
                 if (playTime == TimeSpan.Zero) { countdownTimer.Stop(); GameOver(); }
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
+            */
 
             //speler aanmaken
             speler = new Player(GameCanvas);
