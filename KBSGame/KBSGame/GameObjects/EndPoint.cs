@@ -37,7 +37,7 @@ namespace KBSGame
             myImage.Source = myBitmapImage;
 
             Canvas.SetTop(myImage, 550);
-            Canvas.SetLeft(myImage, 743);
+            Canvas.SetLeft(myImage, 750);
             canvas.Children.Add(myImage);
         }
     }
