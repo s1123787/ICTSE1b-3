@@ -11,8 +11,8 @@ namespace KBSGame
 {
     class Obstakel
     {
-        private int x;
-        private int y;
+        public int x { get; private set; }
+        public int y { get; private set; }
         private int width = 50;
         private int height = 50;
         public Rectangle rect = new Rectangle();
@@ -24,13 +24,7 @@ namespace KBSGame
             SetType(z);
             rect.Width = 50;
             rect.Height = 50;
-            Random random = new Random();
-            x = random.Next(0, 16);
-            x = x * 50;
-            Canvas.SetLeft(rect, x);
-            y = random.Next(0, 8);
-            y = y * 50;
-            Canvas.SetTop(rect, y);
+            AssignPosition();
             //canvas.Children.Add(rect);
             //rect = null;
         }
@@ -40,15 +34,31 @@ namespace KBSGame
             {
                 this.Type = "Bom";
                 rect.Fill = Brushes.DarkRed;
+                rect.Opacity = 0.5;
                 return;
             }
             else if (z == "Boom")
             {
                 this.Type = "Boom";
                 rect.Fill = Brushes.ForestGreen;
+                rect.Opacity = 0.5;
                 return;
             }
             return;
+        }
+
+        public void AssignPosition()
+        {
+            Random random = new Random();
+            while ((x <= 2 && y <= 2) || (x >= 13 && y >= 9))
+            {
+                x = random.Next(0, 16);
+                y = random.Next(0, 12);
+            }
+            x = x * 50;
+            y = y * 50;
+            Canvas.SetLeft(rect, x);
+            Canvas.SetTop(rect, y);
         }
     }
 }
