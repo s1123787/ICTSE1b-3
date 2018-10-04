@@ -62,9 +62,9 @@
     <Compile Include="EndPointModal.xaml.cs">
       <DependentUpon>EndPointModal.xaml</DependentUpon>
     </Compile>
-    <Compile Include="GameObjects\EndPoint.cs" />
-    <Compile Include="GameObjects\Obstakels.cs" />
-    <Compile Include="GameObjects\StartPoint.cs" />
+    <Compile Include="Model\EndPoint.cs" />
+    <Compile Include="Model\Obstakels.cs" />
+    <Compile Include="Model\StartPoint.cs" />
     <Page Include="EndPointModal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -77,15 +77,15 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Game.cs" />
+    <Compile Include="Model\Game.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="GameObjects\Obstakel.cs" />
-    <Compile Include="Player.cs" />
+    <Compile Include="Model\Obstakel.cs" />
+    <Compile Include="Model\Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
