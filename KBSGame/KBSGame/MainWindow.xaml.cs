@@ -26,6 +26,7 @@ namespace KBSGame
         Game game;
         DispatcherTimer countdownTimer;
         TimeSpan playTime;
+        Player speler;
 
         public MainWindow()
         {
@@ -38,6 +39,12 @@ namespace KBSGame
                 if (playTime == TimeSpan.Zero) { countdownTimer.Stop(); GameOver(); }
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
+
+            //speler aanmaken
+            speler = new Player(GameCanvas);
+
+            //key eventhandler toevoegen
+            this.KeyDown += new KeyEventHandler(OnKeyDown);
         }
 
         public void GameOver()
@@ -59,6 +66,26 @@ namespace KBSGame
             Canvas.SetTop(textBlock, 220);
             GameCanvas.Children.Add(textBlock);
             
+        }
+
+        private void OnKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.Key)
+            {
+                case Key.Right:
+                    speler.MoveRight(GameCanvas);
+                    break;
+                case Key.Left:
+                    speler.MoveLeft(GameCanvas);
+                    break;
+                case Key.Down:
+                    speler.MoveDown(GameCanvas);
+                    break;
+                case Key.Up:
+                    speler.MoveUp(GameCanvas);
+                    break;
+
+            }
         }
     }
 }

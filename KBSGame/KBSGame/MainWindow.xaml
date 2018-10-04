@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KBSGame"
         mc:Ignorable="d"
-        Title="KBS Game" Height="800" Width="810" ResizeMode="NoResize">
+        Title="KBS Game" Height="800" Width="810" ResizeMode="NoResize" KeyDown="OnKeyDown">
     <Border
     BorderThickness="1"
     BorderBrush="#FFA4A4A4"
