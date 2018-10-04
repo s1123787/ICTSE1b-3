@@ -22,20 +22,25 @@ namespace KBSGame
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    {        
         Game game;
         DispatcherTimer countdownTimer;
         TimeSpan playTime;
         Player speler;
+        
 
         public MainWindow()
         {
             InitializeComponent();
+<<<<<<< HEAD
             game = new Game(GameCanvas);
             speler = game.Player;
 
             //timer
             /*
+=======
+            game = new Game(GameCanvas, 10, 10);
+>>>>>>> origin/ruben
             playTime = TimeSpan.FromSeconds(10);
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -52,6 +57,10 @@ namespace KBSGame
             this.KeyDown += new KeyEventHandler(OnKeyDown);
 
             
+<<<<<<< HEAD
+=======
+            
+>>>>>>> origin/ruben
         }
 
         public void GameOver()
