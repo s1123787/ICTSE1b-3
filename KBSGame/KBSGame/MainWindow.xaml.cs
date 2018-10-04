@@ -22,16 +22,17 @@ namespace KBSGame
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class MainWindow : Window
-    {
+    {        
         Game game;
         DispatcherTimer countdownTimer;
         TimeSpan playTime;
         Player speler;
+        
 
         public MainWindow()
         {
             InitializeComponent();
-            game = new Game(GameCanvas);
+            game = new Game(GameCanvas, 10, 10);
             playTime = TimeSpan.FromSeconds(10);
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -46,36 +47,8 @@ namespace KBSGame
             //key eventhandler toevoegen
             this.KeyDown += new KeyEventHandler(OnKeyDown);
 
-            List<Obstakel> ObstacleList = new List<Obstakel>();
-            List<String> Typelijst = new List<String>();
-            //List<String> ExistingLocations = new List<String>();
-            for (int i = 0; i < 35; i++)
-            {
-                Typelijst.Add("Boom");
-                Typelijst.Add("Bom");
-            }
             
-
-            for (int i = 0; i < Typelijst.Count; i++)
-            {
-                
-                Obstakel p = new Obstakel(GameCanvas, Typelijst[i]);
-                //string xy = p.x + "," + p.y;
-                //if (!ExistingLocations.Contains(xy))
-                //{
-                    ExistingLocations.Add(xy);
-                    ObstacleList.Add(p);
-                    Thread.Sleep(25);
-                //}
-                //else
-                //{
-                //    break;
-                //}
-            }
-            for (int i = 0; i < ObstacleList.Count; i++)
-            {
-                GameCanvas.Children.Add(ObstacleList[i].rect);
-            }
+            
         }
 
         public void GameOver()

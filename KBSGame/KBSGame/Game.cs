@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KBSGame.GameObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,11 +13,13 @@ namespace KBSGame
     {
         public StartPoint StartPoint { get; set; }
         public EndPoint EndPoint { get; set; }
+        public Obstakels obstakels { get; set; }
 
-        public Game(Canvas canvas)
+        public Game(Canvas canvas, int aantalBoom, int aantalBom)
         {
             StartPoint = new StartPoint(canvas);
             EndPoint = new EndPoint(canvas);
+            obstakels = new Obstakels(aantalBoom, aantalBom, canvas);
         }
     }
 }

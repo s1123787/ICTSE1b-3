@@ -22,6 +22,7 @@ namespace KBSGame
             Canvas.SetLeft(rect, 0);
             Canvas.SetTop(rect, 0);
             canvas.Children.Add(rect);
+
         }
     }
 }
