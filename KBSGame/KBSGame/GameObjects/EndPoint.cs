@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace KBSGame
@@ -14,15 +13,6 @@ namespace KBSGame
     {
         public EndPoint(Canvas canvas)
         {
-            Rectangle rect = new Rectangle();
-            rect.StrokeThickness = 3;
-            rect.Stroke = Brushes.Red;
-            rect.Width = 50;
-            rect.Height = 50;
-            Canvas.SetLeft(rect, 750);
-            Canvas.SetTop(rect, 550);
-            canvas.Children.Add(rect);
-
             Image myImage = new Image();
             myImage.Width = 50;
 
