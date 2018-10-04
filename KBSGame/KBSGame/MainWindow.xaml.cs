@@ -48,21 +48,29 @@ namespace KBSGame
 
             List<Obstakel> ObstacleList = new List<Obstakel>();
             List<String> Typelijst = new List<String>();
-            Typelijst.Add("Boom");
-            Typelijst.Add("Bom");
-            Typelijst.Add("Boom");
-            Typelijst.Add("Bom");
-            Typelijst.Add("Boom");
-            Typelijst.Add("Boom");
-            Typelijst.Add("Bom");
-            Typelijst.Add("Boom");
-            Typelijst.Add("Bom");
-            Typelijst.Add("Boom");
-            for (int i = 0; i < 5; i++)
+            //List<String> ExistingLocations = new List<String>();
+            for (int i = 0; i < 35; i++)
             {
-                ObstacleList.Add(new Obstakel(GameCanvas, Typelijst[i]));
-                Thread.Sleep(25);
+                Typelijst.Add("Boom");
+                Typelijst.Add("Bom");
+            }
+            
 
+            for (int i = 0; i < Typelijst.Count; i++)
+            {
+                
+                Obstakel p = new Obstakel(GameCanvas, Typelijst[i]);
+                //string xy = p.x + "," + p.y;
+                //if (!ExistingLocations.Contains(xy))
+                //{
+                    ExistingLocations.Add(xy);
+                    ObstacleList.Add(p);
+                    Thread.Sleep(25);
+                //}
+                //else
+                //{
+                //    break;
+                //}
             }
             for (int i = 0; i < ObstacleList.Count; i++)
             {
