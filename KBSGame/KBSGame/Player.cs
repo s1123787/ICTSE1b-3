@@ -15,14 +15,15 @@ namespace KBSGame
     class Player
     {
 
-        Ellipse player = new Ellipse();
+        private Ellipse player = new Ellipse();
         private double x = 5;
         private double y = 5;
         private int StepSize = 25;
+        private Canvas gameCanvas;
 
         public Player(Canvas GameCanvas)
         {
-
+            gameCanvas = GameCanvas;
             player.Fill = Brushes.Red;
             player.Width = 40;
             player.Height = 40;
@@ -31,9 +32,8 @@ namespace KBSGame
             GameCanvas.Children.Add(player);
         }
 
-        public void MoveRight(Canvas gameCanvas)
+        public void MoveRight()
         {
-
             //get current position x
             x = Canvas.GetLeft(player);
 
@@ -52,7 +52,7 @@ namespace KBSGame
             }
         }
 
-        public void MoveLeft(Canvas gameCanvas)
+        public void MoveLeft()
         {
             //get current position x
             x = Canvas.GetLeft(player);
@@ -72,7 +72,7 @@ namespace KBSGame
             }
         }
 
-        public void MoveDown(Canvas gameCanvas)
+        public void MoveDown()
         {
             y = Canvas.GetTop(player);
 
@@ -89,7 +89,7 @@ namespace KBSGame
             }
         }
 
-        public void MoveUp(Canvas gameCanvas)
+        public void MoveUp()
         {
             y = Canvas.GetTop(player);
 
@@ -103,6 +103,21 @@ namespace KBSGame
 
                 Canvas.SetTop(player, y -= StepSize);
                 gameCanvas.Children.Add(player);
+            }
+        }
+
+        public Boolean CheckEndPoint()
+        {
+            x = Canvas.GetLeft(player);
+            y = Canvas.GetTop(player);
+
+            if (x == 755 && y == 555)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
             }
         }
     }

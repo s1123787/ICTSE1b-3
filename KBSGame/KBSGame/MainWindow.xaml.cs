@@ -32,6 +32,7 @@ namespace KBSGame
         {
             InitializeComponent();
             game = new Game(GameCanvas);
+            speler = game.Player;
 
             //timer
             /*
@@ -44,34 +45,13 @@ namespace KBSGame
             }, Application.Current.Dispatcher);
             */
 
-            //speler aanmaken
-            speler = new Player(GameCanvas);
+            
+            
 
             //key eventhandler toevoegen
             this.KeyDown += new KeyEventHandler(OnKeyDown);
 
-            List<Obstakel> ObstacleList = new List<Obstakel>();
-            List<String> Typelijst = new List<String>();
-            Typelijst.Add("Boom");
-            Typelijst.Add("Bom");
-            Typelijst.Add("Boom");
-            Typelijst.Add("Bom");
-            Typelijst.Add("Boom");
-            Typelijst.Add("Boom");
-            Typelijst.Add("Bom");
-            Typelijst.Add("Boom");
-            Typelijst.Add("Bom");
-            Typelijst.Add("Boom");
-            for (int i = 0; i < 5; i++)
-            {
-                ObstacleList.Add(new Obstakel(GameCanvas, Typelijst[i]));
-                Thread.Sleep(25);
-
-            }
-            for (int i = 0; i < ObstacleList.Count; i++)
-            {
-                GameCanvas.Children.Add(ObstacleList[i].rect);
-            }
+            
         }
 
         public void GameOver()
@@ -97,22 +77,39 @@ namespace KBSGame
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
+
+
             switch (e.Key)
             {
                 case Key.Right:
-                    speler.MoveRight(GameCanvas);
+                    speler.MoveRight();
                     break;
                 case Key.Left:
-                    speler.MoveLeft(GameCanvas);
+                    speler.MoveLeft();
                     break;
                 case Key.Down:
-                    speler.MoveDown(GameCanvas);
+                    speler.MoveDown();
                     break;
                 case Key.Up:
-                    speler.MoveUp(GameCanvas);
+                    speler.MoveUp();
                     break;
 
             }
+            if (speler.CheckEndPoint() == true)
+            {
+                //show endpoint dialog 
+                EndPointModal dlg = new EndPointModal();
+                dlg.Owner = this;
+                if (dlg.ShowDialog() == true)
+                {
+                    game = null;
+                    game = new Game(GameCanvas);
+                }
+                return;
+            }
+
+
         }
+
     }
 }

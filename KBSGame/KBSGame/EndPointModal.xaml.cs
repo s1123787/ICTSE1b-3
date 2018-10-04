@@ -24,10 +24,11 @@ namespace KBSGame
             InitializeComponent();
         }
 
-
-        private void ExitButton_click(object sender, RoutedEventArgs e)
+        private void Again_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.DialogResult = true;
         }
+
+        
     }
 }
