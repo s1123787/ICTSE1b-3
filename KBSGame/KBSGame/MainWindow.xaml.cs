@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Media;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -41,9 +42,10 @@ namespace KBSGame
 
         public void GameOver()
         {
-            SoundPlayer audio = new SoundPlayer(KBSGame.Properties.Resources.game_over_sound_effect); 
+            TimerLabel.Content = "00:00";
+            SoundPlayer audio = new SoundPlayer(Properties.Resources.game_over_sound_effect); 
             audio.Play();
-            TimerLabel.Content = "";
+            Thread.Sleep(1000);
             TextBlock textBlock = new TextBlock();
             #region textBlock config
             textBlock.VerticalAlignment = VerticalAlignment.Center;

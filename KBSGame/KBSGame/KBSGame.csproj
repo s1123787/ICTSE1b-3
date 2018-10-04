@@ -36,6 +36,7 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -97,10 +98,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\game-over-voice-sound-effect.wav" />
+    <None Include="Resources\game-over-sound-effect.wav" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\game-over-sound-effect.wav" />
+    <Resource Include="Images\flag.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
