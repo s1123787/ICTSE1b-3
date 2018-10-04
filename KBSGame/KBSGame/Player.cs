@@ -18,7 +18,7 @@ namespace KBSGame
         Ellipse player = new Ellipse();
         private double x = 5;
         private double y = 5;
-        private int StepSize = 50;
+        private int StepSize = 25;
 
         public Player(Canvas GameCanvas)
         {

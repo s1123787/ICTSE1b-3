@@ -45,6 +45,29 @@ namespace KBSGame
 
             //key eventhandler toevoegen
             this.KeyDown += new KeyEventHandler(OnKeyDown);
+
+            List<Obstakel> ObstacleList = new List<Obstakel>();
+            List<String> Typelijst = new List<String>();
+            Typelijst.Add("Boom");
+            Typelijst.Add("Bom");
+            Typelijst.Add("Boom");
+            Typelijst.Add("Bom");
+            Typelijst.Add("Boom");
+            Typelijst.Add("Boom");
+            Typelijst.Add("Bom");
+            Typelijst.Add("Boom");
+            Typelijst.Add("Bom");
+            Typelijst.Add("Boom");
+            for (int i = 0; i < 5; i++)
+            {
+                ObstacleList.Add(new Obstakel(GameCanvas, Typelijst[i]));
+                Thread.Sleep(25);
+
+            }
+            for (int i = 0; i < ObstacleList.Count; i++)
+            {
+                GameCanvas.Children.Add(ObstacleList[i].rect);
+            }
         }
 
         public void GameOver()

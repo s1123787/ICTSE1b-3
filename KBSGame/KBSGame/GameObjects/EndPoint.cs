@@ -19,7 +19,7 @@ namespace KBSGame
             rect.Stroke = Brushes.Red;
             rect.Width = 50;
             rect.Height = 50;
-            Canvas.SetLeft(rect, 743);
+            Canvas.SetLeft(rect, 750);
             Canvas.SetTop(rect, 550);
             canvas.Children.Add(rect);
 
