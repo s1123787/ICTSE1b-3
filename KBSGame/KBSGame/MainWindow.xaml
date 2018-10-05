@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KBSGame"
         mc:Ignorable="d"
-        Title="KBS Game" Height="800" Width="810" ResizeMode="NoResize">
+        Title="KBS Game" Height="800" Width="818" ResizeMode="NoResize" KeyDown="OnKeyDown">
     <Border
     BorderThickness="1"
     BorderBrush="#FFA4A4A4"
@@ -14,7 +14,22 @@
     VerticalAlignment="Top"
     Width="802"
     Height="602">
-        <Canvas x:Name="GameCanvas" Height="600" Width="800" Background="#FFEAEAE1" VerticalAlignment="Top" >
+        <Canvas x:Name="GameCanvas" Height="600" Width="800" VerticalAlignment="Top" Margin="1,-1,-1,0" >
+            <Canvas.Background>
+                <DrawingBrush TileMode="Tile" Viewport="0,0,50,50" 
+                                     ViewportUnits="Absolute">
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing>
+                            <GeometryDrawing.Geometry>
+                                <RectangleGeometry Rect="0,0,100,100"/>
+                            </GeometryDrawing.Geometry>
+                            <GeometryDrawing.Pen>
+                                <Pen Brush="Gray" Thickness="1"/>
+                            </GeometryDrawing.Pen>
+                        </GeometryDrawing>
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Canvas.Background>
             <Label x:Name="TimerLabel" Content="" Canvas.Left="341" Height="30" Width="110" FontFamily="Microsoft Sans Serif" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16"/>
         </Canvas>
     </Border>
