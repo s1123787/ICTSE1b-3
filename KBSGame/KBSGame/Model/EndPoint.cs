@@ -25,11 +25,12 @@ namespace KBSGame
 
             Image myImage = new Image();
             myImage.Width = 50;
+            myImage.Height = 50;
 
             BitmapImage myBitmapImage = new BitmapImage();
 
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/flag.png");
+            myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/flag-sprite.png");
 
             myBitmapImage.DecodePixelWidth = 50;
             myBitmapImage.EndInit();

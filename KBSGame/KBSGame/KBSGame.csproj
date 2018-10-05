@@ -115,10 +115,16 @@
     <None Include="Resources\game-over-sound-effect.wav" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\flag.png" />
+    <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="View\" />
+    <Resource Include="Images\flag-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tree-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\tnt-sprite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

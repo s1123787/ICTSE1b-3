@@ -34,7 +34,7 @@ namespace KBSGame.GameObjects
             }
             for(int i = 0; i < obstakels.Count; i++)
             {
-                canvas.Children.Add(obstakels[i].rect);
+                canvas.Children.Add(obstakels[i].image);
             }
         }
     }
