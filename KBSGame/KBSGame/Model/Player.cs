@@ -43,12 +43,7 @@ namespace KBSGame
             }
             else
             {
-                //remove current postion
-                gameCanvas.Children.Remove(player);
-
-                //set new position 
                 Canvas.SetLeft(player, x += StepSize);
-                gameCanvas.Children.Add(player);
             }
         }
 
@@ -63,12 +58,8 @@ namespace KBSGame
             }
             else
             {
-                //remove current position 
-                gameCanvas.Children.Remove(player);
-
                 //set new position 
                 Canvas.SetLeft(player, x -= StepSize);
-                gameCanvas.Children.Add(player);
             }
         }
 
@@ -82,10 +73,7 @@ namespace KBSGame
             }
             else
             {
-                gameCanvas.Children.Remove(player);
-
                 Canvas.SetTop(player, y += StepSize);
-                gameCanvas.Children.Add(player);
             }
         }
 
@@ -99,14 +87,11 @@ namespace KBSGame
             }
             else
             {
-                gameCanvas.Children.Remove(player);
-
                 Canvas.SetTop(player, y -= StepSize);
-                gameCanvas.Children.Add(player);
             }
         }
 
-        /*
+        
         public Boolean CheckEndPoint()
         {
             x = Canvas.GetLeft(player);
@@ -121,6 +106,12 @@ namespace KBSGame
                 return false;
             }
         }
-        */
+
+        public void Reset()
+        {
+            Canvas.SetTop(player, 5);
+            Canvas.SetLeft(player, 5);
+        }
+        
     }
 }

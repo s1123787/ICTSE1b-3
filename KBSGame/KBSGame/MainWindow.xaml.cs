@@ -24,8 +24,6 @@ namespace KBSGame
     public partial class MainWindow : Window
     {        
         Game game;
-        DispatcherTimer countdownTimer;
-        TimeSpan playTime;
         Player speler;
         
 
@@ -52,26 +50,7 @@ namespace KBSGame
             this.KeyDown += new KeyEventHandler(OnKeyDown);
         }
 
-        public void GameOver()
-        {
-            TimerLabel.Content = "00:00";
-            SoundPlayer audio = new SoundPlayer(Properties.Resources.game_over_sound_effect); 
-            audio.Play();
-            Thread.Sleep(1000);
-            TextBlock textBlock = new TextBlock();
-            #region textBlock config
-            textBlock.VerticalAlignment = VerticalAlignment.Center;
-            textBlock.HorizontalAlignment = HorizontalAlignment.Center;
-            textBlock.Text = "Game Over";
-            textBlock.Foreground = Brushes.Red;
-            textBlock.FontSize = 32;
-            textBlock.FontWeight = FontWeights.Bold;
-            #endregion
-            Canvas.SetLeft(textBlock, 312);
-            Canvas.SetTop(textBlock, 220);
-            GameCanvas.Children.Add(textBlock);
-            
-        }
+        
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
@@ -92,7 +71,6 @@ namespace KBSGame
 
             }
 
-            /*
             if (speler.CheckEndPoint() == true)
             {
                 //show endpoint dialog 
@@ -100,14 +78,12 @@ namespace KBSGame
                 dlg.Owner = this;
                 if (dlg.ShowDialog() == true)
                 {
-                    //game = null;
-
-                    //game = new Game(GameCanvas, 10, 10);
+                    game.Restart();
                 }
                 return;
                 
             }
-            */
+            
 
         }
 

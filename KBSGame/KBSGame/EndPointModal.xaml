@@ -9,7 +9,8 @@
     <Grid>
         <Label Content="Gefeliciteerd! U heeft het eindpunt behaald.&#xD;&#xA;&#xD;&#xA;Wilt u nogmaals spelen of afsluiten?" HorizontalAlignment="Left" Margin="79,34,0,0" VerticalAlignment="Top" Width="242"/>
         <Button x:Name="Again" Content="Opnieuw
-" HorizontalAlignment="Left" Margin="162,120,0,0" VerticalAlignment="Top" Width="75" Click="Again_Click"/>
+" HorizontalAlignment="Left" Margin="83,120,0,0" VerticalAlignment="Top" Width="75" Click="Again_Click"/>
+        <Button x:Name="Exit" Content="Afsluiten" HorizontalAlignment="Left" Margin="242,120,0,0" VerticalAlignment="Top" Width="75" Click="Exit_Click"/>
 
     </Grid>
 </Window>
