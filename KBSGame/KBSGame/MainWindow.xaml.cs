@@ -38,8 +38,8 @@ namespace KBSGame
 
             //timer
             
-            game = new Game(GameCanvas, 10, 10);
-
+           
+            /*
             playTime = TimeSpan.FromSeconds(10);
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
@@ -47,7 +47,7 @@ namespace KBSGame
                 if (playTime == TimeSpan.Zero) { countdownTimer.Stop(); GameOver(); }
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
-            
+            */
 
             
             
@@ -108,7 +108,7 @@ namespace KBSGame
                 if (dlg.ShowDialog() == true)
                 {
                     game = null;
-                    game = new Game(GameCanvas, 10, 10);
+                   // game = new Game(GameCanvas, 10, 10);
                 }
                 return;
             }
