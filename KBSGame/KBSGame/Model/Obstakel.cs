@@ -7,6 +7,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 namespace KBSGame
@@ -17,36 +18,67 @@ namespace KBSGame
         public int y { get; private set; }
         private int width = 50;
         private int height = 50;
-        public Rectangle rect;
+        //public Rectangle rect;
+        public Image image;
         private string Type;
         Random random = new Random();
 
         public Obstakel(String z)
         {
-            rect = new Rectangle();
+            image = new Image();
+            //rect = new Rectangle();
             SetType(z);
-            rect.Width = 50;
-            rect.Height = 50;
-            //Canvas.SetLeft(rect, 800);
-            //Canvas.SetTop(rect, 600);
+            //rect.Width = 50;
+            //rect.Height = 50;
+            ////Canvas.SetLeft(rect, 800);
+            ////Canvas.SetTop(rect, 600);
             AssignPosition();
-            //canvas.Children.Add(rect);
-            //rect = null;
+            ////canvas.Children.Add(rect);
+            ////rect = null;
         }
         public void SetType(string z)
         {
             if (z == "Bom")
             {
                 this.Type = "Bom";
-                rect.Fill = Brushes.DarkRed;
-                rect.Opacity = 0.5;
+
+                
+                image.Width = 50;
+                image.Height = 50;
+
+                BitmapImage myBitmapImage = new BitmapImage();
+
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tnt-sprite.png");
+
+                myBitmapImage.DecodePixelWidth = 50;
+                myBitmapImage.EndInit();
+
+                image.Source = myBitmapImage;
+
+                //rect.Fill = Brushes.DarkRed;
+                //rect.Opacity = 0.5;
                 
             }
             else if (z == "Boom")
             {
                 this.Type = "Boom";
-                rect.Fill = Brushes.ForestGreen;
-                rect.Opacity = 0.5;
+
+                image.Width = 50;
+                image.Height = 50;
+
+                BitmapImage myBitmapImage = new BitmapImage();
+
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tree-sprite.png");
+
+                myBitmapImage.DecodePixelWidth = 50;
+                myBitmapImage.EndInit();
+
+                image.Source = myBitmapImage;
+
+                //rect.Fill = Brushes.ForestGreen;
+                //rect.Opacity = 0.5;
                 
             }
             
@@ -62,8 +94,8 @@ namespace KBSGame
             }
             Obstakels.waardes.Add($"{x}{y}");
 
-            Canvas.SetLeft(rect, x);
-            Canvas.SetTop(rect, y);
+            Canvas.SetLeft(image, x);
+            Canvas.SetTop(image, y);
         }
     }
 }
