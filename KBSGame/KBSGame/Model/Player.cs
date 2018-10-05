@@ -106,6 +106,7 @@ namespace KBSGame
             }
         }
 
+        /*
         public Boolean CheckEndPoint()
         {
             x = Canvas.GetLeft(player);
@@ -120,5 +121,6 @@ namespace KBSGame
                 return false;
             }
         }
+        */
     }
 }

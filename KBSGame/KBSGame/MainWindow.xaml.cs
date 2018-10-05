@@ -36,9 +36,8 @@ namespace KBSGame
             game = new Game(GameCanvas, 10, 10);
             speler = game.Player;
 
-            //timer
             
-           
+            //timer
             /*
             playTime = TimeSpan.FromSeconds(10);
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
@@ -49,14 +48,8 @@ namespace KBSGame
             }, Application.Current.Dispatcher);
             */
 
-            
-            
-
             //key eventhandler toevoegen
             this.KeyDown += new KeyEventHandler(OnKeyDown);
-
-            
-
         }
 
         public void GameOver()
@@ -82,8 +75,6 @@ namespace KBSGame
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-
-
             switch (e.Key)
             {
                 case Key.Right:
@@ -100,6 +91,8 @@ namespace KBSGame
                     break;
 
             }
+
+            /*
             if (speler.CheckEndPoint() == true)
             {
                 //show endpoint dialog 
@@ -107,12 +100,14 @@ namespace KBSGame
                 dlg.Owner = this;
                 if (dlg.ShowDialog() == true)
                 {
-                    game = null;
-                   // game = new Game(GameCanvas, 10, 10);
+                    //game = null;
+
+                    //game = new Game(GameCanvas, 10, 10);
                 }
                 return;
+                
             }
-
+            */
 
         }
 
