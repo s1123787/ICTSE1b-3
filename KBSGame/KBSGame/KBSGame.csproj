@@ -63,7 +63,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -166,6 +166,18 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\game-over-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\landmine-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\landmine-sprite.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\landmine.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

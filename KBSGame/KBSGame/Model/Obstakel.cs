@@ -18,47 +18,43 @@ namespace KBSGame
         public int y { get; private set; }
         private int width = 50;
         private int height = 50;
-        //public Rectangle rect;
         public Image image;
-        private string Type;
+        public MediaElement gif;
+        public string Type { get; private set; }
         Random random = new Random();
 
         public Obstakel(String z)
         {
             image = new Image();
-            //rect = new Rectangle();
+            gif = new MediaElement();
             SetType(z);
-            //rect.Width = 50;
-            //rect.Height = 50;
-            ////Canvas.SetLeft(rect, 800);
-            ////Canvas.SetTop(rect, 600);
             AssignPosition();
-            ////canvas.Children.Add(rect);
-            ////rect = null;
         }
+
         public void SetType(string z)
         {
             if (z == "Bom")
             {
                 this.Type = "Bom";
 
-                
                 image.Width = 50;
                 image.Height = 50;
 
                 BitmapImage myBitmapImage = new BitmapImage();
 
                 myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tnt-sprite.png");
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
 
                 myBitmapImage.DecodePixelWidth = 50;
                 myBitmapImage.EndInit();
 
                 image.Source = myBitmapImage;
 
-                //rect.Fill = Brushes.DarkRed;
-                //rect.Opacity = 0.5;
-                
+                //gif.Width = 50;
+                //gif.Height = 50;
+                //gif.LoadedBehavior = MediaState.Play;
+                //gif.Visibility = System.Windows.Visibility.Visible;
+                //gif.Source = new Uri("pack://application:,,,/Images/landmine-sprite.gif");
             }
             else if (z == "Boom")
             {
@@ -76,10 +72,6 @@ namespace KBSGame
                 myBitmapImage.EndInit();
 
                 image.Source = myBitmapImage;
-
-                //rect.Fill = Brushes.ForestGreen;
-                //rect.Opacity = 0.5;
-                
             }
             
         }
