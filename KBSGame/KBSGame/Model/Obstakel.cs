@@ -9,6 +9,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace KBSGame
 {
@@ -22,6 +23,9 @@ namespace KBSGame
         public Image image;
         private string Type;
         Random random = new Random();
+        private int MovingStepSize = 50;
+        public int MovingX { get; private set; }
+        public int MovingY { get; private set; }
 
         public Obstakel(String z)
         {
@@ -32,7 +36,10 @@ namespace KBSGame
             //rect.Height = 50;
             ////Canvas.SetLeft(rect, 800);
             ////Canvas.SetTop(rect, 600);
+
+            /* Initial assigning of obstakel positions */
             AssignPosition();
+
             ////canvas.Children.Add(rect);
             ////rect = null;
         }
@@ -98,7 +105,11 @@ namespace KBSGame
 
                 image.Source = myBitmapImage;
 
-                MoveObstakelRandom();
+                /* Start dispatch for movement */
+                DispatcherTimer timer = new DispatcherTimer();
+                timer.Interval = TimeSpan.FromSeconds(1);
+                timer.Tick += MoveObstakelRandom;
+                timer.Start();
             }
         }
 
@@ -116,9 +127,168 @@ namespace KBSGame
             Canvas.SetTop(image, y);
         }
 
-        public void MoveObstakelRandom()
+        public void MoveObstakelRandom(object sender, EventArgs e)
         {
+            int rand = random.Next(0, 7);
+            switch(rand)
+            {
+                case 0:
+                    MoveObstakelLeft();
+                    break;
+                case 1:
+                    MoveObstakelRight();
+                    break;
+                case 2:
+                    MoveObstakelUp();
+                    break;
+                case 3:
+                    MoveObstakelDown();
+                    break;
+                case 4:
+                    MoveObstakelLeftUp();
+                    break;
+                case 5:
+                    MoveObstakelLeftDown();
+                    break;
+                case 6:
+                    MoveObstakelLeftUp();
+                    break;
+                case 7:
+                    MoveObstakelRightUp();
+                    break;
+            }
+        }
+        
 
+        public void MoveObstakelRight()
+        {
+            //get current position x
+            double x = Canvas.GetLeft(image);
+
+            if (x == 755.00)
+            {
+                return;
+            }
+            else
+            {
+                Canvas.SetLeft(image, x += MovingStepSize);
+            }
+        }
+
+        public void MoveObstakelRightUp()
+        {
+            //get current position x & y
+            double x = Canvas.GetLeft(image);
+            double y = Canvas.GetTop(image);
+
+            if (x == 5.00 || y == 5.00)
+            {
+                return;
+            }
+            else
+            {
+                //set new position 
+                Canvas.SetLeft(image, x += MovingStepSize);
+                Canvas.SetTop(image, y -= MovingStepSize);
+            }
+        }
+
+        public void MoveObstakelRightDown()
+        {
+            //get current position x & y
+            double x = Canvas.GetLeft(image);
+            double y = Canvas.GetTop(image);
+
+            if (x == 5.00 || y == 5.00)
+            {
+                return;
+            }
+            else
+            {
+                //set new position 
+                Canvas.SetLeft(image, x += MovingStepSize);
+                Canvas.SetTop(image, y += MovingStepSize);
+            }
+        }
+
+        public void MoveObstakelLeft()
+        {
+            //get current position x
+            double x = Canvas.GetLeft(image);
+
+            if (x == 5.00)
+            {
+                return;
+            }
+            else
+            {
+                //set new position 
+                Canvas.SetLeft(image, x -= MovingStepSize);
+            }
+        }
+
+        public void MoveObstakelLeftUp()
+        {
+            //get current position x & y
+            double x = Canvas.GetLeft(image);
+            double y = Canvas.GetTop(image);
+
+            if (x == 5.00 || y == 5.00)
+            {
+                return;
+            }
+            else
+            {
+                //set new position 
+                Canvas.SetLeft(image, x -= MovingStepSize);
+                Canvas.SetTop(image, y -= MovingStepSize);
+            }
+        }
+
+        public void MoveObstakelLeftDown()
+        {
+            //get current position x & y
+            double x = Canvas.GetLeft(image);
+            double y = Canvas.GetTop(image);
+
+            if (x == 5.00 || y == 5.00)
+            {
+                return;
+            }
+            else
+            {
+                //set new position 
+                Canvas.SetLeft(image, x -= MovingStepSize);
+                Canvas.SetTop(image, y += MovingStepSize);
+            }
+        }        
+
+        public void MoveObstakelDown()
+        {
+            double y = Canvas.GetTop(image);
+
+            if (y == 555.00)
+            {
+                return;
+            }
+            else
+            {
+                Canvas.SetTop(image, y += MovingStepSize);
+            }
+        }
+
+        public void MoveObstakelUp()
+        {
+            double y = Canvas.GetTop(image);
+
+            if (y == 5.00)
+            {
+                return;
+            }
+            else
+            {
+                Canvas.SetTop(image, y -= MovingStepSize);
+            }
         }
     }
 }

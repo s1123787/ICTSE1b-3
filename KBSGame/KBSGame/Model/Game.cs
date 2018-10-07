@@ -25,14 +25,15 @@ namespace KBSGame
         public Canvas GameCanvas { get;  set; }
         private int aantalBoom;
         private int aantalBom;
+        private int aantalMoving;
 
 
-        public Game(Canvas canvas, int aantalBoom, int aantalBom)
+        public Game(Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving)
         {
             StartPoint = new StartPoint(canvas);
             EndPoint = new EndPoint(canvas);
             Player = new Player(canvas);
-            obstakels = new Obstakels(aantalBoom, aantalBom, canvas);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, canvas);
             this.aantalBoom = aantalBoom;
             this.aantalBom = aantalBom;
             GameCanvas = canvas;
@@ -63,7 +64,7 @@ namespace KBSGame
         {
             Player.Reset();
             obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, GameCanvas);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas);
         }
 
     }
