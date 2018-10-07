@@ -25,7 +25,9 @@ namespace KBSGame
     {        
         Game game;
         Player speler;
-        
+        DispatcherTimer countdownTimer;
+        TimeSpan playTime;
+
 
         public MainWindow()
         {
@@ -34,20 +36,22 @@ namespace KBSGame
             game = new Game(GameCanvas, 10, 10);
             speler = game.Player;
 
-            
+            //key eventhandler toevoegen
+            this.KeyDown += new KeyEventHandler(OnKeyDown);
+
+
             //timer
-            /*
+
             playTime = TimeSpan.FromSeconds(10);
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 TimerLabel.Content = playTime.ToString(@"mm\:ss");
-                if (playTime == TimeSpan.Zero) { countdownTimer.Stop(); GameOver(); }
+                if (playTime == TimeSpan.Zero) { countdownTimer.Stop(); game.GameOver(); }
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
-            */
+            
 
-            //key eventhandler toevoegen
-            this.KeyDown += new KeyEventHandler(OnKeyDown);
+            
         }
 
         
@@ -73,18 +77,28 @@ namespace KBSGame
 
             if (speler.CheckEndPoint() == true)
             {
+                countdownTimer.Stop();
                 //show endpoint dialog 
                 EndPointModal dlg = new EndPointModal();
                 dlg.Owner = this;
                 if (dlg.ShowDialog() == true)
                 {
+                    
                     game.Restart();
+                    playTime = TimeSpan.FromSeconds(10);
+                    countdownTimer.Start();
+                    
                 }
                 return;
                 
             }
             
 
+        }
+
+        public void SetTimerLabel(string text)
+        {
+            TimerLabel.Content = text;
         }
 
     }

@@ -15,15 +15,16 @@ namespace KBSGame
 {
     class Game
     {
-        DispatcherTimer countdownTimer;
-        TimeSpan playTime;
+        
 
         public StartPoint StartPoint { get; set; }
         public EndPoint EndPoint { get; set; }
  
         public Player Player { get; private set; }
         public Obstakels obstakels { get; set; }
-        public Canvas GameCanvas { get; private set; }
+        public Canvas GameCanvas { get;  set; }
+        private int aantalBoom;
+        private int aantalBom;
 
 
         public Game(Canvas canvas, int aantalBoom, int aantalBom)
@@ -32,7 +33,9 @@ namespace KBSGame
             EndPoint = new EndPoint(canvas);
             Player = new Player(canvas);
             obstakels = new Obstakels(aantalBoom, aantalBom, canvas);
-
+            this.aantalBoom = aantalBoom;
+            this.aantalBom = aantalBom;
+            GameCanvas = canvas;
         }
 
         public void GameOver()
@@ -59,7 +62,8 @@ namespace KBSGame
         public void Restart()
         {
             Player.Reset();
-            
+            obstakels.Reset();
+            obstakels = new Obstakels(aantalBoom, aantalBom, GameCanvas);
         }
 
     }
