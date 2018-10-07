@@ -105,5 +105,10 @@ namespace KBSGame
             GameWon = false;
             GameLost = false;
         }
+
+        public void SetTimerLabel(string text)
+        {
+            TimerLabel.Text = text;
+        }
     }
 }

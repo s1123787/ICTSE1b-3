@@ -29,6 +29,8 @@ namespace KBSGame
         public Canvas GameCanvas { get; private set; }
         public Image GameOverSprite;
         Button opnieuw, afsluiten;
+        private int aantalBoom;
+        private int aantalBom;
 
 
         public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom)
@@ -40,6 +42,8 @@ namespace KBSGame
             GameCanvas = canvas;
             GameOverSprite = new Image();
             this.mw = mw;
+            this.aantalBoom = aantalBoom;
+            this.aantalBom = aantalBom;
         }
 
         public void GameOver()
@@ -117,7 +121,8 @@ namespace KBSGame
         public void Restart()
         {
             Player.Reset();
-            
+            obstakels.Reset();
+            obstakels = new Obstakels(aantalBoom, aantalBom, GameCanvas);
         }
 
     }
