@@ -26,7 +26,7 @@ namespace KBSGame
         Game game;
         Player speler;
         TimeSpan playTime;
-        int seconds = 10;
+        int seconds = 4;
         DispatcherTimer countdownTimer;
         bool GameWon;
         bool GameLost;

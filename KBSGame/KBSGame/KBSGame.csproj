@@ -179,5 +179,11 @@
   <ItemGroup>
     <None Include="Resources\landmine.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\afsluit-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\opnieuw-button.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

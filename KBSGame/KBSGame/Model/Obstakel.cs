@@ -25,8 +25,18 @@ namespace KBSGame
 
         public Obstakel(String z)
         {
-            image = new Image();
-            gif = new MediaElement();
+            image = new Image
+            {
+                Width = 50,
+                Height = 50
+            };
+            gif = new MediaElement
+            {
+                Width = 50,
+                Height = 50,
+                LoadedBehavior = MediaState.Play,
+                Visibility = System.Windows.Visibility.Visible
+            };
             SetType(z);
             AssignPosition();
         }
@@ -37,43 +47,16 @@ namespace KBSGame
             {
                 this.Type = "Bom";
 
-                image.Width = 50;
-                image.Height = 50;
-
-                BitmapImage myBitmapImage = new BitmapImage();
-
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
-
-                myBitmapImage.DecodePixelWidth = 50;
-                myBitmapImage.EndInit();
-
-                image.Source = myBitmapImage;
-
-                //gif.Width = 50;
-                //gif.Height = 50;
-                //gif.LoadedBehavior = MediaState.Play;
-                //gif.Visibility = System.Windows.Visibility.Visible;
+                image.Source = new BitmapImage(new Uri("pack://application:,,,/Images/landmine-sprite.png"));
+                
                 //gif.Source = new Uri("pack://application:,,,/Images/landmine-sprite.gif");
             }
             else if (z == "Boom")
             {
                 this.Type = "Boom";
-
-                image.Width = 50;
-                image.Height = 50;
-
-                BitmapImage myBitmapImage = new BitmapImage();
-
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tree-sprite.png");
-
-                myBitmapImage.DecodePixelWidth = 50;
-                myBitmapImage.EndInit();
-
-                image.Source = myBitmapImage;
+                
+                image.Source = new BitmapImage(new Uri("pack://application:,,,/Images/tree-sprite.png"));
             }
-            
         }
 
         public void AssignPosition()

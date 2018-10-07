@@ -14,15 +14,19 @@ namespace KBSGame
     {
         public StartPoint(Canvas canvas)
         {
-            Rectangle rect = new Rectangle();
-            rect.StrokeThickness = 3;
-            rect.Stroke = Brushes.Black;
-            rect.Width = 50;
-            rect.Height = 50;
+            //Create rectangle to identify start
+            Rectangle rect = new Rectangle
+            {
+                Width = 50,
+                Height = 50,
+                Stroke = Brushes.Black,
+                StrokeThickness = 3
+            };
+
+            //Add the rectangle to the screen
             Canvas.SetLeft(rect, 0);
             Canvas.SetTop(rect, 0);
             canvas.Children.Add(rect);
-
         }
     }
 }
