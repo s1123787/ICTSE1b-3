@@ -81,7 +81,25 @@ namespace KBSGame
                 //rect.Opacity = 0.5;
                 
             }
-            
+            else if (z == "moving")
+            {
+                this.Type = "Boom";
+
+                image.Width = 50;
+                image.Height = 50;
+
+                BitmapImage myBitmapImage = new BitmapImage();
+
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/moving-sprite.png");
+
+                myBitmapImage.DecodePixelWidth = 50;
+                myBitmapImage.EndInit();
+
+                image.Source = myBitmapImage;
+
+                MoveObstakelRandom();
+            }
         }
 
         public void AssignPosition()
@@ -96,6 +114,11 @@ namespace KBSGame
 
             Canvas.SetLeft(image, x);
             Canvas.SetTop(image, y);
+        }
+
+        public void MoveObstakelRandom()
+        {
+
         }
     }
 }

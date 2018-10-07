@@ -27,7 +27,11 @@ namespace KBSGame.GameObjects
             {
                 type.Add("Bom");
             }
-            for(int i = 0; i < type.Count; i++)
+
+            /* Moving obstakel */
+            type.Add("moving");
+
+            for (int i = 0; i < type.Count; i++)
             {
                 Obstakel o = new Obstakel(type[i]);
                 obstakels.Add(o);
