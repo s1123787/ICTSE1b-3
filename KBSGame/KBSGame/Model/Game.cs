@@ -52,7 +52,7 @@ namespace KBSGame
         public void GameOver()
         {
             //TimerLabel.Content = "00:00";
-            //Create audio player to play sound effect on gameover
+            //Create audio player to play sound effect on game over
             SoundPlayer audio = new SoundPlayer(Properties.Resources.game_over_sound_effect);
             audio.Play();
 
@@ -69,41 +69,39 @@ namespace KBSGame
                 //Set source of GameOverSprite
                 GameOverSprite.Source = new BitmapImage(new Uri("pack://application:,,,/Images/game-over-sprite.png"));
 
+                //Create new button template for restart button
+                ControlTemplate opnieuwButtonTemplate = new ControlTemplate(typeof(Button));
+                var opnieuwButtonImage = new FrameworkElementFactory(typeof(Image));
+                opnieuwButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/opnieuw-button.png", UriKind.RelativeOrAbsolute)));
+                opnieuwButtonTemplate.VisualTree = opnieuwButtonImage;
+
                 //Create new button to restart the game
                 opnieuw = new Button
                 {
                     Width = 125,
                     Height = 45,
-                    Name = "opnieuwButton"
+                    Name = "opnieuwButton",
+                    Template = opnieuwButtonTemplate
                 };
-                //Set the button image
-                opnieuw.Content = new Image
-                {
-                    Source = new BitmapImage(new Uri("pack://application:,,,/Images/opnieuw-button.png")),
-                    VerticalAlignment = VerticalAlignment.Center,
-                    Stretch = Stretch.Fill,
-                    Height = 45,
-                    Width = 125
-                };
+
                 //Subscribe the button to the method it needs to run
                 opnieuw.Click += Opnieuw_Click;
+
+                //Create new button template for shutdown button
+                ControlTemplate afsluitButtonTemplate = new ControlTemplate(typeof(Button));
+                var afsluitButtonImage = new FrameworkElementFactory(typeof(Image));
+                afsluitButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/afsluit-button.png", UriKind.RelativeOrAbsolute)));
+                afsluitButtonTemplate.VisualTree = afsluitButtonImage;
 
                 //Create new button to exit the game
                 afsluiten = new Button
                 {
                     Width = 125,
                     Height = 45,
-                    Name = "afsluitButton"
+                    Name = "afsluitButton",
+                    Template = afsluitButtonTemplate
                 };
-                //Set the button image
-                afsluiten.Content = new Image
-                 {
-                     Source = new BitmapImage(new Uri("pack://application:,,,/Images/afsluit-button.png")),
-                     VerticalAlignment = VerticalAlignment.Center,
-                     Stretch = Stretch.Fill,
-                     Height = 45,
-                     Width = 125
-                 };
+
                 //Subscribe the button to the method it needs to run
                 afsluiten.Click += Afsluiten_Click;
 
@@ -134,7 +132,7 @@ namespace KBSGame
         {
             //Method to reset the game
             mainWindow.PlayAgain();
-            //Clean up gameover overlay
+            //Clean up game over overlay
             GameCanvas.Children.Remove(GameOverSprite);
             GameCanvas.Children.Remove(opnieuw);
             GameCanvas.Children.Remove(afsluiten);

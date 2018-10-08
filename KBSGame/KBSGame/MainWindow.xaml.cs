@@ -26,7 +26,7 @@ namespace KBSGame
         Game game;
         Player speler;
         TimeSpan playTime;
-        int seconds = 4;
+        int seconds = 10;
         DispatcherTimer countdownTimer;
         bool GameWon;
         bool GameLost;
@@ -39,7 +39,7 @@ namespace KBSGame
             playTime = TimeSpan.FromSeconds(seconds);
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                TimerLabel.Text = playTime.ToString(@"mm\:ss");
+                TimerLabel.Text = playTime.ToString(@"ss");
                 if (playTime == TimeSpan.Zero)
                 {
                     countdownTimer.Stop();
