@@ -90,8 +90,6 @@ namespace KBSGame
                 Canvas.SetTop(player, y -= StepSize);
             }
         }
-
-        
         public Boolean CheckEndPoint()
         {
             x = Canvas.GetLeft(player);
@@ -106,12 +104,10 @@ namespace KBSGame
                 return false;
             }
         }
-
         public void Reset()
         {
             Canvas.SetTop(player, 5);
             Canvas.SetLeft(player, 5);
         }
-        
     }
 }

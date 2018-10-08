@@ -45,7 +45,6 @@ namespace KBSGame
 
             AssignPosition();
         }
-
         public void SetType(string z)
         {
             if (z == "Bom")

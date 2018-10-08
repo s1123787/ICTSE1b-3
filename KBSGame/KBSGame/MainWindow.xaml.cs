@@ -31,7 +31,9 @@ namespace KBSGame
         bool GameWon;
         bool GameLost;
         bool ShowOverlayOnce = true;
-
+        Boolean playing = true;
+        TextBlock pause = new TextBlock();
+        
         public MainWindow()
         {
             InitializeComponent();
@@ -49,6 +51,10 @@ namespace KBSGame
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 TimerLabel.Text = playTime.ToString(@"ss");
+                if(playing == false)
+                {
+                    countdownTimer.Stop();
+                }
                 if (playTime == TimeSpan.Zero)
                 {
                     countdownTimer.Stop();
@@ -61,15 +67,11 @@ namespace KBSGame
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
 
-            game = new Game(this, GameCanvas, 10, 10, 2);
-            speler = game.Player;
-
-            //key eventhandler toevoegen
-            this.KeyDown += new KeyEventHandler(OnKeyDown);
-        }
-        
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
+            
+
+            if (playing){
             switch (e.Key)
             {
                 case Key.Right:
@@ -89,6 +91,37 @@ namespace KBSGame
                     speler.MoveUp();
                     break;
 
+            }
+        }
+            if (e.Key == Key.Escape)
+            {
+                if (playing) {
+                    #region textBlock pause
+                    pause.VerticalAlignment = VerticalAlignment.Center;
+                    pause.HorizontalAlignment = HorizontalAlignment.Center;
+                    pause.Text = "Pause";
+                    pause.Foreground = Brushes.Blue;
+                    pause.FontSize = 32;
+                    pause.FontWeight = FontWeights.Bold;
+                    #endregion
+                    Canvas.SetLeft(pause, 312);
+                    Canvas.SetTop(pause, 220);
+                    GameCanvas.Children.Add(pause);
+                    playing = false;
+                }
+                //if (!playing)
+                //{
+                //    playing = true;
+                //    GameCanvas.Children.Remove(pause);
+                //    countdownTimer.Start();
+                //}
+            }
+            //testing purposes
+            if(e.Key == Key.Enter)
+            {
+                playing = true;
+                GameCanvas.Children.Remove(pause);
+                countdownTimer.Start();
             }
 
             if (speler.CheckEndPoint() == true && !GameLost)
@@ -125,5 +158,6 @@ namespace KBSGame
         {
             TimerLabel.Text = text;
         }
+
     }
 }
