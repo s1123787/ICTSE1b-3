@@ -35,9 +35,17 @@ namespace KBSGame
         public MainWindow()
         {
             InitializeComponent();
-            
+
+            game = new Game(this, GameCanvas, 10, 10, 2);
+            speler = game.Player;
+
+            //key eventhandler toevoegen
+            this.KeyDown += new KeyEventHandler(OnKeyDown);
+
+
             //countdown timer
             playTime = TimeSpan.FromSeconds(seconds);
+           
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 TimerLabel.Text = playTime.ToString(@"ss");
@@ -53,7 +61,7 @@ namespace KBSGame
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
 
-            game = new Game(this, GameCanvas, 10, 10);
+            game = new Game(this, GameCanvas, 10, 10, 2);
             speler = game.Player;
 
             //key eventhandler toevoegen

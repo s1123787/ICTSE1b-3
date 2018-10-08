@@ -16,7 +16,7 @@ namespace KBSGame.GameObjects
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
        
-        public Obstakels(int aantalBoom, int aantalBom, Canvas canvas)
+        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, Canvas canvas)
         {
             Canvas = canvas;
             for(int i = 0; i < aantalBoom; i++)
@@ -27,7 +27,15 @@ namespace KBSGame.GameObjects
             {
                 type.Add("Bom");
             }
-            for(int i = 0; i < type.Count; i++)
+
+            /* Moving obstakel */
+            for (int i = 0; i < aantalMoving; i++)
+            {
+                type.Add("moving");
+            }
+            
+
+            for (int i = 0; i < type.Count; i++)
             {
                 Obstakel o = new Obstakel(type[i]);
                 obstakels.Add(o);
