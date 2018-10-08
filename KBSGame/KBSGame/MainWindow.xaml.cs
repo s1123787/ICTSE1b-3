@@ -26,10 +26,11 @@ namespace KBSGame
         Game game;
         Player speler;
         TimeSpan playTime;
-        int seconds = 10;
+        int seconds = 4;
         DispatcherTimer countdownTimer;
         bool GameWon;
         bool GameLost;
+        bool ShowOverlayOnce = true;
 
         public MainWindow()
         {
@@ -86,14 +87,19 @@ namespace KBSGame
             {
                 GameWon = true;
                 countdownTimer.Stop();
-                //show endpoint dialog 
-                EndPointModal dlg = new EndPointModal();
-                dlg.Owner = this;
-                if (dlg.ShowDialog() == true)
+                if (ShowOverlayOnce)
                 {
-                    PlayAgain();
+                    ShowOverlayOnce = false;
+                    game.GameWon();
                 }
-                return;
+                ////show endpoint dialog 
+                //EndPointModal dlg = new EndPointModal();
+                //dlg.Owner = this;
+                //if (dlg.ShowDialog() == true)
+                //{
+                //    PlayAgain();
+                //}
+                //return;
             }
         }
 
@@ -104,6 +110,7 @@ namespace KBSGame
             countdownTimer.Start();
             GameWon = false;
             GameLost = false;
+            ShowOverlayOnce = true;
         }
 
         public void SetTimerLabel(string text)

@@ -91,6 +91,8 @@
       <DependentUpon>EndPointModal.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\EndPoint.cs" />
+    <Compile Include="Model\GameOverOverlay.cs" />
+    <Compile Include="Model\GameWonOverlay.cs" />
     <Compile Include="Model\Obstakels.cs" />
     <Compile Include="Model\StartPoint.cs" />
     <Page Include="EndPointModal.xaml">
@@ -141,9 +143,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\game-over-sound-effect.wav" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +150,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\tree-sprite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\tnt-sprite.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -177,13 +173,19 @@
     <Resource Include="Images\landmine-sprite.gif" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\landmine.bmp" />
+    <Resource Include="Images\menu-button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\afsluit-button.png" />
+    <Resource Include="Images\play-again-button.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\opnieuw-button.png" />
+    <Resource Include="Images\victory-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\game-over-sound-effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\game-won-sound-effect.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
