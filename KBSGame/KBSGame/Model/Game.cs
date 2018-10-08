@@ -12,15 +12,15 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-
+using System.Windows.Shapes;
 using System.Windows.Threading;
 
 namespace KBSGame
 {
     class Game
     {
-        //DispatcherTimer countdownTimer;
-        //TimeSpan playTime;
+        DispatcherTimer timer = new DispatcherTimer();
+        TimeSpan playTime;
 
         public StartPoint StartPoint { get; set; }
         public EndPoint EndPoint { get; set; }
@@ -31,6 +31,10 @@ namespace KBSGame
         private int aantalBoom;
         private int aantalBom;
         private int aantalMoving;
+
+        private double testx;
+        private double testy;
+        Rectangle r;
         
         public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving)
         {
@@ -42,6 +46,7 @@ namespace KBSGame
             GameCanvas = canvas;
             this.aantalBoom = aantalBoom;
             this.aantalBom = aantalBom;
+            Player.walkedOverBomb += OnPlayerWalkedOverBomb;
         }
 
         public void GameOver()
@@ -52,6 +57,42 @@ namespace KBSGame
         public void GameWon()
         {
             GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas);
+        }
+
+        public void OnPlayerWalkedOverBomb(object source, GameOverEventArgs e)
+        {
+
+            double x = e.x;
+            double y = e.y;
+            testx = e.bomx;
+            testy = e.bomy;
+            r = new Rectangle();
+            r.Fill = Brushes.LightGray;
+            r.Height = 40;
+            r.Width = 40;
+            Canvas.SetLeft(r, x + 5);
+            Canvas.SetTop(r, y + 5);
+            Canvas.SetZIndex(r, 0);
+            Obstakels.waardes.Remove($"{x}{y}b");
+            GameCanvas.Children.Add(r);
+            //canvas.Children.Add(r);
+            timer.Interval = new TimeSpan(0, 0, 0, 1);
+            timer.Tick += Timer_Tick;
+            if(timer != null)
+            {
+                timer.Start();
+            }           
+
+
+
+        }
+
+        private void Timer_Tick(object sender, EventArgs e)
+        {
+            if (Player.x == testx && Player.y == testy)
+            {
+                //throw event to stop the game
+            }
         }
 
         public void Restart()

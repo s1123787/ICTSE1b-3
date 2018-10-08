@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D3E639FC-DF90-4060-96DB-959A8D2707D2}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>KBSGame</RootNamespace>
     <AssemblyName>KBSGame</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -65,6 +65,7 @@
   <PropertyGroup>
     <SignManifests>false</SignManifests>
   </PropertyGroup>
+  <PropertyGroup />
   <PropertyGroup>
     <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
@@ -93,9 +94,12 @@
     <Compile Include="EndPointModal.xaml.cs">
       <DependentUpon>EndPointModal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Bomb.cs" />
     <Compile Include="Model\EndPoint.cs" />
+    <Compile Include="Model\GameOverEventArgs.cs" />
     <Compile Include="Model\GameOverOverlay.cs" />
     <Compile Include="Model\GameWonOverlay.cs" />
+    <Compile Include="Model\MovingObstacle.cs" />
     <Compile Include="Model\Obstakels.cs" />
     <Compile Include="Model\StartPoint.cs" />
     <Page Include="EndPointModal.xaml">
@@ -119,6 +123,7 @@
   <ItemGroup>
     <Compile Include="Model\Obstakel.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\Tree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

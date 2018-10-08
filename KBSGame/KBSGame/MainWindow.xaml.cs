@@ -26,12 +26,12 @@ namespace KBSGame
         Game game;
         Player speler;
         TimeSpan playTime;
-        int seconds = 4;
+        int seconds = 10;
         DispatcherTimer countdownTimer;
         bool GameWon;
         bool GameLost;
         bool ShowOverlayOnce = true;
-        Boolean playing = true;
+        public Boolean playing = true;
         TextBlock pause = new TextBlock();
 
         public MainWindow()
@@ -46,8 +46,9 @@ namespace KBSGame
 
 
             //countdown timer
+            
             playTime = TimeSpan.FromSeconds(seconds);
-
+            
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
                 TimerLabel.Text = playTime.ToString(@"ss");
@@ -65,7 +66,7 @@ namespace KBSGame
                     }
                 }
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
-            }, Application.Current.Dispatcher);
+            }, Application.Current.Dispatcher); 
         }
 
             private void OnKeyDown(object sender, KeyEventArgs e)

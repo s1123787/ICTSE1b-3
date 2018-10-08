@@ -23,13 +23,13 @@ namespace KBSGame
         public MediaElement gif;
         public string Type { get; private set; }
         Random random = new Random();
-        private int MovingStepSize = 50;
+        protected int MovingStepSize = 50;
         public int MovingX { get; private set; }
         public int MovingY { get; private set; }
 
         public Obstakel(String z)
         {
-            image = new Image
+            /*image = new Image
             {
                 Width = 50,
                 Height = 50
@@ -43,11 +43,11 @@ namespace KBSGame
             };
             SetType(z);
 
-            AssignPosition();
+            AssignPosition(); */
         }
         public void SetType(string z)
         {
-            if (z == "Bom")
+            /*if (z == "Bom")
             {
                 this.Type = "Bom";
 
@@ -78,29 +78,30 @@ namespace KBSGame
 
                 image.Source = myBitmapImage;
 
-                /* Start dispatch for movement */
+                //Start dispatch for movement
                 DispatcherTimer timer = new DispatcherTimer();
                 timer.Interval = TimeSpan.FromSeconds(1);
                 timer.Tick += MoveObstakelRandom;
                 timer.Start();
-            }
+            } */
         }
 
-        public void AssignPosition()
+        public void AssignPosition(string soort)
         {            
             bool niet = true;
-            while ((x <= 100 && y <= 100) || (x >= 650 && y >= 450) || Obstakels.waardes.Contains($"{x}{y}"))
+            while ((x <= 100 && y <= 100) || (x >= 650 && y >= 450) || Obstakels.waardes.Contains($"{x}{y}b") || Obstakels.waardes.Contains($"{x}{y}t") || Obstakels.waardes.Contains($"{x}{y}m"))
             {
                 x = random.Next(0, 15) * 50;
                 y = random.Next(0, 11) * 50;
             }
-            Obstakels.waardes.Add($"{x}{y}");
+            Obstakels.waardes.Add($"{x}{y}{soort}");
 
             Canvas.SetLeft(image, x);
             Canvas.SetTop(image, y);
         }
 
         /* Moving obstakel */
+        /*
         public void MoveObstakelRandom(object sender, EventArgs e)
         {
             int rand = random.Next(0, 4);
@@ -131,12 +132,12 @@ namespace KBSGame
             int x = (int)Canvas.GetLeft(image);
             int y = (int)Canvas.GetTop(image);
 
-            /* Right screen boundry */
+            //Right screen boundry
             if (x == 750)
             {
                 return;
             }
-            else if((y == 550) && (x == 700)) /* End point boundry */
+            else if((y == 550) && (x == 700)) // End point boundry
             {
                 return;
             }
@@ -153,12 +154,12 @@ namespace KBSGame
             int x = (int) Canvas.GetLeft(image);
             int y = (int) Canvas.GetTop(image);
 
-            /* Left screen boundry */
+            //Left screen boundry
             if (x == 0)
             {
                 return;
             }
-            else if((y == 0) && (x == 50)) /* Start point boundry */
+            else if((y == 0) && (x == 50)) //Start point boundry 
             {
                 return;
             }
@@ -173,7 +174,7 @@ namespace KBSGame
             int x = (int)Canvas.GetLeft(image);
             int y = (int)Canvas.GetTop(image);
 
-            /* Bottom boundry */
+            // Bottom boundry 
             if (y == 550)
             {
                 return;
@@ -194,12 +195,12 @@ namespace KBSGame
             int x = (int)Canvas.GetLeft(image);
             int y = (int)Canvas.GetTop(image);
 
-            /* Top boundry */
+            // Top boundry 
             if (y == 0)
             {
                 return;
             }
-            else if((x == 0) && (y == 50)) /* Start point boundry */
+            else if((x == 0) && (y == 50)) // Start point boundry
             {
                 return;
             }
@@ -207,6 +208,6 @@ namespace KBSGame
             {
                 Canvas.SetTop(image, y -= MovingStepSize);
             }
-        }
+        } */
     }
 }
