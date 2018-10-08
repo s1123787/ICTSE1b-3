@@ -33,7 +33,7 @@ namespace KBSGame
         {
             InitializeComponent();
 
-            game = new Game(GameCanvas, 10, 10, 10);
+            game = new Game(GameCanvas, 10, 10, 1);
             speler = game.Player;
 
             //key eventhandler toevoegen
