@@ -130,12 +130,12 @@ namespace KBSGame
         /* Moving obstakel */
         public void MoveObstakelRandom(object sender, EventArgs e)
         {
-            int rand = random.Next(0, 3);
+            int rand = random.Next(0, 4);
             switch(rand)
             {
                 case 0:
-                    Console.WriteLine("Moving Left");
-                    MoveObstakelLeft();
+                    Console.WriteLine("Moving Down");
+                    MoveObstakelDown();
                     break;
                 case 1:
                     Console.WriteLine("Moving Right");
@@ -146,21 +146,9 @@ namespace KBSGame
                     MoveObstakelUp();
                     break;
                 case 3:
-                    Console.WriteLine("Moving Down");
-                    MoveObstakelDown();
+                    Console.WriteLine("Moving Left");
+                    MoveObstakelLeft();
                     break;
-                //case 4:
-                //    MoveObstakelLeftUp();
-                //    break;
-                //case 5:
-                //    MoveObstakelLeftDown();
-                //    break;
-                //case 6:
-                //    MoveObstakelLeftUp();
-                //    break;
-                //case 7:
-                //    MoveObstakelRightUp();
-                //    break;
             }
         }
         
@@ -168,9 +156,14 @@ namespace KBSGame
         {
             //get current position x
             int x = (int)Canvas.GetLeft(image);
+            int y = (int)Canvas.GetTop(image);
 
             /* Right screen boundry */
             if (x == 750)
+            {
+                return;
+            }
+            else if((y == 550) && (x == 700)) /* End point boundry */
             {
                 return;
             }
@@ -183,13 +176,16 @@ namespace KBSGame
 
         public void MoveObstakelLeft()
         {
-            //get current position x
+            //get current position
             int x = (int) Canvas.GetLeft(image);
-
-            Console.WriteLine($"Curr X:{x}");
+            int y = (int) Canvas.GetTop(image);
 
             /* Left screen boundry */
             if (x == 0)
+            {
+                return;
+            }
+            else if((y == 0) && (x == 50)) /* Start point boundry */
             {
                 return;
             }
@@ -201,12 +197,17 @@ namespace KBSGame
 
         public void MoveObstakelDown()
         {
+            int x = (int)Canvas.GetLeft(image);
             int y = (int)Canvas.GetTop(image);
 
             /* Bottom boundry */
             if (y == 550)
             {
                 return;
+            }
+            else if((x == 750) && (y == 500))
+            {
+                return; 
             }
             else
             {
@@ -217,10 +218,15 @@ namespace KBSGame
 
         public void MoveObstakelUp()
         {
+            int x = (int)Canvas.GetLeft(image);
             int y = (int)Canvas.GetTop(image);
 
             /* Top boundry */
             if (y == 0)
+            {
+                return;
+            }
+            else if((x == 0) && (y == 50)) /* Start point boundry */
             {
                 return;
             }
@@ -229,77 +235,5 @@ namespace KBSGame
                 Canvas.SetTop(image, y -= MovingStepSize);
             }
         }
-
-        //public void MoveObstakelRightUp()
-        //{
-        //    //get current position x & y
-        //    double x = Canvas.GetLeft(image);
-        //    double y = Canvas.GetTop(image);
-
-        //    if (x == 5.00 || y == 5.00)
-        //    {
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        //set new position 
-        //        Canvas.SetLeft(image, x += MovingStepSize);
-        //        Canvas.SetTop(image, y -= MovingStepSize);
-        //    }
-        //}
-
-        //public void MoveObstakelRightDown()
-        //{
-        //    //get current position x & y
-        //    double x = Canvas.GetLeft(image);
-        //    double y = Canvas.GetTop(image);
-
-        //    if (x == 5.00 || y == 5.00)
-        //    {
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        //set new position 
-        //        Canvas.SetLeft(image, x += MovingStepSize);
-        //        Canvas.SetTop(image, y += MovingStepSize);
-        //    }
-        //}
-
-        //public void MoveObstakelLeftUp()
-        //{
-        //    //get current position x & y
-        //    double x = Canvas.GetLeft(image);
-        //    double y = Canvas.GetTop(image);
-
-        //    if (x == 5.00 || y == 5.00)
-        //    {
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        //set new position 
-        //        Canvas.SetLeft(image, x -= MovingStepSize);
-        //        Canvas.SetTop(image, y -= MovingStepSize);
-        //    }
-        //}
-
-        //public void MoveObstakelLeftDown()
-        //{
-        //    //get current position x & y
-        //    double x = Canvas.GetLeft(image);
-        //    double y = Canvas.GetTop(image);
-
-        //    if (x == 5.00 || y == 5.00)
-        //    {
-        //        return;
-        //    }
-        //    else
-        //    {
-        //        //set new position 
-        //        Canvas.SetLeft(image, x -= MovingStepSize);
-        //        Canvas.SetTop(image, y += MovingStepSize);
-        //    }
-        //}  
     }
 }
