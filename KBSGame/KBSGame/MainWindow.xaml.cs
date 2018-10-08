@@ -25,81 +25,105 @@ namespace KBSGame
     {        
         Game game;
         Player speler;
-        DispatcherTimer countdownTimer;
         TimeSpan playTime;
-
+        int seconds = 4;
+        DispatcherTimer countdownTimer;
+        bool GameWon;
+        bool GameLost;
+        bool ShowOverlayOnce = true;
 
         public MainWindow()
         {
             InitializeComponent();
 
-            game = new Game(GameCanvas, 10, 10, 2);
+            game = new Game(this, GameCanvas, 10, 10, 2);
             speler = game.Player;
 
             //key eventhandler toevoegen
             this.KeyDown += new KeyEventHandler(OnKeyDown);
 
 
-            //timer
-
-            playTime = TimeSpan.FromSeconds(10);
+            //countdown timer
+            playTime = TimeSpan.FromSeconds(seconds);
+           
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                TimerLabel.Content = playTime.ToString(@"mm\:ss");
-                if (playTime == TimeSpan.Zero) { countdownTimer.Stop(); game.GameOver(); }
+                TimerLabel.Text = playTime.ToString(@"ss");
+                if (playTime == TimeSpan.Zero)
+                {
+                    countdownTimer.Stop();
+                    if (!GameWon)
+                    {
+                        GameLost = true;
+                        game.GameOver();
+                    }
+                }
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
-            
 
-            
+            game = new Game(this, GameCanvas, 10, 10, 2);
+            speler = game.Player;
+
+            //key eventhandler toevoegen
+            this.KeyDown += new KeyEventHandler(OnKeyDown);
         }
-
         
-
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
             switch (e.Key)
             {
                 case Key.Right:
+                case Key.D:
                     speler.MoveRight();
                     break;
                 case Key.Left:
+                case Key.A:
                     speler.MoveLeft();
                     break;
                 case Key.Down:
+                case Key.S:
                     speler.MoveDown();
                     break;
                 case Key.Up:
+                case Key.W:
                     speler.MoveUp();
                     break;
 
             }
 
-            if (speler.CheckEndPoint() == true)
+            if (speler.CheckEndPoint() == true && !GameLost)
             {
+                GameWon = true;
                 countdownTimer.Stop();
-                //show endpoint dialog 
-                EndPointModal dlg = new EndPointModal();
-                dlg.Owner = this;
-                if (dlg.ShowDialog() == true)
+                if (ShowOverlayOnce)
                 {
-                    
-                    game.Restart();
-                    playTime = TimeSpan.FromSeconds(10);
-                    countdownTimer.Start();
-                    
+                    ShowOverlayOnce = false;
+                    game.GameWon();
                 }
-                return;
-                
+                ////show endpoint dialog 
+                //EndPointModal dlg = new EndPointModal();
+                //dlg.Owner = this;
+                //if (dlg.ShowDialog() == true)
+                //{
+                //    PlayAgain();
+                //}
+                //return;
             }
-            
+        }
 
+        public void PlayAgain()
+        {
+            game.Restart();
+            playTime = TimeSpan.FromSeconds(seconds);
+            countdownTimer.Start();
+            GameWon = false;
+            GameLost = false;
+            ShowOverlayOnce = true;
         }
 
         public void SetTimerLabel(string text)
         {
-            TimerLabel.Content = text;
+            TimerLabel.Text = text;
         }
-
     }
 }

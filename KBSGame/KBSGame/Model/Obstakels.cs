@@ -43,6 +43,14 @@ namespace KBSGame.GameObjects
             }
             for(int i = 0; i < obstakels.Count; i++)
             {
+                //if (obstakels[i].Type == "Bom")
+                //{
+                //    canvas.Children.Add(obstakels[i].gif);
+                //}
+                //else
+                //{
+                //    canvas.Children.Add(obstakels[i].image);
+                //}
                 canvas.Children.Add(obstakels[i].image);
             }
         }

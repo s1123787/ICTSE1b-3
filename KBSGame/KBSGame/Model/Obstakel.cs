@@ -19,9 +19,9 @@ namespace KBSGame
         public int y { get; private set; }
         private int width = 50;
         private int height = 50;
-        //public Rectangle rect;
         public Image image;
-        private string Type;
+        public MediaElement gif;
+        public string Type { get; private set; }
         Random random = new Random();
         private int MovingStepSize = 50;
         public int MovingX { get; private set; }
@@ -29,64 +29,38 @@ namespace KBSGame
 
         public Obstakel(String z)
         {
-            image = new Image();
-            //rect = new Rectangle();
+            image = new Image
+            {
+                Width = 50,
+                Height = 50
+            };
+            gif = new MediaElement
+            {
+                Width = 50,
+                Height = 50,
+                LoadedBehavior = MediaState.Play,
+                Visibility = System.Windows.Visibility.Visible
+            };
             SetType(z);
-            //rect.Width = 50;
-            //rect.Height = 50;
-            ////Canvas.SetLeft(rect, 800);
-            ////Canvas.SetTop(rect, 600);
 
-            /* Initial assigning of obstakel positions */
             AssignPosition();
-
-            ////canvas.Children.Add(rect);
-            ////rect = null;
         }
+
         public void SetType(string z)
         {
             if (z == "Bom")
             {
                 this.Type = "Bom";
 
+                image.Source = new BitmapImage(new Uri("pack://application:,,,/Images/landmine-sprite.png"));
                 
-                image.Width = 50;
-                image.Height = 50;
-
-                BitmapImage myBitmapImage = new BitmapImage();
-
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tnt-sprite.png");
-
-                myBitmapImage.DecodePixelWidth = 50;
-                myBitmapImage.EndInit();
-
-                image.Source = myBitmapImage;
-
-                //rect.Fill = Brushes.DarkRed;
-                //rect.Opacity = 0.5;
-                
+                //gif.Source = new Uri("pack://application:,,,/Images/landmine-sprite.gif");
             }
             else if (z == "Boom")
             {
                 this.Type = "Boom";
-
-                image.Width = 50;
-                image.Height = 50;
-
-                BitmapImage myBitmapImage = new BitmapImage();
-
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tree-sprite.png");
-
-                myBitmapImage.DecodePixelWidth = 50;
-                myBitmapImage.EndInit();
-
-                image.Source = myBitmapImage;
-
-                //rect.Fill = Brushes.ForestGreen;
-                //rect.Opacity = 0.5;
                 
+                image.Source = new BitmapImage(new Uri("pack://application:,,,/Images/tree-sprite.png"));
             }
             else if (z == "moving")
             {
