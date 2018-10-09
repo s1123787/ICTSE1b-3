@@ -15,8 +15,6 @@ namespace KBSGame
 {
     class Game
     {
-        
-
         public StartPoint StartPoint { get; set; }
         public EndPoint EndPoint { get; set; }
  
