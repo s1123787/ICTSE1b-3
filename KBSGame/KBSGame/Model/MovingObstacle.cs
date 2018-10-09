@@ -13,7 +13,12 @@ namespace KBSGame.Model
 {
     class MovingObstacle : Obstakel
     {
-        public MovingObstacle(string z) : base (z)
+        public MediaElement gif;
+        protected int MovingStepSize = 50;
+        public int MovingX { get; private set; }
+        public int MovingY { get; private set; }
+
+        public MovingObstacle()
         {
             image = new Image
             {
@@ -47,6 +52,7 @@ namespace KBSGame.Model
             myBitmapImage.EndInit();
 
             image.Source = myBitmapImage;
+            Canvas.SetZIndex(image, 2);
         }
 
         public void MoveObstakelRandom(object sender, EventArgs e)

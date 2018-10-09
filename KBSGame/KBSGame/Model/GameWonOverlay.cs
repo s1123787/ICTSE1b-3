@@ -21,9 +21,11 @@ namespace KBSGame.Model
         private Image VictorySprite;
         private Rectangle background;
         private Button again, menu;
+        private Game game;
 
-        public GameWonOverlay(MainWindow mw, Canvas canvas)
+        public GameWonOverlay(MainWindow mw, Canvas canvas, Game g)
         {
+            game = g;
             MainWindow = mw;
             GameCanvas = canvas;
             background = new Rectangle
@@ -123,7 +125,7 @@ namespace KBSGame.Model
         private void Again_Click(object sender, RoutedEventArgs e)
         {
             //Method to reset the game
-            MainWindow.PlayAgain();
+            game.PlayAgain();
             //Clean up victory overlay
             GameCanvas.Children.Remove(background);
             GameCanvas.Children.Remove(VictorySprite);
