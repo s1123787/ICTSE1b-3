@@ -10,7 +10,7 @@ namespace KBSGame.Model
 {
     class Bomb : Obstakel
     {
-        public Bomb(string z) : base(z)
+        public Bomb()
         {
             image = new Image();
             image.Width = 50;

@@ -14,9 +14,11 @@ using System.Windows.Shapes;
 
 namespace KBSGame
 {
-    class Player
+    public class Player
     {
         public delegate void WalkedOverBomb(object source, GameOverEventArgs e);
+        public delegate void EndPointReached(object source, EventArgs e);
+        public event EndPointReached endPointReached;
         public event WalkedOverBomb walkedOverBomb;
         private Ellipse player = new Ellipse();
         public double x = 5;
@@ -33,14 +35,14 @@ namespace KBSGame
             Canvas.SetLeft(player, 5);
             Canvas.SetTop(player, 5);
             Canvas.SetZIndex(player, 1);
-            GameCanvas.Children.Add(player);
+            gameCanvas.Children.Add(player);
         }
 
         public void MoveRight()
         {
             //get current position x
             x = Canvas.GetLeft(player);
-            y = Canvas.GetTop(player);
+            y = Canvas.GetTop(player);                     
             if (Obstakels.waardes.Contains($"{x + 45}{y - 5}b"))
             {
                 OnPlayerWalkedOverBomb(x + 45, y - 5, x + 50, y);
@@ -55,13 +57,18 @@ namespace KBSGame
             {
                 Canvas.SetLeft(player, x += StepSize);
             }
+            if (CheckEndPoint())
+            {
+                OnEndPointReached();
+                return;
+            }
         }
 
         public void MoveLeft()
         {
             //get current position x
             x = Canvas.GetLeft(player);
-            y = Canvas.GetTop(player);
+            y = Canvas.GetTop(player);            
             if (Obstakels.waardes.Contains($"{x - 55}{y - 5}b"))
             {
                 OnPlayerWalkedOverBomb(x - 55, y - 5, x - 50, y);
@@ -77,12 +84,17 @@ namespace KBSGame
                 //set new position 
                 Canvas.SetLeft(player, x -= StepSize);
             }
+            if (CheckEndPoint())
+            {
+                OnEndPointReached();
+                return;
+            }
         }
 
         public void MoveDown()
         {
             y = Canvas.GetTop(player);
-            x = Canvas.GetLeft(player);
+            x = Canvas.GetLeft(player);            
             if (Obstakels.waardes.Contains($"{x - 5}{y + 45}b"))
             {
                 OnPlayerWalkedOverBomb(x - 5, y + 45, x, y + 50);
@@ -97,12 +109,17 @@ namespace KBSGame
             {
                 Canvas.SetTop(player, y += StepSize);
             }
+            if (CheckEndPoint())
+            {
+                OnEndPointReached();
+                return;
+            }
         }
 
         public void MoveUp()
         {
             y = Canvas.GetTop(player);
-            x = Canvas.GetLeft(player);
+            x = Canvas.GetLeft(player);            
             if (Obstakels.waardes.Contains($"{x - 5}{y - 55}b"))
             {
                 OnPlayerWalkedOverBomb(x - 5, y - 55, x, y - 50);
@@ -117,12 +134,22 @@ namespace KBSGame
             {
                 Canvas.SetTop(player, y -= StepSize);
             }
+            if (CheckEndPoint())
+            {
+                OnEndPointReached();
+                return;
+            }
         }
 
         protected virtual void OnPlayerWalkedOverBomb(double xwaarde, double ywaarde, double bomx, double bomy)
         {
             GameOverEventArgs ge = new GameOverEventArgs(xwaarde, ywaarde, bomx, bomy);
             walkedOverBomb?.Invoke(this, ge);
+        }
+
+        protected virtual void OnEndPointReached()
+        {
+            endPointReached?.Invoke(this, EventArgs.Empty);
         }
 
         public Boolean CheckEndPoint()

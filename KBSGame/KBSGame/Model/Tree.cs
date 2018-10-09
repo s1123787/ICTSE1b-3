@@ -14,7 +14,7 @@ namespace KBSGame.Model
         //public int y { get; private set; }
 
 
-        public Tree(string z): base (z)
+        public Tree()
         {
 
             image = new Image();

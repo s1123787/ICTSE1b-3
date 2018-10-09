@@ -17,14 +17,14 @@ using System.Windows.Threading;
 
 namespace KBSGame
 {
-    class Game
+    public class Game
     {
         DispatcherTimer timer = new DispatcherTimer();
-        TimeSpan playTime;
+        private int Seconde { get; set; }
 
-        public StartPoint StartPoint { get; set; }
-        public EndPoint EndPoint { get; set; }
-        public Player Player { get; private set; }
+        private StartPoint StartPoint { get; set; }
+        private EndPoint EndPoint { get; set; }
+        public Player Player { get; set; }
         public Obstakels obstakels { get; set; }
         public MainWindow mainWindow { get; set; }
         public Canvas GameCanvas { get; private set; }
@@ -32,13 +32,22 @@ namespace KBSGame
         private int aantalBoom;
         private int aantalBom;
         private int aantalMoving;
+        private KBSGame.Model.Timer GameTimer { get; set; }
 
+        public bool GameWon;
+        public bool GameLost;
+        public bool playing;
+        
         private double testx;
         private double testy;
+
         Rectangle r;
-        
-        public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving)
+        TextBlock pause = new TextBlock();
+
+        public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int s)
         {
+            playing = true;
+            Seconde = s;
             StartPoint = new StartPoint(canvas);
             EndPoint = new EndPoint(canvas);
             Player = new Player(canvas);
@@ -47,25 +56,17 @@ namespace KBSGame
             GameCanvas = canvas;
             this.aantalBoom = aantalBoom;
             this.aantalBom = aantalBom;
-            this.aantalMoving = aantalMoving;
-            Player.walkedOverBomb += OnPlayerWalkedOverBomb;
-        }
-
-        public void GameOver()
-        {
-            GameOverOverlay gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas);
-            FreezePlayer = true;
-        }
-
-        public void GameWon()
-        {
-            GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas);
-            FreezePlayer = true;
+            this.aantalMoving = aantalMoving;            
+            Player.walkedOverBomb += OnPlayerWalkedOverBomb; //hier subscribed de methode OnPlayerWalkedOverBomb op de event walkedOverBomb             
+            GameTimer = new Model.Timer(Seconde, this, mw); //hier wordt de timer aangemaakt die de meegegeven seconden gebruikt            
+            GameTimer.tijdIsOp += OnPlayerTijdIsOp; //hier subscribe je op de event van timer
+            Player.endPointReached += OnEndPointReached;
+            mw.esqKeyIsPressed += OnEsqKeyIsPressed;
+            mw.enterKeyIsPressed += OnEnterKeyIsPressed;
         }
 
         public void OnPlayerWalkedOverBomb(object source, GameOverEventArgs e)
         {
-
             double x = e.x;
             double y = e.y;
             testx = e.bomx;
@@ -79,16 +80,12 @@ namespace KBSGame
             Canvas.SetZIndex(r, 0);
             Obstakels.waardes.Remove($"{x}{y}b");
             GameCanvas.Children.Add(r);
-            //canvas.Children.Add(r);
             timer.Interval = new TimeSpan(0, 0, 0, 1);
             timer.Tick += Timer_Tick;
             if(timer != null)
             {
                 timer.Start();
             }           
-
-
-
         }
 
         private void Timer_Tick(object sender, EventArgs e)
@@ -99,6 +96,64 @@ namespace KBSGame
             }
         }
 
+        public void OnPlayerTijdIsOp(object source, EventArgs e)
+        {
+            FreezePlayer = true;
+            GameLost = true;
+            GameOverOverlay gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
+            playing = false;            
+        }
+
+        public void OnEndPointReached(object source, EventArgs e)
+        {
+            FreezePlayer = true;
+            GameLost = false;
+            GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas, this);
+            playing = false;
+            GameTimer.Pauze();
+        }
+
+        public void OnEsqKeyIsPressed(object source, EventArgs e)
+        {
+            //net als gameover deze code in andere klasse en vervolgens hier aanroepen
+            if (playing)
+            {
+                pause.Text = "Pause";
+                pause.Foreground = Brushes.Blue;
+                pause.FontSize = 32;
+                pause.FontWeight = FontWeights.Bold;
+                Canvas.SetLeft(pause, 312);
+                Canvas.SetTop(pause, 220);
+                GameCanvas.Children.Add(pause);
+                GameTimer.Pauze();
+                FreezePlayer = true;
+                playing = false;
+            }
+        }
+
+        public void OnEnterKeyIsPressed(object source, EventArgs e)
+        {
+            if (!playing)
+            {
+                playing = true;
+                GameCanvas.Children.Remove(pause);
+                GameTimer.Herstart();
+                FreezePlayer = false;
+            }
+        }
+
+        public void PlayAgain()
+        {
+            Player.Reset();
+            obstakels.Reset();
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas);
+            FreezePlayer = false;
+            GameTimer.Restart();
+            playing = true;
+            GameWon = false;
+            GameLost = false;
+        }
+
         public void Restart()
         {
             Player.Reset();
@@ -106,6 +161,5 @@ namespace KBSGame
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas);
             FreezePlayer = false;
         }
-
     }
 }

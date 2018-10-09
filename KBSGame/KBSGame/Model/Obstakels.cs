@@ -22,20 +22,20 @@ namespace KBSGame.GameObjects
             
             for (int i = 0; i < aantalBoom; i++)
             {
-                Tree t = new Tree("t");
+                Tree t = new Tree();
                 obstakels.Add(t);
                 Thread.Sleep(25);
             }
 
             for (int i = 0; i < aantalBom; i++)
             {
-                Bomb b = new Bomb("z");
+                Bomb b = new Bomb();
                 obstakels.Add(b);
                 Thread.Sleep(25);
             }
             for (int i = 0; i < aantalMoving; i++)
             {
-                MovingObstacle mo = new MovingObstacle("z");
+                MovingObstacle mo = new MovingObstacle();
                 obstakels.Add(mo);
                 Thread.Sleep(25);
             }
@@ -56,7 +56,6 @@ namespace KBSGame.GameObjects
             for (int i = 0; i < obstakels.Count; i++)
             {
                 Canvas.Children.Remove(obstakels[i].image);
-                //obstakels.Clear();
                 waardes.Clear();
             }
         }
