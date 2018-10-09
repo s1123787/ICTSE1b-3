@@ -28,6 +28,9 @@ namespace KBSGame
         public Obstakels obstakels { get; set; }
         public MainWindow mainWindow { get; set; }
         public Canvas GameCanvas { get; private set; }
+
+        public Boolean FreezePlayer { get; set; }
+
         private int aantalBoom;
         private int aantalBom;
         private int aantalMoving;
@@ -57,6 +60,7 @@ namespace KBSGame
         public void GameWon()
         {
             GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas);
+            FreezePlayer = true;
         }
 
         public void OnPlayerWalkedOverBomb(object source, GameOverEventArgs e)
@@ -100,6 +104,7 @@ namespace KBSGame
             Player.Reset();
             obstakels.Reset();
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas);
+            FreezePlayer = false;
         }
 
     }

@@ -61,6 +61,7 @@ namespace KBSGame
                     countdownTimer.Stop();
                     if (!GameWon)
                     {
+                        game.FreezePlayer = true;
                         GameLost = true;
                         game.GameOver();
                     }
@@ -72,7 +73,7 @@ namespace KBSGame
             private void OnKeyDown(object sender, KeyEventArgs e)
             {
 
-                if (playing) {
+                if (playing && !game.FreezePlayer) {
                     switch (e.Key)
                     {
                         case Key.Right:
@@ -109,6 +110,7 @@ namespace KBSGame
                         Canvas.SetTop(pause, 220);
                         GameCanvas.Children.Add(pause);
                         playing = false;
+                        game.FreezePlayer = true;
                     }
                     //if (!playing)
                     //{
@@ -123,6 +125,8 @@ namespace KBSGame
                     playing = true;
                     GameCanvas.Children.Remove(pause);
                     countdownTimer.Start();
+                    game.FreezePlayer = false;
+
                 }
 
                 if (speler.CheckEndPoint() == true && !GameLost)
