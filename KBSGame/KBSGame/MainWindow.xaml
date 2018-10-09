@@ -5,6 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KBSGame"
         mc:Ignorable="d"
+        UseLayoutRounding="True"
         Title="KBS Game" Height="800" Width="818" ResizeMode="NoResize" KeyDown="OnKeyDown">
     <Border
     BorderThickness="1"
@@ -15,6 +16,9 @@
     Width="802"
     Height="602">
         <Canvas x:Name="GameCanvas" Height="600" Width="800" VerticalAlignment="Top" Margin="1,-1,-1,0" >
+            <Border Canvas.ZIndex="99" BorderThickness="1" BorderBrush="Black" Canvas.Left="364">
+                <TextBlock x:Name="TimerLabel" Canvas.ZIndex="99" Height="20" Width="70" FontFamily="Microsoft Sans Serif"  FontWeight="Bold" FontSize="16" HorizontalAlignment="Center" Background="White" TextAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Center"/>
+            </Border>
             <Canvas.Background>
                 <DrawingBrush TileMode="Tile" Viewport="0,0,50,50" 
                                      ViewportUnits="Absolute">
@@ -30,7 +34,6 @@
                     </DrawingBrush.Drawing>
                 </DrawingBrush>
             </Canvas.Background>
-            <Label x:Name="TimerLabel" Content="" Canvas.Left="341" Height="30" Width="110" FontFamily="Microsoft Sans Serif" HorizontalContentAlignment="Center" FontWeight="Bold" FontSize="16"/>
         </Canvas>
     </Border>
 </Window>

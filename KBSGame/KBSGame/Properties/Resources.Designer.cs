@@ -68,5 +68,14 @@ namespace KBSGame.Properties {
                 return ResourceManager.GetStream("game_over_sound_effect", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.IO.UnmanagedMemoryStream similar to System.IO.MemoryStream.
+        /// </summary>
+        internal static System.IO.UnmanagedMemoryStream game_won_sound_effect {
+            get {
+                return ResourceManager.GetStream("game_won_sound_effect", resourceCulture);
+            }
+        }
     }
 }

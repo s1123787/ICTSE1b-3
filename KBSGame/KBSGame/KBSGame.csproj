@@ -63,7 +63,11 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup>
+    <NoWin32Manifest>true</NoWin32Manifest>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -90,7 +94,12 @@
     <Compile Include="EndPointModal.xaml.cs">
       <DependentUpon>EndPointModal.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\Bomb.cs" />
     <Compile Include="Model\EndPoint.cs" />
+    <Compile Include="Model\GameOverEventArgs.cs" />
+    <Compile Include="Model\GameOverOverlay.cs" />
+    <Compile Include="Model\GameWonOverlay.cs" />
+    <Compile Include="Model\MovingObstacle.cs" />
     <Compile Include="Model\Obstakels.cs" />
     <Compile Include="Model\StartPoint.cs" />
     <Page Include="EndPointModal.xaml">
@@ -114,6 +123,7 @@
   <ItemGroup>
     <Compile Include="Model\Obstakel.cs" />
     <Compile Include="Model\Player.cs" />
+    <Compile Include="Model\Tree.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -141,9 +151,6 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\game-over-sound-effect.wav" />
-  </ItemGroup>
-  <ItemGroup>
     <Folder Include="View\" />
   </ItemGroup>
   <ItemGroup>
@@ -151,9 +158,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\tree-sprite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\tnt-sprite.png" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
@@ -166,6 +170,33 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\moving-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\game-over-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\landmine-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\landmine-sprite.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\menu-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\play-again-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\victory-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\game-over-sound-effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\game-won-sound-effect.wav" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -14,32 +14,30 @@ namespace KBSGame
     {
         public EndPoint(Canvas canvas)
         {
-            Rectangle rect = new Rectangle();
-            rect.StrokeThickness = 3;
-            rect.Stroke = Brushes.Red;
-            rect.Width = 50;
-            rect.Height = 50;
+            //Create rectangle to identify finish
+            Rectangle rect = new Rectangle
+            {
+                Width = 50,
+                Height = 50,
+                Stroke = Brushes.Red,
+                StrokeThickness = 3
+            };
+            
+            //Create image of flag for finish
+            Image sprite = new Image
+            {
+                Width = 50,
+                Height = 50
+            };
+            sprite.Source = new BitmapImage(new Uri("pack://application:,,,/Images/flag-sprite.png"));
+
+            //Add the rectangle and image to the screen
             Canvas.SetLeft(rect, 750);
             Canvas.SetTop(rect, 550);
             canvas.Children.Add(rect);
-
-            Image myImage = new Image();
-            myImage.Width = 50;
-            myImage.Height = 50;
-
-            BitmapImage myBitmapImage = new BitmapImage();
-
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/flag-sprite.png");
-
-            myBitmapImage.DecodePixelWidth = 50;
-            myBitmapImage.EndInit();
-
-            myImage.Source = myBitmapImage;
-
-            Canvas.SetTop(myImage, 550);
-            Canvas.SetLeft(myImage, 750);
-            canvas.Children.Add(myImage);
+            Canvas.SetTop(sprite, 550);
+            Canvas.SetLeft(sprite, 750);
+            canvas.Children.Add(sprite);
         }
     }
 }
