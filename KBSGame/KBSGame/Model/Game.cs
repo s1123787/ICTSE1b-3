@@ -28,9 +28,7 @@ namespace KBSGame
         public Obstakels obstakels { get; set; }
         public MainWindow mainWindow { get; set; }
         public Canvas GameCanvas { get; private set; }
-
         public Boolean FreezePlayer { get; set; }
-
         private int aantalBoom;
         private int aantalBom;
         private int aantalMoving;
