@@ -46,6 +46,7 @@ namespace KBSGame
             GameCanvas = canvas;
             this.aantalBoom = aantalBoom;
             this.aantalBom = aantalBom;
+            this.aantalMoving = aantalMoving;
             Player.walkedOverBomb += OnPlayerWalkedOverBomb;
         }
 
