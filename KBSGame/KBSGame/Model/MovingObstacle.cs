@@ -108,6 +108,10 @@ namespace KBSGame.Model
             }
             else
             {
+                //Create tmp list & update old XY to new values
+                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x+MovingStepSize}{y}m")).ToList();
+                Obstakels.waardes = tmpList;
+
                 Canvas.SetLeft(image, x += MovingStepSize);
             }
         }
@@ -130,6 +134,10 @@ namespace KBSGame.Model
             }
             else
             {
+                //Create tmp list & update old XY to new values
+                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x - MovingStepSize}{y}m")).ToList();
+                Obstakels.waardes = tmpList;
+
                 Canvas.SetLeft(image, x -= MovingStepSize);
             }
         }
@@ -150,6 +158,10 @@ namespace KBSGame.Model
             }
             else
             {
+                //Create tmp list & update old XY to new values
+                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x}{y + MovingStepSize}m")).ToList();
+                Obstakels.waardes = tmpList;
+
                 Canvas.SetTop(image, y += MovingStepSize);
 
             }
@@ -171,6 +183,10 @@ namespace KBSGame.Model
             }
             else
             {
+                //Create tmp list & update old XY to new values
+                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x}{y - MovingStepSize}m")).ToList();
+                Obstakels.waardes = tmpList;
+
                 Canvas.SetTop(image, y -= MovingStepSize);
             }
         }

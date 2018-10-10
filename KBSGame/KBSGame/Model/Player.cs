@@ -42,16 +42,21 @@ namespace KBSGame
         {
             //get current position x
             x = Canvas.GetLeft(player);
-            y = Canvas.GetTop(player);                     
+            y = Canvas.GetTop(player);
+
             if (Obstakels.waardes.Contains($"{x + 45}{y - 5}b"))
             {
                 OnPlayerWalkedOverBomb(x + 45, y - 5, x + 50, y);
                 Canvas.SetLeft(player, x += StepSize);
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}t") || x == 755)
+            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}t") || x == 755) //contains a tree
             {
                 return;
+            }
+            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}m")) //contains moving obstakel
+            {
+                Console.WriteLine("Moving obstakel on te way");
             }
             else
             {
@@ -79,6 +84,10 @@ namespace KBSGame
             {
                 return;
             }
+            else if (Obstakels.waardes.Contains($"{x - 55}{y - 5}m")) //contains moving obstakel
+            {
+                Console.WriteLine("Moving obstakel on te way");
+            }
             else
             {
                 //set new position 
@@ -105,6 +114,10 @@ namespace KBSGame
             {
                 return;
             }
+            else if (Obstakels.waardes.Contains($"{x - 5}{y + 45}m")) //contains moving obstakel
+            {
+                Console.WriteLine("Moving obstakel on te way");
+            }
             else
             {
                 Canvas.SetTop(player, y += StepSize);
@@ -129,6 +142,10 @@ namespace KBSGame
             else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}t") || y == 5)
             {
                 return;
+            }
+            else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}m")) //contains moving obstakel
+            {
+                Console.WriteLine("Moving obstakel on te way");
             }
             else
             {
