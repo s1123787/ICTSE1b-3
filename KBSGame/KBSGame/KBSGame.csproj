@@ -91,6 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Coin.cs" />
     <Compile Include="View\EndPointModal.xaml.cs">
       <DependentUpon>EndPointModal.xaml</DependentUpon>
     </Compile>
@@ -151,7 +152,6 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
   <ItemGroup>
     <Resource Include="Images\flag-sprite.png" />
   </ItemGroup>
@@ -196,6 +196,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\game-won-sound-effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\coin.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

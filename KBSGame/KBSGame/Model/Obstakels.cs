@@ -17,7 +17,7 @@ namespace KBSGame.GameObjects
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
        
-        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, Canvas canvas)
+        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas)
         {
             
             for (int i = 0; i < aantalBoom; i++)
@@ -39,7 +39,12 @@ namespace KBSGame.GameObjects
                 obstakels.Add(mo);
                 Thread.Sleep(25);
             }
-
+            for(int i = 0; i < aantalCoin; i++)
+            {
+                Coin c = new Coin();
+                obstakels.Add(c);
+                Thread.Sleep(25);
+            }
 
             for (int i = 0; i < obstakels.Count; i++)
             {

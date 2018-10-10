@@ -32,6 +32,7 @@ namespace KBSGame
         private int aantalBoom;
         private int aantalBom;
         private int aantalMoving;
+        private int aantalCoin;
         private KBSGame.Model.Timer GameTimer { get; set; }
 
         public bool GameWon;
@@ -44,25 +45,44 @@ namespace KBSGame
         Rectangle r;
         TextBlock pause = new TextBlock();
 
-        public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int s)
+        public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s)
         {
             playing = true;
             Seconde = s;
             StartPoint = new StartPoint(canvas);
             EndPoint = new EndPoint(canvas);
             Player = new Player(canvas);
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, canvas);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas);
             mainWindow = mw;
             GameCanvas = canvas;
             this.aantalBoom = aantalBoom;
             this.aantalBom = aantalBom;
-            this.aantalMoving = aantalMoving;            
-            Player.walkedOverBomb += OnPlayerWalkedOverBomb; //hier subscribed de methode OnPlayerWalkedOverBomb op de event walkedOverBomb             
+            this.aantalMoving = aantalMoving;
+            this.aantalCoin = aantalCoin;
+            Player.walkedOverBomb += OnPlayerWalkedOverBomb; //hier subscribed de methode OnPlayerWalkedOverBomb op de event walkedOverBomb 
+            Player.collectCoin += OnPlayerCollectCoin;
             GameTimer = new Model.Timer(Seconde, this, mw); //hier wordt de timer aangemaakt die de meegegeven seconden gebruikt            
             GameTimer.tijdIsOp += OnPlayerTijdIsOp; //hier subscribe je op de event van timer
             Player.endPointReached += OnEndPointReached;
             mw.esqKeyIsPressed += OnEsqKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
+        }
+
+        public void OnPlayerCollectCoin(object source, GameOverEventArgs e)
+        {
+            double x = e.x;
+            double y = e.y;
+            r = new Rectangle();
+            r.Fill = Brushes.LightGray;
+            r.Height = 48;
+            r.Width = 48;
+            Canvas.SetLeft(r, x + 1);
+            Canvas.SetTop(r, y + 1);
+            Canvas.SetZIndex(r, 0);
+            Obstakels.waardes.Remove($"{x}{y}c");
+            GameCanvas.Children.Add(r);
+            
+
         }
 
         public void OnPlayerWalkedOverBomb(object source, GameOverEventArgs e)
@@ -146,7 +166,7 @@ namespace KBSGame
         {
             Player.Reset();
             obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas);
             FreezePlayer = false;
             GameTimer.Restart();
             playing = true;
@@ -158,7 +178,7 @@ namespace KBSGame
         {
             Player.Reset();
             obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas);
             FreezePlayer = false;
         }
     }
