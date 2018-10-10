@@ -91,6 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\PauseOverlay.cs" />
     <Compile Include="View\EndPointModal.xaml.cs">
       <DependentUpon>EndPointModal.xaml</DependentUpon>
     </Compile>
@@ -151,7 +152,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\restart-button.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\flag-sprite.png" />
   </ItemGroup>
@@ -196,6 +199,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\game-won-sound-effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pause-sprite.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
