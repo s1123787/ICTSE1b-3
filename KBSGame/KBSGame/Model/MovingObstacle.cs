@@ -67,28 +67,24 @@ namespace KBSGame.Model
                 case 0:
                     if(CheckGridAvailability(x, y + MovingStepSize))
                     {
-                        Console.WriteLine("Moving Down");
                         MoveObstakelDown();
                     }
                     break;
                 case 1:
                     if (CheckGridAvailability(x + MovingStepSize, y))
                     {
-                        Console.WriteLine("Moving Right");
                         MoveObstakelRight();
                     }
                     break;
                 case 2:
                     if (CheckGridAvailability(x, y - MovingStepSize))
                     {
-                        Console.WriteLine("Moving Up");
                         MoveObstakelUp();
                     }
                     break;
                 case 3:
                     if (CheckGridAvailability(x - MovingStepSize, y))
                     {
-                        Console.WriteLine("Moving Left");
                         MoveObstakelLeft();
                     }
                     break;
@@ -181,9 +177,7 @@ namespace KBSGame.Model
 
         public bool CheckGridAvailability(int x, int y)
         {
-            Console.WriteLine($"Current XY: {x} {y}");
             string XYString = x.ToString() + y.ToString();
-            Console.WriteLine($"{XYString}t\n");
 
             foreach (string waarde in Obstakels.waardes)
             {
