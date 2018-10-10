@@ -37,8 +37,8 @@ namespace KBSGame.Model
             };
             pauseSprite = new Image
             {
-                Width = 125,
-                Height = 45,
+                Width = 200,
+                Height = 100,
                 Name = "PauseSprite"
         };
 
@@ -80,7 +80,7 @@ namespace KBSGame.Model
 
             ControlTemplate resumeButtonTemplate = new ControlTemplate(typeof(Button));
             var resumeButtonImage = new FrameworkElementFactory(typeof(Image));
-            resumeButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/menu-button.png", UriKind.RelativeOrAbsolute)));
+            resumeButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/resume-button.png", UriKind.RelativeOrAbsolute)));
             resumeButtonTemplate.VisualTree = resumeButtonImage;
 
             resume = new Button
@@ -94,20 +94,20 @@ namespace KBSGame.Model
             resume.Click += Resume_Click;
 
             //Adding to canvas
-            Canvas.SetTop(pauseSprite, 150);
-            Canvas.SetLeft(pauseSprite, 333);
+            Canvas.SetTop(pauseSprite, 120);
+            Canvas.SetLeft(pauseSprite, 300);
             GameCanvas.Children.Add(pauseSprite);
             Panel.SetZIndex(pauseSprite, 99);
             Canvas.SetTop(background, 140);
             Canvas.SetLeft(background, 200);
             GameCanvas.Children.Add(background);
-            Canvas.SetTop(resume, 190);
+            Canvas.SetTop(resume, 210);
             Canvas.SetLeft(resume, 333);
             GameCanvas.Children.Add(resume);
-            Canvas.SetTop(restart, 240);
+            Canvas.SetTop(restart, 260);
             Canvas.SetLeft(restart, 333);
             GameCanvas.Children.Add(restart);
-            Canvas.SetTop(menu, 290);
+            Canvas.SetTop(menu, 310);
             Canvas.SetLeft(menu, 333);
             GameCanvas.Children.Add(menu);
         }
