@@ -57,25 +57,36 @@ namespace KBSGame.Model
 
         public void MoveObstakelRandom(object sender, EventArgs e)
         {
+            //get current position x
+            int x = (int)Canvas.GetLeft(image);
+            int y = (int)Canvas.GetTop(image);
             Random random = new Random();
             int rand = random.Next(0, 4);
             switch (rand)
             {
                 case 0:
-                    Console.WriteLine("Moving Down");
-                    MoveObstakelDown();
+                    if(CheckGridAvailability(x, y + MovingStepSize))
+                    {
+                        MoveObstakelDown();
+                    }
                     break;
                 case 1:
-                    Console.WriteLine("Moving Right");
-                    MoveObstakelRight();
+                    if (CheckGridAvailability(x + MovingStepSize, y))
+                    {
+                        MoveObstakelRight();
+                    }
                     break;
                 case 2:
-                    Console.WriteLine("Moving Up");
-                    MoveObstakelUp();
+                    if (CheckGridAvailability(x, y - MovingStepSize))
+                    {
+                        MoveObstakelUp();
+                    }
                     break;
                 case 3:
-                    Console.WriteLine("Moving Left");
-                    MoveObstakelLeft();
+                    if (CheckGridAvailability(x - MovingStepSize, y))
+                    {
+                        MoveObstakelLeft();
+                    }
                     break;
             }
         }
@@ -133,7 +144,7 @@ namespace KBSGame.Model
             {
                 return;
             }
-            else if ((x == 750) && (y == 500))
+            else if ((x == 750) && (y == 500)) // End point boundry
             {
                 return;
             }
@@ -162,6 +173,22 @@ namespace KBSGame.Model
             {
                 Canvas.SetTop(image, y -= MovingStepSize);
             }
+        }
+
+        public bool CheckGridAvailability(int x, int y)
+        {
+            string XYString = x.ToString() + y.ToString();
+
+            foreach (string waarde in Obstakels.waardes)
+            {
+                //Check if next grid contains an tree of moving obstakel
+                if(waarde.Contains($"{XYString}t") || waarde.Contains($"{XYString}m"))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
