@@ -100,15 +100,19 @@ namespace KBSGame.Model
                 Canvas.SetTop(background, 140);
                 Canvas.SetLeft(background, 201);
                 GameCanvas.Children.Add(background);
+                Panel.SetZIndex(background, 99);
                 Canvas.SetTop(VictorySprite, 140);
                 Canvas.SetLeft(VictorySprite, 201);
                 GameCanvas.Children.Add(VictorySprite);
+                Panel.SetZIndex(VictorySprite, 99);
                 Canvas.SetTop(again, 300);
                 Canvas.SetLeft(again, 251);
                 GameCanvas.Children.Add(again);
+                Panel.SetZIndex(again, 99);
                 Canvas.SetTop(menu, 300);
                 Canvas.SetLeft(menu, 424);
                 GameCanvas.Children.Add(menu);
+                Panel.SetZIndex(menu, 99);
             };
 
             backgroundWorker.RunWorkerAsync();
