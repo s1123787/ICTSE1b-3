@@ -23,7 +23,7 @@ namespace KBSGame.Model
         private Rectangle background;
         private Button again, menu;
         private Game game;
-        private MainMenu mm = new MainMenu();
+        private MainMenu mm;
 
         public GameWonOverlay(MainWindow mw, Canvas canvas, Game g)
         {
@@ -123,6 +123,7 @@ namespace KBSGame.Model
         //Actions to perform when menu button is clicked
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
+            mm = new MainMenu();
             //Re-opens the main menu
             mm.Show();
             MainWindow.Close();
