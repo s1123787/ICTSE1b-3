@@ -195,6 +195,9 @@ namespace KBSGame.Model
         {
             string XYString = x.ToString() + y.ToString();
 
+            //check if Moving obstakel hits player
+            Console.WriteLine($"Player X:{x} Y:{y}");
+
             foreach (string waarde in Obstakels.waardes)
             {
                 //Check if next grid contains an tree of moving obstakel
