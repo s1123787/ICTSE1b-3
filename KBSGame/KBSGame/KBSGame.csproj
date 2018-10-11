@@ -91,6 +91,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Model\Coin.cs" />
     <Compile Include="View\EndPointModal.xaml.cs">
       <DependentUpon>EndPointModal.xaml</DependentUpon>
     </Compile>
@@ -207,6 +208,7 @@
     <None Include="Resources\game-won-sound-effect.wav" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Images\coin.png" />
     <Resource Include="Images\exit-button.png" />
   </ItemGroup>
   <ItemGroup>
