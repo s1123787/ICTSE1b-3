@@ -18,6 +18,7 @@ namespace KBSGame.Model
         public int MovingX { get; private set; }
         public int MovingY { get; private set; }
         private Game game;
+        private bool hits = false;
 
         public MovingObstacle(Game game)
         {
@@ -208,11 +209,12 @@ namespace KBSGame.Model
             //Console.WriteLine($"Obstakel X: {x} | Y: {y}");
             //Console.WriteLine("-----------");
 
-            //if (playerX == x && playerY == y && game.GameLost == false)
-            //{
-            //    Console.WriteLine("Game Over: Obstakel hits Player");
-            //    game.GameOver();
-            //}
+            if (playerX == x && playerY == y && game.GameLost == false && hits == false)
+            {
+                Console.WriteLine("Game Over: Obstakel hits Player");
+                game.GameOver();
+                hits = true;
+            }
 
             foreach (string waarde in Obstakels.waardes)
             {
