@@ -25,10 +25,12 @@ namespace KBSGame
         public double y = 5;
         private int StepSize = 25;
         private Canvas gameCanvas;
+        private Game game;
 
-        public Player(Canvas GameCanvas)
+        public Player(Canvas GameCanvas, Game game)
         {
             gameCanvas = GameCanvas;
+            this.game = game;
             player.Fill = Brushes.Red;
             player.Width = 40;
             player.Height = 40;
@@ -56,7 +58,7 @@ namespace KBSGame
             }
             else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}m")) //contains moving obstakel
             {
-                Console.WriteLine("Moving obstakel on te way");
+                game.GameOver();
             }
             else
             {
@@ -86,7 +88,7 @@ namespace KBSGame
             }
             else if (Obstakels.waardes.Contains($"{x - 55}{y - 5}m")) //contains moving obstakel
             {
-                Console.WriteLine("Moving obstakel on te way");
+                game.GameOver();
             }
             else
             {
@@ -116,7 +118,7 @@ namespace KBSGame
             }
             else if (Obstakels.waardes.Contains($"{x - 5}{y + 45}m")) //contains moving obstakel
             {
-                Console.WriteLine("Moving obstakel on te way");
+                game.GameOver();
             }
             else
             {
@@ -145,7 +147,7 @@ namespace KBSGame
             }
             else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}m")) //contains moving obstakel
             {
-                Console.WriteLine("Moving obstakel on te way");
+                game.GameOver();
             }
             else
             {

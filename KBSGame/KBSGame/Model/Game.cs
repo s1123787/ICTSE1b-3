@@ -52,7 +52,7 @@ namespace KBSGame
             Seconde = s;
             StartPoint = new StartPoint(canvas);
             EndPoint = new EndPoint(canvas);
-            Player = new Player(canvas);
+            Player = new Player(canvas, this);
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, canvas);
             mainWindow = mw;
             GameCanvas = canvas;
@@ -160,6 +160,7 @@ namespace KBSGame
             obstakels.Reset();
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas);
             FreezePlayer = false;
+            gameOverOverlay = null;
         }
 
         public void GameOver()
@@ -169,7 +170,6 @@ namespace KBSGame
             gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
             playing = false;
             GameTimer.countdownTimer.Stop();
-            
         }
 
         public void GameVictory()
