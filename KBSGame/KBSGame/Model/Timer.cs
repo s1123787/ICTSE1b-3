@@ -14,7 +14,7 @@ namespace KBSGame.Model
     {
         public delegate void TijdIsOp(object source, EventArgs e);
         public event TijdIsOp tijdIsOp;
-        private DispatcherTimer countdownTimer;
+        public DispatcherTimer countdownTimer;
         private TimeSpan playTime;
         public int Seconds { get; set; }
         private MainWindow mainWindow;
