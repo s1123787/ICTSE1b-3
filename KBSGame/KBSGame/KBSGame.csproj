@@ -158,7 +158,9 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Images\start-button.png" />
+  </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\flag-sprite.png" />
   </ItemGroup>
@@ -203,6 +205,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\game-won-sound-effect.wav" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\exit-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\highscores-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

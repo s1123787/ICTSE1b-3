@@ -27,12 +27,14 @@ namespace KBSGame.View
 
         private void startGameButton_Click(object sender, RoutedEventArgs e)
         {
+            //Opens a new window and starts the game
             mainWindow.Show();
             this.Close();
         }
 
         private void ExitGameButton_Click(object sender, RoutedEventArgs e)
         {
+            //Closes the application
             Application.Current.Shutdown();
         }
     }
