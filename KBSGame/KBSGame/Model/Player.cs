@@ -21,8 +21,8 @@ namespace KBSGame
         public event EndPointReached endPointReached;
         public event WalkedOverBomb walkedOverBomb;
         private Ellipse player = new Ellipse();
-        public double x = 5;
-        public double y = 5;
+        public static double x = 5;
+        public static double y = 5;
         private int StepSize = 25;
         private Canvas gameCanvas;
         private Game game;
@@ -190,5 +190,6 @@ namespace KBSGame
             Canvas.SetTop(player, 5);
             Canvas.SetLeft(player, 5);
         }
+        
     }
 }

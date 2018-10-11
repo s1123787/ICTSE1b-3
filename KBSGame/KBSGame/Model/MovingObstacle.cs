@@ -17,9 +17,12 @@ namespace KBSGame.Model
         protected int MovingStepSize = 50;
         public int MovingX { get; private set; }
         public int MovingY { get; private set; }
+        private Game game;
 
-        public MovingObstacle()
+        public MovingObstacle(Game game)
         {
+            this.game = game;
+
             image = new Image
             {
                 Width = 50,
@@ -194,6 +197,15 @@ namespace KBSGame.Model
         public bool CheckGridAvailability(int x, int y)
         {
             string XYString = x.ToString() + y.ToString();
+
+            //check if Moving obstakel hits player
+            int playerX = (int)Player.x - 5;
+            int playerY = (int)Player.y - 5;
+
+            if(playerX == x && playerY == y)
+            {
+                game.GameOver();
+            }
 
             foreach (string waarde in Obstakels.waardes)
             {
