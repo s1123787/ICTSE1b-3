@@ -185,7 +185,7 @@ namespace KBSGame
         {
             Player.Reset();
             obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas, this);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this);
             FreezePlayer = false;
             gameOverOverlay = null;
         }
