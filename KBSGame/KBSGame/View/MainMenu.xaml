@@ -32,10 +32,11 @@
     </Window.Resources>
     <Grid>
         <Grid.Background>
-            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+            <!--<LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
                 <GradientStop Color="AntiqueWhite" Offset="0.0" />
                 <GradientStop Color="DarkGray" Offset="0.5" />
-            </LinearGradientBrush>
+            </LinearGradientBrush>-->
+            <ImageBrush ImageSource="pack://application:,,,/Images/main-menu-background.png"></ImageBrush>
         </Grid.Background>
         <Button x:Name = "startGameButton"
             Style="{StaticResource MainMenuButton}"
