@@ -11,6 +11,7 @@ using System.Windows.Controls;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using KBSGame.View;
 
 namespace KBSGame.Model
 {
@@ -22,6 +23,7 @@ namespace KBSGame.Model
         private Rectangle background;
         private Button again, menu;
         private Game game;
+        private MainMenu mm = new MainMenu();
 
         public GameWonOverlay(MainWindow mw, Canvas canvas, Game g)
         {
@@ -100,15 +102,19 @@ namespace KBSGame.Model
                 Canvas.SetTop(background, 140);
                 Canvas.SetLeft(background, 201);
                 GameCanvas.Children.Add(background);
+                Panel.SetZIndex(background, 99);
                 Canvas.SetTop(VictorySprite, 140);
                 Canvas.SetLeft(VictorySprite, 201);
                 GameCanvas.Children.Add(VictorySprite);
+                Panel.SetZIndex(VictorySprite, 99);
                 Canvas.SetTop(again, 300);
                 Canvas.SetLeft(again, 251);
                 GameCanvas.Children.Add(again);
+                Panel.SetZIndex(again, 99);
                 Canvas.SetTop(menu, 300);
                 Canvas.SetLeft(menu, 424);
                 GameCanvas.Children.Add(menu);
+                Panel.SetZIndex(menu, 99);
             };
 
             backgroundWorker.RunWorkerAsync();
@@ -117,8 +123,9 @@ namespace KBSGame.Model
         //Actions to perform when menu button is clicked
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
-            //Shutsdown the application
-            Application.Current.Shutdown();
+            //Re-opens the main menu
+            mm.Show();
+            MainWindow.Close();
         }
 
         //Actions to perform when play again button is clicked

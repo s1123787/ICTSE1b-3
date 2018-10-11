@@ -36,6 +36,8 @@ namespace KBSGame
         private KBSGame.Model.Timer GameTimer { get; set; }
         private int CollectedCoins = 0 ;
 
+        GameOverOverlay gameOverOverlay;
+
         public bool GameWon;
         public bool GameLost;
         public bool playing;
@@ -52,8 +54,9 @@ namespace KBSGame
             Seconde = s;
             StartPoint = new StartPoint(canvas);
             EndPoint = new EndPoint(canvas);
-            Player = new Player(canvas);
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this);
+
+            Player = new Player(canvas, this);
             mainWindow = mw;
             GameCanvas = canvas;
             this.aantalBoom = aantalBoom;
@@ -91,10 +94,12 @@ namespace KBSGame
 
         public void OnPlayerWalkedOverBomb(object source, GameOverEventArgs e)
         {
+            Player.walkedOverBomb -= OnPlayerTijdIsOp;
             double x = e.x;
             double y = e.y;
             testx = e.bomx;
             testy = e.bomy;
+            #region
             r = new Rectangle();
             r.Fill = Brushes.LightGray;
             r.Height = 40;
@@ -102,39 +107,35 @@ namespace KBSGame
             Canvas.SetLeft(r, x + 5);
             Canvas.SetTop(r, y + 5);
             Canvas.SetZIndex(r, 0);
+            #endregion
             Obstakels.waardes.Remove($"{x}{y}b");
-            GameCanvas.Children.Add(r);
+            GameCanvas.Children.Add(r);            
             timer.Interval = new TimeSpan(0, 0, 0, 1);
             timer.Tick += Timer_Tick;
             if(timer != null)
             {
                 timer.Start();
-            }           
+            }  
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (Player.x == testx && Player.y == testy)
+            timer.Tick -= Timer_Tick;
+            timer.Stop();
+            if ((Player.x <= testx + 50 || Player.x >= testx - 50) && Player.y == testy && GameLost == false && GameWon == false)
             {
-                //throw event to stop the game
+                GameOver();
             }
         }
 
         public void OnPlayerTijdIsOp(object source, EventArgs e)
         {
-            FreezePlayer = true;
-            GameLost = true;
-            GameOverOverlay gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
-            playing = false;            
+            GameOver();          
         }
 
         public void OnEndPointReached(object source, EventArgs e)
         {
-            FreezePlayer = true;
-            GameLost = false;
-            GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas, this);
-            playing = false;
-            GameTimer.Pauze();
+            GameVictory();
         }
 
         public void OnEsqKeyIsPressed(object source, EventArgs e)
@@ -170,7 +171,7 @@ namespace KBSGame
         {
             Player.Reset();
             obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this);
             FreezePlayer = false;
             GameTimer.Restart();
             playing = true;
@@ -178,6 +179,33 @@ namespace KBSGame
             GameLost = false;
             CollectedCoins = 0;
             mainWindow.CoinCounter.Content = CollectedCoins;
+        }
+
+        public void Restart()
+        {
+            Player.Reset();
+            obstakels.Reset();
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas, this);
+            FreezePlayer = false;
+            gameOverOverlay = null;
+        }
+
+        public void GameOver()
+        {
+            FreezePlayer = true;
+            GameLost = true;
+            gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
+            playing = false;
+            GameTimer.countdownTimer.Stop();
+        }
+
+        public void GameVictory()
+        {
+            FreezePlayer = true;
+            GameLost = false;
+            GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas, this);
+            playing = false;
+            GameTimer.Pauze();
         }
     }
 }
