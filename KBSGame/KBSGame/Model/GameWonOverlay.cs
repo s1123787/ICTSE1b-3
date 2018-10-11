@@ -14,27 +14,13 @@ using System.Windows.Shapes;
 
 namespace KBSGame.Model
 {
-    public class GameWonOverlay
+    public class GameWonOverlay : Overlay
     {
-        private MainWindow MainWindow;
-        private Canvas GameCanvas;
         private Image VictorySprite;
-        private Rectangle background;
-        private Button again, menu;
-        private Game game;
+        private Button again;
 
-        public GameWonOverlay(MainWindow mw, Canvas canvas, Game g)
+        public GameWonOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
         {
-            game = g;
-            MainWindow = mw;
-            GameCanvas = canvas;
-            background = new Rectangle
-            {
-                Width = 400,
-                Height = 250,
-                Fill = Brushes.DimGray,
-                Opacity = 0.90
-            };
             VictorySprite = new Image
             {
                 Width = 400,
@@ -100,15 +86,19 @@ namespace KBSGame.Model
                 Canvas.SetTop(background, 140);
                 Canvas.SetLeft(background, 201);
                 GameCanvas.Children.Add(background);
+                Panel.SetZIndex(background, 99);
                 Canvas.SetTop(VictorySprite, 140);
                 Canvas.SetLeft(VictorySprite, 201);
                 GameCanvas.Children.Add(VictorySprite);
+                Panel.SetZIndex(VictorySprite, 99);
                 Canvas.SetTop(again, 300);
                 Canvas.SetLeft(again, 251);
                 GameCanvas.Children.Add(again);
+                Panel.SetZIndex(again, 99);
                 Canvas.SetTop(menu, 300);
                 Canvas.SetLeft(menu, 424);
                 GameCanvas.Children.Add(menu);
+                Panel.SetZIndex(menu, 99);
             };
 
             backgroundWorker.RunWorkerAsync();
@@ -127,10 +117,13 @@ namespace KBSGame.Model
             //Method to reset the game
             game.PlayAgain();
             //Clean up victory overlay
-            GameCanvas.Children.Remove(background);
+            removeObjects();
+        }
+        public void removeObjects()
+        {
+            base.RemoveObjects();
             GameCanvas.Children.Remove(VictorySprite);
             GameCanvas.Children.Remove(again);
-            GameCanvas.Children.Remove(menu);
         }
     }
 }

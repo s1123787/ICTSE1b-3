@@ -58,7 +58,7 @@ namespace KBSGame.Model
             //Closes the application
             Application.Current.Shutdown();
         }
-        public void removeObjects()
+        public void RemoveObjects()
         {
             GameCanvas.Children.Remove(background);
             GameCanvas.Children.Remove(menu);
