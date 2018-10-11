@@ -47,6 +47,7 @@ namespace KBSGame.GameObjects
             {
                 Coin c = new Coin();
                 obstakels.Add(c);
+                canvas.Children.Add(c.image);
                 Thread.Sleep(25);
             }
 
