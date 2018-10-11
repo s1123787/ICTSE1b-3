@@ -86,13 +86,6 @@ namespace KBSGame.Model
             backgroundWorker.RunWorkerAsync();
         }
 
-        //Actions to perform when menu button is clicked
-        private void Menu_Click(object sender, RoutedEventArgs e)
-        {
-            //Shutsdown the application
-            Application.Current.Shutdown();
-        }
-
         //Actions to perform when play again button is clicked
         private void Again_Click(object sender, RoutedEventArgs e)
         {
