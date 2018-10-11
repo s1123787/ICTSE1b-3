@@ -14,27 +14,27 @@ using System.Windows.Shapes;
 
 namespace KBSGame.Model
 {
-    public class PauseOverlay
+    public class PauseOverlay : Overlay
     {
-        private MainWindow MainWindow;
-        private Canvas GameCanvas;
-        private Rectangle background;
+        //private MainWindow MainWindow;
+        //private Canvas GameCanvas;
+        //private Rectangle background;
         private Image pauseSprite;
-        private Button restart, menu, resume;
-        private Game game;
+        private Button restart, resume;
+        //private Game game;
 
-        public PauseOverlay(MainWindow mw, Canvas canvas, Game g)
+        public PauseOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
         {
-            game = g;
-            MainWindow = mw;
-            GameCanvas = canvas;
-            background = new Rectangle
-            {
-                Width = 400,
-                Height = 250,
-                Fill = Brushes.DimGray,
-                Opacity = 0.90
-            };
+            //game = g;
+            //MainWindow = mw;
+            //GameCanvas = canvas;
+            //background = new Rectangle
+            //{
+            //    Width = 400,
+            //    Height = 250,
+            //    Fill = Brushes.DimGray,
+            //    Opacity = 0.90
+            //};
             pauseSprite = new Image
             {
                 Width = 200,
@@ -61,22 +61,22 @@ namespace KBSGame.Model
 
             restart.Click += Restart_Click;
 
-            //Create new button template for menu button
-            ControlTemplate menuButtonTemplate = new ControlTemplate(typeof(Button));
-            var menuButtonImage = new FrameworkElementFactory(typeof(Image));
-            menuButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/menu-button.png", UriKind.RelativeOrAbsolute)));
-            menuButtonTemplate.VisualTree = menuButtonImage;
+            ////Create new button template for menu button
+            //ControlTemplate menuButtonTemplate = new ControlTemplate(typeof(Button));
+            //var menuButtonImage = new FrameworkElementFactory(typeof(Image));
+            //menuButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/menu-button.png", UriKind.RelativeOrAbsolute)));
+            //menuButtonTemplate.VisualTree = menuButtonImage;
 
-            //Create new button to go to the game menu
-            menu = new Button
-            {
-                Width = 125,
-                Height = 45,
-                Name = "menuButton",
-                Template = menuButtonTemplate
-            };
+            ////Create new button to go to the game menu
+            //menu = new Button
+            //{
+            //    Width = 125,
+            //    Height = 45,
+            //    Name = "menuButton",
+            //    Template = menuButtonTemplate
+            //};
 
-            menu.Click += Menu_Click;
+            //menu.Click += Menu_Click;
 
             ControlTemplate resumeButtonTemplate = new ControlTemplate(typeof(Button));
             var resumeButtonImage = new FrameworkElementFactory(typeof(Image));
@@ -94,22 +94,26 @@ namespace KBSGame.Model
             resume.Click += Resume_Click;
 
             //Adding to canvas
+            Canvas.SetTop(background, 140);
+            Canvas.SetLeft(background, 200);
+            GameCanvas.Children.Add(background);
+            Panel.SetZIndex(background, 99);
             Canvas.SetTop(pauseSprite, 120);
             Canvas.SetLeft(pauseSprite, 300);
             GameCanvas.Children.Add(pauseSprite);
             Panel.SetZIndex(pauseSprite, 99);
-            Canvas.SetTop(background, 140);
-            Canvas.SetLeft(background, 200);
-            GameCanvas.Children.Add(background);
             Canvas.SetTop(resume, 210);
             Canvas.SetLeft(resume, 333);
             GameCanvas.Children.Add(resume);
+            Panel.SetZIndex(resume, 99);
             Canvas.SetTop(restart, 260);
             Canvas.SetLeft(restart, 333);
             GameCanvas.Children.Add(restart);
+            Panel.SetZIndex(restart, 99);
             Canvas.SetTop(menu, 310);
             Canvas.SetLeft(menu, 333);
             GameCanvas.Children.Add(menu);
+            Panel.SetZIndex(menu, 99);
         }
 
         public void continueGame()
@@ -138,13 +142,20 @@ namespace KBSGame.Model
             game.FreezePlayer = false;
             removeObjects();
         }
-        private void removeObjects()
+        //private void removeObjects()
+        //{
+        //    GameCanvas.Children.Remove(background);
+        //    GameCanvas.Children.Remove(restart);
+        //    GameCanvas.Children.Remove(menu);
+        //    GameCanvas.Children.Remove(pauseSprite);
+        //    GameCanvas.Children.Remove(resume);
+        //}
+        public void removeObjects()
         {
-            GameCanvas.Children.Remove(background);
-            GameCanvas.Children.Remove(restart);
-            GameCanvas.Children.Remove(menu);
-            GameCanvas.Children.Remove(pauseSprite);
+            base.removeObjects();
             GameCanvas.Children.Remove(resume);
+            GameCanvas.Children.Remove(pauseSprite);
+            GameCanvas.Children.Remove(restart);
         }
     }
 }
