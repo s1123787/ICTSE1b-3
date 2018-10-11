@@ -20,7 +20,7 @@ namespace KBSGame.GameObjects
        
         public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game)
         {
-            
+         
             for (int i = 0; i < aantalBoom; i++)
             {
                 Tree t = new Tree();
@@ -54,7 +54,12 @@ namespace KBSGame.GameObjects
 
             Canvas = canvas;
 
-            
+
+            foreach (string waarde in Obstakels.waardes)
+            {
+                Console.WriteLine(waarde);
+            }
+
         }
 
         public void Reset()
