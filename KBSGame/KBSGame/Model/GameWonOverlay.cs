@@ -64,24 +64,6 @@ namespace KBSGame.Model
                 //Subscribe the button to the method it needs to run
                 again.Click += Again_Click;
 
-                //Create new button template for menu button
-                ControlTemplate menuButtonTemplate = new ControlTemplate(typeof(Button));
-                var menuButtonImage = new FrameworkElementFactory(typeof(Image));
-                menuButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/menu-button.png", UriKind.RelativeOrAbsolute)));
-                menuButtonTemplate.VisualTree = menuButtonImage;
-
-                //Create new button to go to the game menu
-                menu = new Button
-                {
-                    Width = 125,
-                    Height = 45,
-                    Name = "menuButton",
-                    Template = menuButtonTemplate
-                };
-
-                //Subscribe the button to the method it needs to run
-                menu.Click += Menu_Click;
-
                 //Add everything to the screen
                 Canvas.SetTop(background, 140);
                 Canvas.SetLeft(background, 201);
