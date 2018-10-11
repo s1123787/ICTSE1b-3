@@ -97,7 +97,7 @@ namespace KBSGame
         {
             timer.Tick -= Timer_Tick;
             timer.Stop();
-            if ((Player.x <= testx+50  || Player.x >= testx-50) && Player.y == testy)
+            if ((Player.x <= testx + 50 || Player.x >= testx - 50) && Player.y == testy && GameLost == false && GameWon == false)
             {
                 GameOver();
             }
