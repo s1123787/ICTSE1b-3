@@ -56,9 +56,9 @@ namespace KBSGame
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}m")) //contains moving obstakel
+            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}m") && game.GameLost == false) //contains moving obstakel
             {
-                game.GameOver();
+                game.GameOver();                
             }
             else
             {
@@ -86,7 +86,7 @@ namespace KBSGame
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 55}{y - 5}m")) //contains moving obstakel
+            else if (Obstakels.waardes.Contains($"{x - 55}{y - 5}m") && game.GameLost == false) //contains moving obstakel
             {
                 game.GameOver();
             }
@@ -116,7 +116,7 @@ namespace KBSGame
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y + 45}m")) //contains moving obstakel
+            else if (Obstakels.waardes.Contains($"{x - 5}{y + 45}m") && game.GameLost == false) //contains moving obstakel
             {
                 game.GameOver();
             }
@@ -145,7 +145,7 @@ namespace KBSGame
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}m")) //contains moving obstakel
+            else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}m") && game.GameLost == false) //contains moving obstakel
             {
                 game.GameOver();
             }
