@@ -6,36 +6,68 @@
         xmlns:local="clr-namespace:KBSGame.View"
         mc:Ignorable="d"
         Title="MainMenu" Height="600" Width="818">
+    <Window.Resources>
+        <ImageBrush x:Key="startbutton" ImageSource="/images/start-button.png" />
+        <ImageBrush x:Key="highscoresbutton" ImageSource="/images/highscores-button.png" />
+        <ImageBrush x:Key="exitbutton" ImageSource="/images/exit-button.png" />
+        <Style x:Key="MainMenuButton" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" BorderThickness="0"   Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Opacity" Value="0.8" />
+                                <Setter Property="BorderThickness" Value="1" TargetName="border"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
-        <Button x:Name = "startGameButton"  
-            Content = "Start game" 
-            Click = "startGameButton_Click" 
+        <Grid.Background>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,2">
+                <GradientStop Color="AntiqueWhite" Offset="0.0" />
+                <GradientStop Color="DarkGray" Offset="0.5" />
+            </LinearGradientBrush>
+        </Grid.Background>
+        <Button x:Name = "startGameButton"
+            Style="{StaticResource MainMenuButton}"
+            Click = "startGameButton_Click"
             ClickMode = "Release" 
             Height ="75"  
-            Width = "400" 
+            Width = "400"
+            Background="{StaticResource startbutton}"
             HorizontalAlignment = "Center" 
             VerticalAlignment="Top"
-            Margin="205,125,205,0"
-            Foreground = "Gray"/>
-        <Button x:Name = "HighscoreButton"  
-            Content = "Highscores" 
+            Margin="0,125,0,0"/>
+        <Button x:Name = "HighscoreButton"
+            Style="{StaticResource MainMenuButton}"
             Click = "startGameButton_Click" 
-            ClickMode = "Release" 
+            ClickMode = "Release"
+            BorderThickness="0"
             Height ="75"  
-            Width = "400" 
+            Width = "400"
+            Background="{StaticResource highscoresbutton}"
             HorizontalAlignment = "Center" 
             VerticalAlignment="Top"
-            Margin="205,225,205,0"
-            Foreground = "Gray"/>
-        <Button x:Name = "ExitGameButton"  
-            Content = "Exit game" 
+            Margin="0,225,0,0"/>
+        <Button x:Name = "ExitGameButton"
+            Style="{StaticResource MainMenuButton}"
             Click = "ExitGameButton_Click"
-            ClickMode = "Release" 
+            ClickMode = "Release"
+            BorderThickness="0"
             Height ="75"  
             Width = "400" 
+            Background="{StaticResource exitbutton}"
             HorizontalAlignment = "Center" 
             VerticalAlignment="Top"
-            Margin="205,325,205,0"
-            Foreground = "Gray"/>
+            Margin="0,325,0,0"/>
     </Grid>
 </Window>
