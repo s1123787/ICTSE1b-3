@@ -126,7 +126,7 @@ namespace KBSGame.Model
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             mm = new MainMenu();
-            //Re-opens the main menu
+            //Opens the main menu
             mm.Show();
             MainWindow.Close();
         }
