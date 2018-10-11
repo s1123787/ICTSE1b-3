@@ -34,6 +34,7 @@ namespace KBSGame
         private int aantalMoving;
         private int aantalCoin;
         private KBSGame.Model.Timer GameTimer { get; set; }
+        private int CollectedCoins = 0 ;
 
         public bool GameWon;
         public bool GameLost;
@@ -81,7 +82,10 @@ namespace KBSGame
             Canvas.SetZIndex(r, 0);
             Obstakels.waardes.Remove($"{x}{y}c");
             GameCanvas.Children.Add(r);
-            
+
+            //coin counter
+            CollectedCoins++;
+            mainWindow.CoinCounter.Content = CollectedCoins;
 
         }
 
@@ -172,14 +176,8 @@ namespace KBSGame
             playing = true;
             GameWon = false;
             GameLost = false;
-        }
-
-        public void Restart()
-        {
-            Player.Reset();
-            obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas);
-            FreezePlayer = false;
+            CollectedCoins = 0;
+            mainWindow.CoinCounter.Content = CollectedCoins;
         }
     }
 }
