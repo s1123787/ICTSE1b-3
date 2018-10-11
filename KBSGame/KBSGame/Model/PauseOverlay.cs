@@ -98,12 +98,6 @@ namespace KBSGame.Model
             removeObjects();
         }
 
-        private void Menu_Click(object sender, RoutedEventArgs e)
-        {
-            //Closes the application
-            Application.Current.Shutdown();
-        }
-
         private void Resume_Click(object sender, RoutedEventArgs e)
         {
             game.playing = true;
