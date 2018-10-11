@@ -16,10 +16,11 @@ namespace KBSGame.GameObjects
         List<string> type = new List<string>();
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
+        Game game;
        
-        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, Canvas canvas)
+        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game)
         {
-            
+         
             for (int i = 0; i < aantalBoom; i++)
             {
                 Tree t = new Tree();
@@ -37,12 +38,17 @@ namespace KBSGame.GameObjects
             }
             for (int i = 0; i < aantalMoving; i++)
             {
-                MovingObstacle mo = new MovingObstacle();
+                MovingObstacle mo = new MovingObstacle(game);
                 obstakels.Add(mo);
                 canvas.Children.Add(mo.image);
                 Thread.Sleep(25);
             }
-
+            for(int i = 0; i < aantalCoin; i++)
+            {
+                Coin c = new Coin();
+                obstakels.Add(c);
+                Thread.Sleep(25);
+            }
 
             for (int i = 0; i < obstakels.Count; i++)
             {
@@ -51,7 +57,12 @@ namespace KBSGame.GameObjects
 
             Canvas = canvas;
 
-            
+
+            foreach (string waarde in Obstakels.waardes)
+            {
+                Console.WriteLine(waarde);
+            }
+
         }
 
         public void Reset()
