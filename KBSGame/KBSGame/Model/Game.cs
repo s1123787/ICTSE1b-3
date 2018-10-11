@@ -158,6 +158,7 @@ namespace KBSGame
             obstakels.Reset();
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, GameCanvas);
             FreezePlayer = false;
+            gameOverOverlay = null;
         }
 
         public void GameOver()
@@ -167,7 +168,6 @@ namespace KBSGame
             gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
             playing = false;
             GameTimer.countdownTimer.Stop();
-            
         }
 
         public void GameVictory()
