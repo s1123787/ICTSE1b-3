@@ -83,18 +83,19 @@ namespace KBSGame
             Canvas.SetZIndex(r, 0);
             #endregion
             Obstakels.waardes.Remove($"{x}{y}b");
-            GameCanvas.Children.Add(r);
+            GameCanvas.Children.Add(r);            
             timer.Interval = new TimeSpan(0, 0, 0, 1);
             timer.Tick += Timer_Tick;
             if(timer != null)
             {
                 timer.Start();
-            }           
+            }  
         }
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (Player.x == testx && Player.y == testy)
+            timer.Stop();
+            if ((Player.x <= testx+50  || Player.x >= testx-50) && Player.y == testy)
             {
                 GameOver();
             }
@@ -165,7 +166,8 @@ namespace KBSGame
             GameLost = true;
             gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
             playing = false;
-            timer.Stop();
+            GameTimer.countdownTimer.Stop();
+            
         }
 
         public void GameVictory()

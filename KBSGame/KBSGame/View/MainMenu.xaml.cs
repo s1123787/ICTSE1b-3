@@ -19,7 +19,6 @@ namespace KBSGame.View
     /// </summary>
     public partial class MainMenu : Window
     {
-        MainWindow mainWindow = new MainWindow();
         public MainMenu()
         {
             InitializeComponent();
@@ -27,6 +26,7 @@ namespace KBSGame.View
 
         private void startGameButton_Click(object sender, RoutedEventArgs e)
         {
+            MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();
         }
