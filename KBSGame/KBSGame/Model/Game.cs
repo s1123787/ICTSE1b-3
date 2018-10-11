@@ -69,6 +69,7 @@ namespace KBSGame
 
         public void OnPlayerWalkedOverBomb(object source, GameOverEventArgs e)
         {
+            Player.walkedOverBomb -= OnPlayerTijdIsOp;
             double x = e.x;
             double y = e.y;
             testx = e.bomx;
@@ -94,6 +95,7 @@ namespace KBSGame
 
         private void Timer_Tick(object sender, EventArgs e)
         {
+            timer.Tick -= Timer_Tick;
             timer.Stop();
             if ((Player.x <= testx+50  || Player.x >= testx-50) && Player.y == testy)
             {
