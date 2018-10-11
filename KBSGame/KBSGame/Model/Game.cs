@@ -52,7 +52,7 @@ namespace KBSGame
             Seconde = s;
             StartPoint = new StartPoint(canvas);
             EndPoint = new EndPoint(canvas);
-            Player = new Player(canvas);
+            Player = new Player(canvas, this);
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, canvas);
             mainWindow = mw;
             GameCanvas = canvas;
