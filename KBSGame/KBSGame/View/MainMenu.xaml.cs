@@ -32,7 +32,7 @@ namespace KBSGame.View
             //Opens a new window and starts the game
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
-            this.Hide();
+            this.Close();
         }
 
         private void ExitGameButton_Click(object sender, RoutedEventArgs e)
