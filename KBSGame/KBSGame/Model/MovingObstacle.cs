@@ -205,6 +205,7 @@ namespace KBSGame.Model
             if(playerX == x && playerY == y)
             {
                 game.GameOver();
+                Console.WriteLine("Player heeft Spook geraakt");
             }
 
             foreach (string waarde in Obstakels.waardes)
