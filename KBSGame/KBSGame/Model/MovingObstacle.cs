@@ -17,9 +17,13 @@ namespace KBSGame.Model
         protected int MovingStepSize = 50;
         public int MovingX { get; private set; }
         public int MovingY { get; private set; }
+        private Game game;
+        private bool hits = false;
 
-        public MovingObstacle()
+        public MovingObstacle(Game game)
         {
+            this.game = game;
+
             image = new Image
             {
                 Width = 50,
@@ -57,26 +61,40 @@ namespace KBSGame.Model
 
         public void MoveObstakelRandom(object sender, EventArgs e)
         {
-            Random random = new Random();
-            int rand = random.Next(0, 4);
-            switch (rand)
+            if(game.GameLost == false)
             {
-                case 0:
-                    Console.WriteLine("Moving Down");
-                    MoveObstakelDown();
-                    break;
-                case 1:
-                    Console.WriteLine("Moving Right");
-                    MoveObstakelRight();
-                    break;
-                case 2:
-                    Console.WriteLine("Moving Up");
-                    MoveObstakelUp();
-                    break;
-                case 3:
-                    Console.WriteLine("Moving Left");
-                    MoveObstakelLeft();
-                    break;
+                //get current position x
+                int x = (int)Canvas.GetLeft(image);
+                int y = (int)Canvas.GetTop(image);
+                Random random = new Random();
+                int rand = random.Next(0, 4);
+                switch (rand)
+                {
+                    case 0:
+                        if(CheckGridAvailability(x, y + MovingStepSize))
+                        {
+                            MoveObstakelDown();
+                        }
+                        break;
+                    case 1:
+                        if (CheckGridAvailability(x + MovingStepSize, y))
+                        {
+                            MoveObstakelRight();
+                        }
+                        break;
+                    case 2:
+                        if (CheckGridAvailability(x, y - MovingStepSize))
+                        {
+                            MoveObstakelUp();
+                        }
+                        break;
+                    case 3:
+                        if (CheckGridAvailability(x - MovingStepSize, y))
+                        {
+                            MoveObstakelLeft();
+                        }
+                        break;
+                }
             }
         }
 
@@ -97,6 +115,10 @@ namespace KBSGame.Model
             }
             else
             {
+                //Create tmp list & update old XY to new values
+                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x+MovingStepSize}{y}m")).ToList();
+                Obstakels.waardes = tmpList;
+
                 Canvas.SetLeft(image, x += MovingStepSize);
             }
         }
@@ -119,6 +141,10 @@ namespace KBSGame.Model
             }
             else
             {
+                //Create tmp list & update old XY to new values
+                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x - MovingStepSize}{y}m")).ToList();
+                Obstakels.waardes = tmpList;
+
                 Canvas.SetLeft(image, x -= MovingStepSize);
             }
         }
@@ -133,12 +159,16 @@ namespace KBSGame.Model
             {
                 return;
             }
-            else if ((x == 750) && (y == 500))
+            else if ((x == 750) && (y == 500)) // End point boundry
             {
                 return;
             }
             else
             {
+                //Create tmp list & update old XY to new values
+                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x}{y + MovingStepSize}m")).ToList();
+                Obstakels.waardes = tmpList;
+
                 Canvas.SetTop(image, y += MovingStepSize);
 
             }
@@ -160,8 +190,42 @@ namespace KBSGame.Model
             }
             else
             {
+                //Create tmp list & update old XY to new values
+                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x}{y - MovingStepSize}m")).ToList();
+                Obstakels.waardes = tmpList;
+
                 Canvas.SetTop(image, y -= MovingStepSize);
             }
+        }
+
+        public bool CheckGridAvailability(int x, int y)
+        {
+            string XYString = x.ToString() + y.ToString();
+
+            //check if Moving obstakel hits player
+            int playerX = (int)Player.x - 5;
+            int playerY = (int)Player.y - 5;
+            //Console.WriteLine($"Player X: {playerX} | Y: {playerY}");
+            //Console.WriteLine($"Obstakel X: {x} | Y: {y}");
+            //Console.WriteLine("-----------");
+
+            if (playerX == x && playerY == y && game.GameLost == false && hits == false)
+            {
+                Console.WriteLine("Game Over: Obstakel hits Player");
+                game.GameOver();
+                hits = true;
+            }
+
+            foreach (string waarde in Obstakels.waardes)
+            {
+                //Check if next grid contains an tree of moving obstakel
+                if(waarde.Contains($"{XYString}t") || waarde.Contains($"{XYString}m"))
+                {
+                    return false;
+                }
+            }
+
+            return true;
         }
     }
 }
