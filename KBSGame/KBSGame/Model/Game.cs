@@ -20,6 +20,7 @@ namespace KBSGame
     public class Game
     {
         DispatcherTimer timer = new DispatcherTimer();
+        DispatcherTimer timer2 = new DispatcherTimer();
         private int Seconde { get; set; }
 
         public delegate void ActivateEndPoint(object souce, EventArgs e);
@@ -36,7 +37,7 @@ namespace KBSGame
         private int aantalBom;
         private int aantalMoving;
         private int aantalCoin;
-        private KBSGame.Model.Timer GameTimer { get; set; }
+        public KBSGame.Model.Timer GameTimer { get; set; }
         private int CollectedCoins = 0 ;
 
         GameOverOverlay gameOverOverlay;
@@ -48,8 +49,13 @@ namespace KBSGame
         private double testx;
         private double testy;
 
-        Rectangle r;
+        private PauseOverlay pauseOverlay;
+        private bool overBom = true, overBom2 = true;
+
+        Rectangle r, r2;
         TextBlock pause = new TextBlock();
+
+        Image image, explosion;
 
         public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s)
         {
@@ -77,21 +83,23 @@ namespace KBSGame
 
         public void OnPlayerCollectCoin(object source, GameEventArgs e)
         {
+            
             double x = e.x;
             double y = e.y;
-            r = new Rectangle();
-            r.Fill = Brushes.LightGray;
-            r.Height = 48;
-            r.Width = 48;
-            Canvas.SetLeft(r, x + 1);
-            Canvas.SetTop(r, y + 1);
-            Canvas.SetZIndex(r, 0);
+            r2 = new Rectangle();
+            r2.Fill = Brushes.LightGray;
+            r2.Height = 48;
+            r2.Width = 48;
+            Canvas.SetLeft(r2, x + 1);
+            Canvas.SetTop(r2, y + 1);
+            Canvas.SetZIndex(r2, 0);
             Obstakels.waardes.Remove($"{x}{y}c");
-            GameCanvas.Children.Add(r);
+            GameCanvas.Children.Add(r2);
 
             //coin counter
             CollectedCoins++;
             mainWindow.CoinCounter.Content = CollectedCoins;
+            
             if(CollectedCoins == 5)
             {
                 activeEndPoint?.Invoke(this, EventArgs.Empty);
@@ -107,35 +115,98 @@ namespace KBSGame
 
         public void OnPlayerWalkedOverBomb(object source, GameEventArgs e)
         {
-            Player.walkedOverBomb -= OnPlayerTijdIsOp;
-            double x = e.x;
-            double y = e.y;
-            testx = e.bomx;
-            testy = e.bomy;
-            #region
-            r = new Rectangle();
-            r.Fill = Brushes.LightGray;
-            r.Height = 40;
-            r.Width = 40;
-            Canvas.SetLeft(r, x + 5);
-            Canvas.SetTop(r, y + 5);
-            Canvas.SetZIndex(r, 0);
-            #endregion
-            Obstakels.waardes.Remove($"{x}{y}b");
-            GameCanvas.Children.Add(r);            
-            timer.Interval = new TimeSpan(0, 0, 0, 1);
-            timer.Tick += Timer_Tick;
-            if(timer != null)
+            //this if statement because other wise it don't work
+            if (overBom)
             {
-                timer.Start();
-            }  
+                overBom = false;
+                Player.walkedOverBomb -= OnPlayerTijdIsOp;
+                double x = e.x;
+                double y = e.y;
+                testx = e.bomx;
+                testy = e.bomy;
+                #region
+                r = new Rectangle();
+                r.Fill = Brushes.LightGray;
+                r.Height = 40;
+                r.Width = 40;
+                Canvas.SetLeft(r, x + 5);
+                Canvas.SetTop(r, y + 5);
+                Canvas.SetZIndex(r, 0);
+                #endregion
+                Obstakels.waardes.Remove($"{x}{y}b");
+                #region
+                image = new Image();
+                image.Width = 50;
+                image.Height = 50;
+
+                BitmapImage myBitmapImage = new BitmapImage();
+
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
+
+                myBitmapImage.DecodePixelWidth = 50;
+                myBitmapImage.EndInit();
+
+                image.Source = myBitmapImage;
+                Canvas.SetLeft(image, x);
+                Canvas.SetTop(image, y);
+                #endregion
+                GameCanvas.Children.Add(image);
+                timer.Interval = new TimeSpan(0, 0, 0, 1);
+                timer.Tick += Timer_Tick;
+                if (timer != null)
+                {
+                    timer.Start();
+                }
+
+            }
+            
         }
 
         private void Timer_Tick(object sender, EventArgs e)
+        {            
+            if (overBom2)
+            {
+                overBom2 = false;
+                explosion = new Image();
+                explosion.Width = 150;
+                explosion.Height = 150;
+
+                BitmapImage myBitmapImage = new BitmapImage();
+
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/explosion-sprite.png");
+
+                myBitmapImage.DecodePixelWidth = 50;
+                myBitmapImage.EndInit();
+
+                explosion.Source = myBitmapImage;
+                Canvas.SetLeft(explosion, testx - 50);
+                Canvas.SetTop(explosion, testy - 50);
+                GameCanvas.Children.Add(explosion);
+                timer.Tick -= Timer_Tick;
+                timer.Stop();
+                if ((Player.x == testx || Player.x == testx + 50 || Player.x == testx - 50) && (Player.y == testy || Player.y == testy + 50 || Player.y == testy - 50) && GameLost == false && GameWon == false)
+                {
+                    GameOver();
+                }
+                timer2.Interval = new TimeSpan(0, 0, 0, 1);
+                timer2.Tick += Timer2_Tick; ;
+                if (timer2 != null)
+                {
+                    timer2.Start();
+                }
+            }
+        }
+
+        private void Timer2_Tick(object sender, EventArgs e)
         {
-            timer.Tick -= Timer_Tick;
-            timer.Stop();
-            if ((Player.x <= testx + 50 || Player.x >= testx - 50) && Player.y == testy && GameLost == false && GameWon == false)
+            GameCanvas.Children.Remove(explosion);
+            GameCanvas.Children.Add(r);
+            overBom = true;
+            overBom2 = true;
+            timer2.Tick -= Timer2_Tick;
+            if ((Player.x == testx || Player.x == testx + 50 || Player.x == testx - 50) && (Player.y == testy || Player.y == testy + 50 || Player.y == testy - 50) && GameLost == false && GameWon == false)
             {
                 GameOver();
             }
@@ -153,16 +224,9 @@ namespace KBSGame
 
         public void OnEsqKeyIsPressed(object source, EventArgs e)
         {
-            //net als gameover deze code in andere klasse en vervolgens hier aanroepen
             if (playing)
             {
-                pause.Text = "Pause";
-                pause.Foreground = Brushes.Blue;
-                pause.FontSize = 32;
-                pause.FontWeight = FontWeights.Bold;
-                Canvas.SetLeft(pause, 312);
-                Canvas.SetTop(pause, 220);
-                GameCanvas.Children.Add(pause);
+                pauseOverlay = new PauseOverlay(mainWindow, GameCanvas, this);
                 GameTimer.Pauze();
                 FreezePlayer = true;
                 playing = false;
@@ -174,7 +238,7 @@ namespace KBSGame
             if (!playing)
             {
                 playing = true;
-                GameCanvas.Children.Remove(pause);
+                pauseOverlay.continueGame();
                 GameTimer.Herstart();
                 FreezePlayer = false;
             }
