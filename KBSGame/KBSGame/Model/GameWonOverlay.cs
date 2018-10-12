@@ -15,28 +15,13 @@ using KBSGame.View;
 
 namespace KBSGame.Model
 {
-    public class GameWonOverlay
+    public class GameWonOverlay : Overlay
     {
-        private MainWindow MainWindow;
-        private Canvas GameCanvas;
         private Image VictorySprite;
-        private Rectangle background;
-        private Button again, menu;
-        private Game game;
-        private MainMenu mm = new MainMenu();
+        private Button again;
 
-        public GameWonOverlay(MainWindow mw, Canvas canvas, Game g)
+        public GameWonOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
         {
-            game = g;
-            MainWindow = mw;
-            GameCanvas = canvas;
-            background = new Rectangle
-            {
-                Width = 400,
-                Height = 250,
-                Fill = Brushes.DimGray,
-                Opacity = 0.90
-            };
             VictorySprite = new Image
             {
                 Width = 400,
@@ -80,24 +65,6 @@ namespace KBSGame.Model
                 //Subscribe the button to the method it needs to run
                 again.Click += Again_Click;
 
-                //Create new button template for menu button
-                ControlTemplate menuButtonTemplate = new ControlTemplate(typeof(Button));
-                var menuButtonImage = new FrameworkElementFactory(typeof(Image));
-                menuButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/menu-button.png", UriKind.RelativeOrAbsolute)));
-                menuButtonTemplate.VisualTree = menuButtonImage;
-
-                //Create new button to go to the game menu
-                menu = new Button
-                {
-                    Width = 125,
-                    Height = 45,
-                    Name = "menuButton",
-                    Template = menuButtonTemplate
-                };
-
-                //Subscribe the button to the method it needs to run
-                menu.Click += Menu_Click;
-
                 //Add everything to the screen
                 Canvas.SetTop(background, 140);
                 Canvas.SetLeft(background, 201);
@@ -120,24 +87,19 @@ namespace KBSGame.Model
             backgroundWorker.RunWorkerAsync();
         }
 
-        //Actions to perform when menu button is clicked
-        private void Menu_Click(object sender, RoutedEventArgs e)
-        {
-            //Re-opens the main menu
-            mm.Show();
-            MainWindow.Close();
-        }
-
         //Actions to perform when play again button is clicked
         private void Again_Click(object sender, RoutedEventArgs e)
         {
             //Method to reset the game
             game.PlayAgain();
             //Clean up victory overlay
-            GameCanvas.Children.Remove(background);
+            removeObjects();
+        }
+        public void removeObjects()
+        {
+            base.RemoveObjects();
             GameCanvas.Children.Remove(VictorySprite);
             GameCanvas.Children.Remove(again);
-            GameCanvas.Children.Remove(menu);
         }
     }
 }

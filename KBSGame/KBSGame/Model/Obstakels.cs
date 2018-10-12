@@ -20,11 +20,12 @@ namespace KBSGame.GameObjects
        
         public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game)
         {
-            
+         
             for (int i = 0; i < aantalBoom; i++)
             {
                 Tree t = new Tree();
                 obstakels.Add(t);
+                canvas.Children.Add(t.image);
                 Thread.Sleep(25);
             }
 
@@ -32,29 +33,37 @@ namespace KBSGame.GameObjects
             {
                 Bomb b = new Bomb();
                 obstakels.Add(b);
+                //canvas.Children.Add(b.image);
                 Thread.Sleep(25);
             }
             for (int i = 0; i < aantalMoving; i++)
             {
                 MovingObstacle mo = new MovingObstacle(game);
                 obstakels.Add(mo);
+                canvas.Children.Add(mo.image);
                 Thread.Sleep(25);
             }
             for(int i = 0; i < aantalCoin; i++)
             {
                 Coin c = new Coin();
                 obstakels.Add(c);
+                canvas.Children.Add(c.image);
                 Thread.Sleep(25);
             }
 
             for (int i = 0; i < obstakels.Count; i++)
             {
-                canvas.Children.Add(obstakels[i].image);
+                //canvas.Children.Add(obstakels[i].image);
             }
 
             Canvas = canvas;
 
-            
+
+            foreach (string waarde in Obstakels.waardes)
+            {
+                Console.WriteLine(waarde);
+            }
+
         }
 
         public void Reset()

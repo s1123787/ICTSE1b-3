@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace KBSGame.Model
 {
-    class Timer
+    public class Timer
     {
         public delegate void TijdIsOp(object source, EventArgs e);
         public event TijdIsOp tijdIsOp;
