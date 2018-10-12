@@ -61,7 +61,7 @@ namespace KBSGame.Model
 
         public void MoveObstakelRandom(object sender, EventArgs e)
         {
-            if(game.GameLost == false)
+            if(game.GameLost == false && game.GameWon == false)
             {
                 //get current position x
                 int x = (int)Canvas.GetLeft(image);

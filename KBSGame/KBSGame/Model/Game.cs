@@ -294,6 +294,7 @@ namespace KBSGame
         {
             FreezePlayer = true;
             GameLost = false;
+            GameWon = true;
             GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas, this);
             playing = false;
             GameTimer.Pauze();
