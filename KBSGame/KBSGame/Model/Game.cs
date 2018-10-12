@@ -184,6 +184,7 @@ namespace KBSGame
                 explosion.Source = myBitmapImage;
                 Canvas.SetLeft(explosion, testx - 50);
                 Canvas.SetTop(explosion, testy - 50);
+                Canvas.SetZIndex(explosion, 5);
                 GameCanvas.Children.Add(explosion);
                 timer.Tick -= Timer_Tick;
                 timer.Stop();
