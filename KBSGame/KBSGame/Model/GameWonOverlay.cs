@@ -19,9 +19,6 @@ namespace KBSGame.Model
     {
         private Image VictorySprite;
         private Button again;
-        private Rectangle background;
-        private Game game;
-        private MainMenu mm = new MainMenu();
 
         public GameWonOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
         {
