@@ -19,10 +19,8 @@ namespace KBSGame.View
     /// </summary>
     public partial class MainMenu : Window
     {
-        public MainMenu mm { get; set; }
         public MainMenu()
         {
-            mm = this;
             InitializeComponent();
         }
 
