@@ -226,7 +226,6 @@
     <Resource Include="Images\highscores-button.png" />
   </ItemGroup>
   <ItemGroup>
-
     <Resource Include="Images\main-menu-background.png" />
   </ItemGroup>
   <ItemGroup>

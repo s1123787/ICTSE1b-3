@@ -45,6 +45,7 @@ namespace KBSGame
         public bool GameWon;
         public bool GameLost;
         public bool playing;
+        public bool EndPointIsShown = false;
         
         private double testx;
         private double testy;
@@ -110,6 +111,7 @@ namespace KBSGame
         public void OnActivateEndpoint(object source, EventArgs e)
         {
             EndPoint = new EndPoint(GameCanvas);
+            EndPointIsShown = true;
             Player.endPointReached += OnEndPointReached;
         }
 
@@ -263,6 +265,13 @@ namespace KBSGame
             EndPoint.Delete(GameCanvas);
             EndPoint = null;
             Player.endPointReached -= OnEndPointReached;
+            if (EndPointIsShown)
+            {
+                EndPoint.Delete(GameCanvas);
+                EndPoint = null;
+                Player.endPointReached -= OnEndPointReached;
+                EndPointIsShown = false;
+            }
         }
 
         public void Restart()
