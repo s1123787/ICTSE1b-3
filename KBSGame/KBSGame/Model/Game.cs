@@ -151,39 +151,37 @@ namespace KBSGame
 
         private void Timer_Tick(object sender, EventArgs e)
         {
-            if (playing) {
-                if (overBom2)
+            if (playing && overBom2) 
+            {                
+                overBom2 = false;
+                explosion = new Image();
+                explosion.Width = 150;
+                explosion.Height = 150;
+
+                BitmapImage myBitmapImage = new BitmapImage();
+
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/explosion-sprite.png");
+
+                myBitmapImage.DecodePixelWidth = 50;
+                myBitmapImage.EndInit();
+
+                explosion.Source = myBitmapImage;
+                Canvas.SetLeft(explosion, testx - 50);
+                Canvas.SetTop(explosion, testy - 50);
+                GameCanvas.Children.Add(explosion);
+                timer.Tick -= Timer_Tick;
+                timer.Stop();
+                if ((Player.x == testx || Player.x == testx + 50 || Player.x == testx - 50) && (Player.y == testy || Player.y == testy + 50 || Player.y == testy - 50) && GameLost == false && GameWon == false)
                 {
-                    overBom2 = false;
-                    explosion = new Image();
-                    explosion.Width = 150;
-                    explosion.Height = 150;
-
-                    BitmapImage myBitmapImage = new BitmapImage();
-
-                    myBitmapImage.BeginInit();
-                    myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/explosion-sprite.png");
-
-                    myBitmapImage.DecodePixelWidth = 50;
-                    myBitmapImage.EndInit();
-
-                    explosion.Source = myBitmapImage;
-                    Canvas.SetLeft(explosion, testx - 50);
-                    Canvas.SetTop(explosion, testy - 50);
-                    GameCanvas.Children.Add(explosion);
-                    timer.Tick -= Timer_Tick;
-                    timer.Stop();
-                    if ((Player.x == testx || Player.x == testx + 50 || Player.x == testx - 50) && (Player.y == testy || Player.y == testy + 50 || Player.y == testy - 50) && GameLost == false && GameWon == false)
-                    {
-                        GameOver();
-                    }
-                    timer2.Interval = new TimeSpan(0, 0, 0, 1);
-                    timer2.Tick += Timer2_Tick; ;
-                    if (timer2 != null)
-                    {
-                        timer2.Start();
-                    }
+                    GameOver();
                 }
+                timer2.Interval = new TimeSpan(0, 0, 0, 1);
+                timer2.Tick += Timer2_Tick; ;
+                if (timer2 != null)
+                {
+                    timer2.Start();
+                }                
             }
         }
 
