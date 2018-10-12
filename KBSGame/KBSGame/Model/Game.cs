@@ -116,57 +116,56 @@ namespace KBSGame
         public void OnPlayerWalkedOverBomb(object source, GameEventArgs e)
         {
             //this if statement because other wise it don't work
-            if (overBom)
-            {
-                overBom = false;
-                Player.walkedOverBomb -= OnPlayerTijdIsOp;
-                double x = e.x;
-                double y = e.y;
-                testx = e.bomx;
-                testy = e.bomy;
-                #region
-                r = new Rectangle();
-                r.Fill = Brushes.LightGray;
-                r.Height = 40;
-                r.Width = 40;
-                Canvas.SetLeft(r, x + 5);
-                Canvas.SetTop(r, y + 5);
-                Canvas.SetZIndex(r, 0);
-                #endregion
-                Obstakels.waardes.Remove($"{x}{y}b");
-                #region
-                image = new Image();
-                image.Width = 50;
-                image.Height = 50;
-
-                BitmapImage myBitmapImage = new BitmapImage();
-
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
-
-                myBitmapImage.DecodePixelWidth = 50;
-                myBitmapImage.EndInit();
-
-                image.Source = myBitmapImage;
-                Canvas.SetLeft(image, x);
-                Canvas.SetTop(image, y);
-                #endregion
-                GameCanvas.Children.Add(image);
-                timer.Interval = new TimeSpan(0, 0, 0, 1);
-                timer.Tick += Timer_Tick;
-                if (timer != null)
+                if (overBom)
                 {
-                    timer.Start();
-                }
+                    overBom = false;
+                    Player.walkedOverBomb -= OnPlayerTijdIsOp;
+                    double x = e.x;
+                    double y = e.y;
+                    testx = e.bomx;
+                    testy = e.bomy;
+                    #region
+                    r = new Rectangle();
+                    r.Fill = Brushes.LightGray;
+                    r.Height = 40;
+                    r.Width = 40;
+                    Canvas.SetLeft(r, x + 5);
+                    Canvas.SetTop(r, y + 5);
+                    Canvas.SetZIndex(r, 0);
+                    #endregion
+                    Obstakels.waardes.Remove($"{x}{y}b");
+                    #region
+                    image = new Image();
+                    image.Width = 50;
+                    image.Height = 50;
 
+                    BitmapImage myBitmapImage = new BitmapImage();
+
+                    myBitmapImage.BeginInit();
+                    myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
+
+                    myBitmapImage.DecodePixelWidth = 50;
+                    myBitmapImage.EndInit();
+
+                    image.Source = myBitmapImage;
+                    Canvas.SetLeft(image, x);
+                    Canvas.SetTop(image, y);
+                    #endregion
+                    GameCanvas.Children.Add(image);
+                    timer.Interval = new TimeSpan(0, 0, 0, 1);
+                    timer.Tick += Timer_Tick;
+                    if (timer != null)
+                    {
+                        timer.Start();
+                    }
             }
             
         }
 
         private void Timer_Tick(object sender, EventArgs e)
-        {            
-            if (overBom2)
-            {
+        {
+            if (playing && overBom2) 
+            {                
                 overBom2 = false;
                 explosion = new Image();
                 explosion.Width = 150;
@@ -195,7 +194,7 @@ namespace KBSGame
                 if (timer2 != null)
                 {
                     timer2.Start();
-                }
+                }                
             }
         }
 
