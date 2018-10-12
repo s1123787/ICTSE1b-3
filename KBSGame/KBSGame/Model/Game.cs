@@ -34,7 +34,7 @@ namespace KBSGame
         private int aantalBom;
         private int aantalMoving;
         private int aantalCoin;
-        private KBSGame.Model.Timer GameTimer { get; set; }
+        public KBSGame.Model.Timer GameTimer { get; set; }
         private int CollectedCoins = 0 ;
 
         GameOverOverlay gameOverOverlay;
@@ -46,6 +46,7 @@ namespace KBSGame
         private double testx;
         private double testy;
 
+        private PauseOverlay pauseOverlay;
         private bool overBom = true, overBom2 = true;
 
         Rectangle r, r2;
@@ -210,16 +211,9 @@ namespace KBSGame
 
         public void OnEsqKeyIsPressed(object source, EventArgs e)
         {
-            //net als gameover deze code in andere klasse en vervolgens hier aanroepen
             if (playing)
             {
-                pause.Text = "Pause";
-                pause.Foreground = Brushes.Blue;
-                pause.FontSize = 32;
-                pause.FontWeight = FontWeights.Bold;
-                Canvas.SetLeft(pause, 312);
-                Canvas.SetTop(pause, 220);
-                GameCanvas.Children.Add(pause);
+                pauseOverlay = new PauseOverlay(mainWindow, GameCanvas, this);
                 GameTimer.Pauze();
                 FreezePlayer = true;
                 playing = false;
@@ -231,7 +225,7 @@ namespace KBSGame
             if (!playing)
             {
                 playing = true;
-                GameCanvas.Children.Remove(pause);
+                pauseOverlay.continueGame();
                 GameTimer.Herstart();
                 FreezePlayer = false;
             }
