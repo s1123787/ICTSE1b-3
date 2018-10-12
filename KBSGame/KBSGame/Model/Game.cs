@@ -34,7 +34,7 @@ namespace KBSGame
         private int aantalBom;
         private int aantalMoving;
         private int aantalCoin;
-        private KBSGame.Model.Timer GameTimer { get; set; }
+        public KBSGame.Model.Timer GameTimer { get; set; }
         private int CollectedCoins = 0 ;
 
         GameOverOverlay gameOverOverlay;
@@ -46,9 +46,10 @@ namespace KBSGame
         private double testx;
         private double testy;
 
+        private PauseOverlay pauseOverlay;
         private bool overBom = true, overBom2 = true;
 
-        Rectangle r;
+        Rectangle r, r2;
         TextBlock pause = new TextBlock();
 
         Image image, explosion;
@@ -79,21 +80,23 @@ namespace KBSGame
 
         public void OnPlayerCollectCoin(object source, GameOverEventArgs e)
         {
+            
             double x = e.x;
             double y = e.y;
-            r = new Rectangle();
-            r.Fill = Brushes.LightGray;
-            r.Height = 48;
-            r.Width = 48;
-            Canvas.SetLeft(r, x + 1);
-            Canvas.SetTop(r, y + 1);
-            Canvas.SetZIndex(r, 0);
+            r2 = new Rectangle();
+            r2.Fill = Brushes.LightGray;
+            r2.Height = 48;
+            r2.Width = 48;
+            Canvas.SetLeft(r2, x + 1);
+            Canvas.SetTop(r2, y + 1);
+            Canvas.SetZIndex(r2, 0);
             Obstakels.waardes.Remove($"{x}{y}c");
-            GameCanvas.Children.Add(r);
+            GameCanvas.Children.Add(r2);
 
             //coin counter
             CollectedCoins++;
             mainWindow.CoinCounter.Content = CollectedCoins;
+           
 
         }
 
@@ -208,16 +211,9 @@ namespace KBSGame
 
         public void OnEsqKeyIsPressed(object source, EventArgs e)
         {
-            //net als gameover deze code in andere klasse en vervolgens hier aanroepen
             if (playing)
             {
-                pause.Text = "Pause";
-                pause.Foreground = Brushes.Blue;
-                pause.FontSize = 32;
-                pause.FontWeight = FontWeights.Bold;
-                Canvas.SetLeft(pause, 312);
-                Canvas.SetTop(pause, 220);
-                GameCanvas.Children.Add(pause);
+                pauseOverlay = new PauseOverlay(mainWindow, GameCanvas, this);
                 GameTimer.Pauze();
                 FreezePlayer = true;
                 playing = false;
@@ -229,7 +225,7 @@ namespace KBSGame
             if (!playing)
             {
                 playing = true;
-                GameCanvas.Children.Remove(pause);
+                pauseOverlay.continueGame();
                 GameTimer.Herstart();
                 FreezePlayer = false;
             }
