@@ -262,6 +262,9 @@ namespace KBSGame
             mainWindow.CoinCounter.Content = CollectedCoins;
 
             //disable endpoint 
+            EndPoint.Delete(GameCanvas);
+            EndPoint = null;
+            Player.endPointReached -= OnEndPointReached;
             if (EndPointIsShown)
             {
                 EndPoint.Delete(GameCanvas);
