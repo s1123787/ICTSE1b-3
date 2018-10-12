@@ -86,7 +86,7 @@ namespace KBSGame.Model
 
             backgroundWorker.RunWorkerAsync();
         }
-        
+
         //Actions to perform when play again button is clicked
         private void Again_Click(object sender, RoutedEventArgs e)
         {
