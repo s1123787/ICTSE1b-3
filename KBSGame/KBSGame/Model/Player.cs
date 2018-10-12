@@ -49,6 +49,8 @@ namespace KBSGame
             x = Canvas.GetLeft(player);
             y = Canvas.GetTop(player);
 
+            //fetch movingobstakel old XY
+
             if (Obstakels.waardes.Contains($"{x + 45}{y - 5}b"))
             {
                 OnPlayerWalkedOverBomb(x + 45, y - 5, x + 50, y);
@@ -69,7 +71,6 @@ namespace KBSGame
             {
                 if(hits == false)
                 {
-                    Console.WriteLine("Game Over: Player hits Obstakel on Right");
                     hits = true;
                     game.GameOver();
                     Canvas.SetLeft(player, x += (StepSize * 2));
@@ -112,7 +113,6 @@ namespace KBSGame
             {
                 if (hits == false)
                 {
-                    Console.WriteLine("Game Over: Player hits Obstakel on Left");
                     hits = true;
                     game.GameOver();
                     Canvas.SetLeft(player, x -= (StepSize * 2));
@@ -155,7 +155,6 @@ namespace KBSGame
             {
                 if (hits == false)
                 {
-                    Console.WriteLine("Game Over: Player hits Obstakel on Down");
                     hits = true;
                     game.GameOver();
                     Canvas.SetTop(player, y += (StepSize * 2));
@@ -197,7 +196,6 @@ namespace KBSGame
             {
                 if (hits == false)
                 {
-                    Console.WriteLine("Game Over: Player hits Obstakel on Up");
                     hits = true;
                     game.GameOver();
                     Canvas.SetTop(player, y -= (StepSize * 2));
