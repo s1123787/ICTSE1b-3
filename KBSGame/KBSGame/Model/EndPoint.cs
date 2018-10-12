@@ -12,10 +12,13 @@ namespace KBSGame
 {
     class EndPoint
     {
+        Rectangle rect;
+        Image sprite;
+
         public EndPoint(Canvas canvas)
         {
             //Create rectangle to identify finish
-            Rectangle rect = new Rectangle
+            rect = new Rectangle
             {
                 Width = 50,
                 Height = 50,
@@ -24,7 +27,7 @@ namespace KBSGame
             };
             
             //Create image of flag for finish
-            Image sprite = new Image
+            sprite = new Image
             {
                 Width = 50,
                 Height = 50
@@ -38,6 +41,12 @@ namespace KBSGame
             Canvas.SetTop(sprite, 550);
             Canvas.SetLeft(sprite, 750);
             canvas.Children.Add(sprite);
+        }
+
+        public void Delete(Canvas canvas)
+        {
+            canvas.Children.Remove(rect);
+            canvas.Children.Remove(sprite);
         }
     }
 }
