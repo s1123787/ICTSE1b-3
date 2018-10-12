@@ -21,6 +21,7 @@ namespace KBSGame.Model
         protected Rectangle background;
         protected Button menu;
         protected Game game;
+        protected View.MainMenu mm;
 
         public Overlay(MainWindow mw, Canvas canvas, Game g)
         {
@@ -55,8 +56,10 @@ namespace KBSGame.Model
         }
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
-            //Closes the application
-            Application.Current.Shutdown();
+            mm = new View.MainMenu();
+            //Opens the main menu
+            mm.Show();
+            MainWindow.Close();
         }
         public void RemoveObjects()
         {
