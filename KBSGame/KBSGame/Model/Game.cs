@@ -48,7 +48,7 @@ namespace KBSGame
 
         private bool overBom = true, overBom2 = true;
 
-        Rectangle r;
+        Rectangle r, r2;
         TextBlock pause = new TextBlock();
 
         Image image, explosion;
@@ -79,21 +79,23 @@ namespace KBSGame
 
         public void OnPlayerCollectCoin(object source, GameOverEventArgs e)
         {
+            
             double x = e.x;
             double y = e.y;
-            r = new Rectangle();
-            r.Fill = Brushes.LightGray;
-            r.Height = 48;
-            r.Width = 48;
-            Canvas.SetLeft(r, x + 1);
-            Canvas.SetTop(r, y + 1);
-            Canvas.SetZIndex(r, 0);
+            r2 = new Rectangle();
+            r2.Fill = Brushes.LightGray;
+            r2.Height = 48;
+            r2.Width = 48;
+            Canvas.SetLeft(r2, x + 1);
+            Canvas.SetTop(r2, y + 1);
+            Canvas.SetZIndex(r2, 0);
             Obstakels.waardes.Remove($"{x}{y}c");
-            GameCanvas.Children.Add(r);
+            GameCanvas.Children.Add(r2);
 
             //coin counter
             CollectedCoins++;
             mainWindow.CoinCounter.Content = CollectedCoins;
+           
 
         }
 
