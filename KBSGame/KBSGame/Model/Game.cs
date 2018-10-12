@@ -22,6 +22,9 @@ namespace KBSGame
         DispatcherTimer timer = new DispatcherTimer();
         private int Seconde { get; set; }
 
+        public delegate void ActivateEndPoint(object souce, EventArgs e);
+        public event ActivateEndPoint activeEndPoint;
+
         private StartPoint StartPoint { get; set; }
         private EndPoint EndPoint { get; set; }
         public Player Player { get; set; }
@@ -53,7 +56,7 @@ namespace KBSGame
             playing = true;
             Seconde = s;
             StartPoint = new StartPoint(canvas);
-            //EndPoint = new EndPoint(canvas);
+            
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this);
 
             Player = new Player(canvas, this);
@@ -67,12 +70,12 @@ namespace KBSGame
             Player.collectCoin += OnPlayerCollectCoin;
             GameTimer = new Model.Timer(Seconde, this, mw); //hier wordt de timer aangemaakt die de meegegeven seconden gebruikt            
             GameTimer.tijdIsOp += OnPlayerTijdIsOp; //hier subscribe je op de event van timer
-            Player.endPointReached += OnEndPointReached;
             mw.esqKeyIsPressed += OnEsqKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
+            activeEndPoint += OnActivateEndpoint;
         }
 
-        public void OnPlayerCollectCoin(object source, GameOverEventArgs e)
+        public void OnPlayerCollectCoin(object source, GameEventArgs e)
         {
             double x = e.x;
             double y = e.y;
@@ -89,10 +92,20 @@ namespace KBSGame
             //coin counter
             CollectedCoins++;
             mainWindow.CoinCounter.Content = CollectedCoins;
+            if(CollectedCoins == 5)
+            {
+                activeEndPoint?.Invoke(this, EventArgs.Empty);
+            }
 
         }
 
-        public void OnPlayerWalkedOverBomb(object source, GameOverEventArgs e)
+        public void OnActivateEndpoint(object source, EventArgs e)
+        {
+            EndPoint = new EndPoint(GameCanvas);
+            Player.endPointReached += OnEndPointReached;
+        }
+
+        public void OnPlayerWalkedOverBomb(object source, GameEventArgs e)
         {
             Player.walkedOverBomb -= OnPlayerTijdIsOp;
             double x = e.x;
@@ -178,8 +191,15 @@ namespace KBSGame
             playing = true;
             GameWon = false;
             GameLost = false;
+
+            //set collected coins 0
             CollectedCoins = 0;
             mainWindow.CoinCounter.Content = CollectedCoins;
+
+            //disable endpoint 
+            EndPoint.Delete(GameCanvas);
+            EndPoint = null;
+            Player.endPointReached -= OnEndPointReached;
         }
 
         public void Restart()

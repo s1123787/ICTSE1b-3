@@ -16,8 +16,8 @@ namespace KBSGame
 {
     public class Player
     {
-        public delegate void CollectCoin(object source, GameOverEventArgs e);
-        public delegate void WalkedOverBomb(object source, GameOverEventArgs e);
+        public delegate void CollectCoin(object source, GameEventArgs e);
+        public delegate void WalkedOverBomb(object source, GameEventArgs e);
         public delegate void EndPointReached(object source, EventArgs e);
         public event EndPointReached endPointReached;
         public event WalkedOverBomb walkedOverBomb;
@@ -217,13 +217,14 @@ namespace KBSGame
 
         protected virtual void OnPlayerCollectCoin(double xwaarde, double ywaarde, double coinx, double coiny)
         {
-            GameOverEventArgs ge = new GameOverEventArgs(xwaarde, ywaarde, coinx, coiny);
+            GameEventArgs ge = new GameEventArgs(xwaarde, ywaarde, coinx, coiny);
             collectCoin?.Invoke(this, ge);
+
         }
 
         protected virtual void OnPlayerWalkedOverBomb(double xwaarde, double ywaarde, double bomx, double bomy)
         {
-            GameOverEventArgs ge = new GameOverEventArgs(xwaarde, ywaarde, bomx, bomy);
+            GameEventArgs ge = new GameEventArgs(xwaarde, ywaarde, bomx, bomy);
             walkedOverBomb?.Invoke(this, ge);
         }
 
@@ -254,6 +255,8 @@ namespace KBSGame
             y = 5;
             hits = false;
         }
+
+
         
     }
 }

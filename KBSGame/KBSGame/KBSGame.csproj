@@ -94,7 +94,7 @@
     <Compile Include="Model\Coin.cs" />
     <Compile Include="Model\Bomb.cs" />
     <Compile Include="Model\EndPoint.cs" />
-    <Compile Include="Model\GameOverEventArgs.cs" />
+    <Compile Include="Model\GameEventArgs.cs" />
     <Compile Include="Model\GameOverOverlay.cs" />
     <Compile Include="Model\GameWonOverlay.cs" />
     <Compile Include="Model\MovingObstacle.cs" />
