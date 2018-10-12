@@ -18,10 +18,7 @@ namespace KBSGame.Model
     public class GameWonOverlay : Overlay
     {
         private Image VictorySprite;
-        private Rectangle background;
-        private Button again, menu;
-        private Game game;
-        private MainMenu mm;
+        private Button again;
 
         public GameWonOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
         {
@@ -88,15 +85,6 @@ namespace KBSGame.Model
             };
 
             backgroundWorker.RunWorkerAsync();
-        }
-
-        //Actions to perform when menu button is clicked
-        private void Menu_Click(object sender, RoutedEventArgs e)
-        {
-            mm = new MainMenu();
-            //Opens the main menu
-            mm.Show();
-            MainWindow.Close();
         }
 
         //Actions to perform when play again button is clicked
