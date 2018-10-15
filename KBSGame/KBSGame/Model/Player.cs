@@ -69,7 +69,6 @@ namespace KBSGame
             {
                 if(hits == false)
                 {
-                    Console.WriteLine("Game Over: Player hits Obstakel on Right");
                     hits = true;
                     game.GameOver();
                     Canvas.SetLeft(player, x += (StepSize * 2));
@@ -112,7 +111,6 @@ namespace KBSGame
             {
                 if (hits == false)
                 {
-                    Console.WriteLine("Game Over: Player hits Obstakel on Left");
                     hits = true;
                     game.GameOver();
                     Canvas.SetLeft(player, x -= (StepSize * 2));
@@ -155,7 +153,6 @@ namespace KBSGame
             {
                 if (hits == false)
                 {
-                    Console.WriteLine("Game Over: Player hits Obstakel on Down");
                     hits = true;
                     game.GameOver();
                     Canvas.SetTop(player, y += (StepSize * 2));
@@ -197,7 +194,6 @@ namespace KBSGame
             {
                 if (hits == false)
                 {
-                    Console.WriteLine("Game Over: Player hits Obstakel on Up");
                     hits = true;
                     game.GameOver();
                     Canvas.SetTop(player, y -= (StepSize * 2));
