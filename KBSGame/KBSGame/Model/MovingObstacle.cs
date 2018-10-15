@@ -78,25 +78,25 @@ namespace KBSGame.Model
                 switch (rand)
                 {
                     case 0:
-                        if(CheckGridAvailability(x, y + MovingStepSize))
+                        if(CheckGridAvailability(x, y + MovingStepSize, x, y))
                         {
                             MoveObstakelDown();
                         }
                         break;
                     case 1:
-                        if (CheckGridAvailability(x + MovingStepSize, y))
+                        if (CheckGridAvailability(x + MovingStepSize, y, x, y))
                         {
                             MoveObstakelRight();
                         }
                         break;
                     case 2:
-                        if (CheckGridAvailability(x, y - MovingStepSize))
+                        if (CheckGridAvailability(x, y - MovingStepSize, x, y))
                         {
                             MoveObstakelUp();
                         }
                         break;
                     case 3:
-                        if (CheckGridAvailability(x - MovingStepSize, y))
+                        if (CheckGridAvailability(x - MovingStepSize, y, x, y))
                         {
                             MoveObstakelLeft();
                         }
@@ -205,14 +205,21 @@ namespace KBSGame.Model
             }
         }
 
-        public bool CheckGridAvailability(int x, int y)
+        public bool CheckGridAvailability(int x, int y, int currentX, int currentY)
         {
             string XYString = x.ToString() + y.ToString();
 
-            //check if Moving obstakel hits player
             int playerX = (int)Player.x - 5;
             int playerY = (int)Player.y - 5;
 
+            //check if Player is on Moving obstakel
+            if(playerX == currentX && playerY == currentY && hits == false)
+            {
+                game.GameOver();
+                hits = true;
+            }
+
+            //check if Moving obstakel hits player
             if (playerX == x && playerY == y && game.GameLost == false && hits == false)
             {
                 game.GameOver();
