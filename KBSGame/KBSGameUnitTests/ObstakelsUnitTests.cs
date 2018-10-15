@@ -24,6 +24,7 @@ namespace KBSGameUnitTests
             game = new Game(new MainWindow(), new Canvas(), 30, 10, 3, 5, 30);
 
         }
+        //hier test je of de obstakels worden toegevoegd aan de lijst en direct of het geen duplicates heeft
         [Test]
         public void Obstakels_ObstakelsAddedToList_ReturnTrue()
         {
@@ -33,6 +34,7 @@ namespace KBSGameUnitTests
             Assert.AreEqual(48, aantal);
         }
 
+        //hier test je of de waardes uit de lijst worden verwijderd
         [Test]
         public void Reset_ObstakelsBeingDeletedFromList_ReturnTrue()
         {
