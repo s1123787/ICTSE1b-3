@@ -16,8 +16,7 @@ namespace KBSGame.GameObjects
         List<string> type = new List<string>();
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
-        Game game;
-       
+        
         public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game)
         {
          
@@ -51,13 +50,7 @@ namespace KBSGame.GameObjects
                 Thread.Sleep(25);
             }
 
-            for (int i = 0; i < obstakels.Count; i++)
-            {
-                //canvas.Children.Add(obstakels[i].image);
-            }
-
             Canvas = canvas;
-
 
             foreach (string waarde in Obstakels.waardes)
             {
