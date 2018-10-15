@@ -15,7 +15,10 @@ namespace KBSGame
         public event EsqKeyIsPressed esqKeyIsPressed;
         public delegate void EnterKeyIsPressed(object source, EventArgs e);
         public event EnterKeyIsPressed enterKeyIsPressed;
+        private bool IsPressed = false;
+
         Game game;
+
         public MainWindow()
         {
             InitializeComponent();
@@ -29,37 +32,43 @@ namespace KBSGame
 
         private void OnKeyDown(object sender, KeyEventArgs e)
         {
-            //wat doet deze game.playing?
-            if (/* game.playing && */!game.FreezePlayer) {
-                switch (e.Key)
+            if (!IsPressed)
+            {
+                
+                IsPressed = true;
+
+                if (!game.FreezePlayer)
                 {
-                    case Key.Right:
-                    case Key.D:
-                        game.Player.MoveRight();
-                        break;
-                    case Key.Left:
-                    case Key.A:
-                        game.Player.MoveLeft();
-                        break;
-                    case Key.Down:
-                    case Key.S:
-                        game.Player.MoveDown();
-                        break;
-                    case Key.Up:
-                    case Key.W:
-                        game.Player.MoveUp();
-                        break;
+                    switch (e.Key)
+                    {
+                        case Key.Right:
+                        case Key.D:
+                            game.Player.MoveRight();
+                            break;
+                        case Key.Left:
+                        case Key.A:
+                            game.Player.MoveLeft();
+                            break;
+                        case Key.Down:
+                        case Key.S:
+                            game.Player.MoveDown();
+                            break;
+                        case Key.Up:
+                        case Key.W:
+                            game.Player.MoveUp();
+                            break;
+
+                    }
+                }
+                if (e.Key == Key.Escape)
+                {
+                    OnEsqKeyIsPressed();
+                }
+                if (e.Key == Key.Enter)
+                {
+                    OnEnterKeyIsPressed();
 
                 }
-            }
-            if (e.Key == Key.Escape)
-            {
-                OnEsqKeyIsPressed();                        
-            }
-            if (e.Key == Key.Enter)
-            {
-                OnEnterKeyIsPressed();
-                    
             }
                 
         }        
@@ -73,6 +82,10 @@ namespace KBSGame
         {
             enterKeyIsPressed?.Invoke(this, EventArgs.Empty);                
         }
-        
+
+        private void OnKeyUp(object sender, KeyEventArgs e)
+        {
+            IsPressed = false;
+        }
     }
 }
