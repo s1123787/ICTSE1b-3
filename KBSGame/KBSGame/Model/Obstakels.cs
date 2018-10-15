@@ -12,7 +12,7 @@ namespace KBSGame.GameObjects
 {
     public class Obstakels
     {
-        List<Obstakel> obstakels = new List<Obstakel>();
+        public List<Obstakel> obstakels = new List<Obstakel>();
         List<string> type = new List<string>();
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
