@@ -12,7 +12,7 @@ namespace KBSGame.GameObjects
 {
     public class Obstakels
     {
-        List<Obstakel> obstakels = new List<Obstakel>();
+        public List<Obstakel> obstakels = new List<Obstakel>();
         List<string> type = new List<string>();
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
@@ -50,19 +50,12 @@ namespace KBSGame.GameObjects
                 canvas.Children.Add(c.image);
                 Thread.Sleep(25);
             }
-
-            for (int i = 0; i < obstakels.Count; i++)
-            {
-                //canvas.Children.Add(obstakels[i].image);
-            }
+            
 
             Canvas = canvas;
 
 
-            foreach (string waarde in Obstakels.waardes)
-            {
-                Console.WriteLine(waarde);
-            }
+            
 
         }
 
@@ -71,8 +64,8 @@ namespace KBSGame.GameObjects
             for (int i = 0; i < obstakels.Count; i++)
             {
                 Canvas.Children.Remove(obstakels[i].image);
-                waardes.Clear();
             }
+            waardes.Clear();
         }
     }
 }

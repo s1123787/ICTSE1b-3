@@ -21,7 +21,7 @@ namespace KBSGame
             InitializeComponent();
 
             //hier wordt de game aangemaakt
-            game = new Game(this, GameCanvas, 10, 10, 1, 5, 30);
+            game = new Game(this, GameCanvas, 30, 10, 3, 5, 30);
             
             //key eventhandler toevoegen
             this.KeyDown += new KeyEventHandler(OnKeyDown);

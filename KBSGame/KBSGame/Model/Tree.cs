@@ -20,6 +20,7 @@ namespace KBSGame.Model
             image = new Image();
             image.Width = 50;
             image.Height = 50;
+            Canvas.SetZIndex(image, 2);
 
             BitmapImage myBitmapImage = new BitmapImage();
 
