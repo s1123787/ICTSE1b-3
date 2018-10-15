@@ -25,7 +25,7 @@ namespace KBSGame
         private Ellipse player = new Ellipse();
         public static double x = 5;
         public static double y = 5;
-        private int StepSize = 25;
+        private int StepSize = 50;
         private Canvas gameCanvas;
         private Game game;
         private bool hits = false;
