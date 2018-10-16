@@ -39,7 +39,7 @@ namespace KBSGame
         private int aantalMoving;
         private int aantalCoin;
         public Model.Timer GameTimer { get; set; }
-        private int CollectedCoins = 0 ;
+        public int CollectedCoins { get; set; }
 
         GameOverOverlay gameOverOverlay;
 
@@ -52,7 +52,8 @@ namespace KBSGame
         public double testy;
 
         private PauseOverlay pauseOverlay;
-        public bool overBom = true, overBom2 = true;
+        private bool overBom = true, overBom2 = true;
+        public bool pauseActivated = false;
 
         public Rectangle r, r2;
         Image i, i2;
@@ -83,6 +84,7 @@ namespace KBSGame
             mw.esqKeyIsPressed += OnEsqKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
             activeEndPoint += OnActivateEndpoint;
+            CollectedCoins = 0;
         }
 
         public void OnPlayerCollectCoin(object source, GameEventArgs e)
@@ -247,13 +249,13 @@ namespace KBSGame
                 GameTimer.Pauze();
                 FreezePlayer = true;
                 playing = false;
+                pauseActivated = true;
             }
         }
 
         public void OnEnterKeyIsPressed(object source, EventArgs e)
         {
-            if (!playing)
-            {
+            if (!playing && pauseActivated == true) {
                 playing = true;
                 pauseOverlay.continueGame();
                 GameTimer.Herstart();

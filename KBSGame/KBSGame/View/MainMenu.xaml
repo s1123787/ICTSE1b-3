@@ -8,7 +8,6 @@
         Title="MainMenu" Height="600" Width="800">
     <Window.Resources>
         <ImageBrush x:Key="startbutton" ImageSource="/images/start-button.png" />
-        <ImageBrush x:Key="highscoresbutton" ImageSource="/images/highscores-button.png" />
         <ImageBrush x:Key="exitbutton" ImageSource="/images/exit-button.png" />
         <Style x:Key="MainMenuButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -48,17 +47,6 @@
             HorizontalAlignment = "Center" 
             VerticalAlignment="Top"
             Margin="0,125,0,0"/>
-        <Button x:Name = "HighscoreButton"
-            Style="{StaticResource MainMenuButton}"
-            Click = "startGameButton_Click" 
-            ClickMode = "Release"
-            BorderThickness="0"
-            Height ="75"  
-            Width = "400"
-            Background="{StaticResource highscoresbutton}"
-            HorizontalAlignment = "Center" 
-            VerticalAlignment="Top"
-            Margin="0,225,0,0"/>
         <Button x:Name = "ExitGameButton"
             Style="{StaticResource MainMenuButton}"
             Click = "ExitGameButton_Click"
