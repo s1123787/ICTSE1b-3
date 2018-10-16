@@ -198,13 +198,21 @@ namespace KBSGame
                 if ((Player.x == testx || Player.x == testx + 50 || Player.x == testx - 50) && (Player.y == testy || Player.y == testy + 50 || Player.y == testy - 50) && GameLost == false && GameWon == false)
                 {
                     GameOver();
+                    GameCanvas.Children.Remove(explosion);
+                    GameCanvas.Children.Add(i);
+                    overBom = true;
+                    overBom2 = true;
+                    Console.WriteLine("dood door bom");
                 }
-                timer2.Interval = new TimeSpan(0, 0, 0, 1);
-                timer2.Tick += Timer2_Tick; ;
-                if (timer2 != null)
+                else
                 {
-                    timer2.Start();
-                }                
+                    timer2.Interval = new TimeSpan(0, 0, 0, 1);
+                    timer2.Tick += Timer2_Tick; ;
+                    if (timer2 != null)
+                    {
+                        timer2.Start();
+                    }
+                }
             }
         }
 

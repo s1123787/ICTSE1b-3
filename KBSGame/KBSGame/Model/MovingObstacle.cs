@@ -21,7 +21,7 @@ namespace KBSGame.Model
         private bool hits = false;
         public int OldX;
         public int OldY;
-
+        
         public MovingObstacle(Game game)
         {
             this.game = game;
@@ -67,11 +67,7 @@ namespace KBSGame.Model
             {
                 //get current position x
                 int x = (int)Canvas.GetLeft(image);
-                int y = (int)Canvas.GetTop(image);
-
-                //set old position
-                OldX = x;
-                OldY = y;
+                int y = (int)Canvas.GetTop(image);               
 
                 Random random = new Random();
                 int rand = random.Next(0, 4);
@@ -212,16 +208,9 @@ namespace KBSGame.Model
             int playerX = (int)Player.x - 5;
             int playerY = (int)Player.y - 5;
 
-            //check if Player is on Moving obstakel
-            if(playerX == currentX && playerY == currentY && hits == false)
-            {
-                game.GameOver();
-                hits = true;
-            }
-
-            //check if Moving obstakel hits player
             if (playerX == x && playerY == y && game.GameLost == false && hits == false)
             {
+                Console.WriteLine("Game Over: Obstakel hits Player");
                 game.GameOver();
                 hits = true;
             }
@@ -234,6 +223,7 @@ namespace KBSGame.Model
                     return false;
                 }
             }
+           
 
             return true;
         }
