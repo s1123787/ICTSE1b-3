@@ -252,7 +252,6 @@ namespace KBSGame.Model
             //check if Moving obstakel hits player
             if (playerX == x && playerY == y && game.GameLost == false && hits == false)
             {
-                Console.WriteLine("Game Over: Obstakel hits Player");
                 game.GameOver();
                 hits = true;
                 return false;
