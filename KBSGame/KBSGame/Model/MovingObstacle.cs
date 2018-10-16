@@ -124,8 +124,8 @@ namespace KBSGame.Model
             if (x != null && y != null)
             { 
                 //get current position x
-                int x = (int)Canvas.GetLeft(image);
-                int y = (int)Canvas.GetTop(image);
+                x = (int)Canvas.GetLeft(image);
+                y = (int)Canvas.GetTop(image);
             }
 
             //Right screen boundry
@@ -153,8 +153,8 @@ namespace KBSGame.Model
             if (x != null && y != null)
             {
                 //get current position x
-                int x = (int)Canvas.GetLeft(image);
-                int y = (int)Canvas.GetTop(image);
+                x = (int)Canvas.GetLeft(image);
+                y = (int)Canvas.GetTop(image);
             }
 
             //Left screen boundry
@@ -181,8 +181,8 @@ namespace KBSGame.Model
             if (x != null && y != null)
             {
                 //get current position x
-                int x = (int)Canvas.GetLeft(image);
-                int y = (int)Canvas.GetTop(image);
+                x = (int)Canvas.GetLeft(image);
+                y = (int)Canvas.GetTop(image);
             }
 
             // Bottom boundry 
@@ -210,8 +210,8 @@ namespace KBSGame.Model
             if (x != null && y != null)
             {
                 //get current position x
-                int x = (int)Canvas.GetLeft(image);
-                int y = (int)Canvas.GetTop(image);
+                x = (int)Canvas.GetLeft(image);
+                y = (int)Canvas.GetTop(image);
             }
 
             // Top boundry 
