@@ -1,4 +1,5 @@
-﻿using System;
+﻿using KBSGame.GameObjects;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -26,8 +27,9 @@ namespace KBSGame.View
 
         private void startGameButton_Click(object sender, RoutedEventArgs e)
         {
-            
+
             //Opens a new window and starts the game
+            Obstakels.waardes.Clear();
             MainWindow mainWindow = new MainWindow();
             mainWindow.Show();
             this.Close();

@@ -78,7 +78,7 @@ namespace KBSGame
                 {
                     hits = true;
                     game.GameOver();
-                    Canvas.SetLeft(player, x += (StepSize * 2));
+                    Canvas.SetLeft(player, x += (StepSize));
                     return;
                 }
             }
@@ -120,7 +120,7 @@ namespace KBSGame
                 {
                     hits = true;
                     game.GameOver();
-                    Canvas.SetLeft(player, x -= (StepSize * 2));
+                    Canvas.SetLeft(player, x -= (StepSize));
                     return;
                 }
             }
@@ -162,7 +162,7 @@ namespace KBSGame
                 {
                     hits = true;
                     game.GameOver();
-                    Canvas.SetTop(player, y += (StepSize * 2));
+                    Canvas.SetTop(player, y += (StepSize));
                     return;
                 }
             }
@@ -203,7 +203,7 @@ namespace KBSGame
                 {
                     hits = true;
                     game.GameOver();
-                    Canvas.SetTop(player, y -= (StepSize * 2));
+                    Canvas.SetTop(player, y -= (StepSize));
                     return;
                 }
             }
