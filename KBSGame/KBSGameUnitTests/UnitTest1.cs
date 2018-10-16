@@ -1,14 +1,17 @@
 ﻿using System;
+using KBSGame;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NUnit.Framework;
 
 namespace KBSGameUnitTests
 {
-    [TestClass]
+    [TestFixture]
     public class UnitTest1
     {
-        [TestMethod]
+        [Test]
         public void TestMethod1()
         {
         }
+        
     }
 }

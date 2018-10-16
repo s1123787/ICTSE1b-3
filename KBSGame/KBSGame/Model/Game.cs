@@ -19,9 +19,10 @@ namespace KBSGame
 {
     public class Game
     {
-        DispatcherTimer timer = new DispatcherTimer();
-        DispatcherTimer timer2 = new DispatcherTimer();
+        public DispatcherTimer timer = new DispatcherTimer();
+        public DispatcherTimer timer2 = new DispatcherTimer();
         private int Seconde { get; set; }
+        
 
         public delegate void ActivateEndPoint(object souce, EventArgs e);
         public event ActivateEndPoint activeEndPoint;
@@ -47,16 +48,18 @@ namespace KBSGame
         public bool playing;
         public bool EndPointIsShown = false;
         
-        private double testx;
-        private double testy;
+        public double testx;
+        public double testy;
 
         private PauseOverlay pauseOverlay;
-        private bool overBom = true, overBom2 = true;
-        
+        public bool overBom = true, overBom2 = true;
+
+        public Rectangle r, r2;
         Image i, i2;
+      
         TextBlock pause = new TextBlock();
 
-        Image image, explosion;
+        public Image image, explosion;
 
         public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s)
         {
@@ -168,7 +171,7 @@ namespace KBSGame
             
         }
 
-        private void Timer_Tick(object sender, EventArgs e)
+        public void Timer_Tick(object sender, EventArgs e)
         {
             if (playing && overBom2) 
             {                
@@ -205,7 +208,7 @@ namespace KBSGame
             }
         }
 
-        private void Timer2_Tick(object sender, EventArgs e)
+        public void Timer2_Tick(object sender, EventArgs e)
         {
             GameCanvas.Children.Remove(explosion);
             GameCanvas.Children.Add(i);
@@ -283,6 +286,8 @@ namespace KBSGame
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this);
             FreezePlayer = false;
             gameOverOverlay = null;
+            timer.Tick -= Timer_Tick;
+            timer2.Tick -= Timer2_Tick;
         }
 
         public void GameOver()
