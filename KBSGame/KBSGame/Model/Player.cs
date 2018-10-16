@@ -252,6 +252,11 @@ namespace KBSGame
             hits = false;
         }
 
+        public string Position()
+        {
+            return $"{x}{y}";
+        }
+
 
         
     }
