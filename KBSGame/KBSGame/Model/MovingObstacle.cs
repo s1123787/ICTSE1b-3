@@ -150,9 +150,12 @@ namespace KBSGame.Model
 
         public void MoveObstakelLeft()
         {
-            //get current position
-            int x = (int)Canvas.GetLeft(image);
-            int y = (int)Canvas.GetTop(image);
+            if (x != null && y != null)
+            {
+                //get current position x
+                int x = (int)Canvas.GetLeft(image);
+                int y = (int)Canvas.GetTop(image);
+            }
 
             //Left screen boundry
             if (x == 0)
@@ -175,8 +178,12 @@ namespace KBSGame.Model
 
         public void MoveObstakelDown()
         {
-            int x = (int)Canvas.GetLeft(image);
-            int y = (int)Canvas.GetTop(image);
+            if (x != null && y != null)
+            {
+                //get current position x
+                int x = (int)Canvas.GetLeft(image);
+                int y = (int)Canvas.GetTop(image);
+            }
 
             // Bottom boundry 
             if (y == 550)
@@ -200,8 +207,12 @@ namespace KBSGame.Model
 
         public void MoveObstakelUp()
         {
-            int x = (int)Canvas.GetLeft(image);
-            int y = (int)Canvas.GetTop(image);
+            if (x != null && y != null)
+            {
+                //get current position x
+                int x = (int)Canvas.GetLeft(image);
+                int y = (int)Canvas.GetTop(image);
+            }
 
             // Top boundry 
             if (y == 0)

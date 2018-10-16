@@ -62,9 +62,8 @@ namespace KBSGameUnitTests
             get { return testContextInstance; }
             set { testContextInstance = value; }
         }
-        
 
-        //hier test je of de waardes uit de lijst worden verwijderd
+        
         [Test]
         public void MovingObstakelMovesRight_ReturnTrue()
         {
@@ -82,11 +81,40 @@ namespace KBSGameUnitTests
             {
                 TestContext.WriteLine(waarde);
             }
-                        
+
 
             //check if Moving Obstakels moved 50px to the right
             if (Obstakels.waardes.Contains("1500m"))
-            {   
+            {
+                test = true;
+            }
+
+            Assert.IsTrue(test);
+        }
+
+        //hier test je of de waardes uit de lijst worden verwijderd
+        [Test]
+        public void MovingObstakelMovesLeft_ReturnTrue()
+        {
+            bool test = false;
+
+            //hier voeg je een moving obstakel toe op positie x=100 en y = 0
+            MovingObstacle moving = new MovingObstacle(game, true);
+            moving.SetX(100);
+            moving.SetY(0);
+            Obstakels.waardes.Add($"1000m");
+
+            moving.MoveObstakelLeft();
+
+            foreach (string waarde in Obstakels.waardes)
+            {
+                TestContext.WriteLine(waarde);
+            }
+
+
+            //check if Moving Obstakels moved 50px to the right
+            if (Obstakels.waardes.Contains("500m"))
+            {
                 test = true;
             }
 
