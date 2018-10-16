@@ -30,11 +30,11 @@ namespace KBSGame.Model
             int i = random.Next(0, 3);
             if (i == 0)
             {
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tomb-stone-sprite.png");
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/hell-tree-sprite.png");
             }
             else if (i == 1)
             {
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tomb-stone2-sprite.png");
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tomb-stone-sprite.png");
             }
             else if (i == 2)
             {

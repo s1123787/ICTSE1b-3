@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
 
@@ -22,7 +23,8 @@ namespace KBSGame
         public event EndPointReached endPointReached;
         public event WalkedOverBomb walkedOverBomb;
         public event CollectCoin collectCoin;
-        private Ellipse player = new Ellipse();
+        //private Ellipse player = new Ellipse();
+        private Image player;
         public static double x = 5;
         public static double y = 5;
         private int StepSize = 50;
@@ -38,16 +40,22 @@ namespace KBSGame
         {
             gameCanvas = GameCanvas;
             this.game = game;
-            player.Fill = Brushes.Red;
-            player.Width = 40;
-            player.Height = 40;
+            player = new Image
+            {
+                Width = 40,
+                Height = 40
+            };
+            BitmapImage myBitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/player.png"));
+
+            player.Source = myBitmapImage;
+            
             Canvas.SetLeft(player, 5);
             Canvas.SetTop(player, 5);
             Canvas.SetZIndex(player, 1);
             gameCanvas.Children.Add(player);
 
             //testing
-            Eplayer = player;
+            //Eplayer = player;
         }
 
         public void MoveRight()

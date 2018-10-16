@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:KBSGame"
         mc:Ignorable="d"
         UseLayoutRounding="True"
-        Title="KBS Game" Height="800" Width="818" ResizeMode="NoResize" KeyDown="OnKeyDown" KeyUp="OnKeyUp">
+        Title="A2B" Height="800" Width="818" ResizeMode="NoResize" KeyDown="OnKeyDown" KeyUp="OnKeyUp">
     <Border
     BorderThickness="1"
     BorderBrush="#FFA4A4A4"

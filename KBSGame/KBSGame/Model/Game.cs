@@ -51,7 +51,7 @@ namespace KBSGame
         public double testx;
         public double testy;
 
-        private PauseOverlay pauseOverlay;
+        public PauseOverlay pauseOverlay;
         private bool overBom = true, overBom2 = true;
         public bool pauseActivated = false;
 

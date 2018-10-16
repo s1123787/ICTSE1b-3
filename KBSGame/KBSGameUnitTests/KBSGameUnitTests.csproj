@@ -57,6 +57,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="MenuButtonUnitTests.cs" />
     <Compile Include="PauseOverlayUnitTests.cs" />
     <Compile Include="UnitTestPlayer.cs" />
     <Compile Include="UnitTest1.cs" />

@@ -19,7 +19,7 @@ namespace KBSGame.Model
         protected MainWindow MainWindow;
         protected Canvas GameCanvas;
         protected Rectangle background;
-        protected Button menu;
+        public Button menu;
         protected Game game;
         protected View.MainMenu mm;
 
