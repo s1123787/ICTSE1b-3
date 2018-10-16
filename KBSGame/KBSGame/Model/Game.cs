@@ -239,14 +239,11 @@ namespace KBSGame
 
         public void OnEnterKeyIsPressed(object source, EventArgs e)
         {
-            if (!playing) {
-            if (pauseActivated)
-            {
+            if (!playing && pauseActivated == true) {
                 playing = true;
                 pauseOverlay.continueGame();
                 GameTimer.Herstart();
                 FreezePlayer = false;
-            }
             }
         }
 
