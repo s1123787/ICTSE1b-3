@@ -19,8 +19,6 @@ namespace KBSGame.Model
         public int MovingY { get; private set; }
         private Game game;
         private bool hits = false;
-        public int OldX;
-        public int OldY;
         public int x;
         public int y;
 
@@ -82,10 +80,6 @@ namespace KBSGame.Model
                 //get current position x
                 x = (int)Canvas.GetLeft(image);
                 y = (int)Canvas.GetTop(image);
-
-                //set old position
-                OldX = x;
-                OldY = y;
 
                 Random random = new Random();
                 int rand = random.Next(0, 4);
