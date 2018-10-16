@@ -65,7 +65,6 @@
     <Compile Include="MovingObstakelUnitTest.cs" />
     <Compile Include="BombUnitTests.cs" />
     <Compile Include="ObstakelsUnitTests.cs" />
-    <Compile Include="MenuButtonUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
