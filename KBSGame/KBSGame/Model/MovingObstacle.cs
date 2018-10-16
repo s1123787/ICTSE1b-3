@@ -11,7 +11,7 @@ using System.Windows.Threading;
 
 namespace KBSGame.Model
 {
-    class MovingObstacle : Obstakel
+    public class MovingObstacle : Obstakel
     {
         public MediaElement gif;
         protected int MovingStepSize = 50;
