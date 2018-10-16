@@ -38,7 +38,7 @@ namespace KBSGame
         private int aantalBom;
         private int aantalMoving;
         private int aantalCoin;
-        public KBSGame.Model.Timer GameTimer { get; set; }
+        public Model.Timer GameTimer { get; set; }
         private int CollectedCoins = 0 ;
 
         GameOverOverlay gameOverOverlay;
@@ -297,6 +297,7 @@ namespace KBSGame
         {
             FreezePlayer = true;
             GameLost = false;
+            GameWon = true;
             GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas, this);
             playing = false;
             GameTimer.Pauze();
