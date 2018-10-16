@@ -20,11 +20,26 @@ namespace KBSGame.Model
             image = new Image();
             image.Width = 50;
             image.Height = 50;
+            Canvas.SetZIndex(image, 2);
 
             BitmapImage myBitmapImage = new BitmapImage();
 
             myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tree-sprite.png");
+
+            Random random = new Random();
+            int i = random.Next(0, 3);
+            if (i == 0)
+            {
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tomb-stone-sprite.png");
+            }
+            else if (i == 1)
+            {
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tomb-stone2-sprite.png");
+            }
+            else if (i == 2)
+            {
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/weeping-angel-sprite.png");
+            }
 
             myBitmapImage.DecodePixelWidth = 50;
             myBitmapImage.EndInit();
