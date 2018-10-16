@@ -245,6 +245,7 @@ namespace KBSGame.Model
             {
                 game.GameOver();
                 hits = true;
+                return false;
             }
 
             //check if Moving obstakel hits player
@@ -252,6 +253,7 @@ namespace KBSGame.Model
             {
                 game.GameOver();
                 hits = true;
+                return false;
             }
 
             foreach (string waarde in Obstakels.waardes)
