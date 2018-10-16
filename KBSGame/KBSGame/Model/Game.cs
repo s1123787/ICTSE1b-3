@@ -199,18 +199,19 @@ namespace KBSGame
                 timer.Stop();
                 if ((Player.x == testx || Player.x == testx + 50 || Player.x == testx - 50) && (Player.y == testy || Player.y == testy + 50 || Player.y == testy - 50) && GameLost == false && GameWon == false)
                 {
-                    GameOver();                    
+                    GameOver();
                     Console.WriteLine("dood door bom");
                 }
-                else
-                {
+                
+                
                     timer2.Interval = new TimeSpan(0, 0, 0, 1);
                     timer2.Tick += Timer2_Tick; ;
                     if (timer2 != null)
                     {
                         timer2.Start();
                     }
-                }
+                
+
             }
         }
 
@@ -282,11 +283,7 @@ namespace KBSGame
                 EndPoint = null;
                 Player.endPointReached -= OnEndPointReached;
                 EndPointIsShown = false;
-            }
-            GameCanvas.Children.Remove(explosion);
-            GameCanvas.Children.Add(i);
-            overBom = true;
-            overBom2 = true;
+            }            
         }
 
         public void Restart()
