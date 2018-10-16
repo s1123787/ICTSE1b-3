@@ -52,7 +52,8 @@ namespace KBSGame
         public double testy;
 
         private PauseOverlay pauseOverlay;
-        public bool overBom = true, overBom2 = true;
+        private bool overBom = true, overBom2 = true;
+        public bool pauseActivated = false;
 
         public Rectangle r, r2;
         Image i, i2;
@@ -240,13 +241,13 @@ namespace KBSGame
                 GameTimer.Pauze();
                 FreezePlayer = true;
                 playing = false;
+                pauseActivated = true;
             }
         }
 
         public void OnEnterKeyIsPressed(object source, EventArgs e)
         {
-            if (!playing)
-            {
+            if (!playing && pauseActivated == true) {
                 playing = true;
                 pauseOverlay.continueGame();
                 GameTimer.Herstart();
