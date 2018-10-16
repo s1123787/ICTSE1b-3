@@ -39,7 +39,7 @@ namespace KBSGame
         private int aantalMoving;
         private int aantalCoin;
         public Model.Timer GameTimer { get; set; }
-        private int CollectedCoins = 0 ;
+        public int CollectedCoins { get; set; }
 
         GameOverOverlay gameOverOverlay;
 
@@ -83,6 +83,7 @@ namespace KBSGame
             mw.esqKeyIsPressed += OnEsqKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
             activeEndPoint += OnActivateEndpoint;
+            CollectedCoins = 0;
         }
 
         public void OnPlayerCollectCoin(object source, GameEventArgs e)
