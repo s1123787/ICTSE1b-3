@@ -77,7 +77,6 @@ namespace KBSGame
                 if(hits == false)
                 {
                     hits = true;
-                    Console.WriteLine("af door spook");
                     game.GameOver();
                     Canvas.SetLeft(player, x += (StepSize));
                     return;
