@@ -11,7 +11,7 @@ using System.Windows.Threading;
 
 namespace KBSGame.Model
 {
-    class MovingObstacle : Obstakel
+    public class MovingObstacle : Obstakel
     {
         public MediaElement gif;
         protected int MovingStepSize = 50;
@@ -19,10 +19,10 @@ namespace KBSGame.Model
         public int MovingY { get; private set; }
         private Game game;
         private bool hits = false;
-        public int OldX;
-        public int OldY;
+        public int x;
+        public int y;
 
-        public MovingObstacle(Game game)
+        public MovingObstacle(Game game, bool debug = false)
         {
             this.game = game;
 
@@ -39,7 +39,9 @@ namespace KBSGame.Model
                 Visibility = System.Windows.Visibility.Visible
             };
 
-            base.AssignPosition("m");
+
+            if(!debug)
+                base.AssignPosition("m");
 
             DispatcherTimer timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
@@ -61,17 +63,23 @@ namespace KBSGame.Model
             Canvas.SetZIndex(image, 2);
         }
 
+        public void SetX(int x)
+        {
+            this.x = x;
+        }
+
+        public void SetY(int y)
+        {
+            this.y = y;
+        }
+
         public void MoveObstakelRandom(object sender, EventArgs e)
         {
             if(game.GameLost == false && game.GameWon == false && game.playing == true)
             {
                 //get current position x
-                int x = (int)Canvas.GetLeft(image);
-                int y = (int)Canvas.GetTop(image);
-
-                //set old position
-                OldX = x;
-                OldY = y;
+                x = (int)Canvas.GetLeft(image);
+                y = (int)Canvas.GetTop(image);
 
                 Random random = new Random();
                 int rand = random.Next(0, 4);
@@ -107,9 +115,12 @@ namespace KBSGame.Model
 
         public void MoveObstakelRight()
         {
-            //get current position x
-            int x = (int)Canvas.GetLeft(image);
-            int y = (int)Canvas.GetTop(image);
+            if (x != null && y != null)
+            { 
+                //get current position x
+                int x = (int)Canvas.GetLeft(image);
+                int y = (int)Canvas.GetTop(image);
+            }
 
             //Right screen boundry
             if (x == 750)
@@ -133,9 +144,12 @@ namespace KBSGame.Model
 
         public void MoveObstakelLeft()
         {
-            //get current position
-            int x = (int)Canvas.GetLeft(image);
-            int y = (int)Canvas.GetTop(image);
+            if (x != null && y != null)
+            {
+                //get current position x
+                int x = (int)Canvas.GetLeft(image);
+                int y = (int)Canvas.GetTop(image);
+            }
 
             //Left screen boundry
             if (x == 0)
@@ -158,8 +172,12 @@ namespace KBSGame.Model
 
         public void MoveObstakelDown()
         {
-            int x = (int)Canvas.GetLeft(image);
-            int y = (int)Canvas.GetTop(image);
+            if (x != null && y != null)
+            {
+                //get current position x
+                int x = (int)Canvas.GetLeft(image);
+                int y = (int)Canvas.GetTop(image);
+            }
 
             // Bottom boundry 
             if (y == 550)
@@ -183,8 +201,12 @@ namespace KBSGame.Model
 
         public void MoveObstakelUp()
         {
-            int x = (int)Canvas.GetLeft(image);
-            int y = (int)Canvas.GetTop(image);
+            if (x != null && y != null)
+            {
+                //get current position x
+                int x = (int)Canvas.GetLeft(image);
+                int y = (int)Canvas.GetTop(image);
+            }
 
             // Top boundry 
             if (y == 0)
@@ -217,6 +239,7 @@ namespace KBSGame.Model
             {
                 game.GameOver();
                 hits = true;
+                return false;
             }
 
             //check if Moving obstakel hits player
@@ -224,6 +247,7 @@ namespace KBSGame.Model
             {
                 game.GameOver();
                 hits = true;
+                return false;
             }
 
             foreach (string waarde in Obstakels.waardes)

@@ -48,7 +48,7 @@ namespace KBSGame.GameObjects
                 obstakels.Add(c);
                 canvas.Children.Add(c.image);
                 Thread.Sleep(25);
-            }
+            }            
 
             Canvas = canvas;
 
@@ -59,8 +59,8 @@ namespace KBSGame.GameObjects
             for (int i = 0; i < obstakels.Count; i++)
             {
                 Canvas.Children.Remove(obstakels[i].image);
-                waardes.Clear();
             }
+            waardes.Clear();
         }
     }
 }
