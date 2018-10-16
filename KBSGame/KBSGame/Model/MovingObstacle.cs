@@ -65,9 +65,11 @@ namespace KBSGame.Model
         {
             if(game.GameLost == false && game.GameWon == false && game.playing == true)
             {
+                int x = 0;
+                int y = 0;
                 //get current position x
-                int x = (int)Canvas.GetLeft(image);
-                int y = (int)Canvas.GetTop(image);               
+                x = (int)Canvas.GetLeft(image);
+                y = (int)Canvas.GetTop(image);               
 
                 Random random = new Random();
                 int rand = random.Next(0, 4);
