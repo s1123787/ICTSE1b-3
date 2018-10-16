@@ -21,7 +21,9 @@ namespace KBSGame
         Random random = new Random();        
         
         public void AssignPosition(string soort)
-        {            
+        {  
+            x = random.Next(0, 15) * 50;
+                y = random.Next(0, 11) * 50;
             while ((x <= 100 && y <= 100) || (x >= 650 && y >= 450) || Obstakels.waardes.Contains($"{x}{y}b") || Obstakels.waardes.Contains($"{x}{y}t") || Obstakels.waardes.Contains($"{x}{y}m") || Obstakels.waardes.Contains($"{x}{y}c"))
             {
                 x = random.Next(0, 15) * 50;
