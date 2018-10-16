@@ -1,0 +1,3 @@
+Speler kan niet bewegen als pauze scherm open is: check
+Objecten zijn verwijderd : (hoe werkt Canvas in testUnit?)
+Mijn-explosies worden gepauzeerd op pauze : check
