@@ -242,19 +242,23 @@
     <Resource Include="Images\explosion-sprite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\background.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\soul-sand48x48.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\soul-sand40x40.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\tomb-stone2-sprite.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\weeping-angel-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\hell-tree-sprite.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\background.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\soul-sand40x40.png" />
+    <Resource Include="Images\soul-sand48x48.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\player.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
