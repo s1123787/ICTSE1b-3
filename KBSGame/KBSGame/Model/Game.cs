@@ -52,8 +52,8 @@ namespace KBSGame
 
         private PauseOverlay pauseOverlay;
         private bool overBom = true, overBom2 = true;
-
-        Rectangle r, r2;
+        
+        Image i, i2;
         TextBlock pause = new TextBlock();
 
         Image image, explosion;
@@ -87,15 +87,17 @@ namespace KBSGame
             
             double x = e.x;
             double y = e.y;
-            r2 = new Rectangle();
-            r2.Fill = Brushes.LightGray;
-            r2.Height = 48;
-            r2.Width = 48;
-            Canvas.SetLeft(r2, x + 1);
-            Canvas.SetTop(r2, y + 1);
-            Canvas.SetZIndex(r2, 0);
+            i2 = new Image
+            {
+                Height = 48,
+                Width = 48
+            };
+            i2.Source = new BitmapImage(new Uri("pack://application:,,,/Images/soul-sand48x48.png"));
+            Canvas.SetLeft(i2, x + 1);
+            Canvas.SetTop(i2, y + 1);
+            Canvas.SetZIndex(i2, 0);
             Obstakels.waardes.Remove($"{x}{y}c");
-            GameCanvas.Children.Add(r2);
+            GameCanvas.Children.Add(i2);
 
             //coin counter
             CollectedCoins++;
@@ -127,13 +129,15 @@ namespace KBSGame
                     testx = e.bomx;
                     testy = e.bomy;
                     #region
-                    r = new Rectangle();
-                    r.Fill = Brushes.LightGray;
-                    r.Height = 40;
-                    r.Width = 40;
-                    Canvas.SetLeft(r, x + 5);
-                    Canvas.SetTop(r, y + 5);
-                    Canvas.SetZIndex(r, 0);
+                    i = new Image
+                    {
+                        Height = 40,
+                        Width = 40
+                    };
+                    i.Source = new BitmapImage(new Uri("pack://application:,,,/Images/soul-sand40x40.png"));
+                    Canvas.SetLeft(i, x + 5);
+                    Canvas.SetTop(i, y + 5);
+                    Canvas.SetZIndex(i, 0);
                     #endregion
                     Obstakels.waardes.Remove($"{x}{y}b");
                     #region
@@ -204,7 +208,7 @@ namespace KBSGame
         private void Timer2_Tick(object sender, EventArgs e)
         {
             GameCanvas.Children.Remove(explosion);
-            GameCanvas.Children.Add(r);
+            GameCanvas.Children.Add(i);
             overBom = true;
             overBom2 = true;
             timer2.Tick -= Timer2_Tick;
