@@ -65,5 +65,22 @@ namespace KBSGameUnitTests
             game.OnEnterKeyIsPressed(this, EventArgs.Empty);
             Assert.False(game.playing);
         }
+        [Test]
+        public void CantOpenPauseWhenOtherMenuOpen()
+        {
+            game.playing = true;
+            game.GameOver();
+            game.OnEsqKeyIsPressed(this, EventArgs.Empty);
+            Assert.False(game.pauseActivated);
+        }
+        [Test]
+        public void EnterThenEscOnGameOverDoesntTriggerPauseOverlay()
+        {
+            game.playing = true;
+            game.GameOver();
+            game.OnEnterKeyIsPressed(this, EventArgs.Empty);
+            game.OnEsqKeyIsPressed(this, EventArgs.Empty);
+            Assert.False(game.pauseActivated);
+        }
     }
 }

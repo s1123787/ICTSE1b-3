@@ -52,7 +52,7 @@ namespace KBSGame
 
         private PauseOverlay pauseOverlay;
         private bool overBom = true, overBom2 = true;
-        private bool pauseActivated = false;
+        public bool pauseActivated = false;
 
         Rectangle r, r2;
         TextBlock pause = new TextBlock();
@@ -239,11 +239,14 @@ namespace KBSGame
 
         public void OnEnterKeyIsPressed(object source, EventArgs e)
         {
-            if (pauseActivated) {
+            if (!playing) {
+            if (pauseActivated)
+            {
                 playing = true;
                 pauseOverlay.continueGame();
                 GameTimer.Herstart();
                 FreezePlayer = false;
+            }
             }
         }
 
