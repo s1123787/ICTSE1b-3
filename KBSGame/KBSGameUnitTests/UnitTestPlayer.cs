@@ -1,11 +1,9 @@
-﻿using System;
-using KBSGame;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows;
 using NUnit.Framework;
 using System.Threading;
 using System.Windows.Shapes;
-using KBSGame.Model;
+using KBSGame;
 using KBSGame.GameObjects;
 
 namespace KBSGameUnitTests
@@ -19,10 +17,10 @@ namespace KBSGameUnitTests
 
         [SetUp]
         public void SetUp()
-        {            
+        {
 
-                if (Application.ResourceAssembly == null)
-                    Application.ResourceAssembly = typeof(MainWindow).Assembly;
+            if (Application.ResourceAssembly == null)
+                Application.ResourceAssembly = typeof(MainWindow).Assembly;
 
             g = new Game(new MainWindow(), new Canvas(), 30, 10, 3, 5, 30);
             player = g.Player.Eplayer;
