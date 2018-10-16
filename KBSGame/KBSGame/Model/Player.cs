@@ -32,6 +32,10 @@ namespace KBSGame
         private Game game;
         private bool hits = false;
 
+        //only for testing
+        public Ellipse Eplayer { get; set; }
+
+
         public Player(Canvas GameCanvas, Game game)
         {
             gameCanvas = GameCanvas;
@@ -49,6 +53,9 @@ namespace KBSGame
             Canvas.SetTop(player, 5);
             Canvas.SetZIndex(player, 1);
             gameCanvas.Children.Add(player);
+
+            //testing
+            //Eplayer = player;
         }
 
         public void MoveRight()
