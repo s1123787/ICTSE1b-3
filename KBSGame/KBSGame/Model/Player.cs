@@ -38,8 +38,8 @@ namespace KBSGame
             this.game = game;
             player = new Image
             {
-                Width = 50,
-                Height = 50
+                Width = 40,
+                Height = 40
             };
             BitmapImage myBitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/player.png"));
 
