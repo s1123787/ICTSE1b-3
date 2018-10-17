@@ -74,7 +74,7 @@ namespace KBSGameUnitTests
             Assert.False(game.pauseActivated);
         }
         [Test]
-        public void EnterThenEscOnGameOverDoesntTriggerPauseOverlay()
+        public void EnterThenEscapeOnGameOverDoesntTriggerPauseOverlay()
         {
             game.playing = true;
             game.GameOver();

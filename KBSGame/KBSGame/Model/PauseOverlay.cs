@@ -31,7 +31,6 @@ namespace KBSGame.Model
             //Set source of pauseSprite
             pauseSprite.Source = new BitmapImage(new Uri("pack://application:,,,/Images/pause-sprite.png"));
 
-            //Create new button template for restart button
             ControlTemplate restartButtonTemplate = new ControlTemplate(typeof(Button));
             var restartButtonImage = new FrameworkElementFactory(typeof(Image));
             restartButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/restart-button.png", UriKind.RelativeOrAbsolute)));
@@ -52,7 +51,9 @@ namespace KBSGame.Model
             var resumeButtonImage = new FrameworkElementFactory(typeof(Image));
             resumeButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/resume-button.png", UriKind.RelativeOrAbsolute)));
             resumeButtonTemplate.VisualTree = resumeButtonImage;
+
             //Create new button to resume game
+
             resume = new Button
             {
                 Width = 125,
