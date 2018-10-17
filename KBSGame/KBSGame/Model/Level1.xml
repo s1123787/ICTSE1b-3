@@ -436,6 +436,32 @@
     <ObstakelX>600</ObstakelX>
     <ObstakelY>550</ObstakelY>
   </Obstakel>
+  
+  <Obstakel>
+    <ObstakelType>Coin</ObstakelType>
+    <ObstakelX>200</ObstakelX>
+    <ObstakelY>50</ObstakelY>
+  </Obstakel>
+  <Obstakel>
+    <ObstakelType>Coin</ObstakelType>
+    <ObstakelX>650</ObstakelX>
+    <ObstakelY>100</ObstakelY>
+  </Obstakel>
+  <Obstakel>
+    <ObstakelType>Coin</ObstakelType>
+    <ObstakelX>450</ObstakelX>
+    <ObstakelY>300</ObstakelY>
+  </Obstakel>
+  <Obstakel>
+    <ObstakelType>Coin</ObstakelType>
+    <ObstakelX>100</ObstakelX>
+    <ObstakelY>450</ObstakelY>
+  </Obstakel>
+  <Obstakel>
+    <ObstakelType>Coin</ObstakelType>
+    <ObstakelX>650</ObstakelX>
+    <ObstakelY>400</ObstakelY>
+  </Obstakel>
 </Obstakels>
   
   
