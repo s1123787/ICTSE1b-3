@@ -48,8 +48,8 @@ namespace KBSGame
         public bool playing;
         public bool EndPointIsShown = false;
         
-        public double testx;
-        public double testy;
+        public double bomx;
+        public double bomy;
 
         public PauseOverlay pauseOverlay;
         private bool overBom = true, overBom2 = true;
@@ -61,6 +61,9 @@ namespace KBSGame
         TextBlock pause = new TextBlock();
 
         public Image image, explosion;
+
+        private int aantal = 0;
+        private bool explosie = false, explosieGaatPlaatsVinden = false;
 
         public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s)
         {
@@ -125,59 +128,60 @@ namespace KBSGame
         public void OnPlayerWalkedOverBomb(object source, GameEventArgs e)
         {
             //this if statement because other wise it don't work
-                if (overBom)
+            if (overBom)
+            {
+                explosieGaatPlaatsVinden = true;
+                overBom = false;
+                Player.walkedOverBomb -= OnPlayerTijdIsOp;
+                double x = e.x;
+                double y = e.y;
+                bomx = e.bomx;
+                bomy = e.bomy;
+                #region
+                i = new Image
                 {
-                    overBom = false;
-                    Player.walkedOverBomb -= OnPlayerTijdIsOp;
-                    double x = e.x;
-                    double y = e.y;
-                    testx = e.bomx;
-                    testy = e.bomy;
-                    #region
-                    i = new Image
-                    {
-                        Height = 40,
-                        Width = 40
-                    };
-                    i.Source = new BitmapImage(new Uri("pack://application:,,,/Images/soul-sand40x40.png"));
-                    Canvas.SetLeft(i, x + 5);
-                    Canvas.SetTop(i, y + 5);
-                    Canvas.SetZIndex(i, 0);
-                    #endregion
-                    Obstakels.waardes.Remove($"{x}{y}b");
-                    #region
-                    image = new Image();
-                    image.Width = 50;
-                    image.Height = 50;
+                    Height = 40,
+                    Width = 40
+                };
+                i.Source = new BitmapImage(new Uri("pack://application:,,,/Images/soul-sand40x40.png"));
+                Canvas.SetLeft(i, x + 5);
+                Canvas.SetTop(i, y + 5);
+                Canvas.SetZIndex(i, 0);
+                #endregion
+                Obstakels.waardes.Remove($"{x}{y}b");
+                #region
+                image = new Image();
+                image.Width = 50;
+                image.Height = 50;
 
-                    BitmapImage myBitmapImage = new BitmapImage();
+                BitmapImage myBitmapImage = new BitmapImage();
 
-                    myBitmapImage.BeginInit();
-                    myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
+                myBitmapImage.BeginInit();
+                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
 
-                    myBitmapImage.DecodePixelWidth = 50;
-                    myBitmapImage.EndInit();
+                myBitmapImage.DecodePixelWidth = 50;
+                myBitmapImage.EndInit();
 
-                    image.Source = myBitmapImage;
-                    Canvas.SetLeft(image, x);
-                    Canvas.SetTop(image, y);
-                    #endregion
-                    GameCanvas.Children.Add(image);
-                    timer.Interval = new TimeSpan(0, 0, 0, 1);
-                    timer.Tick += Timer_Tick;
-                    if (timer != null)
-                    {
-                        timer.Start();
-                    }
-            }
-            
+                image.Source = myBitmapImage;
+                Canvas.SetLeft(image, x);
+                Canvas.SetTop(image, y);
+                #endregion
+                GameCanvas.Children.Add(image);
+                timer.Interval = new TimeSpan(0, 0, 0, 1);
+                timer.Tick += Timer_Tick;
+                if (timer != null && playing)
+                {
+                    timer.Start();
+                }
+            }            
         }
 
         public void Timer_Tick(object sender, EventArgs e)
         {
             if (playing && overBom2) 
-            {                
+            {
                 overBom2 = false;
+                #region
                 explosion = new Image();
                 explosion.Width = 150;
                 explosion.Height = 150;
@@ -191,40 +195,45 @@ namespace KBSGame
                 myBitmapImage.EndInit();
 
                 explosion.Source = myBitmapImage;
-                Canvas.SetLeft(explosion, testx - 50);
-                Canvas.SetTop(explosion, testy - 50);
+                Canvas.SetLeft(explosion, bomx - 50);
+                Canvas.SetTop(explosion, bomy - 50);
                 Canvas.SetZIndex(explosion, 5);
-                GameCanvas.Children.Add(explosion);
+                #endregion
+                GameCanvas.Children.Add(explosion);                
+                explosie = true;
+                explosieGaatPlaatsVinden = false;
                 timer.Tick -= Timer_Tick;
                 timer.Stop();
-                if ((Player.x == testx || Player.x == testx + 50 || Player.x == testx - 50) && (Player.y == testy || Player.y == testy + 50 || Player.y == testy - 50) && GameLost == false && GameWon == false)
+                if ((Player.x == bomx || Player.x == bomx + 50 || Player.x == bomx - 50) && (Player.y == bomy || Player.y == bomy + 50 || Player.y == bomy - 50) && GameLost == false && GameWon == false)
                 {
                     GameOver();
                     Console.WriteLine("dood door bom");
                 }
-                
-                
-                    timer2.Interval = new TimeSpan(0, 0, 0, 1);
+                else
+                {
+                    timer2.Interval = new TimeSpan(0, 0, 0, 0, 10);
                     timer2.Tick += Timer2_Tick; ;
                     if (timer2 != null)
                     {
                         timer2.Start();
                     }
-                
-
+                }
             }
         }
 
         public void Timer2_Tick(object sender, EventArgs e)
         {
-            GameCanvas.Children.Remove(explosion);
-            GameCanvas.Children.Add(i);
-            overBom = true;
-            overBom2 = true;
-            timer2.Tick -= Timer2_Tick;
-            if ((Player.x == testx || Player.x == testx + 50 || Player.x == testx - 50) && (Player.y == testy || Player.y == testy + 50 || Player.y == testy - 50) && GameLost == false && GameWon == false)
+            if (aantal < 100)
             {
-                GameOver();
+                aantal++;                
+                if ((Player.x == bomx || Player.x == bomx + 50 || Player.x == bomx - 50) && (Player.y == bomy || Player.y == bomy + 50 || Player.y == bomy - 50) && GameLost == false && GameWon == false)
+                {
+                    GameOver();
+                    timer2.Tick -= Timer2_Tick;
+                }
+            } else if (aantal >= 100)
+            {
+                ExplosionEnded();
             }
         }
 
@@ -272,6 +281,11 @@ namespace KBSGame
             GameWon = false;
             GameLost = false;
 
+            if (explosie)
+            {
+                ExplosionEnded();
+            }
+
             //set collected coins 0
             CollectedCoins = 0;
             mainWindow.CoinCounter.Content = CollectedCoins;
@@ -298,13 +312,16 @@ namespace KBSGame
         }
 
         public void GameOver()
-        {
+        {            
             FreezePlayer = true;
             GameLost = true;
             gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
             playing = false;
             GameTimer.countdownTimer.Stop();
-            
+            if (explosieGaatPlaatsVinden)
+            {
+                ExplosionEnded();
+            }
         }
 
         public void GameVictory()
@@ -315,6 +332,19 @@ namespace KBSGame
             GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas, this);
             playing = false;
             GameTimer.Pauze();
+        }
+
+        public void ExplosionEnded()
+        {
+            GameCanvas.Children.Remove(explosion);
+            GameCanvas.Children.Add(i);
+            explosie = false;
+            overBom = true;
+            overBom2 = true;
+            timer2.Tick -= Timer2_Tick;
+            aantal = 0;
+            timer.Tick -= Timer_Tick;
+            explosieGaatPlaatsVinden = false;
         }
     }
 }
