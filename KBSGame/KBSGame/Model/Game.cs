@@ -47,6 +47,7 @@ namespace KBSGame
         public bool GameLost;
         public bool playing;
         public bool EndPointIsShown = false;
+        private bool randomLevel;
         
         public double testx;
         public double testy;
@@ -62,8 +63,9 @@ namespace KBSGame
 
         public Image image, explosion;
 
-        public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s)
+        public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s, bool rl)
         {
+            randomLevel = rl;
             playing = true;
             Seconde = s;
             StartPoint = new StartPoint(canvas);

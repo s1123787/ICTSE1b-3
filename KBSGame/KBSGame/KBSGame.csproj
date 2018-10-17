@@ -177,9 +177,6 @@
     <Resource Include="Images\flag-sprite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\tree-sprite.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
@@ -199,9 +196,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\landmine-sprite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\landmine-sprite.gif" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\menu-button.png" />
@@ -237,9 +231,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\explosion-sprite.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Images\tomb-stone2-sprite.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\weeping-angel-sprite.png" />
