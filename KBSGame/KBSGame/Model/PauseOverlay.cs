@@ -21,20 +21,20 @@ namespace KBSGame.Model
 
         public PauseOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
         {
+            //Create new image for sprite
             pauseSprite = new Image
             {
                 Width = 200,
                 Height = 100,
                 Name = "PauseSprite"
-        };
-
+            };
+            //Set source of pauseSprite
             pauseSprite.Source = new BitmapImage(new Uri("pack://application:,,,/Images/pause-sprite.png"));
 
             ControlTemplate restartButtonTemplate = new ControlTemplate(typeof(Button));
             var restartButtonImage = new FrameworkElementFactory(typeof(Image));
             restartButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/restart-button.png", UriKind.RelativeOrAbsolute)));
             restartButtonTemplate.VisualTree = restartButtonImage;
-
             //Create new button to restart the game
             restart = new Button
             {
@@ -43,15 +43,17 @@ namespace KBSGame.Model
                 Name = "restartButton",
                 Template = restartButtonTemplate
             };
-
+            //Subscribe the restart button to the method it needs to run
             restart.Click += Restart_Click;
 
+            //Create button template for restart button
             ControlTemplate resumeButtonTemplate = new ControlTemplate(typeof(Button));
             var resumeButtonImage = new FrameworkElementFactory(typeof(Image));
             resumeButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/resume-button.png", UriKind.RelativeOrAbsolute)));
             resumeButtonTemplate.VisualTree = resumeButtonImage;
 
-            //Create new button to continue the game
+            //Create new button to resume game
+
             resume = new Button
             {
                 Width = 125,
@@ -59,7 +61,7 @@ namespace KBSGame.Model
                 Name = "resumeButton",
                 Template = resumeButtonTemplate
             };
-
+            //Subscribe the resume button to the method it needs to run
             resume.Click += Resume_Click;
 
             //Adding to canvas
@@ -85,11 +87,13 @@ namespace KBSGame.Model
             Panel.SetZIndex(menu, 99);
         }
 
+        //Method to resume playing
         public void continueGame()
         {
             removeObjects();
         }
 
+        //Actions to perform when restart button is clicked
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
             //Method to reset the game
@@ -98,13 +102,16 @@ namespace KBSGame.Model
             removeObjects();
         }
 
+        //Actions to perform when resume button is clicked
         private void Resume_Click(object sender, RoutedEventArgs e)
         {
             game.playing = true;
-            game.GameTimer.Herstart();
+            game.GameTimer.Resume();
             game.FreezePlayer = false;
-            removeObjects();
+            continueGame();
         }
+
+        //Method to remove the overlay once a button is clicked
         public void removeObjects()
         {
             base.RemoveObjects();

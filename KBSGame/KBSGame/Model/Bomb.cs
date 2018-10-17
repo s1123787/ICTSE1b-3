@@ -12,19 +12,22 @@ namespace KBSGame.Model
     {
         public Bomb(int StaticX = 0, int StaticY = 0)
         {
-            image = new Image();
-            image.Width = 50;
-            image.Height = 50;
+            image = new Image
+            {
+                Width = 50,
+                Height = 50
+            };
+            
+            BitmapImage bitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/landmine-sprite.png"));
 
-            BitmapImage myBitmapImage = new BitmapImage();
 
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
+            //myBitmapImage.BeginInit();
+            //myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
 
-            myBitmapImage.DecodePixelWidth = 50;
-            myBitmapImage.EndInit();
+            //myBitmapImage.DecodePixelWidth = 50;
+            //myBitmapImage.EndInit();
 
-            image.Source = myBitmapImage;
+            //image.Source = myBitmapImage;
 
             if(StaticX != -1 && StaticY != -1)
             {
@@ -33,6 +36,7 @@ namespace KBSGame.Model
             else { 
                 base.AssignPosition("b");
             }
+            image.Source = bitmapImage;
         }
     }
 }

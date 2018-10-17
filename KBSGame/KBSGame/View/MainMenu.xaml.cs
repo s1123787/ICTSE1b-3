@@ -20,6 +20,8 @@ namespace KBSGame.View
     /// </summary>
     public partial class MainMenu : Window
     {
+        private bool randomLevel = true;
+
         public MainMenu()
         {
             InitializeComponent();
@@ -30,15 +32,29 @@ namespace KBSGame.View
 
             //Opens a new window and starts the game
             Obstakels.waardes.Clear();
-            MainWindow mainWindow = new MainWindow();
+            MainWindow mainWindow = new MainWindow(randomLevel);
             mainWindow.Show();
             this.Close();
         }
 
-        private void ExitGameButton_Click(object sender, RoutedEventArgs e)
+        private void exitGameButton_Click(object sender, RoutedEventArgs e)
         {
             //Closes the application
             Application.Current.Shutdown();
+        }
+
+        private void randomLevelButton_Click(object sender, RoutedEventArgs e)
+        {
+            randomLevelButton.Opacity = 1;
+            setLevelButton.Opacity = 0.5;
+            randomLevel = true;
+        }
+
+        private void setLevelButton_Click(object sender, RoutedEventArgs e)
+        {
+            setLevelButton.Opacity = 1;
+            randomLevelButton.Opacity = 0.5;
+            randomLevel = false;
         }
     }
 }

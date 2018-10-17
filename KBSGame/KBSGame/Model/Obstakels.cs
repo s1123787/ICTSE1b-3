@@ -18,9 +18,9 @@ namespace KBSGame.GameObjects
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
 
-        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game, bool loadFromXML = false)
+        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game, bool randomLevel = false)
         {
-            if (loadFromXML)
+            if (!randomLevel) // is XML level
             {
                 Serializer ser = new Serializer();
                 string path = string.Empty;
