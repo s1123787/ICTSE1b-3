@@ -12,19 +12,19 @@ namespace KBSGame
     public partial class MainWindow : Window
     {
         public delegate void EsqKeyIsPressed(object source, EventArgs e);
-        public event EsqKeyIsPressed esqKeyIsPressed;
+        public event EsqKeyIsPressed escKeyIsPressed;
         public delegate void EnterKeyIsPressed(object source, EventArgs e);
         public event EnterKeyIsPressed enterKeyIsPressed;
         private bool IsPressed = false;
 
         Game game;
 
-        public MainWindow()
+        public MainWindow(bool rl)
         {
             InitializeComponent();
 
             //hier wordt de game aangemaakt
-            game = new Game(this, GameCanvas, 30, 10, 3, 5, 30);
+            game = new Game(this, GameCanvas, 30, 10, 3, 5, 30, rl);
             
             //key eventhandler toevoegen
             this.KeyDown += new KeyEventHandler(OnKeyDown);
@@ -75,7 +75,7 @@ namespace KBSGame
 
         protected virtual void OnEsqKeyIsPressed()
         {
-            esqKeyIsPressed?.Invoke(this, EventArgs.Empty);
+            escKeyIsPressed?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnEnterKeyIsPressed()

@@ -47,6 +47,7 @@ namespace KBSGame
         public bool GameLost;
         public bool playing;
         public bool EndPointIsShown = false;
+        private bool randomLevel;
         
         public double testx;
         public double testy;
@@ -62,8 +63,9 @@ namespace KBSGame
 
         public Image image, explosion;
 
-        public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s)
+        public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s, bool rl)
         {
+            randomLevel = rl;
             playing = true;
             Seconde = s;
             StartPoint = new StartPoint(canvas);
@@ -81,7 +83,7 @@ namespace KBSGame
             Player.collectCoin += OnPlayerCollectCoin;
             GameTimer = new Model.Timer(Seconde, this, mw); //hier wordt de timer aangemaakt die de meegegeven seconden gebruikt            
             GameTimer.tijdIsOp += OnPlayerTijdIsOp; //hier subscribe je op de event van timer
-            mw.esqKeyIsPressed += OnEsqKeyIsPressed;
+            mw.escKeyIsPressed += OnEscKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
             activeEndPoint += OnActivateEndpoint;
             CollectedCoins = 0;
@@ -178,19 +180,15 @@ namespace KBSGame
             if (playing && overBom2) 
             {                
                 overBom2 = false;
-                explosion = new Image();
-                explosion.Width = 150;
-                explosion.Height = 150;
+                explosion = new Image
+                {                    
+                    Width = 150,
+                    Height = 150
+                };
 
-                BitmapImage myBitmapImage = new BitmapImage();
+                BitmapImage bitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/explosion-sprite.png"));
 
-                myBitmapImage.BeginInit();
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/explosion-sprite.png");
-
-                myBitmapImage.DecodePixelWidth = 50;
-                myBitmapImage.EndInit();
-
-                explosion.Source = myBitmapImage;
+                explosion.Source = bitmapImage;
                 Canvas.SetLeft(explosion, testx - 50);
                 Canvas.SetTop(explosion, testy - 50);
                 Canvas.SetZIndex(explosion, 5);
@@ -238,13 +236,13 @@ namespace KBSGame
             GameVictory();
         }
 
-        public void OnEsqKeyIsPressed(object source, EventArgs e)
+        public void OnEscKeyIsPressed(object source, EventArgs e)
         {
             //Check if the game is active
             if (playing)
             {
                 pauseOverlay = new PauseOverlay(mainWindow, GameCanvas, this);
-                GameTimer.Pauze();
+                GameTimer.Pause();
                 FreezePlayer = true;
                 playing = false;
                 pauseActivated = true;
@@ -257,7 +255,7 @@ namespace KBSGame
             if (!playing && pauseActivated == true) {
                 playing = true;
                 pauseOverlay.continueGame();
-                GameTimer.Herstart();
+                GameTimer.Resume();
                 FreezePlayer = false;
             }
         }
@@ -316,7 +314,7 @@ namespace KBSGame
             GameWon = true;
             GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas, this);
             playing = false;
-            GameTimer.Pauze();
+            GameTimer.Pause();
         }
     }
 }

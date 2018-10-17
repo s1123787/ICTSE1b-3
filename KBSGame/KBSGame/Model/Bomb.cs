@@ -12,19 +12,15 @@ namespace KBSGame.Model
     {
         public Bomb()
         {
-            image = new Image();
-            image.Width = 50;
-            image.Height = 50;
+            image = new Image
+            {
+                Width = 50,
+                Height = 50
+            };
+            
+            BitmapImage bitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/landmine-sprite.png"));
 
-            BitmapImage myBitmapImage = new BitmapImage();
-
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
-
-            myBitmapImage.DecodePixelWidth = 50;
-            myBitmapImage.EndInit();
-
-            image.Source = myBitmapImage;
+            image.Source = bitmapImage;
             base.AssignPosition("b");
         }
     }

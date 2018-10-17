@@ -23,36 +23,32 @@ namespace KBSGame.Model
         {
             mainWindow = mw;
             Seconds = s;
-
             playTime = TimeSpan.FromSeconds(Seconds);
 
+            //Create the timer
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
+                //Set timer sring to current time left
                 mw.TimerLabel.Text = playTime.ToString(@"ss");
-                /* if (playing == false)
-                {
-                    countdownTimer.Stop();
-                } */
+                
+                //When tier hits 0 notify subscribers and stop counting
                 if (playTime == TimeSpan.Zero)
                 {
                     OnTijdIsOp();
                     countdownTimer.Stop();
-                    /* if (!GameWon)
-                    {
-                        game.FreezePlayer = true;
-                        GameLost = true;
-                        game.GameOver();
-                    } */
                 }
+                //Update time left
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
             }, Application.Current.Dispatcher);
         }
 
+        //Method to notify subscribers the timer has hit 0
         protected virtual void OnTijdIsOp()
         {            
             tijdIsOp?.Invoke(this, EventArgs.Empty);
         }
 
+        //Method to reset the timer
         public void Restart()
         {
             playTime = TimeSpan.FromSeconds(Seconds);
@@ -60,16 +56,18 @@ namespace KBSGame.Model
             mainWindow.TimerLabel.Text = String.Empty;
 
             countdownTimer.Start();
-        }        
-        public void Pauze()
+        }
+
+        //Method to pause the timer
+        public void Pause()
         {
             countdownTimer.Stop();
         }
 
-        public void Herstart()
+        //Method to resume the timer
+        public void Resume()
         {
             countdownTimer.Start();
         }
-        
     }
 }
