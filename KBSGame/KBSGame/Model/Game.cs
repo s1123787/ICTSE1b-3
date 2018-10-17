@@ -23,7 +23,6 @@ namespace KBSGame
         public DispatcherTimer timer2 = new DispatcherTimer();
         private int Seconde { get; set; }
         
-
         public delegate void ActivateEndPoint(object souce, EventArgs e);
         public event ActivateEndPoint activeEndPoint;
 
@@ -48,11 +47,11 @@ namespace KBSGame
         public bool playing;
         public bool EndPointIsShown = false;
         
-        public double bomx;
-        public double bomy;
+        public double bombx;
+        public double bomby;
 
         public PauseOverlay pauseOverlay;
-        private bool overBom = true, overBom2 = true;
+        private bool overBomb = true, overBomb2 = true;
         public bool pauseActivated = false;
 
         public Rectangle r, r2;
@@ -60,10 +59,10 @@ namespace KBSGame
       
         TextBlock pause = new TextBlock();
 
-        public Image image, explosion;
+        public Image image, explosionImage;
 
         private int aantal = 0;
-        private bool explosie = false, explosieGaatPlaatsVinden = false;
+        private bool explosion = false, explosionIsGoingToTakePlace = false;
 
         public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s)
         {
@@ -127,16 +126,17 @@ namespace KBSGame
 
         public void OnPlayerWalkedOverBomb(object source, GameEventArgs e)
         {
-            //this if statement because other wise it don't work
-            if (overBom)
+            //check if there is any other bomb active
+            if (overBomb)
             {
-                explosieGaatPlaatsVinden = true;
-                overBom = false;
-                Player.walkedOverBomb -= OnPlayerTijdIsOp;
-                double x = e.x;
+                explosionIsGoingToTakePlace = true; //to let know that a mine is going to explode
+                overBomb = false;
+                //initialize the position of player when is walked over bomb
+                double x = e.x; 
                 double y = e.y;
-                bomx = e.bomx;
-                bomy = e.bomy;
+                //initialize the position of bomb when player walked on it
+                bombx = e.bomx;
+                bomby = e.bomy;
                 #region
                 i = new Image
                 {
@@ -148,7 +148,7 @@ namespace KBSGame
                 Canvas.SetTop(i, y + 5);
                 Canvas.SetZIndex(i, 0);
                 #endregion
-                Obstakels.waardes.Remove($"{x}{y}b");
+                Obstakels.waardes.Remove($"{x}{y}b"); //remove the bomb from list so it can't be activated again
                 #region
                 image = new Image();
                 image.Width = 50;
@@ -166,25 +166,26 @@ namespace KBSGame
                 Canvas.SetLeft(image, x);
                 Canvas.SetTop(image, y);
                 #endregion
-                GameCanvas.Children.Add(image);
+                GameCanvas.Children.Add(image); //let the player know he stept on bomb to make bomb visible
                 timer.Interval = new TimeSpan(0, 0, 0, 1);
                 timer.Tick += Timer_Tick;
                 if (timer != null && playing)
                 {
-                    timer.Start();
+                    timer.Start(); //start timer who's event is called in one second
                 }
             }            
         }
 
         public void Timer_Tick(object sender, EventArgs e)
         {
-            if (playing && overBom2) 
+            //this checked if there is any bomb active
+            if (playing && overBomb2) 
             {
-                overBom2 = false;
+                overBomb2 = false;
                 #region
-                explosion = new Image();
-                explosion.Width = 150;
-                explosion.Height = 150;
+                explosionImage = new Image();
+                explosionImage.Width = 150;
+                explosionImage.Height = 150;
 
                 BitmapImage myBitmapImage = new BitmapImage();
 
@@ -194,25 +195,25 @@ namespace KBSGame
                 myBitmapImage.DecodePixelWidth = 50;
                 myBitmapImage.EndInit();
 
-                explosion.Source = myBitmapImage;
-                Canvas.SetLeft(explosion, bomx - 50);
-                Canvas.SetTop(explosion, bomy - 50);
-                Canvas.SetZIndex(explosion, 5);
+                explosionImage.Source = myBitmapImage;
+                Canvas.SetLeft(explosionImage, bombx - 50);
+                Canvas.SetTop(explosionImage, bomby - 50);
+                Canvas.SetZIndex(explosionImage, 5);
                 #endregion
-                GameCanvas.Children.Add(explosion);                
-                explosie = true;
-                explosieGaatPlaatsVinden = false;
+                GameCanvas.Children.Add(explosionImage); //add the explosion to the canvas               
+                explosion = true; //explosion is taking place
+                explosionIsGoingToTakePlace = false; //explosion has already taken place
                 timer.Tick -= Timer_Tick;
                 timer.Stop();
-                if ((Player.x == bomx || Player.x == bomx + 50 || Player.x == bomx - 50) && (Player.y == bomy || Player.y == bomy + 50 || Player.y == bomy - 50) && GameLost == false && GameWon == false)
+                //check if player is near the exploding bomb to check if it game over
+                if ((Player.x == bombx || Player.x == bombx + 50 || Player.x == bombx - 50) && (Player.y == bomby || Player.y == bomby + 50 || Player.y == bomby - 50) && GameLost == false && GameWon == false)
                 {
                     GameOver();
-                    Console.WriteLine("dood door bom");
                 }
-                else
+                else //when player is not game over it will check it for the next second
                 {
                     timer2.Interval = new TimeSpan(0, 0, 0, 0, 10);
-                    timer2.Tick += Timer2_Tick; ;
+                    timer2.Tick += Timer2_Tick; //this event will check every 10 miliseconds
                     if (timer2 != null)
                     {
                         timer2.Start();
@@ -223,15 +224,16 @@ namespace KBSGame
 
         public void Timer2_Tick(object sender, EventArgs e)
         {
+            //check if second is over
             if (aantal < 100)
             {
-                aantal++;                
-                if ((Player.x == bomx || Player.x == bomx + 50 || Player.x == bomx - 50) && (Player.y == bomy || Player.y == bomy + 50 || Player.y == bomy - 50) && GameLost == false && GameWon == false)
+                aantal++;              
+                if ((Player.x == bombx || Player.x == bombx + 50 || Player.x == bombx - 50) && (Player.y == bomby || Player.y == bomby + 50 || Player.y == bomby - 50) && GameLost == false && GameWon == false)
                 {
                     GameOver();
                     timer2.Tick -= Timer2_Tick;
                 }
-            } else if (aantal >= 100)
+            } else if (aantal >= 100) //second is over and player isn't hit by explosion so it can move on and explosion will be deleted
             {
                 ExplosionEnded();
             }
@@ -281,7 +283,8 @@ namespace KBSGame
             GameWon = false;
             GameLost = false;
 
-            if (explosie)
+            //check if explosion is on so it can be deleted from screen
+            if (explosion)
             {
                 ExplosionEnded();
             }
@@ -318,7 +321,8 @@ namespace KBSGame
             gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
             playing = false;
             GameTimer.countdownTimer.Stop();
-            if (explosieGaatPlaatsVinden)
+            //check if explosion will take place so it can be deleted and not shown on screen
+            if (explosionIsGoingToTakePlace)
             {
                 ExplosionEnded();
             }
@@ -336,15 +340,15 @@ namespace KBSGame
 
         public void ExplosionEnded()
         {
-            GameCanvas.Children.Remove(explosion);
-            GameCanvas.Children.Add(i);
-            explosie = false;
-            overBom = true;
-            overBom2 = true;
-            timer2.Tick -= Timer2_Tick;
-            aantal = 0;
-            timer.Tick -= Timer_Tick;
-            explosieGaatPlaatsVinden = false;
+            GameCanvas.Children.Remove(explosionImage);
+            GameCanvas.Children.Add(i); //this will ad the background over the bomb
+            explosion = false; 
+            overBomb = true;
+            overBomb2 = true;
+            timer2.Tick -= Timer2_Tick; //delete subscriber
+            aantal = 0; //set the amount to check if second is over to zero
+            timer.Tick -= Timer_Tick; //delete the subscriber
+            explosionIsGoingToTakePlace = false;
         }
     }
 }

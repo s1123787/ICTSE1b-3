@@ -13,6 +13,7 @@ namespace KBSGame.Model
     {
         public Bomb()
         {
+            //image is a attribute of obstacle
             image = new Image();
             image.Width = 50;
             image.Height = 50;
@@ -26,6 +27,7 @@ namespace KBSGame.Model
             myBitmapImage.EndInit();
 
             image.Source = myBitmapImage;
+            //assign the position where do bomb need to be placed on the screen
             base.AssignPosition("b");
         }
     }
