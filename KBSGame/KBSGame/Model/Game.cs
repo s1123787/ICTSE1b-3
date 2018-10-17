@@ -240,6 +240,7 @@ namespace KBSGame
 
         public void OnEsqKeyIsPressed(object source, EventArgs e)
         {
+            //Check if the game is active
             if (playing)
             {
                 pauseOverlay = new PauseOverlay(mainWindow, GameCanvas, this);
@@ -252,6 +253,7 @@ namespace KBSGame
 
         public void OnEnterKeyIsPressed(object source, EventArgs e)
         {
+            //Check if the game is not active and the pause screen is activated
             if (!playing && pauseActivated == true) {
                 playing = true;
                 pauseOverlay.continueGame();
