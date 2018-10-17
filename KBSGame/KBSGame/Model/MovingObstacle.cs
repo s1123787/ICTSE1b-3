@@ -13,7 +13,6 @@ namespace KBSGame.Model
 {
     public class MovingObstacle : Obstakel
     {
-        public MediaElement gif;
         protected int MovingStepSize = 50;
         public int MovingX { get; private set; }
         public int MovingY { get; private set; }
@@ -35,13 +34,6 @@ namespace KBSGame.Model
                 Width = 50,
                 Height = 50
             };
-            gif = new MediaElement
-            {
-                Width = 50,
-                Height = 50,
-                LoadedBehavior = MediaState.Play,
-                Visibility = System.Windows.Visibility.Visible
-            };
 
 
             if(!debug)
@@ -52,16 +44,7 @@ namespace KBSGame.Model
             timer.Tick += MoveObstakelRandom;
             timer.Start();
 
-            image.Width = 50;
-            image.Height = 50;
-
-            BitmapImage myBitmapImage = new BitmapImage();
-
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/moving-sprite.png");
-
-            myBitmapImage.DecodePixelWidth = 50;
-            myBitmapImage.EndInit();
+            BitmapImage myBitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/moving-sprite.png"));
 
             image.Source = myBitmapImage;
             Canvas.SetZIndex(image, 2);

@@ -12,7 +12,7 @@ namespace KBSGame
     public partial class MainWindow : Window
     {
         public delegate void EsqKeyIsPressed(object source, EventArgs e);
-        public event EsqKeyIsPressed esqKeyIsPressed;
+        public event EsqKeyIsPressed escKeyIsPressed;
         public delegate void EnterKeyIsPressed(object source, EventArgs e);
         public event EnterKeyIsPressed enterKeyIsPressed;
         private bool IsPressed = false;
@@ -75,7 +75,7 @@ namespace KBSGame
 
         protected virtual void OnEsqKeyIsPressed()
         {
-            esqKeyIsPressed?.Invoke(this, EventArgs.Empty);
+            escKeyIsPressed?.Invoke(this, EventArgs.Empty);
         }
 
         protected virtual void OnEnterKeyIsPressed()
