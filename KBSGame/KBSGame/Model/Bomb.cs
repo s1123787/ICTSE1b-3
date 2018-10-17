@@ -10,7 +10,7 @@ namespace KBSGame.Model
 {
     class Bomb : Obstakel
     {
-        public Bomb()
+        public Bomb(int StaticX = 0, int StaticY = 0)
         {
             image = new Image();
             image.Width = 50;
@@ -25,7 +25,14 @@ namespace KBSGame.Model
             myBitmapImage.EndInit();
 
             image.Source = myBitmapImage;
-            base.AssignPosition("b");
+
+            if(StaticX != -1 && StaticY != -1)
+            {
+                base.AssignStaticPosition("b", StaticX, StaticY);
+            } 
+            else { 
+                base.AssignPosition("b");
+            }
         }
     }
 }

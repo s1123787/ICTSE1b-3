@@ -25,8 +25,9 @@ namespace KBSGame.Model
         //public MovingObstacle(Game game)
         public int x;
         public int y;
+        public DispatcherTimer MovingTimer = new DispatcherTimer();
 
-        public MovingObstacle(Game game, bool debug = false)
+        public MovingObstacle(Game game, bool debug = false, int StaticX = 0, int StaticY = 0)
         {
             this.game = game;
 
@@ -44,13 +45,19 @@ namespace KBSGame.Model
             };
 
 
-            if(!debug)
+            if (!debug)
+            {
                 base.AssignPosition("m");
+            }
+            else
+            {
+                base.AssignStaticPosition("m", StaticX, StaticY);
+            }
 
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += MoveObstakelRandom;
-            timer.Start();
+
+            MovingTimer.Interval = TimeSpan.FromSeconds(1);
+            MovingTimer.Tick += MoveObstakelRandom;
+            MovingTimer.Start();
 
             image.Width = 50;
             image.Height = 50;
@@ -83,6 +90,7 @@ namespace KBSGame.Model
             {
                 int x = 0;
                 int y = 0;
+
                 //get current position x
                 x = (int)Canvas.GetLeft(image);
                 y = (int)Canvas.GetTop(image);

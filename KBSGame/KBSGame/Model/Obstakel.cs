@@ -33,6 +33,15 @@ namespace KBSGame
 
             Canvas.SetLeft(image, x);
             Canvas.SetTop(image, y);
-        }        
+        }
+        
+        public void AssignStaticPosition(string soort, int x, int y)
+        {
+
+            Obstakels.waardes.Add($"{x}{y}{soort}");
+
+            Canvas.SetLeft(image, x);
+            Canvas.SetTop(image, y);
+        }
     }
 }
