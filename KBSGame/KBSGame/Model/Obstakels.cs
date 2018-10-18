@@ -14,7 +14,6 @@ namespace KBSGame.GameObjects
     public class Obstakels
     {
         public List<Obstakel> obstakels = new List<Obstakel>();
-        List<string> type = new List<string>();
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
 
@@ -37,28 +36,27 @@ namespace KBSGame.GameObjects
                 //Loop through nodes and match type
                 foreach(XMLObstakel obs in obj.XMLItems)
                 {
-                    Console.WriteLine(obs.ObstakelType);
                     switch (obs.ObstakelType) { 
-                        case "Tree":
+                        case "Tree": //add the amount of trees to canvas
                             Tree t = new Tree(obs.ObstakelX, obs.ObstakelY);
                             obstakels.Add(t);
                             canvas.Children.Add(t.image);
                             Thread.Sleep(25);
                             break;
-                        case "Bomb":
+                        case "Bomb": //generate amount of bombs but don't put it on the screen because it is a land mine
                             Bomb b = new Bomb(obs.ObstakelX, obs.ObstakelY);
                             obstakels.Add(b);
                             canvas.Children.Add(b.image);
                             Thread.Sleep(25);
                             break;
-                        case "Moving":
+                        case "Moving": //add the amount of moving obstacles to canvas
                             MovingObstacle mo = new MovingObstacle(game, true, obs.ObstakelX, obs.ObstakelY);
                             obstakels.Add(mo);
 
                             canvas.Children.Add(mo.image);
                             Thread.Sleep(25);
                             break;
-                        case "Coin":
+                        case "Coin": //add the amount of coins to canvas
                             Coin c = new Coin(obs.ObstakelX, obs.ObstakelY);
                             obstakels.Add(c);
                             canvas.Children.Add(c.image);
@@ -69,6 +67,7 @@ namespace KBSGame.GameObjects
             }
             else
             {
+                //add the amount of trees to canvas
                 for (int i = 0; i < aantalBoom; i++)
                 {
                     Tree t = new Tree();
@@ -76,7 +75,7 @@ namespace KBSGame.GameObjects
                     canvas.Children.Add(t.image);
                     Thread.Sleep(25);
                 }
-
+                //generate amount of bombs but don't put it on the screen because it is a land mine
                 for (int i = 0; i < aantalBom; i++)
                 {
                     Bomb b = new Bomb();
@@ -84,6 +83,7 @@ namespace KBSGame.GameObjects
                     //canvas.Children.Add(b.image);
                     Thread.Sleep(25);
                 }
+                //add the amount of moving obstacles to canvas
                 for (int i = 0; i < aantalMoving; i++)
                 {
                     MovingObstacle mo = new MovingObstacle(game);
@@ -91,6 +91,7 @@ namespace KBSGame.GameObjects
                     canvas.Children.Add(mo.image);
                     Thread.Sleep(25);
                 }
+                //add the amount of coins to canvas
                 for (int i = 0; i < aantalCoin; i++)
                 {
                     Coin c = new Coin();
@@ -101,20 +102,19 @@ namespace KBSGame.GameObjects
             }
 
             Canvas = canvas;
-
         }
 
+        //reset all the obstacles that are placed on canvas
         public void Reset()
         {
             for (int i = 0; i < obstakels.Count; i++)
             {
+                //remove obstacles from canvas
                 Canvas.Children.Remove(obstakels[i].image);
             }
-
-            Console.WriteLine(waardes.Count());
-
+            
+            //remove all of the data in waardes so it is empty
             waardes.Clear();
-            Console.WriteLine(waardes.Count());
         }
     }
 }

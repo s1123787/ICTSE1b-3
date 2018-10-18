@@ -20,8 +20,6 @@ namespace KBSGame.Model
         private bool hits = false;
         public int OldX;
         public int OldY;
-        
-        //public MovingObstacle(Game game)
         public int x = -1;
         public int y = -1;
         public DispatcherTimer MovingTimer = new DispatcherTimer();
@@ -36,17 +34,17 @@ namespace KBSGame.Model
                 Height = 50
             };
 
-
+            //Only for random map
             if (!debug)
             {
                 base.AssignPosition("m");
             }
-            else
+            else //For unittest & XML map
             {
                 base.AssignStaticPosition("m", StaticX, StaticY);
             }
 
-
+            //Starting timer to move obstakels
             MovingTimer.Interval = TimeSpan.FromSeconds(1);
             MovingTimer.Tick += MoveObstakelRandom;
             MovingTimer.Start();
@@ -69,6 +67,7 @@ namespace KBSGame.Model
 
         public void MoveObstakelRandom(object sender, EventArgs e)
         {
+            //Moving obstakle can move
             if(game.GameLost == false && game.GameWon == false && game.playing == true)
             {
                 int x = 0;
@@ -228,6 +227,7 @@ namespace KBSGame.Model
         {
             string XYString = x.ToString() + y.ToString();
 
+            //set X & Y for Player
             int playerX = (int)Player.x - 5;
             int playerY = (int)Player.y - 5;
 
