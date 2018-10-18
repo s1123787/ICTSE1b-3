@@ -19,7 +19,7 @@ namespace KBSGame.Model
         private Image pauseSprite;
         private Button restart, resume;
 
-        public PauseOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
+        public PauseOverlay(Game g) : base(g)
         {
             //Create new image for sprite
             pauseSprite = new Image

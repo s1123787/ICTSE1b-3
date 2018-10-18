@@ -258,7 +258,7 @@ namespace KBSGame
             //Check if the game is active
             if (playing)
             {
-                pauseOverlay = new PauseOverlay(mainWindow, GameCanvas, this);
+                pauseOverlay = new PauseOverlay(this);
                 GameTimer.Pause();
                 FreezePlayer = true;
                 playing = false;
@@ -325,7 +325,7 @@ namespace KBSGame
             FreezePlayer = true;
             GameLost = true;
             GameWon = false;
-            gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
+            gameOverOverlay = new GameOverOverlay(this);
             playing = false;
             GameTimer.countdownTimer.Stop();
             //check if explosion will take place so it can be deleted and not shown on screen
@@ -340,7 +340,7 @@ namespace KBSGame
             FreezePlayer = true;
             GameLost = false;
             GameWon = true;
-            GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas, this);
+            GameWonOverlay gameWonOverlay = new GameWonOverlay(this);
             playing = false;
             GameTimer.Pause();
         }

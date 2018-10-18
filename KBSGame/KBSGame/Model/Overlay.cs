@@ -23,11 +23,11 @@ namespace KBSGame.Model
         protected Game game;
         protected View.MainMenu mm;
 
-        public Overlay(MainWindow mw, Canvas canvas, Game g)
+        public Overlay(Game g)
         {
             game = g;
-            MainWindow = mw;
-            GameCanvas = canvas;
+            MainWindow = g.mainWindow;
+            GameCanvas = g.GameCanvas;
             //Create new rectangle to use as background for the overlay
             background = new Rectangle
             {
@@ -63,7 +63,7 @@ namespace KBSGame.Model
             //Opens the main menu
             mm.Show();
             //Close the game window
-            MainWindow.Close();
+            game.mainWindow.Close();
         }
 
         //Method to remove the overlay once a button is clicked

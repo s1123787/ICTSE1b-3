@@ -20,7 +20,7 @@ namespace KBSGame.Model
         private Image GameOverSprite;
         private Button again;
 
-        public GameOverOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
+        public GameOverOverlay(Game g) : base(g)
         {
             //Create new image for sprite
             GameOverSprite = new Image
