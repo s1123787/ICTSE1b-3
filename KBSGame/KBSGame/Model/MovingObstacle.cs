@@ -22,10 +22,11 @@ namespace KBSGame.Model
         public int OldY;
         
         //public MovingObstacle(Game game)
-        public int x;
-        public int y;
+        public int x = -1;
+        public int y = -1;
+        public DispatcherTimer MovingTimer = new DispatcherTimer();
 
-        public MovingObstacle(Game game, bool debug = false)
+        public MovingObstacle(Game game, bool debug = false, int StaticX = 0, int StaticY = 0)
         {
             this.game = game;
 
@@ -36,13 +37,19 @@ namespace KBSGame.Model
             };
 
 
-            if(!debug)
+            if (!debug)
+            {
                 base.AssignPosition("m");
+            }
+            else
+            {
+                base.AssignStaticPosition("m", StaticX, StaticY);
+            }
 
-            DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += MoveObstakelRandom;
-            timer.Start();
+
+            MovingTimer.Interval = TimeSpan.FromSeconds(1);
+            MovingTimer.Tick += MoveObstakelRandom;
+            MovingTimer.Start();
 
             BitmapImage myBitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/moving-sprite.png"));
 
@@ -66,6 +73,7 @@ namespace KBSGame.Model
             {
                 int x = 0;
                 int y = 0;
+
                 //get current position x
                 x = (int)Canvas.GetLeft(image);
                 y = (int)Canvas.GetTop(image);
@@ -104,7 +112,7 @@ namespace KBSGame.Model
 
         public void MoveObstakelRight()
         {
-            if (x != null && y != null)
+            if (x != -1 && y != -1)
             { 
                 //get current position x
                 x = (int)Canvas.GetLeft(image);
@@ -133,7 +141,7 @@ namespace KBSGame.Model
 
         public void MoveObstakelLeft()
         {
-            if (x != null && y != null)
+            if (x != -1 && y != -1)
             {
                 //get current position x
                 x = (int)Canvas.GetLeft(image);
@@ -161,7 +169,7 @@ namespace KBSGame.Model
 
         public void MoveObstakelDown()
         {
-            if (x != null && y != null)
+            if (x != -1 && y != -1)
             {
                 //get current position x
                 x = (int)Canvas.GetLeft(image);
@@ -190,7 +198,7 @@ namespace KBSGame.Model
 
         public void MoveObstakelUp()
         {
-            if (x != null && y != null)
+            if (x != -1 && y != -1)
             {
                 //get current position x
                 x = (int)Canvas.GetLeft(image);

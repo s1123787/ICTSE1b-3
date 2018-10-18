@@ -129,6 +129,9 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Model\Game.cs" />
+    <Compile Include="Model\XMLItem.cs" />
+    <Compile Include="Model\XMLObstakel.cs" />
+    <Compile Include="Serializer.cs" />
     <Compile Include="View\MainMenu.xaml.cs">
       <DependentUpon>MainMenu.xaml</DependentUpon>
     </Compile>
@@ -249,8 +252,8 @@
     <Resource Include="Images\player.png" />
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Resources\level.xml" />
     <None Include="Resources\game-won-sound-effect.wav" />
-    <Resource Include="Model\Level1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

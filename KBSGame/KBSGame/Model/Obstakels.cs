@@ -1,6 +1,7 @@
 ﻿using KBSGame.Model;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading;
@@ -16,42 +17,88 @@ namespace KBSGame.GameObjects
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
 
-        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game)
+        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game, bool randomLevel = false)
         {
-            //add the amount of trees to canvas
-            for (int i = 0; i < aantalBoom; i++)
+            if (!randomLevel) // is XML level
             {
-                Tree t = new Tree();
-                obstakels.Add(t);
-                canvas.Children.Add(t.image);
-                //use of thread sleep because of the random generator
-                Thread.Sleep(25);
-            }
+                Serializer ser = new Serializer();
+                string path = string.Empty;
+                string xmlInputData = string.Empty;
+                string xmlOutputData = string.Empty;
 
-            //generate amount of bombs but don't put it on the screen because it is a land mine
-            for (int i = 0; i < aantalBom; i++)
-            {
-                Bomb b = new Bomb();
-                obstakels.Add(b);
-                //canvas.Children.Add(b.image);
-                Thread.Sleep(25);
+                // Load Data from XML
+                path = Directory.GetCurrentDirectory() + @"..\..\..\Resources\level.xml";
+                xmlInputData = File.ReadAllText(path);
+
+                // Deserialize nodes
+                XMLItem obj = ser.Deserialize<XMLItem>(xmlInputData);
+
+                //Loop through nodes and match type
+                foreach(XMLObstakel obs in obj.XMLItems)
+                {
+                    switch (obs.ObstakelType) { 
+                        case "Tree":
+                            Tree t = new Tree(obs.ObstakelX, obs.ObstakelY);
+                            obstakels.Add(t);
+                            canvas.Children.Add(t.image);
+                            Thread.Sleep(25);
+                            break;
+                        case "Bomb":
+                            Bomb b = new Bomb(obs.ObstakelX, obs.ObstakelY);
+                            obstakels.Add(b);
+                            canvas.Children.Add(b.image);
+                            Thread.Sleep(25);
+                            break;
+                        case "Moving":
+                            MovingObstacle mo = new MovingObstacle(game, true, obs.ObstakelX, obs.ObstakelY);
+                            obstakels.Add(mo);
+
+                            canvas.Children.Add(mo.image);
+                            Thread.Sleep(25);
+                            break;
+                        case "Coin":
+                            Coin c = new Coin(obs.ObstakelX, obs.ObstakelY);
+                            obstakels.Add(c);
+                            canvas.Children.Add(c.image);
+                            Thread.Sleep(25);
+                            break;
+                    }
+                }
             }
-            //add the amount of moving obstacles to canvas
-            for (int i = 0; i < aantalMoving; i++)
+            else
             {
-                MovingObstacle mo = new MovingObstacle(game);
-                obstakels.Add(mo);
-                canvas.Children.Add(mo.image);
-                Thread.Sleep(25);
+                //add the amount of trees to canvas
+                for (int i = 0; i < aantalBoom; i++)
+                {
+                    Tree t = new Tree();
+                    obstakels.Add(t);
+                    canvas.Children.Add(t.image);
+                    Thread.Sleep(25);
+                }
+                //generate amount of bombs but don't put it on the screen because it is a land mine
+                for (int i = 0; i < aantalBom; i++)
+                {
+                    Bomb b = new Bomb();
+                    obstakels.Add(b);
+                    Thread.Sleep(25);
+                }
+                //add the amount of moving obstacles to canvas
+                for (int i = 0; i < aantalMoving; i++)
+                {
+                    MovingObstacle mo = new MovingObstacle(game);
+                    obstakels.Add(mo);
+                    canvas.Children.Add(mo.image);
+                    Thread.Sleep(25);
+                }
+                //add the amount of coins to canvas
+                for (int i = 0; i < aantalCoin; i++)
+                {
+                    Coin c = new Coin();
+                    obstakels.Add(c);
+                    canvas.Children.Add(c.image);
+                    Thread.Sleep(25);
+                }
             }
-            //add the amount of coins to canvas
-            for(int i = 0; i < aantalCoin; i++)
-            {
-                Coin c = new Coin();
-                obstakels.Add(c);
-                canvas.Children.Add(c.image);
-                Thread.Sleep(25);
-            }            
 
             Canvas = canvas;
 
@@ -64,9 +111,10 @@ namespace KBSGame.GameObjects
             {
                 //remove obstacles from canvas
                 Canvas.Children.Remove(obstakels[i].image);
-                //remove all of the data in waardes so it is empty
-                waardes.Clear();
             }
+
+            //remove all of the data in waardes so it is empty
+            waardes.Clear();
         }
     }
 }

@@ -11,7 +11,7 @@ namespace KBSGame.Model
     //bomb is a generalisation of Obstacle
     class Bomb : Obstakel
     {
-        public Bomb()
+        public Bomb(int StaticX = 0, int StaticY = 0)
         {
             //image is a attribute of obstacle
             image = new Image();
@@ -29,7 +29,14 @@ namespace KBSGame.Model
             image.Source = myBitmapImage;
             //assign the position where do bomb need to be placed on the screen
 
-            base.AssignPosition("b");
+            if(StaticX != -1 && StaticY != -1)
+            {
+                base.AssignStaticPosition("b", StaticX, StaticY);
+            } 
+            else { 
+                base.AssignPosition("b");
+            }
+            image.Source = bitmapImage;
         }
     }
 }

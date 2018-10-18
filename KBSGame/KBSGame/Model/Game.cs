@@ -72,7 +72,7 @@ namespace KBSGame
             Seconde = s;
             StartPoint = new StartPoint(canvas);
             
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this, randomLevel);
 
             Player = new Player(canvas, this);
             mainWindow = mw;
@@ -279,7 +279,7 @@ namespace KBSGame
         {
             Player.Reset();
             obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this, randomLevel);
             
             FreezePlayer = false;
             GameTimer.Restart();

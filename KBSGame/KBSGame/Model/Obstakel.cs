@@ -37,6 +37,15 @@ namespace KBSGame
             //add the obstacle to the canvas with the generated positions
             Canvas.SetLeft(image, x);
             Canvas.SetTop(image, y);
-        }        
+        }
+        
+        public void AssignStaticPosition(string soort, int x, int y)
+        {
+
+            Obstakels.waardes.Add($"{x}{y}{soort}");
+
+            Canvas.SetLeft(image, x);
+            Canvas.SetTop(image, y);
+        }
     }
 }
