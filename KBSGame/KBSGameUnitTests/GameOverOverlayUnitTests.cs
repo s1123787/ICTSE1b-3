@@ -44,7 +44,7 @@ namespace KBSGameUnitTests
             game.testy = 0;
             game.GameOver();
             game.testy = 150;
-            if (game.GameLost == true)
+            if (game.explosionIsGoingToTakePlace == true)
             {
                 Assert.Fail();
             }

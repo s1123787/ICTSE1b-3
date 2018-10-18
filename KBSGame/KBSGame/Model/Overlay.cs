@@ -16,18 +16,14 @@ namespace KBSGame.Model
 {
     public class Overlay
     {
-        protected MainWindow MainWindow;
-        protected Canvas GameCanvas;
-        protected Rectangle background;
-        public Button menu;
         protected Game game;
-        protected View.MainMenu mm;
+        public Rectangle background;
+        public Button menu;
+        public int backgroundX, backgroundY;
 
         public Overlay(Game g)
         {
             game = g;
-            MainWindow = g.mainWindow;
-            GameCanvas = g.GameCanvas;
             //Create new rectangle to use as background for the overlay
             background = new Rectangle
             {
@@ -53,24 +49,16 @@ namespace KBSGame.Model
             };
             //Subscribe the menu button to the method it needs to run
             menu.Click += Menu_Click;
+
+            //Set coardinate values
+            backgroundX = 201;
+            backgroundY = 140;
         }
 
         //Actions to perform when menu button is clicked
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
-            //Create new menu
-            mm = new View.MainMenu();
-            //Opens the main menu
-            mm.Show();
-            //Close the game window
-            game.mainWindow.Close();
-        }
-
-        //Method to remove the overlay once a button is clicked
-        public void RemoveObjects()
-        {
-            GameCanvas.Children.Remove(background);
-            GameCanvas.Children.Remove(menu);
+            game.ToMainMenu();
         }
     }
 }
