@@ -26,6 +26,8 @@ namespace KBSGame.Model
         public int x;
         public int y;
 
+        public DispatcherTimer timer { get; set; }
+
         public MovingObstacle(Game game, bool debug = false)
         {
             this.game = game;
@@ -47,7 +49,7 @@ namespace KBSGame.Model
             if(!debug)
                 base.AssignPosition("m");
 
-            DispatcherTimer timer = new DispatcherTimer();
+            timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += MoveObstakelRandom;
             timer.Start();
@@ -91,24 +93,28 @@ namespace KBSGame.Model
                 int rand = random.Next(0, 4);
                 switch (rand)
                 {
+                    //down
                     case 0:
                         if(CheckGridAvailability(x, y + MovingStepSize, x, y))
                         {
                             MoveObstakelDown();
                         }
                         break;
+                    //Right
                     case 1:
                         if (CheckGridAvailability(x + MovingStepSize, y, x, y))
                         {
                             MoveObstakelRight();
                         }
                         break;
+                    //Up
                     case 2:
                         if (CheckGridAvailability(x, y - MovingStepSize, x, y))
                         {
                             MoveObstakelUp();
                         }
                         break;
+                    //Left
                     case 3:
                         if (CheckGridAvailability(x - MovingStepSize, y, x, y))
                         {
@@ -118,6 +124,8 @@ namespace KBSGame.Model
                 }
             }
         }
+
+        #region MoveObstakel
 
         public void MoveObstakelRight()
         {
@@ -232,6 +240,7 @@ namespace KBSGame.Model
                 Canvas.SetTop(image, y -= MovingStepSize);
             }
         }
+        #endregion 
 
         public bool CheckGridAvailability(int x, int y, int currentX, int currentY)
         {
@@ -239,8 +248,6 @@ namespace KBSGame.Model
 
             int playerX = (int)Player.x - 5;
             int playerY = (int)Player.y - 5;
-
-
             //check if Player is on Moving obstakel
             if(playerX == currentX && playerY == currentY && hits == false)
             {

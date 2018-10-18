@@ -268,7 +268,7 @@ namespace KBSGame
             Player.Reset();
             obstakels.Reset();
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this);
-            
+
             FreezePlayer = false;
             GameTimer.Restart();
             playing = true;
@@ -289,18 +289,7 @@ namespace KBSGame
             }
         }
 
-        public void Restart()
-        {
-            Player.Reset();
-            obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this);
-            FreezePlayer = false;
-            gameOverOverlay = null;
-            timer.Tick -= Timer_Tick;
-            timer2.Tick -= Timer2_Tick;
-        }
-
-        public void GameOver()
+       public void GameOver()
         {
             FreezePlayer = true;
             GameLost = true;

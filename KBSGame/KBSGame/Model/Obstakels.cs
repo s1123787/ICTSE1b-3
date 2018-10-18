@@ -16,6 +16,7 @@ namespace KBSGame.GameObjects
         List<string> type = new List<string>();
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
+        MovingObstacle mo;
 
         public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game)
         {
@@ -32,12 +33,11 @@ namespace KBSGame.GameObjects
             {
                 Bomb b = new Bomb();
                 obstakels.Add(b);
-                //canvas.Children.Add(b.image);
                 Thread.Sleep(25);
             }
             for (int i = 0; i < aantalMoving; i++)
             {
-                MovingObstacle mo = new MovingObstacle(game);
+                mo = new MovingObstacle(game);
                 obstakels.Add(mo);
                 canvas.Children.Add(mo.image);
                 Thread.Sleep(25);
@@ -59,8 +59,19 @@ namespace KBSGame.GameObjects
             for (int i = 0; i < obstakels.Count; i++)
             {
                 Canvas.Children.Remove(obstakels[i].image);
-                waardes.Clear();
             }
+
+            foreach (Obstakel o in obstakels)
+            {
+                if(o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
+                {
+                    MovingObstacle mo = (MovingObstacle)o;
+                    mo.timer.Tick -= mo.MoveObstakelRandom;
+                }
+            }
+            obstakels.Clear();
+            waardes.Clear();
+            
         }
     }
 }
