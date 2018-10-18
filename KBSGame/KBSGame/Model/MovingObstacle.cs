@@ -36,7 +36,7 @@ namespace KBSGame.Model
             };
 
             //Only for random map
-            if (!debug)
+            if (debug == false)
             {
                 base.AssignPosition("m");
             }
@@ -74,9 +74,7 @@ namespace KBSGame.Model
             //Moving obstakle can move
             if(game.GameLost == false && game.GameWon == false && game.playing == true)
             {
-                int x = 0;
-                int y = 0;
-
+                
                 //get current position x
                 x = (int)Canvas.GetLeft(image);
                 y = (int)Canvas.GetTop(image);
