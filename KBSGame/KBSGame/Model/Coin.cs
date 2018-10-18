@@ -22,10 +22,12 @@ namespace KBSGame.Model
 
             image.Source = bitmapImage;
 
+            //asssign preset position
             if (StaticX != -1 && StaticY != -1)
             {
                 base.AssignStaticPosition("c", StaticX, StaticY);
             }
+            //assign random position
             else
             {
                 base.AssignPosition("c");
