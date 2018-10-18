@@ -25,7 +25,7 @@ namespace KBSGameUnitTests
             if (Application.ResourceAssembly == null)
                 Application.ResourceAssembly = typeof(MainWindow).Assembly;
 
-            game = new Game(new MainWindow(), new Canvas(), 30, 10, 0, 5, 30);
+            game = new Game(new MainWindow(true), new Canvas(), 30, 10, 0, 5, 30, true);
             
 
         }

@@ -43,6 +43,7 @@ namespace KBSGame
             canvas.Children.Add(sprite);
         }
 
+        //Method to remove the endpoint from the screen
         public void Delete(Canvas canvas)
         {
             canvas.Children.Remove(rect);

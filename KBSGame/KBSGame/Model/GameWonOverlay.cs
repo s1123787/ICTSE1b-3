@@ -22,14 +22,32 @@ namespace KBSGame.Model
 
         public GameWonOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
         {
+            //Create new image for sprite
             VictorySprite = new Image
             {
                 Width = 400,
                 Height = 200,
                 Name = "VictorySprite"
             };
+            //Set source of VictorySprite
+            VictorySprite.Source = new BitmapImage(new Uri("pack://application:,,,/Images/victory-sprite.png"));
 
-            //TimerLabel.Content = "00:00";
+            //Create new button template for restart button
+            ControlTemplate againButtonTemplate = new ControlTemplate(typeof(Button));
+            var againButtonImage = new FrameworkElementFactory(typeof(Image));
+            againButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/play-again-button.png", UriKind.RelativeOrAbsolute)));
+            againButtonTemplate.VisualTree = againButtonImage;
+            //Create new button to restart the game
+            again = new Button
+            {
+                Width = 125,
+                Height = 45,
+                Name = "againButton",
+                Template = againButtonTemplate
+            };
+            //Subscribe the again button to the method it needs to run
+            again.Click += Again_Click;
+            
             //Create audio player to play sound effect on victory
             SoundPlayer audio = new SoundPlayer(Properties.Resources.game_won_sound_effect);
             audio.Play();
@@ -44,27 +62,6 @@ namespace KBSGame.Model
 
             backgroundWorker.RunWorkerCompleted += (s, e) =>
             {
-                //Set source of VictorySprite
-                VictorySprite.Source = new BitmapImage(new Uri("pack://application:,,,/Images/victory-sprite.png"));
-
-                //Create new button template for restart button
-                ControlTemplate againButtonTemplate = new ControlTemplate(typeof(Button));
-                var againButtonImage = new FrameworkElementFactory(typeof(Image));
-                againButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/play-again-button.png", UriKind.RelativeOrAbsolute)));
-                againButtonTemplate.VisualTree = againButtonImage;
-
-                //Create new button to restart the game
-                again = new Button
-                {
-                    Width = 125,
-                    Height = 45,
-                    Name = "againButton",
-                    Template = againButtonTemplate
-                };
-
-                //Subscribe the button to the method it needs to run
-                again.Click += Again_Click;
-
                 //Add everything to the screen
                 Canvas.SetTop(background, 140);
                 Canvas.SetLeft(background, 201);
@@ -95,6 +92,8 @@ namespace KBSGame.Model
             //Clean up victory overlay
             removeObjects();
         }
+
+        //Method to remove the overlay once a button is clicked
         public void removeObjects()
         {
             base.RemoveObjects();

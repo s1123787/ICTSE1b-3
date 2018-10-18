@@ -13,42 +13,46 @@ namespace KBSGame.Model
         //public int x { get; private set; }
         //public int y { get; private set; }
 
-
-        public Tree()
-        {
-
+        public Tree(int StaticX = -1, int StaticY = -1)
+        { 
             image = new Image();
             image.Width = 50;
             image.Height = 50;
+            //to make sure that the player can't be under the three
             Canvas.SetZIndex(image, 2);
 
-            BitmapImage myBitmapImage = new BitmapImage();
+            BitmapImage bitmapImage = new BitmapImage();
 
-            myBitmapImage.BeginInit();
+            bitmapImage.BeginInit();
 
             Random random = new Random();
             int i = random.Next(0, 3);
             if (i == 0)
             {
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tomb-stone-sprite.png");
+                bitmapImage.UriSource = new Uri("pack://application:,,,/Images/hell-tree-sprite.png");
             }
             else if (i == 1)
             {
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/tomb-stone2-sprite.png");
+                bitmapImage.UriSource = new Uri("pack://application:,,,/Images/tomb-stone-sprite.png");
             }
             else if (i == 2)
             {
-                myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/weeping-angel-sprite.png");
+                bitmapImage.UriSource = new Uri("pack://application:,,,/Images/weeping-angel-sprite.png");
             }
+            
+            bitmapImage.EndInit();
 
-            myBitmapImage.DecodePixelWidth = 50;
-            myBitmapImage.EndInit();
+            image.Source = bitmapImage;
 
-            image.Source = myBitmapImage;
-
-            base.AssignPosition("t");
+            if(StaticX != -1 && StaticY != -1)
+            {
+                base.AssignStaticPosition("t", StaticX, StaticY);
+            }
+            else
+            {
+                base.AssignPosition("t");
+            }
+            //assign the positon of tree
         }
-
-
     }
 }

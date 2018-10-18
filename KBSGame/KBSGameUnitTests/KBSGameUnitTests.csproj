@@ -58,6 +58,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PauseOverlayUnitTests.cs" />
+    <Compile Include="GameWonOverlayUnitTests.cs" />
+    <Compile Include="GameOverOverlayUnitTests.cs" />
     <Compile Include="UnitTestPlayer.cs" />
     <Compile Include="UnitTest1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

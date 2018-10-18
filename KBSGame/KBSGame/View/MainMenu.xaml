@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KBSGame.View"
         mc:Ignorable="d"
-        Title="MainMenu" Height="600" Width="800">
+        Title="A2B" Height="600" Width="800">
     <Window.Resources>
         <ImageBrush x:Key="startbutton" ImageSource="/images/start-button.png" />
         <ImageBrush x:Key="exitbutton" ImageSource="/images/exit-button.png" />
+        <ImageBrush x:Key="randomlevelbutton" ImageSource="/images/random-button.png"/>
+        <ImageBrush x:Key="setlevelbutton" ImageSource="/images/set-button.png"/>
         <Style x:Key="MainMenuButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Cursor" Value="Hand" />
@@ -47,9 +49,30 @@
             HorizontalAlignment = "Center" 
             VerticalAlignment="Top"
             Margin="0,125,0,0"/>
-        <Button x:Name = "ExitGameButton"
+        <Button x:Name = "randomLevelButton"
             Style="{StaticResource MainMenuButton}"
-            Click = "ExitGameButton_Click"
+            Click = "randomLevelButton_Click"
+            ClickMode = "Release" 
+            Height ="75"  
+            Width = "190"
+            Background="{StaticResource randomlevelbutton}"
+            HorizontalAlignment = "Center" 
+            VerticalAlignment="Top"
+            Margin="196,225,406,0"/>
+        <Button x:Name = "setLevelButton"
+            Style="{StaticResource MainMenuButton}"
+            Click = "setLevelButton_Click"
+            ClickMode = "Release" 
+            Height ="75"  
+            Width = "190"
+            Background="{StaticResource setlevelbutton}"
+            HorizontalAlignment = "Center" 
+            VerticalAlignment="Top"
+            Margin="406,225,196,0"
+            Opacity="0.5"/>
+        <Button x:Name = "exitGameButton"
+            Style="{StaticResource MainMenuButton}"
+            Click = "exitGameButton_Click"
             ClickMode = "Release"
             BorderThickness="0"
             Height ="75"  
