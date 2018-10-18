@@ -47,7 +47,6 @@ namespace KBSGame.GameObjects
                         case "Bomb": //generate amount of bombs but don't put it on the screen because it is a land mine
                             Bomb b = new Bomb(obs.ObstakelX, obs.ObstakelY);
                             obstakels.Add(b);
-                            canvas.Children.Add(b.image);
                             Thread.Sleep(25);
                             break;
                         case "Moving": //add the amount of moving obstacles to canvas
