@@ -9,8 +9,8 @@
     <Window.Resources>
         <ImageBrush x:Key="startbutton" ImageSource="/images/start-button.png" />
         <ImageBrush x:Key="exitbutton" ImageSource="/images/exit-button.png" />
-        <ImageBrush x:Key="randomlevelbutton" ImageSource="/images/exit-button.png"/>
-        <ImageBrush x:Key="setlevelbutton" ImageSource="/images/start-button.png"/>
+        <ImageBrush x:Key="randomlevelbutton" ImageSource="/images/random-button.png"/>
+        <ImageBrush x:Key="setlevelbutton" ImageSource="/images/set-button.png"/>
         <Style x:Key="MainMenuButton" TargetType="Button">
             <Setter Property="OverridesDefaultStyle" Value="True" />
             <Setter Property="Cursor" Value="Hand" />
