@@ -8,7 +8,7 @@
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{D3E639FC-DF90-4060-96DB-959A8D2707D2}</ProjectGuid>
-    <OutputType>Exe</OutputType>
+    <OutputType>WinExe</OutputType>
     <RootNamespace>KBSGame</RootNamespace>
     <AssemblyName>KBSGame</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
@@ -19,7 +19,7 @@
     <IsWebBootstrapper>false</IsWebBootstrapper>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
-    <PublishUrl>C:\Users\Wilco Rook\Desktop\</PublishUrl>
+    <PublishUrl>C:\Users\Wilco Rook\Desktop\A2B\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
     <UpdateEnabled>false</UpdateEnabled>
@@ -29,7 +29,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <ApplicationRevision>1</ApplicationRevision>
+    <ApplicationRevision>3</ApplicationRevision>
     <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
@@ -177,9 +177,6 @@
     <Resource Include="Images\flag-sprite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\tree-sprite.png" />
-  </ItemGroup>
-  <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.6.1">
       <Visible>False</Visible>
       <ProductName>Microsoft .NET Framework 4.6.1 %28x86 and x64%29</ProductName>
@@ -201,9 +198,6 @@
     <Resource Include="Images\landmine-sprite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\landmine-sprite.gif" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\menu-button.png" />
   </ItemGroup>
   <ItemGroup>
@@ -214,9 +208,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\game-over-sound-effect.wav" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\game-won-sound-effect.wav" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\pause-sprite.png" />
@@ -242,9 +233,6 @@
     <Resource Include="Images\explosion-sprite.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Images\tomb-stone2-sprite.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\weeping-angel-sprite.png" />
   </ItemGroup>
   <ItemGroup>
@@ -259,6 +247,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\player.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\game-won-sound-effect.wav" />
+    <Resource Include="Model\Level1.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

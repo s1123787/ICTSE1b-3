@@ -22,14 +22,33 @@ namespace KBSGame.Model
 
         public GameOverOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
         {
+            //Create new image for sprite
             GameOverSprite = new Image
             {
                 Width = 400,
                 Height = 200,
                 Name = "GameOverSprite"
             };
+            //Set source of GameOverSprite
+            GameOverSprite.Source = new BitmapImage(new Uri("pack://application:,,,/Images/game-over-sprite.png"));
 
-            //TimerLabel.Content = "00:00";
+            //Create new button template for restart button
+            ControlTemplate againButtonTemplate = new ControlTemplate(typeof(Button));
+            var againButtonImage = new FrameworkElementFactory(typeof(Image));
+            againButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/play-again-button.png", UriKind.RelativeOrAbsolute)));
+            againButtonTemplate.VisualTree = againButtonImage;
+
+            //Create new button to restart the game
+            again = new Button
+            {
+                Width = 125,
+                Height = 45,
+                Name = "againButton",
+                Template = againButtonTemplate
+            };
+            //Subscribe the again button to the method it needs to run
+            again.Click += Again_Click;
+            
             //Create audio player to play sound effect on game over
             SoundPlayer audio = new SoundPlayer(Properties.Resources.game_over_sound_effect);
             audio.Play();
@@ -43,29 +62,7 @@ namespace KBSGame.Model
             };
 
             backgroundWorker.RunWorkerCompleted += (s, e) =>
-            {
-                //Set source of GameOverSprite
-                GameOverSprite.Source = new BitmapImage(new Uri("pack://application:,,,/Images/game-over-sprite.png"));
-
-                //Create new button template for restart button
-                ControlTemplate againButtonTemplate = new ControlTemplate(typeof(Button));
-                var againButtonImage = new FrameworkElementFactory(typeof(Image));
-                againButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/play-again-button.png", UriKind.RelativeOrAbsolute)));
-                againButtonTemplate.VisualTree = againButtonImage;
-
-                //Create new button to restart the game
-                again = new Button
-                {
-                    Width = 125,
-                    Height = 45,
-                    Name = "againButton",
-                    Template = againButtonTemplate
-                };
-
-                //Subscribe the button to the method it needs to run
-                again.Click += Again_Click;
-               
-
+            {                
                 //Add everything to the screen
                 Canvas.SetTop(background, 140);
                 Canvas.SetLeft(background, 201);
@@ -87,6 +84,7 @@ namespace KBSGame.Model
 
             backgroundWorker.RunWorkerAsync();
         }
+
         //Actions to perform when play again button is clicked
         private void Again_Click(object sender, RoutedEventArgs e)
         {
@@ -95,6 +93,8 @@ namespace KBSGame.Model
             //Clean up game over overlay
             removeObjects();
         }
+
+        //Method to remove the overlay once a button is clicked
         public void removeObjects()
         {
             base.RemoveObjects();

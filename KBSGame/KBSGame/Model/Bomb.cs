@@ -28,6 +28,7 @@ namespace KBSGame.Model
 
             image.Source = myBitmapImage;
             //assign the position where do bomb need to be placed on the screen
+
             base.AssignPosition("b");
         }
     }

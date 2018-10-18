@@ -45,9 +45,9 @@ namespace KBSGame
                 Width = 40,
                 Height = 40
             };
-            BitmapImage myBitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/player.png"));
+            BitmapImage bitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/player.png"));
 
-            player.Source = myBitmapImage;
+            player.Source = bitmapImage;
             
             Canvas.SetLeft(player, 5);
             Canvas.SetTop(player, 5);
