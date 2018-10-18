@@ -29,9 +29,10 @@ namespace KBSGameUnitTests
         [Test]
         public void Eplayer_PlayerSpawnsAtStartPoint_ReturnEqual()
         {
+            //Arrange
             double x = Canvas.GetLeft(g.Player.Eplayer);
             double y = Canvas.GetTop(g.Player.Eplayer);
-
+            //Assert
             Assert.AreEqual(5, x);
             Assert.AreEqual(5, y);
 
@@ -40,16 +41,20 @@ namespace KBSGameUnitTests
         [Test]
         public void Move_PlayerMovesInEveryDirection_ReturnEqual()
         {
+            //Arrange
             double x = Canvas.GetLeft(player);
             double y = Canvas.GetTop(player);
-
+            
+            //Act
             g.Player.MoveRight();
 
             double x2 = Canvas.GetLeft(player);
             double y2 = Canvas.GetTop(player);
-
+            
+            //Assert
             Assert.AreEqual(x + 50, x2);
-
+            
+            //Act
             g.Player.MoveDown();
 
             x = Canvas.GetLeft(player);
@@ -57,18 +62,22 @@ namespace KBSGameUnitTests
 
             Assert.AreEqual(y2 + 50, y);
 
+            //Act
             g.Player.MoveLeft();
 
             x2 = Canvas.GetLeft(player);
             y2 = Canvas.GetTop(player);
-
+            
+            //Assert
             Assert.AreEqual(x - 50, x2);
 
+            //Act
             g.Player.MoveUp();
 
             x = Canvas.GetLeft(player);
             y = Canvas.GetTop(player);
 
+            //Assert
             Assert.AreEqual(y2 - 50, y);
 
         }
@@ -76,11 +85,17 @@ namespace KBSGameUnitTests
         [Test]
         public void Move_MoveTowardsBorder_ReturnEqual()
         {
+            //Act
             g.Player.MoveLeft();
+            
+            //Assert
             double x = Canvas.GetLeft(player);
             Assert.AreEqual(5, x);
-
+            
+            //Act
             g.Player.MoveUp();
+
+            //Assert
             double y = Canvas.GetTop(player);
             Assert.AreEqual(5, y);
         }
@@ -88,12 +103,19 @@ namespace KBSGameUnitTests
         [Test]
         public void Move_MoveTowardsTree_ReturnEqual()
         {
+            //Arrange
             Obstakels.waardes.Add("1000t");
 
+            //Act
             g.Player.MoveRight();
+
+            //Assert
             Assert.AreEqual(55, Canvas.GetLeft(player));
 
+            //Act
             g.Player.MoveRight();
+
+            //Assert
             Assert.AreEqual(55, Canvas.GetLeft(player));
         }
 
@@ -112,17 +134,22 @@ namespace KBSGameUnitTests
         [Test]
         public void Move_PlayerCollectsCoinAndCantCollectSameCoinTwice_ReturnEqual()
         {
+            //Arrange
             Obstakels.waardes.Add("0100c");
 
+            //Act
             g.Player.MoveDown();
             g.Player.MoveDown();
             g.Player.MoveDown();
 
+            //Assert
             Assert.AreEqual(1, g.CollectedCoins);
 
+            //Act
             g.Player.MoveUp();
             g.Player.MoveUp();
 
+            //Assert
             Assert.AreEqual(1, g.CollectedCoins);
 
         }
@@ -130,14 +157,19 @@ namespace KBSGameUnitTests
         [Test]
         public void Move_EndPointIsAvailableWhenPickUpFifthCoin_ReturnTrue()
         {
+            //Assert
             Assert.IsFalse(g.EndPointIsShown);
 
+            //Arrange
             g.CollectedCoins = 4;
             Obstakels.waardes.Add("0100c");
+
+            //Act
             g.Player.MoveDown();
             g.Player.MoveDown();
             g.Player.MoveDown();
 
+            //Assert
             Assert.IsTrue(g.EndPointIsShown);
         }
     }
