@@ -28,14 +28,12 @@ namespace KBSGame.Model
             //Create the timer
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-                //Set timer sring to current time left
-                mw.TimerLabel.Text = playTime.ToString(@"ss");
-                
-                //When tier hits 0 notify subscribers and stop counting
+
+                mw.TimerLabel.Text = playTime.ToString(@"ss");                
                 if (playTime == TimeSpan.Zero)
                 {
-                    OnTijdIsOp();
-                    countdownTimer.Stop();
+                    OnTijdIsOp(); //when time is 0 this event will be raised
+                    countdownTimer.Stop();                    
                 }
                 //Update time left
                 playTime = playTime.Add(TimeSpan.FromSeconds(-1));
@@ -44,7 +42,8 @@ namespace KBSGame.Model
 
         //Method to notify subscribers the timer has hit 0
         protected virtual void OnTijdIsOp()
-        {            
+        {   
+            //check if there are any subscribers to this event
             tijdIsOp?.Invoke(this, EventArgs.Empty);
         }
 
@@ -52,9 +51,10 @@ namespace KBSGame.Model
         public void Restart()
         {
             playTime = TimeSpan.FromSeconds(Seconds);
-            //timer label wordt op empty gezet zodat je geen verwarring krijgt met wat timer aangeeft
+            //timer label will be empty the moment it will restart
             mainWindow.TimerLabel.Text = String.Empty;
 
+            //timer will be started again
             countdownTimer.Start();
         }
 
