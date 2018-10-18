@@ -18,6 +18,7 @@ namespace KBSGame.Model
             image = new Image();
             image.Width = 50;
             image.Height = 50;
+            //to make sure that the player can't be under the three
             Canvas.SetZIndex(image, 2);
 
             BitmapImage bitmapImage = new BitmapImage();
@@ -43,6 +44,7 @@ namespace KBSGame.Model
 
             image.Source = bitmapImage;
 
+            //assign the positon of tree
             base.AssignPosition("t");
         }
     }
