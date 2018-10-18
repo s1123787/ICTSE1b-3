@@ -40,10 +40,10 @@ namespace KBSGameUnitTests
         {
             Player.x = 150;
             Player.y = 150;
-            game.testx = 150;
-            game.testy = 0;
+            game.bombx = 150;
+            game.bomby = 0;
             game.GameOver();
-            game.testy = 150;
+            game.bomby = 150;
             if (game.GameLost == true)
             {
                 Assert.Fail();

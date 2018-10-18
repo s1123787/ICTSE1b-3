@@ -32,7 +32,7 @@ namespace KBSGameUnitTests
 
         //Check if moving obstakel moves right and hits next grid.
         [Test]
-        public void PlayerHitsMovingObstakel_ReturnTrue()
+        public void PlayerMove_PlayerHitsMovingObstakel_ReturnTrue()
         {
             // Act
             bool test = false;
@@ -65,7 +65,7 @@ namespace KBSGameUnitTests
 
         
         [Test]
-        public void MovingObstakelMovesRight_ReturnTrue()
+        public void MoveObstacleRight_MovingObstakelMovesRight_ReturnTrue()
         {
             bool test = false;
 
@@ -89,7 +89,7 @@ namespace KBSGameUnitTests
 
         
         [Test]
-        public void MovingObstakelMovesLeft_ReturnTrue()
+        public void MoveObstacleLeft_MovingObstakelMovesLeft_ReturnTrue()
         {
             bool test = false;
 
@@ -112,7 +112,7 @@ namespace KBSGameUnitTests
 
 
         [Test]
-        public void MovingObstakelMovesUp_ReturnTrue()
+        public void MoveObstacleUp_MovingObstakelMovesUp_ReturnTrue()
         {
             bool test = false;
 
@@ -134,7 +134,7 @@ namespace KBSGameUnitTests
         }
 
         [Test]
-        public void MovingObstakelMovesDown_ReturnTrue()
+        public void MoveObstacleDown_MovingObstakelMovesDown_ReturnTrue()
         {
             bool test = false;
 
