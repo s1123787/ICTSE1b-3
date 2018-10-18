@@ -75,8 +75,8 @@ namespace KBSGameUnitTests
             Player.x = 100;
             Player.y = 100;
             //dit is de positie waar de bom zich bevind
-            game.testx = 100;
-            game.testy = 100;
+            game.bombx = 100;
+            game.bomby = 100;
             //het event wordt aangeroepen
             game.Timer_Tick(this, EventArgs.Empty);
             Assert.IsFalse(game.playing);
@@ -86,8 +86,8 @@ namespace KBSGameUnitTests
         [Test]
         public void TimerTick_PlayerWalkedOverBombAndMoveOnePlace_ReturnFalse()
         {           
-            game.testx = 100;
-            game.testy = 100;
+            game.bombx = 100;
+            game.bomby = 100;
             //de speler is 1 plek opgeschoven van de plek waar de bom ontploft
             Player.x = 150;
             Player.y = 100;
@@ -99,8 +99,8 @@ namespace KBSGameUnitTests
         [Test]
         public void TimerTick_PlayerWalkedOverBombAndMovedTwoPlaces_ReturnTrue()
         {
-            game.testx = 100;
-            game.testy = 100;
+            game.bombx = 100;
+            game.bomby = 100;
             //de speler is 2 plekker opgeschoven waar bom is ontploft
             Player.x = 200;
             Player.y = 100;
@@ -115,8 +115,8 @@ namespace KBSGameUnitTests
         {
             //deze moet je aanroepen om foutmeldingen te voorkomen
             game.OnPlayerWalkedOverBomb(game, new GameEventArgs(100, 0, 0, 0));
-            game.testx = 100;
-            game.testy = 100;
+            game.bombx = 100;
+            game.bomby = 100;
             Player.x = 100;
             Player.y = 100;            
             game.Timer2_Tick(game, EventArgs.Empty);
@@ -128,8 +128,8 @@ namespace KBSGameUnitTests
         public void TimerTick2_PlayerWalkedOverBombAndMovedOnePlace_ReturnFalse()
         {
             game.OnPlayerWalkedOverBomb(game, new GameEventArgs(100, 0, 0, 0));
-            game.testx = 100;
-            game.testy = 100;
+            game.bombx = 100;
+            game.bomby = 100;
             Player.x = 150;
             Player.y = 100;
             game.Timer2_Tick(game, EventArgs.Empty);
@@ -141,8 +141,8 @@ namespace KBSGameUnitTests
         public void TimerTick2_PlayerWalkedOverBombAndMovedTwoPlaces_ReturnTrue()
         {
             game.OnPlayerWalkedOverBomb(game, new GameEventArgs(100, 0, 0, 0));
-            game.testx = 100;
-            game.testy = 100;
+            game.bombx = 100;
+            game.bomby = 100;
             Player.x = 200;
             Player.y = 100;
             game.Timer2_Tick(game, EventArgs.Empty);

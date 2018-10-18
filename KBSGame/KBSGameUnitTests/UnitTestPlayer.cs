@@ -27,7 +27,7 @@ namespace KBSGameUnitTests
         }
 
         [Test]
-        public void PlayerSpawnsAtStartPoint()
+        public void Eplayer_PlayerSpawnsAtStartPoint_ReturnEqual()
         {
             double x = Canvas.GetLeft(g.Player.Eplayer);
             double y = Canvas.GetTop(g.Player.Eplayer);
@@ -38,7 +38,7 @@ namespace KBSGameUnitTests
         }
 
         [Test]
-        public void PlayerMoves()
+        public void Move_PlayerMovesInEveryDirection_ReturnEqual()
         {
             double x = Canvas.GetLeft(player);
             double y = Canvas.GetTop(player);
@@ -74,7 +74,7 @@ namespace KBSGameUnitTests
         }
 
         [Test]
-        public void MoveTowardsBorder()
+        public void Move_MoveTowardsBorder_ReturnEqual()
         {
             g.Player.MoveLeft();
             double x = Canvas.GetLeft(player);
@@ -86,7 +86,7 @@ namespace KBSGameUnitTests
         }
 
         [Test]
-        public void MoveTowardsTree()
+        public void Move_MoveTowardsTree_ReturnEqual()
         {
             Obstakels.waardes.Add("1000t");
 
@@ -98,7 +98,7 @@ namespace KBSGameUnitTests
         }
 
         [Test]
-        public void PlayerCollectsCoin_CounterPlus1()
+        public void Move_PlayerCollectsCoinAndCounterPlus1_ReturnEqual()
         {
             Obstakels.waardes.Add("0100c");
 
@@ -110,7 +110,7 @@ namespace KBSGameUnitTests
         }
 
         [Test]
-        public void PlayerCollectsCoin_CantCollectSameCoinTwice()
+        public void Move_PlayerCollectsCoinAndCantCollectSameCoinTwice_ReturnEqual()
         {
             Obstakels.waardes.Add("0100c");
 
@@ -128,7 +128,7 @@ namespace KBSGameUnitTests
         }
 
         [Test]
-        public void EndPointAvailable()
+        public void Move_EndPointIsAvailableWhenPickUpFifthCoin_ReturnTrue()
         {
             Assert.IsFalse(g.EndPointIsShown);
 
