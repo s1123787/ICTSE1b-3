@@ -16,6 +16,7 @@ namespace KBSGame.GameObjects
         public List<Obstakel> obstakels = new List<Obstakel>();
         public static List<string> waardes = new List<string>();
         Canvas Canvas;
+        MovingObstacle mo;
 
         public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game, bool randomLevel = false)
         {
@@ -67,6 +68,7 @@ namespace KBSGame.GameObjects
             }
             else
             {
+
                 //add the amount of trees to canvas
                 for (int i = 0; i < aantalBoom; i++)
                 {
@@ -85,7 +87,7 @@ namespace KBSGame.GameObjects
                 //add the amount of moving obstacles to canvas
                 for (int i = 0; i < aantalMoving; i++)
                 {
-                    MovingObstacle mo = new MovingObstacle(game);
+                    mo = new MovingObstacle(game);
                     obstakels.Add(mo);
                     canvas.Children.Add(mo.image);
                     Thread.Sleep(25);
@@ -113,7 +115,16 @@ namespace KBSGame.GameObjects
                 Canvas.Children.Remove(obstakels[i].image);
             }
 
-            //remove all of the data in waardes so it is empty
+            foreach (Obstakel o in obstakels)
+            {
+                if(o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
+                {
+                    MovingObstacle mo = (MovingObstacle)o;
+                    mo.timer.Tick -= mo.MoveObstakelRandom;
+                }
+            }
+            //remove all of the data in waardes and obstakels so it is empty
+            obstakels.Clear();
             waardes.Clear();
         }
     }

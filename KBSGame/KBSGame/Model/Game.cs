@@ -279,6 +279,7 @@ namespace KBSGame
         {
             Player.Reset();
             obstakels.Reset();
+
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this, randomLevel);
             
             FreezePlayer = false;
@@ -307,19 +308,8 @@ namespace KBSGame
             }            
         }
 
-        public void Restart()
+       public void GameOver()
         {
-            Player.Reset();
-            obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this);
-            FreezePlayer = false;
-            gameOverOverlay = null;
-            timer.Tick -= Timer_Tick;
-            timer2.Tick -= Timer2_Tick;
-        }
-
-        public void GameOver()
-        {            
             FreezePlayer = true;
             GameLost = true;
             GameWon = false;
