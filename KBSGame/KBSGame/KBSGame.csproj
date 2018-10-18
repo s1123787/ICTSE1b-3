@@ -250,7 +250,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\game-won-sound-effect.wav" />
-    <Resource Include="Model\Level1.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\random-button.png" />
+    <Resource Include="Images\set-button.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
