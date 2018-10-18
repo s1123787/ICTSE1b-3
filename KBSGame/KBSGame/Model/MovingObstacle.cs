@@ -20,11 +20,10 @@ namespace KBSGame.Model
         private bool hits = false;
         public int OldX;
         public int OldY;
-        
-        //public MovingObstacle(Game game)
         public int x = -1;
         public int y = -1;
-        public DispatcherTimer MovingTimer = new DispatcherTimer();
+
+        public DispatcherTimer timer { get; set; }
 
         public MovingObstacle(Game game, bool debug = false, int StaticX = 0, int StaticY = 0)
         {
@@ -36,20 +35,23 @@ namespace KBSGame.Model
                 Height = 50
             };
 
-
-            if (!debug)
+            //Only for random map
+            if (debug == false)
             {
                 base.AssignPosition("m");
             }
-            else
+            else //For unittest & XML map
             {
                 base.AssignStaticPosition("m", StaticX, StaticY);
             }
 
+            timer = new DispatcherTimer();
+            timer.Interval = TimeSpan.FromSeconds(1);
+            timer.Tick += MoveObstakelRandom;
+            timer.Start();
 
-            MovingTimer.Interval = TimeSpan.FromSeconds(1);
-            MovingTimer.Tick += MoveObstakelRandom;
-            MovingTimer.Start();
+            image.Width = 50;
+            image.Height = 50;
 
             BitmapImage myBitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/moving-sprite.png"));
 
@@ -69,11 +71,10 @@ namespace KBSGame.Model
 
         public void MoveObstakelRandom(object sender, EventArgs e)
         {
+            //Moving obstakle can move
             if(game.GameLost == false && game.GameWon == false && game.playing == true)
             {
-                int x = 0;
-                int y = 0;
-
+                
                 //get current position x
                 x = (int)Canvas.GetLeft(image);
                 y = (int)Canvas.GetTop(image);
@@ -82,24 +83,28 @@ namespace KBSGame.Model
                 int rand = random.Next(0, 4);
                 switch (rand)
                 {
+                    //down
                     case 0:
                         if(CheckGridAvailability(x, y + MovingStepSize, x, y))
                         {
                             MoveObstakelDown();
                         }
                         break;
+                    //Right
                     case 1:
                         if (CheckGridAvailability(x + MovingStepSize, y, x, y))
                         {
                             MoveObstakelRight();
                         }
                         break;
+                    //Up
                     case 2:
                         if (CheckGridAvailability(x, y - MovingStepSize, x, y))
                         {
                             MoveObstakelUp();
                         }
                         break;
+                    //Left
                     case 3:
                         if (CheckGridAvailability(x - MovingStepSize, y, x, y))
                         {
@@ -109,6 +114,8 @@ namespace KBSGame.Model
                 }
             }
         }
+
+        #region MoveObstakel
 
         public void MoveObstakelRight()
         {
@@ -223,15 +230,15 @@ namespace KBSGame.Model
                 Canvas.SetTop(image, y -= MovingStepSize);
             }
         }
+        #endregion 
 
         public bool CheckGridAvailability(int x, int y, int currentX, int currentY)
         {
             string XYString = x.ToString() + y.ToString();
 
+            //set X & Y for Player
             int playerX = (int)Player.x - 5;
             int playerY = (int)Player.y - 5;
-
-
             //check if Player is on Moving obstakel
             if(playerX == currentX && playerY == currentY && hits == false)
             {

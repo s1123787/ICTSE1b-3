@@ -10,9 +10,6 @@ namespace KBSGame.Model
 {
     public class Tree : Obstakel
     {
-        //public int x { get; private set; }
-        //public int y { get; private set; }
-
         public Tree(int StaticX = -1, int StaticY = -1)
         { 
             image = new Image();
@@ -46,13 +43,14 @@ namespace KBSGame.Model
 
             if(StaticX != -1 && StaticY != -1)
             {
+                //assign the positon of tree
                 base.AssignStaticPosition("t", StaticX, StaticY);
             }
             else
             {
+                //assign the positon of tree
                 base.AssignPosition("t");
             }
-            //assign the positon of tree
         }
     }
 }

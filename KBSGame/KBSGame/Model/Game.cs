@@ -61,6 +61,7 @@ namespace KBSGame
         TextBlock pause = new TextBlock();
 
         public Image image, explosionImage;
+        public BitmapImage myBitmapImage = new BitmapImage();
 
         private int aantal = 0;
         private bool explosion = false, explosionIsGoingToTakePlace = false;
@@ -191,7 +192,6 @@ namespace KBSGame
                 explosionImage.Height = 150;
 
                 BitmapImage myBitmapImage = new BitmapImage();
-
                 myBitmapImage.BeginInit();
                 myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/explosion-sprite.png");
 
@@ -281,6 +281,7 @@ namespace KBSGame
         {
             Player.Reset();
             obstakels.Reset();
+
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this, randomLevel);
             
             FreezePlayer = false;
@@ -309,19 +310,8 @@ namespace KBSGame
             }            
         }
 
-        public void Restart()
+       public void GameOver()
         {
-            Player.Reset();
-            obstakels.Reset();
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this);
-            FreezePlayer = false;
-            gameOverOverlay = null;
-            timer.Tick -= Timer_Tick;
-            timer2.Tick -= Timer2_Tick;
-        }
-
-        public void GameOver()
-        {            
             FreezePlayer = true;
             GameLost = true;
             GameWon = false;
