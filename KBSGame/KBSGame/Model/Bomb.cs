@@ -26,7 +26,8 @@ namespace KBSGame.Model
             myBitmapImage.DecodePixelWidth = 50;
             myBitmapImage.EndInit();
 
-            if (StaticX != -1 && StaticY != -1)
+
+            if(StaticX != -1 && StaticY != -1)
             {
                 //assign the position where do bomb need to be placed on the screen
                 base.AssignStaticPosition("b", StaticX, StaticY);
@@ -38,7 +39,7 @@ namespace KBSGame.Model
             }
 
             image.Source = myBitmapImage;
-            
+
         }
     }
 }

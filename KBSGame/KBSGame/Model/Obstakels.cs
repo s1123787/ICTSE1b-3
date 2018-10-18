@@ -80,7 +80,6 @@ namespace KBSGame.GameObjects
                 {
                     Bomb b = new Bomb();
                     obstakels.Add(b);
-                    //canvas.Children.Add(b.image);
                     Thread.Sleep(25);
                 }
                 //add the amount of moving obstacles to canvas
@@ -112,7 +111,7 @@ namespace KBSGame.GameObjects
                 //remove obstacles from canvas
                 Canvas.Children.Remove(obstakels[i].image);
             }
-            
+
             //remove all of the data in waardes so it is empty
             waardes.Clear();
         }
