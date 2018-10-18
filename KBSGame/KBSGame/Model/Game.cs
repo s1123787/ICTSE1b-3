@@ -322,6 +322,7 @@ namespace KBSGame
         {            
             FreezePlayer = true;
             GameLost = true;
+            GameWon = false;
             gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
             playing = false;
             GameTimer.countdownTimer.Stop();
