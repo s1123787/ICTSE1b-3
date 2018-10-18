@@ -115,6 +115,7 @@ namespace KBSGame.GameObjects
                 Canvas.Children.Remove(obstakels[i].image);
             }
 
+            //remove eventhandler from ghosts
             foreach (Obstakel o in obstakels)
             {
                 if(o.GetType().ToString() == "KBSGame.Model.MovingObstacle")

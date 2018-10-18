@@ -61,6 +61,7 @@ namespace KBSGame
         TextBlock pause = new TextBlock();
 
         public Image image, explosionImage;
+        public BitmapImage myBitmapImage = new BitmapImage();
 
         private int aantal = 0;
         private bool explosion = false, explosionIsGoingToTakePlace = false;

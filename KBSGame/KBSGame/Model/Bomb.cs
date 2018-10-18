@@ -11,6 +11,8 @@ namespace KBSGame.Model
     //bomb is a generalisation of Obstacle
     class Bomb : Obstakel
     {
+        public BitmapImage bitmapImage = new BitmapImage();
+
         public Bomb(int StaticX = 0, int StaticY = 0)
         {
             //image is a attribute of obstacle
