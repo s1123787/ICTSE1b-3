@@ -229,7 +229,7 @@ namespace KBSGame
         public void Timer2_Tick(object sender, EventArgs e)
         {
             //check if second is over
-            if (aantal < 100)
+            if (aantal < 25)
             {
                 aantal++;              
                 if ((Player.x == bombx || Player.x == bombx + 50 || Player.x == bombx - 50) && (Player.y == bomby || Player.y == bomby + 50 || Player.y == bomby - 50) && GameLost == false && GameWon == false)
@@ -237,7 +237,7 @@ namespace KBSGame
                     GameOver();
                     timer2.Tick -= Timer2_Tick;
                 }
-            } else if (aantal >= 100) //second is over and player isn't hit by explosion so it can move on and explosion will be deleted
+            } else if (aantal >= 25) //second is over and player isn't hit by explosion so it can move on and explosion will be deleted
             {
                 ExplosionEnded();
             }
