@@ -52,7 +52,6 @@ namespace KBSGame.GameObjects
                         case "Moving": //add the amount of moving obstacles to canvas
                             MovingObstacle mo = new MovingObstacle(game, true, obs.ObstakelX, obs.ObstakelY);
                             obstakels.Add(mo);
-
                             canvas.Children.Add(mo.image);
                             Thread.Sleep(25);
                             break;
