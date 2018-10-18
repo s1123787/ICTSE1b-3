@@ -88,13 +88,11 @@ namespace KBSGame
                     return;
                 }
             }
-            else
+            else //move player
             {
-                //move player
                 Canvas.SetLeft(player, x += StepSize);
             }
-            //check if endpoint is reached
-            if (CheckEndPoint())
+            if (CheckEndPoint()) //check if endpoint is reached
             {
                 OnEndPointReached();
                 return;
@@ -132,13 +130,11 @@ namespace KBSGame
                     return;
                 }
             }
-            else
+            else //set new position
             {
-                //set new position 
-                Canvas.SetLeft(player, x -= StepSize);
+                 Canvas.SetLeft(player, x -= StepSize);
             }
-            //check if endpoint is reached
-            if (CheckEndPoint())
+            if (CheckEndPoint()) //check if endpoint is reached
             {
                 OnEndPointReached();
                 return;
@@ -175,13 +171,11 @@ namespace KBSGame
                     return;
                 }
             }
-            else
+            else //move player
             {
-                //move player
                 Canvas.SetTop(player, y += StepSize);
             }
-            //check if endpoint is reached
-            if (CheckEndPoint())
+            if (CheckEndPoint()) //check if endpoint is reached
             {
                 OnEndPointReached();
                 return;
@@ -218,13 +212,11 @@ namespace KBSGame
                     return;
                 }
             }
-            else
-            //move player
-            {
+            else //move player
+           {
                 Canvas.SetTop(player, y -= StepSize);
             }
-            //check if endpoint is reached
-            if (CheckEndPoint())
+            if (CheckEndPoint()) //check if endpoint is reached
             {
                 OnEndPointReached();
                 return;
