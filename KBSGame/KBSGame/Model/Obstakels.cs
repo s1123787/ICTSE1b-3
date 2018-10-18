@@ -68,7 +68,6 @@ namespace KBSGame.GameObjects
             }
             else
             {
-
                 //add the amount of trees to canvas
                 for (int i = 0; i < aantalBoom; i++)
                 {

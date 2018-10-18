@@ -13,7 +13,7 @@ namespace KBSGame.Model
     {
         public BitmapImage bitmapImage = new BitmapImage();
 
-        public Bomb(int StaticX = 0, int StaticY = 0)
+        public Bomb(int StaticX = -1, int StaticY = -1)
         {
             //image is a attribute of obstacle
             image = new Image();
