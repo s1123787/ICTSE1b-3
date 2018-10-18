@@ -13,11 +13,12 @@ namespace KBSGame.Model
         //public int x { get; private set; }
         //public int y { get; private set; }
 
-        public Tree()
-        {
+        public Tree(int StaticX = -1, int StaticY = -1)
+        { 
             image = new Image();
             image.Width = 50;
             image.Height = 50;
+            //to make sure that the player can't be under the three
             Canvas.SetZIndex(image, 2);
 
             BitmapImage bitmapImage = new BitmapImage();
@@ -43,7 +44,15 @@ namespace KBSGame.Model
 
             image.Source = bitmapImage;
 
-            base.AssignPosition("t");
+            if(StaticX != -1 && StaticY != -1)
+            {
+                base.AssignStaticPosition("t", StaticX, StaticY);
+            }
+            else
+            {
+                base.AssignPosition("t");
+            }
+            //assign the positon of tree
         }
     }
 }

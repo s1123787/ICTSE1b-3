@@ -10,7 +10,7 @@ namespace KBSGame.Model
 {
     class Coin : Obstakel
     {
-        public Coin()
+        public Coin(int StaticX = -1, int StaticY = -1)
         {
             image = new Image
             {
@@ -21,7 +21,15 @@ namespace KBSGame.Model
             BitmapImage bitmapImage = new BitmapImage(new Uri("pack://application:,,,/Images/coin.png"));
 
             image.Source = bitmapImage;
-            base.AssignPosition("c");
+
+            if (StaticX != -1 && StaticY != -1)
+            {
+                base.AssignStaticPosition("c", StaticX, StaticY);
+            }
+            else
+            {
+                base.AssignPosition("c");
+            }
         }
     }
 }
