@@ -13,12 +13,9 @@ namespace KBSGame.Model
     public class XMLItem
     {
         
+        //List filled with Obstakels from XML
         public List<XMLObstakel> XMLItems { get; set; }
-        //public Object[] Obstakel { get; set; }
 
-        public XMLItem()
-        {
-
-        }
+        public XMLItem(){}
     }
 }

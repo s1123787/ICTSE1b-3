@@ -191,6 +191,7 @@ namespace KBSGame
                 explosionImage.Width = 150;
                 explosionImage.Height = 150;
 
+                BitmapImage myBitmapImage = new BitmapImage();
                 myBitmapImage.BeginInit();
                 myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/explosion-sprite.png");
 
