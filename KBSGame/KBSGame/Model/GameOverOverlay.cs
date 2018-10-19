@@ -23,7 +23,7 @@ namespace KBSGame.Model
         public delegate void AgainIsPressed(object source, EventArgs e);
         public event AgainIsPressed againIsPressed;
 
-        public GameOverOverlay(Game g)
+        public GameOverOverlay()
         {
             //Create new image for sprite
             GameOverSprite = new Image
