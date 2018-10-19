@@ -37,13 +37,13 @@ namespace KBSGameUnitTests
             // Act
             bool test = false;
 
-            //hier beweeg je de speler 4 keer zodat het op het obstakel komt, waardoor de event wordt aangeroepen
+            //Move the player 4 times to hit obstacle
             game.Player.MoveRight();
             game.Player.MoveRight();
             game.Player.MoveRight();
             game.Player.MoveRight();
 
-            //hier voeg je een moving obstakel toe op positie x=100 en y = 0
+            //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle(game);
             moving.SetX(100);
             moving.SetY(0);
@@ -69,7 +69,7 @@ namespace KBSGameUnitTests
         {
             bool test = false;
 
-            //hier voeg je een moving obstakel toe op positie x=100 en y = 0
+            //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle(game, true);
             moving.SetX(100);
             moving.SetY(0);
@@ -93,7 +93,7 @@ namespace KBSGameUnitTests
         {
             bool test = false;
 
-            //hier voeg je een moving obstakel toe op positie x=100 en y = 0
+            //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle(game, true);
             moving.SetX(100);
             moving.SetY(0);
@@ -116,7 +116,7 @@ namespace KBSGameUnitTests
         {
             bool test = false;
 
-            //hier voeg je een moving obstakel toe op positie x=100 en y = 0
+            //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle(game, true);
             moving.SetX(100);
             moving.SetY(100);
@@ -138,7 +138,7 @@ namespace KBSGameUnitTests
         {
             bool test = false;
 
-            //hier voeg je een moving obstakel toe op positie x=100 en y = 0
+            //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle(game, true);
             moving.SetX(100);
             moving.SetY(100);
