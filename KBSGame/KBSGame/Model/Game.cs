@@ -78,21 +78,20 @@ namespace KBSGame
             this.aantalBom = aantalBom;
             this.aantalMoving = aantalMoving;
             this.aantalCoin = aantalCoin;
-
             Seconde = s;
             randomLevel = rl;
+
             playing = true;
-            
             StartPoint = new StartPoint();
             AddStartPoint(StartPoint, GameCanvas);
 
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this, randomLevel);
 
             Player = new Player(canvas, this);
-            Player.walkedOverBomb += OnPlayerWalkedOverBomb; 
-            Player.collectCoin += OnPlayerCollectCoin; 
-            GameTimer = new Model.Timer(Seconde, this); 
-            GameTimer.tijdIsOp += OnPlayerTijdIsOp; 
+            Player.walkedOverBomb += OnPlayerWalkedOverBomb; //hier subscribed de methode OnPlayerWalkedOverBomb op de event walkedOverBomb 
+            Player.collectCoin += OnPlayerCollectCoin;
+            GameTimer = new Model.Timer(Seconde, this); //hier wordt de timer aangemaakt die de meegegeven seconden gebruikt            
+            GameTimer.timeIsUp += OnPlayerTimeIsUp; //hier subscribe je op de event van timer
             mw.escKeyIsPressed += OnEscKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
             activeEndPoint += OnActivateEndpoint;
@@ -252,7 +251,7 @@ namespace KBSGame
             }
         }
 
-        public void OnPlayerTijdIsOp(object source, EventArgs e)
+        public void OnPlayerTimeIsUp(object source, EventArgs e)
         {
             GameOver();          
         }
