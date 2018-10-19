@@ -21,6 +21,7 @@ namespace KBSGame.View
     public partial class MainMenu : Window
     {
         private bool randomLevel = true;
+        public MainWindow mainWindow; 
 
         public MainMenu()
         {
@@ -32,7 +33,8 @@ namespace KBSGame.View
 
             //Opens a new window and starts the game
             Obstakels.waardes.Clear();
-            MainWindow mainWindow = new MainWindow(randomLevel);
+            Obstakels.obstakels.Clear();
+            mainWindow = new MainWindow(randomLevel);
             mainWindow.Show();
             this.Close();
         }

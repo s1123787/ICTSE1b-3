@@ -20,26 +20,25 @@ namespace KBSGame
         public delegate void CollectCoin(object source, GameEventArgs e);
         public delegate void WalkedOverBomb(object source, GameEventArgs e);
         public delegate void EndPointReached(object source, EventArgs e);
+        public delegate void WalkedOnMovingObstacle(object source, EventArgs e);
+
         public event EndPointReached endPointReached;
         public event WalkedOverBomb walkedOverBomb;
         public event CollectCoin collectCoin;
+        public event WalkedOnMovingObstacle walkedOnMovingObstacle;
         //private Ellipse player = new Ellipse();
-        private Image player;
+        public Image player;
         public static double x = 5;
         public static double y = 5;
         private int StepSize = 50;
-        private Canvas gameCanvas;
-        private Game game;
         private bool hits = false;
 
         //only for testing
         public Ellipse Eplayer { get; set; }
 
 
-        public Player(Canvas GameCanvas, Game game)
+        public Player()
         {
-            gameCanvas = GameCanvas;
-            this.game = game;
             player = new Image
             {
                 Width = 40,
@@ -52,7 +51,6 @@ namespace KBSGame
             Canvas.SetLeft(player, 5);
             Canvas.SetTop(player, 5);
             Canvas.SetZIndex(player, 1);
-            gameCanvas.Children.Add(player);
 
            }
 
@@ -78,12 +76,12 @@ namespace KBSGame
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}m") && game.GameLost == false) //contains moving obstakel
+            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}m") && Game.GameLost == false) //contains moving obstakel
             {
                 if(hits == false)
                 {
                     hits = true;
-                    game.GameOver();
+                    OnWalkedOnMovingObstacle();
                     Canvas.SetLeft(player, x += (StepSize));
                     return;
                 }
@@ -120,12 +118,12 @@ namespace KBSGame
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 55}{y - 5}m") && game.GameLost == false) //contains moving obstakel
+            else if (Obstakels.waardes.Contains($"{x - 55}{y - 5}m") && Game.GameLost == false) //contains moving obstakel
             {
                 if (hits == false)
                 {
                     hits = true;
-                    game.GameOver();
+                    OnWalkedOnMovingObstacle();
                     Canvas.SetLeft(player, x -= (StepSize));
                     return;
                 }
@@ -161,12 +159,12 @@ namespace KBSGame
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y + 45}m") && game.GameLost == false) //contains moving obstakel
+            else if (Obstakels.waardes.Contains($"{x - 5}{y + 45}m") && Game.GameLost == false) //contains moving obstakel
             {
                 if (hits == false)
                 {
                     hits = true;
-                    game.GameOver();
+                    OnWalkedOnMovingObstacle();
                     Canvas.SetTop(player, y += (StepSize));
                     return;
                 }
@@ -202,12 +200,12 @@ namespace KBSGame
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}m") && game.GameLost == false) //contains moving obstakel
+            else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}m") && Game.GameLost == false) //contains moving obstakel
             {
                 if (hits == false)
                 {
                     hits = true;
-                    game.GameOver();
+                    OnWalkedOnMovingObstacle();
                     Canvas.SetTop(player, y -= (StepSize));
                     return;
                 }
@@ -239,6 +237,11 @@ namespace KBSGame
         protected virtual void OnEndPointReached()
         {
             endPointReached?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnWalkedOnMovingObstacle()
+        {
+            walkedOnMovingObstacle?.Invoke(this, EventArgs.Empty);
         }
 
         public Boolean CheckEndPoint()

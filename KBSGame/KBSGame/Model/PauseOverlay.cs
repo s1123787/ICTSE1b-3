@@ -16,11 +16,16 @@ namespace KBSGame.Model
 {
     public class PauseOverlay : Overlay
     {
+        public delegate void ResumeIsPressed(object source, EventArgs e);
+        public event ResumeIsPressed resumeIsPressed;
+        public delegate void RestartIspressed(object source, EventArgs e);
+        public event RestartIspressed restartIsPressed;
+
         public Image pauseSprite;
         public Button restart, resume;
         public int pauseSpriteX, pauseSpriteY, resumeX, resumeY, restartX, restartY, menuX, menuY;
 
-        public PauseOverlay(Game g) : base(g)
+        public PauseOverlay()
         {
             //Create new image for sprite
             pauseSprite = new Image
@@ -78,19 +83,33 @@ namespace KBSGame.Model
         //Actions to perform when restart button is clicked
         private void Restart_Click(object sender, RoutedEventArgs e)
         {
+            OnRestartIsPressed();
             //Method to reset the game
-            game.PlayAgain();
+            //game.PlayAgain();
             //Clean up victory overlay
-            game.RemovePauseOverlay(this, game.GameCanvas);
+            //game.RemovePauseOverlay(this, game.GameCanvas);
         }
 
         //Actions to perform when resume button is clicked
         private void Resume_Click(object sender, RoutedEventArgs e)
         {
-            game.playing = true;
+            OnResumeIsPressed();
+
+            /* 
+            Game.playing = true;
             game.GameTimer.Resume();
             game.FreezePlayer = false;
-            game.RemovePauseOverlay(this, game.GameCanvas);
+            game.RemovePauseOverlay(this, game.GameCanvas); */
+        }
+
+        protected virtual void OnResumeIsPressed()
+        {
+            resumeIsPressed?.Invoke(this, EventArgs.Empty);
+        }
+
+        protected virtual void OnRestartIsPressed()
+        {
+            restartIsPressed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

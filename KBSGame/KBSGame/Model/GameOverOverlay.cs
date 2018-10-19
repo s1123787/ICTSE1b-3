@@ -20,8 +20,10 @@ namespace KBSGame.Model
         public Image GameOverSprite;
         public Button again;
         public int GameOverSpriteX, GameOverSpriteY, againX, againY, menuX, menuY;
+        public delegate void AgainIsPressed(object source, EventArgs e);
+        public event AgainIsPressed againIsPressed;
 
-        public GameOverOverlay(Game g) : base(g)
+        public GameOverOverlay()
         {
             //Create new image for sprite
             GameOverSprite = new Image
@@ -62,10 +64,16 @@ namespace KBSGame.Model
         //Actions to perform when play again button is clicked
         private void Again_Click(object sender, RoutedEventArgs e)
         {
+            OnAgainIsPressed();
             //Method to reset the game
-            game.PlayAgain();
+            //game.PlayAgain();
             //Clean up game over overlay
-            game.RemoveGameOverOverlay(this, game.GameCanvas);
+            //game.RemoveGameOverOverlay(this, game.GameCanvas);
+        }
+
+        protected virtual void OnAgainIsPressed()
+        {
+            againIsPressed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

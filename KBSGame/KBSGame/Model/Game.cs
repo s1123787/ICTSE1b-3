@@ -34,6 +34,7 @@ namespace KBSGame
         public Obstakels obstakels { get; set; }
         public MainWindow mainWindow { get; set; }
         public Canvas GameCanvas { get; private set; }
+        public MovingObstacle mo { get; set; }
         public Boolean FreezePlayer { get; set; }
         private int aantalBoom;
         private int aantalBom;
@@ -44,9 +45,11 @@ namespace KBSGame
 
         GameOverOverlay gameOverOverlay;
 
-        public bool GameWon;
-        public bool GameLost;
-        public bool playing;
+        GameWonOverlay gameWonOverlay;
+
+        public static bool GameWon;
+        public static bool GameLost;
+        public static bool playing;
         public bool EndPointIsShown = false;
         private bool randomLevel;
         
@@ -85,16 +88,30 @@ namespace KBSGame
             StartPoint = new StartPoint();
             AddStartPoint(StartPoint, GameCanvas);
 
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this, randomLevel);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, randomLevel);
+            PlaceAllObstacles();
 
-            Player = new Player(canvas, this);
-            Player.walkedOverBomb += OnPlayerWalkedOverBomb; //hier subscribed de methode OnPlayerWalkedOverBomb op de event walkedOverBomb 
+            Player = new Player();
+            AddPlayer();
+            Player.walkedOverBomb += OnPlayerWalkedOverBomb; 
             Player.collectCoin += OnPlayerCollectCoin;
-            GameTimer = new Model.Timer(Seconde, this); //hier wordt de timer aangemaakt die de meegegeven seconden gebruikt            
-            GameTimer.timeIsUp += OnPlayerTimeIsUp; //hier subscribe je op de event van timer
+            Player.walkedOnMovingObstacle += OnDeadByMovingObstacle;
+            GameTimer = new Model.Timer(Seconde, this); 
+            GameTimer.tijdIsOp += OnPlayerTijdIsOp; 
+
+           
             mw.escKeyIsPressed += OnEscKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
             activeEndPoint += OnActivateEndpoint;
+            foreach (Obstakel o in Obstakels.obstakels)
+            {
+                if (o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
+                {
+                    MovingObstacle mo = (MovingObstacle)o;
+                    mo.deadByMovingObstacle += OnDeadByMovingObstacle;
+                }
+            }
+            
             CollectedCoins = 0;
         }
 
@@ -267,6 +284,9 @@ namespace KBSGame
             if (playing)
             {
                 pauseOverlay = new PauseOverlay(this);
+                pauseOverlay.resumeIsPressed += OnPressedOnResume;
+                pauseOverlay.restartIsPressed += OnPressedOnRestart;
+                pauseOverlay.pressedOnMenu += OnPressedOnMenu;
                 AddPauseOverlay(pauseOverlay, GameCanvas);
                 GameTimer.Pause();
                 FreezePlayer = true;
@@ -290,9 +310,18 @@ namespace KBSGame
         {
             // reset player and obstakels
             Player.Reset();
-            obstakels.Reset();
+            ResetAllObstacles();
             //create new obastakels
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this, randomLevel);
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, randomLevel);
+            PlaceAllObstacles();
+            foreach (Obstakel o in Obstakels.obstakels)
+            {
+                if (o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
+                {
+                    MovingObstacle mo = (MovingObstacle)o;
+                    mo.deadByMovingObstacle += OnDeadByMovingObstacle;
+                }
+            }
             //allow player to move again, restart timer
             FreezePlayer = false;
             GameTimer.Restart();
@@ -326,6 +355,8 @@ namespace KBSGame
             GameLost = true;
             GameWon = false;
             gameOverOverlay = new GameOverOverlay(this);
+            gameOverOverlay.againIsPressed += OnPressedOnRestart;
+            gameOverOverlay.pressedOnMenu += OnPressedOnMenu;
             AddGameOverOverlay(gameOverOverlay, GameCanvas);
             playing = false;
             GameTimer.countdownTimer.Stop();
@@ -341,7 +372,9 @@ namespace KBSGame
             FreezePlayer = true;
             GameLost = false;
             GameWon = true;
-            GameWonOverlay gameWonOverlay = new GameWonOverlay(this);
+            gameWonOverlay = new GameWonOverlay(this);
+            gameWonOverlay.againIsPressed += OnPressedOnRestart;
+            gameWonOverlay.pressedOnMenu += OnPressedOnMenu;
             AddGameWonOverlay(gameWonOverlay, GameCanvas);
             playing = false;
             GameTimer.Pause();
@@ -381,6 +414,11 @@ namespace KBSGame
             c.Children.Add(e.sprite);
         }
 
+        public void AddPlayer()
+        {
+            GameCanvas.Children.Add(Player.player);
+        }
+
         //Method to remove the endpoint form the screen
         public void RemoveEndPoint(EndPoint e, Canvas c)
         {
@@ -390,15 +428,39 @@ namespace KBSGame
         }
 
         //Method to open a main menu
-        public void ToMainMenu()
+        public void OnPressedOnMenu(object source, EventArgs e)
         {
             //Create new menu
             MainMenu mm = new MainMenu();
             //Opens the main menu
             mm.Show();
             //Close the game window
-            mainWindow.Close();
+            mainWindow.Close();            
+        }  
+        
+        public void OnPressedOnResume(object source, EventArgs e)
+        {
+            Game.playing = true;
+            GameTimer.Resume();
+            FreezePlayer = false;
+            RemovePauseOverlay(pauseOverlay, GameCanvas);
         }
+
+        public void OnPressedOnRestart(object source, EventArgs e)
+        {
+            PlayAgain();
+            if (pauseOverlay != null)
+            {
+                RemovePauseOverlay(pauseOverlay, GameCanvas);
+            } else if (gameOverOverlay != null)
+            {
+                RemoveGameOverOverlay(gameOverOverlay, GameCanvas);
+            } else
+            {
+                RemoveGameWonOverlay(gameWonOverlay, GameCanvas);
+            }
+        }
+        
 
         //Method to add pause overlay to the screen
         public void AddPauseOverlay(PauseOverlay o, Canvas c)
@@ -539,6 +601,47 @@ namespace KBSGame
         public void SetTimerText(string value)
         {
             mainWindow.TimerLabel.Text = value;
+        }
+
+        public void PlaceAllObstacles()
+        {
+            foreach (Obstakel o in Obstakels.obstakels)
+            {
+                GameCanvas.Children.Add(o.image);                
+            }
+        }
+
+        public void ResetAllObstacles()
+        {
+            for (int i = 0; i < Obstakels.obstakels.Count; i++)
+            {
+                //remove obstacles from canvas
+                GameCanvas.Children.Remove(Obstakels.obstakels[i].image);
+            }
+
+            //remove eventhandler from ghosts
+            foreach (Obstakel o in Obstakels.obstakels)
+            {
+                if (o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
+                {
+                    MovingObstacle mo = (MovingObstacle)o;
+                    mo.timer.Tick -= mo.MoveObstakelRandom;
+                    mo.deadByMovingObstacle -= OnDeadByMovingObstacle;
+                }
+            }
+            //remove all of the data in waardes and obstakels so it is empty
+            Obstakels.obstakels.Clear();
+            Obstakels.waardes.Clear();
+        }
+
+        public void OnDeadByMovingObstacle(object source, EventArgs e)
+        {
+            GameOver();
+        }
+
+        public void OnWalkedOnMovingObstacle(object source, EventArgs e)
+        {
+            GameOver();
         }
     }
 }
