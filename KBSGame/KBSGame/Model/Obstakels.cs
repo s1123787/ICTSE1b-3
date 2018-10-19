@@ -43,7 +43,7 @@ namespace KBSGame.GameObjects
                             //canvas.Children.Add(t.image);
                             Thread.Sleep(25);
                             break;
-                        case "Bomb": //generate amount of bombs but don't put it on the screen because it is a land mine
+                        case "Bomb": //generate amount of bombs but don't put them on the screen because it is a land mine
                             Bomb b = new Bomb(obs.ObstakelX, obs.ObstakelY);
                             obstakels.Add(b);
                             Thread.Sleep(25);
@@ -99,28 +99,6 @@ namespace KBSGame.GameObjects
             }
 
         }
-
-        //reset all the obstacles that are placed on canvas
-        /*  void Reset()
-        {
-            for (int i = 0; i < obstakels.Count; i++)
-            {
-                //remove obstacles from canvas
-                Canvas.Children.Remove(obstakels[i].image);
-            }
-
-            //remove eventhandler from ghosts
-            foreach (Obstakel o in obstakels)
-            {
-                if(o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
-                {
-                    MovingObstacle mo = (MovingObstacle)o;
-                    mo.timer.Tick -= mo.MoveObstakelRandom;
-                }
-            }
-            //remove all of the data in waardes and obstakels so it is empty
-            obstakels.Clear();
-            waardes.Clear();
-        } */
+        
     }
 }

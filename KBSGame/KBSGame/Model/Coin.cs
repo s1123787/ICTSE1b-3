@@ -8,10 +8,12 @@ using System.Windows.Controls;
 
 namespace KBSGame.Model
 {
+    //coin is a generalisation of Obstacle
     class Coin : Obstakel
     {
         public Coin(int StaticX = -1, int StaticY = -1)
         {
+            //image is an attribute of obstacle
             image = new Image
             {
                 Width = 50,
