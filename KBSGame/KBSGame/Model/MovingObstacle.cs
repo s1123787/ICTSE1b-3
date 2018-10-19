@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using System.Threading;
 
 namespace KBSGame.Model
 {
@@ -22,6 +23,8 @@ namespace KBSGame.Model
         public int OldY;
         public int x = -1;
         public int y = -1;
+        Random random = new Random();
+
 
         public DispatcherTimer timer { get; set; }
 
@@ -79,7 +82,6 @@ namespace KBSGame.Model
                 x = (int)Canvas.GetLeft(image);
                 y = (int)Canvas.GetTop(image);
 
-                Random random = new Random();
                 int rand = random.Next(0, 4);
                 switch (rand)
                 {
@@ -112,6 +114,7 @@ namespace KBSGame.Model
                         }
                         break;
                 }
+                Thread.Sleep(25);
             }
         }
 
