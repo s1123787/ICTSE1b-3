@@ -1,5 +1,6 @@
 ﻿using KBSGame.GameObjects;
 using KBSGame.Model;
+using KBSGame.View;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,28 +66,32 @@ namespace KBSGame
         public BitmapImage myBitmapImage = new BitmapImage();
 
         private int aantal = 0;
-        private bool explosion = false, explosionIsGoingToTakePlace = false;
-        #endregion
+        public bool explosion = false, explosionIsGoingToTakePlace = false;
+       #endregion
+
 
         public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s, bool rl)
         {
-            randomLevel = rl;
-            playing = true;
-            Seconde = s;
-            StartPoint = new StartPoint(canvas);
-            
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this, randomLevel);
-
-            Player = new Player(canvas, this);
             mainWindow = mw;
             GameCanvas = canvas;
             this.aantalBoom = aantalBoom;
             this.aantalBom = aantalBom;
             this.aantalMoving = aantalMoving;
             this.aantalCoin = aantalCoin;
+
+            Seconde = s;
+            randomLevel = rl;
+            playing = true;
+            
+            StartPoint = new StartPoint();
+            AddStartPoint(StartPoint, GameCanvas);
+
+            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this, randomLevel);
+
+            Player = new Player(canvas, this);
             Player.walkedOverBomb += OnPlayerWalkedOverBomb; 
             Player.collectCoin += OnPlayerCollectCoin; 
-            GameTimer = new Model.Timer(Seconde, this, mw); 
+            GameTimer = new Model.Timer(Seconde, this); 
             GameTimer.tijdIsOp += OnPlayerTijdIsOp; 
             mw.escKeyIsPressed += OnEscKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
@@ -125,7 +130,8 @@ namespace KBSGame
 
         public void OnActivateEndpoint(object source, EventArgs e)
         {
-            EndPoint = new EndPoint(GameCanvas);
+            EndPoint = new EndPoint();
+            AddEndPoint(EndPoint, GameCanvas);
             EndPointIsShown = true;
             Player.endPointReached += OnEndPointReached;
         }
@@ -261,7 +267,8 @@ namespace KBSGame
             //Check if the game is active
             if (playing)
             {
-                pauseOverlay = new PauseOverlay(mainWindow, GameCanvas, this);
+                pauseOverlay = new PauseOverlay(this);
+                AddPauseOverlay(pauseOverlay, GameCanvas);
                 GameTimer.Pause();
                 FreezePlayer = true;
                 playing = false;
@@ -274,7 +281,7 @@ namespace KBSGame
             //Check if the game is not active and the pause screen is activated
             if (!playing && pauseActivated == true) {
                 playing = true;
-                pauseOverlay.continueGame();
+                RemovePauseOverlay(pauseOverlay, GameCanvas);
                 GameTimer.Resume();
                 FreezePlayer = false;
             }
@@ -306,8 +313,8 @@ namespace KBSGame
 
             //disable endpoint             
             if (EndPointIsShown)
-            {                
-                EndPoint.Delete(GameCanvas);
+            {
+                RemoveEndPoint(EndPoint, GameCanvas);
                 EndPoint = null;
                 Player.endPointReached -= OnEndPointReached;
                 EndPointIsShown = false;
@@ -319,7 +326,8 @@ namespace KBSGame
             FreezePlayer = true;
             GameLost = true;
             GameWon = false;
-            gameOverOverlay = new GameOverOverlay(mainWindow, GameCanvas, this);
+            gameOverOverlay = new GameOverOverlay(this);
+            AddGameOverOverlay(gameOverOverlay, GameCanvas);
             playing = false;
             GameTimer.countdownTimer.Stop();
             //check if explosion will take place so it can be deleted and not shown on screen
@@ -334,7 +342,8 @@ namespace KBSGame
             FreezePlayer = true;
             GameLost = false;
             GameWon = true;
-            GameWonOverlay gameWonOverlay = new GameWonOverlay(mainWindow, GameCanvas, this);
+            GameWonOverlay gameWonOverlay = new GameWonOverlay(this);
+            AddGameWonOverlay(gameWonOverlay, GameCanvas);
             playing = false;
             GameTimer.Pause();
         }
@@ -350,6 +359,187 @@ namespace KBSGame
             aantal = 0; //set the amount to check if second is over to zero
             timer.Tick -= Timer_Tick; //delete the subscriber
             explosionIsGoingToTakePlace = false;
+        }
+
+        //Method to add startpoint to screen
+        public void AddStartPoint(StartPoint s, Canvas c)
+        {
+            //Add everything to the screen
+            Canvas.SetTop(s.rect, s.Y);
+            Canvas.SetLeft(s.rect, s.X);
+            c.Children.Add(s.rect);
+        }
+
+        //Method to add the endpoint to the screen
+        public void AddEndPoint(EndPoint e, Canvas c)
+        {
+            //Add everything to the screen
+            Canvas.SetTop(e.rect, e.Y);
+            Canvas.SetLeft(e.rect, e.X);
+            c.Children.Add(e.rect);
+            Canvas.SetTop(e.sprite, e.Y);
+            Canvas.SetLeft(e.sprite, e.X);
+            c.Children.Add(e.sprite);
+        }
+
+        //Method to remove the endpoint form the screen
+        public void RemoveEndPoint(EndPoint e, Canvas c)
+        {
+            //Remove endpoint objects from the screen
+            c.Children.Remove(e.rect);
+            c.Children.Remove(e.sprite);
+        }
+
+        //Method to open a main menu
+        public void ToMainMenu()
+        {
+            //Create new menu
+            MainMenu mm = new MainMenu();
+            //Opens the main menu
+            mm.Show();
+            //Close the game window
+            mainWindow.Close();
+        }
+
+        //Method to add pause overlay to the screen
+        public void AddPauseOverlay(PauseOverlay o, Canvas c)
+        {
+            //Add everything to the screen
+            Canvas.SetTop(o.background, o.backgroundY);
+            Canvas.SetLeft(o.background, o.backgroundX);
+            c.Children.Add(o.background);
+            Panel.SetZIndex(o.background, 99);
+            Canvas.SetTop(o.pauseSprite, o.pauseSpriteY);
+            Canvas.SetLeft(o.pauseSprite, o.pauseSpriteX);
+            c.Children.Add(o.pauseSprite);
+            Panel.SetZIndex(o.pauseSprite, 99);
+            Canvas.SetTop(o.resume, o.resumeY);
+            Canvas.SetLeft(o.resume, o.resumeX);
+            c.Children.Add(o.resume);
+            Panel.SetZIndex(o.resume, 99);
+            Canvas.SetTop(o.restart, o.restartY);
+            Canvas.SetLeft(o.restart, o.restartX);
+            c.Children.Add(o.restart);
+            Panel.SetZIndex(o.restart, 99);
+            Canvas.SetTop(o.menu, o.menuY);
+            Canvas.SetLeft(o.menu, o.menuX);
+            c.Children.Add(o.menu);
+            Panel.SetZIndex(o.menu, 99);
+        }
+
+        //Method to remove the pause overlay
+        public void RemovePauseOverlay(PauseOverlay o, Canvas c)
+        {
+            //Remove endpoint objects from the screen
+            c.Children.Remove(o.background);
+            c.Children.Remove(o.pauseSprite);
+            c.Children.Remove(o.resume);
+            c.Children.Remove(o.restart);
+            c.Children.Remove(o.menu);
+        }
+
+        //Method to add game over overlay
+        public void AddGameOverOverlay(GameOverOverlay o, Canvas c)
+        {
+            //Create audio player to play sound effect on game over
+            SoundPlayer audio = new SoundPlayer(Properties.Resources.game_over_sound_effect);
+            audio.Play();
+
+            //create background worker to sync audio playback with overlay
+            var backgroundWorker = new BackgroundWorker();
+
+            backgroundWorker.DoWork += (s, e) =>
+            {
+                Thread.Sleep(150);
+            };
+
+            backgroundWorker.RunWorkerCompleted += (s, e) =>
+            {
+                //Add everything to the screen
+                Canvas.SetTop(o.background, o.backgroundY);
+                Canvas.SetLeft(o.background, o.backgroundX);
+                c.Children.Add(o.background);
+                Panel.SetZIndex(o.background, 99);
+                Canvas.SetTop(o.GameOverSprite, o.GameOverSpriteY);
+                Canvas.SetLeft(o.GameOverSprite, o.GameOverSpriteX);
+                c.Children.Add(o.GameOverSprite);
+                Panel.SetZIndex(o.GameOverSprite, 99);
+                Canvas.SetTop(o.again, o.againY);
+                Canvas.SetLeft(o.again, o.againX);
+                c.Children.Add(o.again);
+                Panel.SetZIndex(o.again, 99);
+                Canvas.SetTop(o.menu, o.menuY);
+                Canvas.SetLeft(o.menu, o.menuX);
+                c.Children.Add(o.menu);
+                Panel.SetZIndex(o.menu, 99);
+            };
+
+            backgroundWorker.RunWorkerAsync();
+        }
+
+        //Method to remove the game ovr overlay from the screen
+        public void RemoveGameOverOverlay(GameOverOverlay o, Canvas c)
+        {
+            //Remove overlay objects from the screen
+            c.Children.Remove(o.background);
+            c.Children.Remove(o.GameOverSprite);
+            c.Children.Remove(o.again);
+            c.Children.Remove(o.menu);
+        }
+
+        //Method to add a victory overlat=y to the screen
+        public void AddGameWonOverlay(GameWonOverlay o, Canvas c)
+        {
+            //Create audio player to play sound effect on game over
+            SoundPlayer audio = new SoundPlayer(Properties.Resources.game_won_sound_effect);
+            audio.Play();
+
+            //create background worker to sync audio playback with overlay
+            var backgroundWorker = new BackgroundWorker();
+
+            backgroundWorker.DoWork += (s, e) =>
+            {
+                Thread.Sleep(150);
+            };
+
+            backgroundWorker.RunWorkerCompleted += (s, e) =>
+            {
+                //Add everything to the screen
+                Canvas.SetTop(o.background, o.backgroundY);
+                Canvas.SetLeft(o.background, o.backgroundX);
+                c.Children.Add(o.background);
+                Panel.SetZIndex(o.background, 99);
+                Canvas.SetTop(o.VictorySprite, o.VictorySpriteY);
+                Canvas.SetLeft(o.VictorySprite, o.VictorySpriteX);
+                c.Children.Add(o.VictorySprite);
+                Panel.SetZIndex(o.VictorySprite, 99);
+                Canvas.SetTop(o.again, o.againY);
+                Canvas.SetLeft(o.again, o.againX);
+                c.Children.Add(o.again);
+                Panel.SetZIndex(o.again, 99);
+                Canvas.SetTop(o.menu, o.menuY);
+                Canvas.SetLeft(o.menu, o.menuX);
+                c.Children.Add(o.menu);
+                Panel.SetZIndex(o.menu, 99);
+            };
+
+            backgroundWorker.RunWorkerAsync();
+        }
+
+        //Method to remove the victory overlay
+        public void RemoveGameWonOverlay(GameWonOverlay o, Canvas c)
+        {
+            //Remove overlay objects from the screen
+            c.Children.Remove(o.background);
+            c.Children.Remove(o.VictorySprite);
+            c.Children.Remove(o.again);
+            c.Children.Remove(o.menu);
+        }
+
+        //Method to set the timerlabel content
+        public void SetTimerText(string value)
+        {
+            mainWindow.TimerLabel.Text = value;
         }
     }
 }

@@ -16,10 +16,11 @@ namespace KBSGame.Model
 {
     public class PauseOverlay : Overlay
     {
-        private Image pauseSprite;
-        private Button restart, resume;
+        public Image pauseSprite;
+        public Button restart, resume;
+        public int pauseSpriteX, pauseSpriteY, resumeX, resumeY, restartX, restartY, menuX, menuY;
 
-        public PauseOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
+        public PauseOverlay(Game g) : base(g)
         {
             //Create new image for sprite
             pauseSprite = new Image
@@ -64,33 +65,15 @@ namespace KBSGame.Model
             //Subscribe the resume button to the method it needs to run
             resume.Click += Resume_Click;
 
-            //Adding to canvas
-            Canvas.SetTop(background, 140);
-            Canvas.SetLeft(background, 200);
-            GameCanvas.Children.Add(background);
-            Panel.SetZIndex(background, 99);
-            Canvas.SetTop(pauseSprite, 120);
-            Canvas.SetLeft(pauseSprite, 300);
-            GameCanvas.Children.Add(pauseSprite);
-            Panel.SetZIndex(pauseSprite, 99);
-            Canvas.SetTop(resume, 210);
-            Canvas.SetLeft(resume, 333);
-            GameCanvas.Children.Add(resume);
-            Panel.SetZIndex(resume, 99);
-            Canvas.SetTop(restart, 260);
-            Canvas.SetLeft(restart, 333);
-            GameCanvas.Children.Add(restart);
-            Panel.SetZIndex(restart, 99);
-            Canvas.SetTop(menu, 310);
-            Canvas.SetLeft(menu, 333);
-            GameCanvas.Children.Add(menu);
-            Panel.SetZIndex(menu, 99);
-        }
-
-        //Method to resume playing
-        public void continueGame()
-        {
-            removeObjects();
+            //Set coardinate values
+            pauseSpriteX = 300;
+            pauseSpriteY = 120;
+            resumeX = 333;
+            resumeY = 210;
+            restartX = 333;
+            restartY = 260;
+            menuX = 333;
+            menuY = 310;
         }
 
         //Actions to perform when restart button is clicked
@@ -99,7 +82,7 @@ namespace KBSGame.Model
             //Method to reset the game
             game.PlayAgain();
             //Clean up victory overlay
-            removeObjects();
+            game.RemovePauseOverlay(this, game.GameCanvas);
         }
 
         //Actions to perform when resume button is clicked
@@ -108,16 +91,7 @@ namespace KBSGame.Model
             game.playing = true;
             game.GameTimer.Resume();
             game.FreezePlayer = false;
-            continueGame();
-        }
-
-        //Method to remove the overlay once a button is clicked
-        public void removeObjects()
-        {
-            base.RemoveObjects();
-            GameCanvas.Children.Remove(resume);
-            GameCanvas.Children.Remove(pauseSprite);
-            GameCanvas.Children.Remove(restart);
+            game.RemovePauseOverlay(this, game.GameCanvas);
         }
     }
 }

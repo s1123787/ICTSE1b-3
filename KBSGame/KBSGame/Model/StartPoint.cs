@@ -10,12 +10,14 @@ using System.Windows.Shapes;
 
 namespace KBSGame
 {
-    class StartPoint
+    public class StartPoint
     {
-        public StartPoint(Canvas canvas)
+        public Rectangle rect;
+        public int X, Y;
+        public StartPoint()
         {
             //Create rectangle to identify start
-            Rectangle rect = new Rectangle
+            rect = new Rectangle
             {
                 Width = 50,
                 Height = 50,
@@ -23,10 +25,9 @@ namespace KBSGame
                 StrokeThickness = 3
             };
 
-            //Add the rectangle to the screen
-            Canvas.SetLeft(rect, 0);
-            Canvas.SetTop(rect, 0);
-            canvas.Children.Add(rect);
+            //Set coardinate values
+            X = 0;
+            Y = 0;
         }
     }
 }

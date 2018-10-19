@@ -12,24 +12,25 @@ namespace KBSGame.Model
 {
     public class Timer
     {
+        private Game g;
         public delegate void TijdIsOp(object source, EventArgs e);
         public event TijdIsOp tijdIsOp;
         public DispatcherTimer countdownTimer;
         private TimeSpan playTime;
         public int Seconds { get; set; }
-        private MainWindow mainWindow;
 
-        public Timer(int s, Game g, MainWindow mw)
+        public Timer(int s, Game g)
         {
-            mainWindow = mw;
+            this.g = g;
             Seconds = s;
             playTime = TimeSpan.FromSeconds(Seconds);
 
             //Create the timer
             countdownTimer = new DispatcherTimer(new TimeSpan(0, 0, 1), DispatcherPriority.Normal, delegate
             {
-
-                mw.TimerLabel.Text = playTime.ToString(@"ss");                
+                //Set timer label value
+                g.SetTimerText(playTime.ToString(@"ss"));
+                //Check if the counter has hit 0
                 if (playTime == TimeSpan.Zero)
                 {
                     OnTijdIsOp(); //when time is 0 this event will be raised
@@ -52,7 +53,7 @@ namespace KBSGame.Model
         {
             playTime = TimeSpan.FromSeconds(Seconds);
             //timer label will be empty the moment it will restart
-            mainWindow.TimerLabel.Text = String.Empty;
+            g.SetTimerText("");
 
             //timer will be started again
             countdownTimer.Start();

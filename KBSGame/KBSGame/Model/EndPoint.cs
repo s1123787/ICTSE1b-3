@@ -10,12 +10,13 @@ using System.Windows.Shapes;
 
 namespace KBSGame
 {
-    class EndPoint
+    public class EndPoint
     {
-        Rectangle rect;
-        Image sprite;
+        public Rectangle rect;
+        public Image sprite;
+        public int X, Y;
 
-        public EndPoint(Canvas canvas)
+        public EndPoint()
         {
             //Create rectangle to identify finish
             rect = new Rectangle
@@ -34,20 +35,9 @@ namespace KBSGame
             };
             sprite.Source = new BitmapImage(new Uri("pack://application:,,,/Images/flag-sprite.png"));
 
-            //Add the rectangle and image to the screen
-            Canvas.SetLeft(rect, 750);
-            Canvas.SetTop(rect, 550);
-            canvas.Children.Add(rect);
-            Canvas.SetTop(sprite, 550);
-            Canvas.SetLeft(sprite, 750);
-            canvas.Children.Add(sprite);
-        }
-
-        //Method to remove the endpoint from the screen
-        public void Delete(Canvas canvas)
-        {
-            canvas.Children.Remove(rect);
-            canvas.Children.Remove(sprite);
+            //Set coardinate values
+            X = 750;
+            Y = 550;
         }
     }
 }

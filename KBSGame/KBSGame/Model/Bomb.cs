@@ -20,14 +20,16 @@ namespace KBSGame.Model
             image.Width = 50;
             image.Height = 50;
 
-            BitmapImage myBitmapImage = new BitmapImage();
+            BitmapImage bitmapImage = new BitmapImage();
 
-            myBitmapImage.BeginInit();
-            myBitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
+            bitmapImage.BeginInit();
+            bitmapImage.UriSource = new Uri("pack://application:,,,/Images/landmine-sprite.png");
 
-            myBitmapImage.DecodePixelWidth = 50;
-            myBitmapImage.EndInit();
-
+            bitmapImage.DecodePixelWidth = 50;
+            bitmapImage.EndInit();
+            
+            image.Source = bitmapImage;
+            //assign the position where do bomb need to be placed on the screen
 
             if(StaticX != -1 && StaticY != -1)
             {
@@ -40,7 +42,7 @@ namespace KBSGame.Model
                 base.AssignPosition("b");
             }
 
-            image.Source = myBitmapImage;
+            image.Source = bitmapImage;
 
         }
     }
