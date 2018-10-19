@@ -88,7 +88,7 @@ namespace KBSGame
             Player.walkedOverBomb += OnPlayerWalkedOverBomb; //hier subscribed de methode OnPlayerWalkedOverBomb op de event walkedOverBomb 
             Player.collectCoin += OnPlayerCollectCoin;
             GameTimer = new Model.Timer(Seconde, this); //hier wordt de timer aangemaakt die de meegegeven seconden gebruikt            
-            GameTimer.tijdIsOp += OnPlayerTijdIsOp; //hier subscribe je op de event van timer
+            GameTimer.timeIsUp += OnPlayerTimeIsUp; //hier subscribe je op de event van timer
             mw.escKeyIsPressed += OnEscKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
             activeEndPoint += OnActivateEndpoint;
@@ -247,7 +247,7 @@ namespace KBSGame
             }
         }
 
-        public void OnPlayerTijdIsOp(object source, EventArgs e)
+        public void OnPlayerTimeIsUp(object source, EventArgs e)
         {
             GameOver();          
         }

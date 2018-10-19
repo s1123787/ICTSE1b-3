@@ -54,7 +54,6 @@ namespace KBSGame.Model
             resumeButtonTemplate.VisualTree = resumeButtonImage;
 
             //Create new button to resume game
-
             resume = new Button
             {
                 Width = 125,
