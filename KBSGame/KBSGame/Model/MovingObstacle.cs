@@ -257,7 +257,7 @@ namespace KBSGame.Model
 
             foreach (string waarde in Obstakels.waardes)
             {
-                //Check if next grid contains an tree of moving obstakel
+                //Check if next grid contains an tree or moving obstakel
                 if(waarde.Contains($"{XYString}t") || waarde.Contains($"{XYString}m"))
                 {
                     return false;

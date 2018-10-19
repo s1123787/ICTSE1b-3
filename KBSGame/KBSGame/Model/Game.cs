@@ -97,7 +97,7 @@ namespace KBSGame
             Player.collectCoin += OnPlayerCollectCoin;
             Player.walkedOnMovingObstacle += OnDeadByMovingObstacle;
             GameTimer = new Model.Timer(Seconde, this); 
-            GameTimer.tijdIsOp += OnPlayerTijdIsOp; 
+            GameTimer.timeIsUp += OnPlayerTimeIsUp; 
 
            
             mw.escKeyIsPressed += OnEscKeyIsPressed;
@@ -283,7 +283,7 @@ namespace KBSGame
             //Check if the game is active
             if (playing)
             {
-                pauseOverlay = new PauseOverlay(this);
+                pauseOverlay = new PauseOverlay();
                 pauseOverlay.resumeIsPressed += OnPressedOnResume;
                 pauseOverlay.restartIsPressed += OnPressedOnRestart;
                 pauseOverlay.pressedOnMenu += OnPressedOnMenu;
@@ -354,7 +354,7 @@ namespace KBSGame
             FreezePlayer = true;
             GameLost = true;
             GameWon = false;
-            gameOverOverlay = new GameOverOverlay(this);
+            gameOverOverlay = new GameOverOverlay();
             gameOverOverlay.againIsPressed += OnPressedOnRestart;
             gameOverOverlay.pressedOnMenu += OnPressedOnMenu;
             AddGameOverOverlay(gameOverOverlay, GameCanvas);
@@ -372,7 +372,7 @@ namespace KBSGame
             FreezePlayer = true;
             GameLost = false;
             GameWon = true;
-            gameWonOverlay = new GameWonOverlay(this);
+            gameWonOverlay = new GameWonOverlay();
             gameWonOverlay.againIsPressed += OnPressedOnRestart;
             gameWonOverlay.pressedOnMenu += OnPressedOnMenu;
             AddGameWonOverlay(gameWonOverlay, GameCanvas);
