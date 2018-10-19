@@ -25,7 +25,7 @@ namespace KBSGame.Model
         public Button restart, resume;
         public int pauseSpriteX, pauseSpriteY, resumeX, resumeY, restartX, restartY, menuX, menuY;
 
-        public PauseOverlay(Game g)
+        public PauseOverlay()
         {
             //Create new image for sprite
             pauseSprite = new Image
