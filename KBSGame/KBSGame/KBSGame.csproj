@@ -115,7 +115,7 @@
     <Compile Include="Model\GameOverOverlay.cs" />
     <Compile Include="Model\GameWonOverlay.cs" />
     <Compile Include="Model\MovingObstacle.cs" />
-    <Compile Include="Model\Obstakels.cs" />
+    <Compile Include="Model\Obstacles.cs" />
     <Compile Include="Model\StartPoint.cs" />
     <Page Include="View\MainMenu.xaml">
       <SubType>Designer</SubType>
@@ -142,7 +142,7 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model\Obstakel.cs" />
+    <Compile Include="Model\Obstacle.cs" />
     <Compile Include="Model\Player.cs" />
     <Compile Include="Model\Timer.cs" />
     <Compile Include="Model\Tree.cs" />

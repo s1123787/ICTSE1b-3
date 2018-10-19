@@ -9,7 +9,7 @@ using System.Windows.Media.Imaging;
 namespace KBSGame.Model
 {
     //bomb is a generalisation of Obstacle
-    class Bomb : Obstakel
+    class Bomb : Obstacle
     {
         public BitmapImage bitmapImage = new BitmapImage();
 
