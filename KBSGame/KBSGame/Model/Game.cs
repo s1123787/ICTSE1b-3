@@ -81,11 +81,10 @@ namespace KBSGame
             this.aantalBom = aantalBom;
             this.aantalMoving = aantalMoving;
             this.aantalCoin = aantalCoin;
-
             Seconde = s;
             randomLevel = rl;
+
             playing = true;
-            
             StartPoint = new StartPoint();
             AddStartPoint(StartPoint, GameCanvas);
 
@@ -99,6 +98,8 @@ namespace KBSGame
             Player.walkedOnMovingObstacle += OnDeadByMovingObstacle;
             GameTimer = new Model.Timer(Seconde, this); 
             GameTimer.tijdIsOp += OnPlayerTijdIsOp; 
+
+           
             mw.escKeyIsPressed += OnEscKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
             activeEndPoint += OnActivateEndpoint;
@@ -267,7 +268,7 @@ namespace KBSGame
             }
         }
 
-        public void OnPlayerTijdIsOp(object source, EventArgs e)
+        public void OnPlayerTimeIsUp(object source, EventArgs e)
         {
             GameOver();          
         }

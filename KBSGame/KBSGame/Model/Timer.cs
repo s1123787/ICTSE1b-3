@@ -13,8 +13,8 @@ namespace KBSGame.Model
     public class Timer
     {
         private Game g;
-        public delegate void TijdIsOp(object source, EventArgs e);
-        public event TijdIsOp tijdIsOp;
+        public delegate void TimeIsUp(object source, EventArgs e);
+        public event TimeIsUp timeIsUp;
         public DispatcherTimer countdownTimer;
         private TimeSpan playTime;
         public int Seconds { get; set; }
@@ -33,7 +33,7 @@ namespace KBSGame.Model
                 //Check if the counter has hit 0
                 if (playTime == TimeSpan.Zero)
                 {
-                    OnTijdIsOp(); //when time is 0 this event will be raised
+                    OnTimeIsUp(); //when time is 0 this event will be raised
                     countdownTimer.Stop();                    
                 }
                 //Update time left
@@ -42,10 +42,10 @@ namespace KBSGame.Model
         }
 
         //Method to notify subscribers the timer has hit 0
-        protected virtual void OnTijdIsOp()
+        protected virtual void OnTimeIsUp()
         {   
             //check if there are any subscribers to this event
-            tijdIsOp?.Invoke(this, EventArgs.Empty);
+            timeIsUp?.Invoke(this, EventArgs.Empty);
         }
 
         //Method to reset the timer
