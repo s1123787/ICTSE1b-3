@@ -17,11 +17,14 @@ namespace KBSGame.Model
 {
     public class GameWonOverlay : Overlay
     {
+
+        public delegate void AgainIsPressed(object source, EventArgs e);
+        public event AgainIsPressed againIsPressed;
         public Image VictorySprite;
         public Button again;
         public int VictorySpriteX, VictorySpriteY, againX, againY, menuX, menuY;
 
-        public GameWonOverlay(Game g) : base(g)
+        public GameWonOverlay(Game g)
         {
             //Create new image for sprite
             VictorySprite = new Image
@@ -61,10 +64,16 @@ namespace KBSGame.Model
         //Actions to perform when play again button is clicked
         private void Again_Click(object sender, RoutedEventArgs e)
         {
+            OnAgainIsPressed();
             //Method to reset the game
-            game.PlayAgain();
+            //game.PlayAgain();
             //Clean up victory overlay
-            game.RemoveGameWonOverlay(this, game.GameCanvas);
+            //game.RemoveGameWonOverlay(this, game.GameCanvas);
+        }
+
+        protected virtual void OnAgainIsPressed()
+        {
+            againIsPressed?.Invoke(this, EventArgs.Empty);
         }
     }
 }

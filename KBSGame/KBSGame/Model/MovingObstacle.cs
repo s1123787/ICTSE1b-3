@@ -14,10 +14,11 @@ namespace KBSGame.Model
 {
     public class MovingObstacle : Obstakel
     {
+        public delegate void DeadByMovingObstacle(object source, EventArgs e);
+        public event DeadByMovingObstacle deadByMovingObstacle;
         protected int MovingStepSize = 50;
         public int MovingX { get; private set; }
         public int MovingY { get; private set; }
-        private Game game;
         private bool hits = false;
         public int OldX;
         public int OldY;
@@ -25,12 +26,10 @@ namespace KBSGame.Model
         public int y = -1;
         Random random = new Random();
 
-
         public DispatcherTimer timer { get; set; }
 
-        public MovingObstacle(Game game, bool debug = false, int StaticX = 0, int StaticY = 0)
+        public MovingObstacle(bool debug = false, int StaticX = 0, int StaticY = 0)
         {
-            this.game = game;
 
             image = new Image
             {
@@ -75,7 +74,7 @@ namespace KBSGame.Model
         public void MoveObstakelRandom(object sender, EventArgs e)
         {
             //Moving obstakle can move
-            if(game.GameLost == false && game.GameWon == false && game.playing == true)
+            if(Game.GameLost == false && Game.GameWon == false && Game.playing == true)
             {
                 
                 //get current position x
@@ -245,14 +244,14 @@ namespace KBSGame.Model
             //check if Player is on Moving obstakel
             if(playerX == currentX && playerY == currentY && hits == false)
             {
-                game.GameOver();
+                OnDeadByMovingObstacle();
                 hits = true;
             }
 
             //check if Moving obstakel hits player
-            if (playerX == x && playerY == y && game.GameLost == false && hits == false)
+            if (playerX == x && playerY == y && Game.GameLost == false && hits == false)
             {
-                game.GameOver();
+                OnDeadByMovingObstacle();
                 hits = true;
             }
 
@@ -268,5 +267,10 @@ namespace KBSGame.Model
 
             return true;
         }
+        protected virtual void OnDeadByMovingObstacle()
+        {
+            deadByMovingObstacle?.Invoke(this, EventArgs.Empty);
+        }
+
     }
 }

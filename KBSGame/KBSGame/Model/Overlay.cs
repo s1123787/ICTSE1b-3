@@ -16,14 +16,14 @@ namespace KBSGame.Model
 {
     public class Overlay
     {
-        protected Game game;
         public Rectangle background;
         public Button menu;
         public int backgroundX, backgroundY;
+        public delegate void PressedOnMenu(object source, EventArgs e);
+        public event PressedOnMenu pressedOnMenu;            
 
-        public Overlay(Game g)
+        public Overlay()
         {
-            game = g;
             //Create new rectangle to use as background for the overlay
             background = new Rectangle
             {
@@ -58,7 +58,12 @@ namespace KBSGame.Model
         //Actions to perform when menu button is clicked
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
-            game.ToMainMenu();
+            OnPressedOnMenu();
+        }
+
+        protected virtual void OnPressedOnMenu()
+        {
+            pressedOnMenu?.Invoke(this, EventArgs.Empty);
         }
     }
 }
