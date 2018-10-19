@@ -43,8 +43,8 @@ namespace KBSGameUnitTests
             game.bombx = 150;
             game.bomby = 0;
             game.GameOver();
-            game.bomby = 150;
-            if (game.GameLost == true)
+
+            if (game.explosionIsGoingToTakePlace == true)
             {
                 Assert.Fail();
             }

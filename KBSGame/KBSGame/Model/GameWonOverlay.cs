@@ -17,10 +17,11 @@ namespace KBSGame.Model
 {
     public class GameWonOverlay : Overlay
     {
-        private Image VictorySprite;
-        private Button again;
+        public Image VictorySprite;
+        public Button again;
+        public int VictorySpriteX, VictorySpriteY, againX, againY, menuX, menuY;
 
-        public GameWonOverlay(MainWindow mw, Canvas canvas, Game g) : base(mw, canvas, g)
+        public GameWonOverlay(Game g) : base(g)
         {
             //Create new image for sprite
             VictorySprite = new Image
@@ -47,41 +48,14 @@ namespace KBSGame.Model
             };
             //Subscribe the again button to the method it needs to run
             again.Click += Again_Click;
-            
-            //Create audio player to play sound effect on victory
-            SoundPlayer audio = new SoundPlayer(Properties.Resources.game_won_sound_effect);
-            audio.Play();
 
-            //create background worker to sync audio playback with overlay
-            var backgroundWorker = new BackgroundWorker();
-
-            backgroundWorker.DoWork += (s, e) =>
-            {
-                Thread.Sleep(150);
-            };
-
-            backgroundWorker.RunWorkerCompleted += (s, e) =>
-            {
-                //Add everything to the screen
-                Canvas.SetTop(background, 140);
-                Canvas.SetLeft(background, 201);
-                GameCanvas.Children.Add(background);
-                Panel.SetZIndex(background, 99);
-                Canvas.SetTop(VictorySprite, 140);
-                Canvas.SetLeft(VictorySprite, 201);
-                GameCanvas.Children.Add(VictorySprite);
-                Panel.SetZIndex(VictorySprite, 99);
-                Canvas.SetTop(again, 300);
-                Canvas.SetLeft(again, 251);
-                GameCanvas.Children.Add(again);
-                Panel.SetZIndex(again, 99);
-                Canvas.SetTop(menu, 300);
-                Canvas.SetLeft(menu, 424);
-                GameCanvas.Children.Add(menu);
-                Panel.SetZIndex(menu, 99);
-            };
-
-            backgroundWorker.RunWorkerAsync();
+            //Set coardinate values
+            VictorySpriteX = 201;
+            VictorySpriteY = 140;
+            againX = 251;
+            againY = 300;
+            menuX = 424;
+            menuY = 300;
         }
 
         //Actions to perform when play again button is clicked
@@ -90,15 +64,7 @@ namespace KBSGame.Model
             //Method to reset the game
             game.PlayAgain();
             //Clean up victory overlay
-            removeObjects();
-        }
-
-        //Method to remove the overlay once a button is clicked
-        public void removeObjects()
-        {
-            base.RemoveObjects();
-            GameCanvas.Children.Remove(VictorySprite);
-            GameCanvas.Children.Remove(again);
+            game.RemoveGameWonOverlay(this, game.GameCanvas);
         }
     }
 }
