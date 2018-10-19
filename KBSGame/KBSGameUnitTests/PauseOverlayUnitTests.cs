@@ -26,60 +26,68 @@ namespace KBSGameUnitTests
         }
 
         [Test]
-        public void playerCantMoveOnPause()
+        public void OnEscKeyIsPressed_CheckIfPlayerDidntMove_XNotEqual()
         {
             Player.x = 150;
             Player.y = 150;
+
             game.OnEscKeyIsPressed(this, EventArgs.Empty);
             game.Player.MoveRight();
+
             Assert.AreNotEqual(Player.x, 150);
         }
         
         [Test]
-        public void BombExplodeStopsOnPause()
+        public void OnEscKeyIsPressed_BombDoesntExplodeOnPause_IfGameLostFail()
         {
             Player.x = 150;
             Player.y = 150;
-            game.testx = 150;
-            game.testy = 0;
+            game.bombx = 150;
+            game.bomby = 0;
+
             game.OnEscKeyIsPressed(this, EventArgs.Empty);
-            game.testy = 150;
+            game.bomby = 150;
+
             if(game.GameLost == true)
             {
                 Assert.Fail();
             }
         }
         [Test]
-        public void EnterDoesNothingOnGameOverOverlay()
+        public void OnEnterKeyIsPressed_EnterDoesntDoAnythingOnGameOverOverlay_ReturnFalse()
         {
             game.playing = true;
             game.GameOver();
             game.OnEnterKeyIsPressed(this, EventArgs.Empty);
+
             Assert.False(game.playing);
         }
         [Test]
-        public void EnterDoesNothingOnGameWonOverlay()
+        public void OnEnterKeyIsPressed_EnterDoesntDoAnythingOnGameWonOverlay_ReturnFalse()
         {
             game.playing = true;
             game.GameVictory();
             game.OnEnterKeyIsPressed(this, EventArgs.Empty);
+
             Assert.False(game.playing);
         }
         [Test]
-        public void CantOpenPauseWhenOtherMenuOpen()
+        public void OnEscKeyIsPressed_PauseMenuDoesntTriggerWhenOtherMenuIsActive_ReturnFalse()
         {
             game.playing = true;
             game.GameOver();
             game.OnEscKeyIsPressed(this, EventArgs.Empty);
+
             Assert.False(game.pauseActivated);
         }
         [Test]
-        public void EnterThenEscapeOnGameOverDoesntTriggerPauseOverlay()
+        public void OnEscKeyIsPressed_EnterThenEscapeOnGameOverDoesntTriggerPauseOverlay_ReturnFalse()
         {
             game.playing = true;
             game.GameOver();
             game.OnEnterKeyIsPressed(this, EventArgs.Empty);
             game.OnEscKeyIsPressed(this, EventArgs.Empty);
+
             Assert.False(game.pauseActivated);
         }
     }

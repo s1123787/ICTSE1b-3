@@ -78,11 +78,6 @@
     </XMLObstakel>
     <XMLObstakel>
       <ObstakelType>Tree</ObstakelType>
-      <ObstakelX>0</ObstakelX>
-      <ObstakelY>100</ObstakelY>
-    </XMLObstakel>
-    <XMLObstakel>
-      <ObstakelType>Tree</ObstakelType>
       <ObstakelX>300</ObstakelX>
       <ObstakelY>100</ObstakelY>
     </XMLObstakel>
@@ -98,7 +93,7 @@
     </XMLObstakel>
     <XMLObstakel>
       <ObstakelType>Bomb</ObstakelType>
-      <ObstakelX>600</ObstakelX>
+      <ObstakelX>550</ObstakelX>
       <ObstakelY>150</ObstakelY>
     </XMLObstakel>
     <XMLObstakel>

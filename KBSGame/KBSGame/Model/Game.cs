@@ -20,6 +20,7 @@ namespace KBSGame
 {
     public class Game
     {
+        #region 
         public DispatcherTimer timer = new DispatcherTimer();
         public DispatcherTimer timer2 = new DispatcherTimer();
         private int Seconde { get; set; }
@@ -66,6 +67,8 @@ namespace KBSGame
 
         private int aantal = 0;
         public bool explosion = false, explosionIsGoingToTakePlace = false;
+       #endregion
+
 
         public Game(MainWindow mw, Canvas canvas, int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, int s, bool rl)
         {
@@ -75,6 +78,7 @@ namespace KBSGame
             this.aantalBom = aantalBom;
             this.aantalMoving = aantalMoving;
             this.aantalCoin = aantalCoin;
+
             Seconde = s;
             randomLevel = rl;
             playing = true;
@@ -85,10 +89,10 @@ namespace KBSGame
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this, randomLevel);
 
             Player = new Player(canvas, this);
-            Player.walkedOverBomb += OnPlayerWalkedOverBomb; //hier subscribed de methode OnPlayerWalkedOverBomb op de event walkedOverBomb 
-            Player.collectCoin += OnPlayerCollectCoin;
-            GameTimer = new Model.Timer(Seconde, this); //hier wordt de timer aangemaakt die de meegegeven seconden gebruikt            
-            GameTimer.tijdIsOp += OnPlayerTijdIsOp; //hier subscribe je op de event van timer
+            Player.walkedOverBomb += OnPlayerWalkedOverBomb; 
+            Player.collectCoin += OnPlayerCollectCoin; 
+            GameTimer = new Model.Timer(Seconde, this); 
+            GameTimer.tijdIsOp += OnPlayerTijdIsOp; 
             mw.escKeyIsPressed += OnEscKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
             activeEndPoint += OnActivateEndpoint;
@@ -112,10 +116,11 @@ namespace KBSGame
             Obstakels.waardes.Remove($"{x}{y}c");
             GameCanvas.Children.Add(i2);
 
-            //coin counter
+            //set coin counter
             CollectedCoins++;
             mainWindow.CoinCounter.Content = CollectedCoins;
             
+            //invoke event when all coins are collected
             if(CollectedCoins == 5)
             {
                 activeEndPoint?.Invoke(this, EventArgs.Empty);
@@ -233,7 +238,7 @@ namespace KBSGame
         public void Timer2_Tick(object sender, EventArgs e)
         {
             //check if second is over
-            if (aantal < 100)
+            if (aantal < 25)
             {
                 aantal++;              
                 if ((Player.x == bombx || Player.x == bombx + 50 || Player.x == bombx - 50) && (Player.y == bomby || Player.y == bomby + 50 || Player.y == bomby - 50) && GameLost == false && GameWon == false)
@@ -241,7 +246,7 @@ namespace KBSGame
                     GameOver();
                     timer2.Tick -= Timer2_Tick;
                 }
-            } else if (aantal >= 100) //second is over and player isn't hit by explosion so it can move on and explosion will be deleted
+            } else if (aantal >= 25) //second is over and player isn't hit by explosion so it can move on and explosion will be deleted
             {
                 ExplosionEnded();
             }
@@ -284,11 +289,12 @@ namespace KBSGame
 
         public void PlayAgain()
         {
+            // reset player and obstakels
             Player.Reset();
             obstakels.Reset();
-
+            //create new obastakels
             obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this, randomLevel);
-            
+            //allow player to move again, restart timer
             FreezePlayer = false;
             GameTimer.Restart();
             playing = true;
