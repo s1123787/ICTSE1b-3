@@ -24,7 +24,7 @@ namespace KBSGame.Model
         public Button again;
         public int VictorySpriteX, VictorySpriteY, againX, againY, menuX, menuY;
 
-        public GameWonOverlay(Game g)
+        public GameWonOverlay()
         {
             //Create new image for sprite
             VictorySprite = new Image
