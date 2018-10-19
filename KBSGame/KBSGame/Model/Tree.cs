@@ -8,7 +8,7 @@ using System.Windows.Media.Imaging;
 
 namespace KBSGame.Model
 {
-    public class Tree : Obstakel
+    public class Tree : Obstacle
     {
         public Tree(int StaticX = -1, int StaticY = -1)
         { 

@@ -31,7 +31,7 @@ namespace KBSGame
         private StartPoint StartPoint { get; set; }
         private EndPoint EndPoint { get; set; }
         public Player Player { get; set; }
-        public Obstakels obstakels { get; set; }
+        public Obstacles obstacles { get; set; }
         public MainWindow mainWindow { get; set; }
         public Canvas GameCanvas { get; private set; }
         public MovingObstacle mo { get; set; }
@@ -88,7 +88,7 @@ namespace KBSGame
             StartPoint = new StartPoint();
             AddStartPoint(StartPoint, GameCanvas);
 
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, randomLevel);
+            obstacles = new Obstacles(aantalBoom, aantalBom, aantalMoving, aantalCoin, randomLevel);
             PlaceAllObstacles();
 
             Player = new Player();
@@ -103,7 +103,7 @@ namespace KBSGame
             mw.escKeyIsPressed += OnEscKeyIsPressed;
             mw.enterKeyIsPressed += OnEnterKeyIsPressed;
             activeEndPoint += OnActivateEndpoint;
-            foreach (Obstakel o in Obstakels.obstakels)
+            foreach (Obstacle o in Obstacles.obstacles)
             {
                 if (o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
                 {
@@ -129,7 +129,7 @@ namespace KBSGame
             Canvas.SetLeft(i2, x + 1);
             Canvas.SetTop(i2, y + 1);
             Canvas.SetZIndex(i2, 0);
-            Obstakels.waardes.Remove($"{x}{y}c");
+            Obstacles.waardes.Remove($"{x}{y}c");
             GameCanvas.Children.Add(i2);
 
             //set coin counter
@@ -176,7 +176,7 @@ namespace KBSGame
                 Canvas.SetTop(i, y + 5);
                 Canvas.SetZIndex(i, 0);
                 #endregion
-                Obstakels.waardes.Remove($"{x}{y}b"); //remove the bomb from list so it can't be activated again
+                Obstacles.waardes.Remove($"{x}{y}b"); //remove the bomb from list so it can't be activated again
                 #region
                 image = new Image();
                 image.Width = 50;
@@ -308,13 +308,13 @@ namespace KBSGame
 
         public void PlayAgain()
         {
-            // reset player and obstakels
+            // reset player and obstacles
             Player.Reset();
             ResetAllObstacles();
             //create new obastakels
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, randomLevel);
+            obstacles = new Obstacles(aantalBoom, aantalBom, aantalMoving, aantalCoin, randomLevel);
             PlaceAllObstacles();
-            foreach (Obstakel o in Obstakels.obstakels)
+            foreach (Obstacle o in Obstacles.obstacles)
             {
                 if (o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
                 {
@@ -452,12 +452,15 @@ namespace KBSGame
             if (pauseOverlay != null)
             {
                 RemovePauseOverlay(pauseOverlay, GameCanvas);
+                pauseOverlay = null;
             } else if (gameOverOverlay != null)
             {
                 RemoveGameOverOverlay(gameOverOverlay, GameCanvas);
+                gameOverOverlay = null;
             } else
             {
                 RemoveGameWonOverlay(gameWonOverlay, GameCanvas);
+                gameWonOverlay = null;
             }
         }
         
@@ -605,7 +608,7 @@ namespace KBSGame
 
         public void PlaceAllObstacles()
         {
-            foreach (Obstakel o in Obstakels.obstakels)
+            foreach (Obstacle o in Obstacles.obstacles)
             {
                 GameCanvas.Children.Add(o.image);                
             }
@@ -613,14 +616,14 @@ namespace KBSGame
 
         public void ResetAllObstacles()
         {
-            for (int i = 0; i < Obstakels.obstakels.Count; i++)
+            for (int i = 0; i < Obstacles.obstacles.Count; i++)
             {
                 //remove obstacles from canvas
-                GameCanvas.Children.Remove(Obstakels.obstakels[i].image);
+                GameCanvas.Children.Remove(Obstacles.obstacles[i].image);
             }
 
             //remove eventhandler from ghosts
-            foreach (Obstakel o in Obstakels.obstakels)
+            foreach (Obstacle o in Obstacles.obstacles)
             {
                 if (o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
                 {
@@ -629,9 +632,9 @@ namespace KBSGame
                     mo.deadByMovingObstacle -= OnDeadByMovingObstacle;
                 }
             }
-            //remove all of the data in waardes and obstakels so it is empty
-            Obstakels.obstakels.Clear();
-            Obstakels.waardes.Clear();
+            //remove all of the data in waardes and obstacles so it is empty
+            Obstacles.obstacles.Clear();
+            Obstacles.waardes.Clear();
         }
 
         public void OnDeadByMovingObstacle(object source, EventArgs e)

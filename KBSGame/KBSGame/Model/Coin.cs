@@ -9,7 +9,7 @@ using System.Windows.Controls;
 namespace KBSGame.Model
 {
     //coin is a generalisation of Obstacle
-    class Coin : Obstakel
+    class Coin : Obstacle
     {
         public Coin(int StaticX = -1, int StaticY = -1)
         {

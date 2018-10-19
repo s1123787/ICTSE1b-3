@@ -12,7 +12,7 @@ using System.Threading;
 
 namespace KBSGame.Model
 {
-    public class MovingObstacle : Obstakel
+    public class MovingObstacle : Obstacle
     {
         public delegate void DeadByMovingObstacle(object source, EventArgs e);
         public event DeadByMovingObstacle deadByMovingObstacle;
@@ -140,8 +140,8 @@ namespace KBSGame.Model
             else
             {
                 //Create tmp list & update old XY to new values
-                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x+MovingStepSize}{y}m")).ToList();
-                Obstakels.waardes = tmpList;
+                var tmpList = Obstacles.waardes.Select(s => s.Replace($"{x}{y}m", $"{x+MovingStepSize}{y}m")).ToList();
+                Obstacles.waardes = tmpList;
 
                 Canvas.SetLeft(image, x += MovingStepSize);
             }
@@ -169,8 +169,8 @@ namespace KBSGame.Model
             else
             {
                 //Create tmp list & update old XY to new values
-                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x - MovingStepSize}{y}m")).ToList();
-                Obstakels.waardes = tmpList;
+                var tmpList = Obstacles.waardes.Select(s => s.Replace($"{x}{y}m", $"{x - MovingStepSize}{y}m")).ToList();
+                Obstacles.waardes = tmpList;
 
                 Canvas.SetLeft(image, x -= MovingStepSize);
             }
@@ -197,8 +197,8 @@ namespace KBSGame.Model
             else
             {
                 //Create tmp list & update old XY to new values
-                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x}{y + MovingStepSize}m")).ToList();
-                Obstakels.waardes = tmpList;
+                var tmpList = Obstacles.waardes.Select(s => s.Replace($"{x}{y}m", $"{x}{y + MovingStepSize}m")).ToList();
+                Obstacles.waardes = tmpList;
 
                 Canvas.SetTop(image, y += MovingStepSize);
 
@@ -226,8 +226,8 @@ namespace KBSGame.Model
             else
             {
                 //Create tmp list & update old XY to new values
-                var tmpList = Obstakels.waardes.Select(s => s.Replace($"{x}{y}m", $"{x}{y - MovingStepSize}m")).ToList();
-                Obstakels.waardes = tmpList;
+                var tmpList = Obstacles.waardes.Select(s => s.Replace($"{x}{y}m", $"{x}{y - MovingStepSize}m")).ToList();
+                Obstacles.waardes = tmpList;
 
                 Canvas.SetTop(image, y -= MovingStepSize);
             }
@@ -255,7 +255,7 @@ namespace KBSGame.Model
                 hits = true;
             }
 
-            foreach (string waarde in Obstakels.waardes)
+            foreach (string waarde in Obstacles.waardes)
             {
                 //Check if next grid contains an tree or moving obstakel
                 if(waarde.Contains($"{XYString}t") || waarde.Contains($"{XYString}m"))

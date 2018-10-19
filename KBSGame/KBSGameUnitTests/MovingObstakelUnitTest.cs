@@ -18,18 +18,6 @@ namespace KBSGameUnitTests
         Application app = new Application();
         private TestContext testContextInstance;
 
-        [SetUp]
-        public void SetUp()
-        {
-
-            if (Application.ResourceAssembly == null)
-                Application.ResourceAssembly = typeof(MainWindow).Assembly;
-
-            game = new Game(new MainWindow(true), new Canvas(), 30, 10, 0, 5, 30, true);
-            
-
-        }
-
         //Check if moving obstakel moves right and hits next grid.
         [Test]
         public void PlayerMove_PlayerHitsMovingObstakel_ReturnTrue()
@@ -44,7 +32,7 @@ namespace KBSGameUnitTests
             game.Player.MoveRight();
 
             //add obstacle on position x=100 en y = 0
-            MovingObstacle moving = new MovingObstacle(game);
+            MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(0);
 
@@ -70,7 +58,7 @@ namespace KBSGameUnitTests
             bool test = false;
 
             //add obstacle on position x=100 en y = 0
-            MovingObstacle moving = new MovingObstacle(game, true);
+            MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(0);
             Obstakels.waardes.Add($"1000m");
@@ -94,7 +82,7 @@ namespace KBSGameUnitTests
             bool test = false;
 
             //add obstacle on position x=100 en y = 0
-            MovingObstacle moving = new MovingObstacle(game, true);
+            MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(0);
             Obstakels.waardes.Add($"1000m");
@@ -117,7 +105,7 @@ namespace KBSGameUnitTests
             bool test = false;
 
             //add obstacle on position x=100 en y = 0
-            MovingObstacle moving = new MovingObstacle(game, true);
+            MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(100);
             Obstakels.waardes.Add($"100100m");
@@ -139,7 +127,7 @@ namespace KBSGameUnitTests
             bool test = false;
 
             //add obstacle on position x=100 en y = 0
-            MovingObstacle moving = new MovingObstacle(game, true);
+            MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(100);
             Obstakels.waardes.Add($"100100m");
