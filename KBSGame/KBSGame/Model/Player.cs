@@ -62,23 +62,23 @@ namespace KBSGame
             x = Canvas.GetLeft(player);
             y = Canvas.GetTop(player);
 
-            if (Obstakels.waardes.Contains($"{x + 45}{y - 5}b"))//contains bomb
+            if (Obstacles.values.Contains($"{x + 45}{y - 5}b"))//contains bomb
             {
                 OnPlayerWalkedOverBomb(x + 45, y - 5, x + 50, y);
                 Canvas.SetLeft(player, x += StepSize);
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}c"))//contains coin
+            else if (Obstacles.values.Contains($"{x + 45}{y - 5}c"))//contains coin
             {
                 OnPlayerCollectCoin(x + 45, y - 5, x + 50, y);
                 Canvas.SetLeft(player, x += StepSize);
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}t") || x == 755) //contains a tree
+            else if (Obstacles.values.Contains($"{x + 45}{y - 5}t") || x == 755) //contains a tree
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x + 45}{y - 5}m") && game.GameLost == false) //contains moving obstakel
+            else if (Obstacles.values.Contains($"{x + 45}{y - 5}m") && game.GameLost == false) //contains moving obstakel
             {
                 if(hits == false)
                 {
@@ -104,23 +104,23 @@ namespace KBSGame
             //get current position x
             x = Canvas.GetLeft(player);
             y = Canvas.GetTop(player);            
-            if (Obstakels.waardes.Contains($"{x - 55}{y - 5}b"))//contains bomb
+            if (Obstacles.values.Contains($"{x - 55}{y - 5}b"))//contains bomb
             {
                 OnPlayerWalkedOverBomb(x - 55, y - 5, x - 50, y);
                 Canvas.SetLeft(player, x -= StepSize);
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 55}{y - 5}c"))//contains coin
+            else if (Obstacles.values.Contains($"{x - 55}{y - 5}c"))//contains coin
             {
                 OnPlayerCollectCoin(x - 55, y - 5, x - 50, y);
                 Canvas.SetLeft(player, x -= StepSize);
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 55}{y - 5}t") || x == 5)//contains a tree
+            else if (Obstacles.values.Contains($"{x - 55}{y - 5}t") || x == 5)//contains a tree
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 55}{y - 5}m") && game.GameLost == false) //contains moving obstakel
+            else if (Obstacles.values.Contains($"{x - 55}{y - 5}m") && game.GameLost == false) //contains moving obstakel
             {
                 if (hits == false)
                 {
@@ -145,23 +145,23 @@ namespace KBSGame
         {
             y = Canvas.GetTop(player);
             x = Canvas.GetLeft(player);            
-            if (Obstakels.waardes.Contains($"{x - 5}{y + 45}b"))//contains bomb
+            if (Obstacles.values.Contains($"{x - 5}{y + 45}b"))//contains bomb
             {
                 OnPlayerWalkedOverBomb(x - 5, y + 45, x, y + 50);
                 Canvas.SetTop(player, y += StepSize);
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y + 45}c"))//contains coin
+            else if (Obstacles.values.Contains($"{x - 5}{y + 45}c"))//contains coin
             {
                 OnPlayerCollectCoin(x - 5, y + 45, x, y + 50);
                 Canvas.SetTop(player, y += StepSize);
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y + 45}t") || y == 555)//contains a tree
+            else if (Obstacles.values.Contains($"{x - 5}{y + 45}t") || y == 555)//contains a tree
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y + 45}m") && game.GameLost == false) //contains moving obstakel
+            else if (Obstacles.values.Contains($"{x - 5}{y + 45}m") && game.GameLost == false) //contains moving obstakel
             {
                 if (hits == false)
                 {
@@ -186,23 +186,23 @@ namespace KBSGame
         {
             y = Canvas.GetTop(player);
             x = Canvas.GetLeft(player);            
-            if (Obstakels.waardes.Contains($"{x - 5}{y - 55}b"))//contains bomb
+            if (Obstacles.values.Contains($"{x - 5}{y - 55}b"))//contains bomb
             {
                 OnPlayerWalkedOverBomb(x - 5, y - 55, x, y - 50);
                 Canvas.SetTop(player, y -= StepSize);
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}c"))//contains coin
+            else if (Obstacles.values.Contains($"{x - 5}{y - 55}c"))//contains coin
             {
                 OnPlayerCollectCoin(x - 5, y - 55, x, y - 50);
                 Canvas.SetTop(player, y -= StepSize);
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}t") || y == 5)//contains a tree
+            else if (Obstacles.values.Contains($"{x - 5}{y - 55}t") || y == 5)//contains a tree
             {
                 return;
             }
-            else if (Obstakels.waardes.Contains($"{x - 5}{y - 55}m") && game.GameLost == false) //contains moving obstakel
+            else if (Obstacles.values.Contains($"{x - 5}{y - 55}m") && game.GameLost == false) //contains moving obstakel
             {
                 if (hits == false)
                 {

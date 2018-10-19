@@ -58,12 +58,12 @@ namespace KBSGameUnitTests
             MovingObstacle moving = new MovingObstacle(game, true);
             moving.SetX(100);
             moving.SetY(100);
-            Obstakels.waardes.Add($"100100m");
+            Obstacles.values.Add($"100100m");
 
             game.GameOver();
             moving.MoveObstakelDown();
 
-            if (Obstakels.waardes.Contains("100150m"))
+            if (Obstacles.values.Contains("100150m"))
             {
                 test = false;
             }

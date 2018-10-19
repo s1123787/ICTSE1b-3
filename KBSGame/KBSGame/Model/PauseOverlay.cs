@@ -53,7 +53,7 @@ namespace KBSGame.Model
             resumeButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/resume-button.png", UriKind.RelativeOrAbsolute)));
             resumeButtonTemplate.VisualTree = resumeButtonImage;
 
-            //Create new button to resume game
+            //Create new button to resume the game
             resume = new Button
             {
                 Width = 125,

@@ -30,7 +30,7 @@ namespace KBSGameUnitTests
         {
             // de game is al aangemaakt dat betekent dus dat de waardes al in de list staan
             //je moet het aantal gedeelt door twee doen, want obstakels.waarde is static waardoor het twee keer wordt gevuld
-            int aantal = Obstakels.waardes.Count / 2;
+            int aantal = Obstacles.values.Count / 2;
             Assert.AreEqual(48, aantal);
         }
 
@@ -40,7 +40,7 @@ namespace KBSGameUnitTests
         {
             //de game is al aangemaakt dus het heeft waardes
             game.obstakels.Reset();
-            int aantal = Obstakels.waardes.Count;
+            int aantal = Obstacles.values.Count;
             Assert.AreEqual(0, aantal);
         }
     }

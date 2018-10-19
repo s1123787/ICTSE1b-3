@@ -9,13 +9,13 @@ using System.Windows.Media.Imaging;
 namespace KBSGame.Model
 {
     //bomb is a generalisation of Obstacle
-    class Bomb : Obstakel
+    class Bomb : Obstacle
     {
         public BitmapImage bitmapImage = new BitmapImage();
 
         public Bomb(int StaticX = -1, int StaticY = -1)
         {
-            //image is a attribute of obstacle
+            //image is an attribute of obstacle
             image = new Image();
             image.Width = 50;
             image.Height = 50;
@@ -29,16 +29,16 @@ namespace KBSGame.Model
             bitmapImage.EndInit();
             
             image.Source = bitmapImage;
-            //assign the position where do bomb need to be placed on the screen
+            //assign the position where the bomb needs to be placed on the screen
 
             if(StaticX != -1 && StaticY != -1)
             {
-                //assign the position where do bomb need to be placed on the screen
+                //assign the position where the bomb needs to be placed on the screen
                 base.AssignStaticPosition("b", StaticX, StaticY);
             }
             else
             {
-                //assign the position where do bomb need to be placed on the screen
+                //assign the position where the bomb needs to be placed on the screen
                 base.AssignPosition("b");
             }
 

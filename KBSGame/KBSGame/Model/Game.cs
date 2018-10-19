@@ -31,7 +31,7 @@ namespace KBSGame
         private StartPoint StartPoint { get; set; }
         private EndPoint EndPoint { get; set; }
         public Player Player { get; set; }
-        public Obstakels obstakels { get; set; }
+        public Obstacles obstakels { get; set; }
         public MainWindow mainWindow { get; set; }
         public Canvas GameCanvas { get; private set; }
         public Boolean FreezePlayer { get; set; }
@@ -85,7 +85,7 @@ namespace KBSGame
             StartPoint = new StartPoint();
             AddStartPoint(StartPoint, GameCanvas);
 
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this, randomLevel);
+            obstakels = new Obstacles(aantalBoom, aantalBom, aantalMoving, aantalCoin, canvas, this, randomLevel);
 
             Player = new Player(canvas, this);
             Player.walkedOverBomb += OnPlayerWalkedOverBomb; //hier subscribed de methode OnPlayerWalkedOverBomb op de event walkedOverBomb 
@@ -112,7 +112,7 @@ namespace KBSGame
             Canvas.SetLeft(i2, x + 1);
             Canvas.SetTop(i2, y + 1);
             Canvas.SetZIndex(i2, 0);
-            Obstakels.waardes.Remove($"{x}{y}c");
+            Obstacles.values.Remove($"{x}{y}c");
             GameCanvas.Children.Add(i2);
 
             //set coin counter
@@ -159,7 +159,7 @@ namespace KBSGame
                 Canvas.SetTop(i, y + 5);
                 Canvas.SetZIndex(i, 0);
                 #endregion
-                Obstakels.waardes.Remove($"{x}{y}b"); //remove the bomb from list so it can't be activated again
+                Obstacles.values.Remove($"{x}{y}b"); //remove the bomb from list so it can't be activated again
                 #region
                 image = new Image();
                 image.Width = 50;
@@ -292,7 +292,7 @@ namespace KBSGame
             Player.Reset();
             obstakels.Reset();
             //create new obastakels
-            obstakels = new Obstakels(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this, randomLevel);
+            obstakels = new Obstacles(aantalBoom, aantalBom, aantalMoving, aantalCoin, GameCanvas, this, randomLevel);
             //allow player to move again, restart timer
             FreezePlayer = false;
             GameTimer.Restart();

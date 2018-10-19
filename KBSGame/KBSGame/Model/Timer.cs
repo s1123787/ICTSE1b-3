@@ -44,7 +44,7 @@ namespace KBSGame.Model
         //Method to notify subscribers the timer has hit 0
         protected virtual void OnTimeIsUp()
         {   
-            //check if there are any subscribers to this event
+            //check if there are any subscribers to this event if there are raise the event
             timeIsUp?.Invoke(this, EventArgs.Empty);
         }
 

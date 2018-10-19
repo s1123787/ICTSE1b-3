@@ -11,14 +11,14 @@ using System.Windows.Media;
 
 namespace KBSGame.GameObjects
 {
-    public class Obstakels
+    public class Obstacles
     {
-        public List<Obstakel> obstakels = new List<Obstakel>();
-        public static List<string> waardes = new List<string>();
+        public List<Obstacle> obstacles = new List<Obstacle>();
+        public static List<string> values = new List<string>();
         Canvas Canvas;
         MovingObstacle mo;
 
-        public Obstakels(int aantalBoom, int aantalBom, int aantalMoving, int aantalCoin, Canvas canvas, Game game, bool randomLevel = false)
+        public Obstacles(int amountOfTrees, int amountOfBombs, int amountOfMovingObstacles, int amountOfCons, Canvas canvas, Game game, bool randomLevel = false)
         {
             if (!randomLevel) // is XML level
             {
@@ -37,27 +37,27 @@ namespace KBSGame.GameObjects
                 //Loop through nodes and match type
                 foreach(XMLObstakel obs in obj.XMLItems)
                 {
-                    switch (obs.ObstakelType) { 
+                    switch (obs.ObstacleType) { 
                         case "Tree": //add the amount of trees to canvas
-                            Tree t = new Tree(obs.ObstakelX, obs.ObstakelY);
-                            obstakels.Add(t);
+                            Tree t = new Tree(obs.ObstacleX, obs.ObstacleY);
+                            obstacles.Add(t);
                             canvas.Children.Add(t.image);
                             Thread.Sleep(25);
                             break;
                         case "Bomb": //generate amount of bombs but don't put it on the screen because it is a land mine
-                            Bomb b = new Bomb(obs.ObstakelX, obs.ObstakelY);
-                            obstakels.Add(b);
+                            Bomb b = new Bomb(obs.ObstacleX, obs.ObstacleY);
+                            obstacles.Add(b);
                             Thread.Sleep(25);
                             break;
                         case "Moving": //add the amount of moving obstacles to canvas
-                            MovingObstacle mo = new MovingObstacle(game, true, obs.ObstakelX, obs.ObstakelY);
-                            obstakels.Add(mo);
+                            MovingObstacle mo = new MovingObstacle(game, true, obs.ObstacleX, obs.ObstacleY);
+                            obstacles.Add(mo);
                             canvas.Children.Add(mo.image);
                             Thread.Sleep(25);
                             break;
                         case "Coin": //add the amount of coins to canvas
-                            Coin c = new Coin(obs.ObstakelX, obs.ObstakelY);
-                            obstakels.Add(c);
+                            Coin c = new Coin(obs.ObstacleX, obs.ObstacleY);
+                            obstacles.Add(c);
                             canvas.Children.Add(c.image);
                             Thread.Sleep(25);
                             break;
@@ -66,34 +66,34 @@ namespace KBSGame.GameObjects
             }
             else
             {
-                //add the amount of trees to canvas
-                for (int i = 0; i < aantalBoom; i++)
+                //add the amount of trees to the canvas
+                for (int i = 0; i < amountOfTrees; i++)
                 {
                     Tree t = new Tree();
-                    obstakels.Add(t);
+                    obstacles.Add(t);
                     canvas.Children.Add(t.image);
                     Thread.Sleep(25);
                 }
-                //generate amount of bombs but don't put it on the screen because it is a land mine
-                for (int i = 0; i < aantalBom; i++)
+                //generate amount of bombs but don't put them on the screen because it is a land mine
+                for (int i = 0; i < amountOfBombs; i++)
                 {
                     Bomb b = new Bomb();
-                    obstakels.Add(b);
+                    obstacles.Add(b);
                     Thread.Sleep(25);
                 }
-                //add the amount of moving obstacles to canvas
-                for (int i = 0; i < aantalMoving; i++)
+                //add the amount of moving obstacles to the canvas
+                for (int i = 0; i < amountOfMovingObstacles; i++)
                 {
                     mo = new MovingObstacle(game);
-                    obstakels.Add(mo);
+                    obstacles.Add(mo);
                     canvas.Children.Add(mo.image);
                     Thread.Sleep(25);
                 }
-                //add the amount of coins to canvas
-                for (int i = 0; i < aantalCoin; i++)
+                //add the amount of coins to the canvas
+                for (int i = 0; i < amountOfCons; i++)
                 {
                     Coin c = new Coin();
-                    obstakels.Add(c);
+                    obstacles.Add(c);
                     canvas.Children.Add(c.image);
                     Thread.Sleep(25);
                 }
@@ -102,17 +102,17 @@ namespace KBSGame.GameObjects
             Canvas = canvas;
         }
 
-        //reset all the obstacles that are placed on canvas
+        //reset all the obstacles that are placed on the canvas
         public void Reset()
         {
-            for (int i = 0; i < obstakels.Count; i++)
+            for (int i = 0; i < obstacles.Count; i++)
             {
-                //remove obstacles from canvas
-                Canvas.Children.Remove(obstakels[i].image);
+                //remove obstacles from the canvas
+                Canvas.Children.Remove(obstacles[i].image);
             }
 
             //remove eventhandler from ghosts
-            foreach (Obstakel o in obstakels)
+            foreach (Obstacle o in obstacles)
             {
                 if(o.GetType().ToString() == "KBSGame.Model.MovingObstacle")
                 {
@@ -120,9 +120,9 @@ namespace KBSGame.GameObjects
                     mo.timer.Tick -= mo.MoveObstakelRandom;
                 }
             }
-            //remove all of the data in waardes and obstakels so it is empty
-            obstakels.Clear();
-            waardes.Clear();
+            //remove all of the data in values and obstacles so it is empty
+            obstacles.Clear();
+            values.Clear();
         }
     }
 }

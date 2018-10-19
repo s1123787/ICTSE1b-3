@@ -31,7 +31,7 @@ namespace KBSGame.View
         {
 
             //Opens a new window and starts the game
-            Obstakels.waardes.Clear();
+            Obstacles.values.Clear();
             MainWindow mainWindow = new MainWindow(randomLevel);
             mainWindow.Show();
             this.Close();

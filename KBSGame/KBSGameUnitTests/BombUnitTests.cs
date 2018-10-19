@@ -57,7 +57,7 @@ namespace KBSGameUnitTests
             // Act
             bool test = false;
             //hier voeg je een bom toe op positie x=100 en y = 0
-            Obstakels.waardes.Add("1000b");
+            Obstacles.values.Add("1000b");
             game.Player.walkedOverBomb += (sender, e) => { test = true; };
             //hier beweeg je de speler 4 keer zodat het op de bom komt, waardoor de event wordt aangeroepen
             game.Player.MoveRight();
@@ -154,11 +154,11 @@ namespace KBSGameUnitTests
         public void OnPlayerWalkedOverBomb_PlayerWalkedOverBombAndBombIsGone_ReturnTrue()
         {
             //je voegt bom toe op positie x=100 y=0
-            Obstakels.waardes.Add("1000b");
+            Obstacles.values.Add("1000b");
             //speler loopt over bom waar de waardes van bom in worden meegegeven
             game.OnPlayerWalkedOverBomb(game, new GameEventArgs(100, 0, 0, 0));
             //hier kijk je of de bom nog in de lijst staat
-            bool test = Obstakels.waardes.Contains("1000b");
+            bool test = Obstacles.values.Contains("1000b");
             Assert.IsFalse(test);
         }
     }

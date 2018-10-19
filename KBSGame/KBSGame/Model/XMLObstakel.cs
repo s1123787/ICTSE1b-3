@@ -9,8 +9,8 @@ namespace KBSGame.Model
     public class XMLObstakel
     {
         //Properties from XML file
-        public string ObstakelType { get; set; }
-        public int ObstakelX { get; set; }
-        public int ObstakelY { get; set; }
+        public string ObstacleType { get; set; }
+        public int ObstacleX { get; set; }
+        public int ObstacleY { get; set; }
     }
 }
