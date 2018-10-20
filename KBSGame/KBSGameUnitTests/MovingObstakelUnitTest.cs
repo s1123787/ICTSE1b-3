@@ -21,27 +21,31 @@ namespace KBSGameUnitTests
         //Check if moving obstakel moves right and hits next grid.
         [Test]
         public void PlayerMove_PlayerHitsMovingObstakel_ReturnTrue()
-        {
-            // Act
+        { 
+            //Arrange
             bool test = false;
 
+            //Act
             //Move the player 4 times to hit obstacle
             game.Player.MoveRight();
             game.Player.MoveRight();
             game.Player.MoveRight();
             game.Player.MoveRight();
 
+            
             //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(0);
 
             //check if exists
-            if(Obstakels.waardes.Contains($"1000m"))
+            if(Obstacles.waardes.Contains($"1000m"))
             {
                 //check if player hit Obstakel
                 test = true;
             }
+
+            //Assert
             Assert.IsTrue(test);
         }
 
@@ -55,23 +59,25 @@ namespace KBSGameUnitTests
         [Test]
         public void MoveObstacleRight_MovingObstakelMovesRight_ReturnTrue()
         {
+            //Arrange
             bool test = false;
 
             //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(0);
-            Obstakels.waardes.Add($"1000m");
+            Obstacles.waardes.Add($"1000m");
 
+            //Act
             moving.MoveObstakelRight();
             
-            
             //check if Moving Obstakels moved 50px to the right
-            if (Obstakels.waardes.Contains("1500m"))
+            if (Obstacles.waardes.Contains("1500m"))
             {
                 test = true;
             }
 
+            //Assert
             Assert.IsTrue(test);
         }
 
@@ -79,22 +85,25 @@ namespace KBSGameUnitTests
         [Test]
         public void MoveObstacleLeft_MovingObstakelMovesLeft_ReturnTrue()
         {
+            //Arrange
             bool test = false;
 
             //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(0);
-            Obstakels.waardes.Add($"1000m");
+            Obstacles.waardes.Add($"1000m");
 
+            //Act
             moving.MoveObstakelLeft();
-
+            
             //check if Moving Obstakels moved 50px to the right
-            if (Obstakels.waardes.Contains("500m"))
+            if (Obstacles.waardes.Contains("500m"))
             {
                 test = true;
             }
 
+            //Assert
             Assert.IsTrue(test);
         }
 
@@ -102,45 +111,50 @@ namespace KBSGameUnitTests
         [Test]
         public void MoveObstacleUp_MovingObstakelMovesUp_ReturnTrue()
         {
+            //Arrange
             bool test = false;
 
             //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(100);
-            Obstakels.waardes.Add($"100100m");
+            Obstacles.waardes.Add($"100100m");
 
+            //Act
             moving.MoveObstakelUp();
 
             //check if Moving Obstakels moved 50px to the right
-            if (Obstakels.waardes.Contains("10050m"))
+            if (Obstacles.waardes.Contains("10050m"))
             {
                 test = true;
             }
 
+            //Assert
             Assert.IsTrue(test);
         }
 
         [Test]
         public void MoveObstacleDown_MovingObstakelMovesDown_ReturnTrue()
         {
+            //Arrange
             bool test = false;
 
             //add obstacle on position x=100 en y = 0
             MovingObstacle moving = new MovingObstacle();
             moving.SetX(100);
             moving.SetY(100);
-            Obstakels.waardes.Add($"100100m");
+            Obstacles.waardes.Add($"100100m");
             
-
+            //Act
             moving.MoveObstakelDown();
 
             //check if Moving Obstakels moved 50px to the right
-            if (Obstakels.waardes.Contains("100150m"))
+            if (Obstacles.waardes.Contains("100150m"))
             {
                 test = true;
             }
 
+            //Assert
             Assert.IsTrue(test);
         }
     }
