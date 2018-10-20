@@ -104,7 +104,7 @@ namespace KBSGameUnitTests
         public void Move_MoveTowardsTree_ReturnEqual()
         {
             //Arrange
-            Obstakels.waardes.Add("1000t");
+            Obstacles.waardes.Add("1000t");
 
             //Act
             g.Player.MoveRight();
@@ -122,7 +122,7 @@ namespace KBSGameUnitTests
         [Test]
         public void Move_PlayerCollectsCoinAndCounterPlus1_ReturnEqual()
         {
-            Obstakels.waardes.Add("0100c");
+            Obstacles.waardes.Add("0100c");
 
             g.Player.MoveDown();
             g.Player.MoveDown();
@@ -135,7 +135,7 @@ namespace KBSGameUnitTests
         public void Move_PlayerCollectsCoinAndCantCollectSameCoinTwice_ReturnEqual()
         {
             //Arrange
-            Obstakels.waardes.Add("0100c");
+            Obstacles.waardes.Add("0100c");
 
             //Act
             g.Player.MoveDown();
@@ -162,7 +162,7 @@ namespace KBSGameUnitTests
 
             //Arrange
             g.CollectedCoins = 4;
-            Obstakels.waardes.Add("0100c");
+            Obstacles.waardes.Add("0100c");
 
             //Act
             g.Player.MoveDown();
