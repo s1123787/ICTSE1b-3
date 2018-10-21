@@ -48,7 +48,7 @@ namespace KBSGameUnitTests
             game.OnEscKeyIsPressed(this, EventArgs.Empty);
             game.bomby = 150;
 
-            if(game.GameLost == true)
+            if(Game.GameLost == true)
             {
                 Assert.Fail();
             }
@@ -56,25 +56,25 @@ namespace KBSGameUnitTests
         [Test]
         public void OnEnterKeyIsPressed_EnterDoesntDoAnythingOnGameOverOverlay_ReturnFalse()
         {
-            game.playing = true;
+            Game.playing = true;
             game.GameOver();
             game.OnEnterKeyIsPressed(this, EventArgs.Empty);
 
-            Assert.False(game.playing);
+            Assert.False(Game.playing);
         }
         [Test]
         public void OnEnterKeyIsPressed_EnterDoesntDoAnythingOnGameWonOverlay_ReturnFalse()
         {
-            game.playing = true;
+            Game.playing = true;
             game.GameVictory();
             game.OnEnterKeyIsPressed(this, EventArgs.Empty);
 
-            Assert.False(game.playing);
+            Assert.False(Game.playing);
         }
         [Test]
         public void OnEscKeyIsPressed_PauseMenuDoesntTriggerWhenOtherMenuIsActive_ReturnFalse()
         {
-            game.playing = true;
+            Game.playing = true;
             game.GameOver();
             game.OnEscKeyIsPressed(this, EventArgs.Empty);
 
@@ -83,7 +83,7 @@ namespace KBSGameUnitTests
         [Test]
         public void OnEscKeyIsPressed_EnterThenEscapeOnGameOverDoesntTriggerPauseOverlay_ReturnFalse()
         {
-            game.playing = true;
+            Game.playing = true;
             game.GameOver();
             game.OnEnterKeyIsPressed(this, EventArgs.Empty);
             game.OnEscKeyIsPressed(this, EventArgs.Empty);
