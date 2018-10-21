@@ -129,7 +129,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Model\Game.cs" />
+    <Compile Include="Game.cs" />
     <Compile Include="Model\XMLItem.cs" />
     <Compile Include="Model\XMLObstakel.cs" />
     <Compile Include="Serializer.cs" />
