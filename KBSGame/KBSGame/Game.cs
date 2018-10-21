@@ -36,10 +36,10 @@ namespace KBSGame
         public Canvas GameCanvas { get; private set; }
         public MovingObstacle mo { get; set; }
         public Boolean FreezePlayer { get; set; }
-        private int aantalBoom;
-        private int aantalBom;
-        private int aantalMoving;
-        private int aantalCoin;
+        private int amountTree;
+        private int amountBomb;
+        private int amountMoving;
+        private int amountCoin;
         public Model.Timer GameTimer { get; set; }
         public int CollectedCoins { get; set; }
 
@@ -68,7 +68,7 @@ namespace KBSGame
         public Image image, explosionImage;
         public BitmapImage myBitmapImage = new BitmapImage();
 
-        private int aantal = 0;
+        private int amount = 0;
         public bool explosion = false, explosionIsGoingToTakePlace = false;
        #endregion
 
@@ -77,10 +77,10 @@ namespace KBSGame
         {
             mainWindow = mw;
             GameCanvas = canvas;
-            this.aantalBoom = aantalBoom;
-            this.aantalBom = aantalBom;
-            this.aantalMoving = aantalMoving;
-            this.aantalCoin = aantalCoin;
+            this.amountTree = aantalBoom;
+            this.amountBomb = aantalBom;
+            this.amountMoving = aantalMoving;
+            this.amountCoin = aantalCoin;
             Seconde = s;
             randomLevel = rl;
 
@@ -254,15 +254,15 @@ namespace KBSGame
         public void Timer2_Tick(object sender, EventArgs e)
         {
             //check if second is over
-            if (aantal < 25)
+            if (amount < 25)
             {
-                aantal++;              
+                amount++;              
                 if ((Player.x == bombx || Player.x == bombx + 50 || Player.x == bombx - 50) && (Player.y == bomby || Player.y == bomby + 50 || Player.y == bomby - 50) && GameLost == false && GameWon == false)
                 {
                     GameOver();
                     timer2.Tick -= Timer2_Tick;
                 }
-            } else if (aantal >= 25) //second is over and player isn't hit by explosion so it can move on and explosion will be deleted
+            } else if (amount >= 25) //second is over and player isn't hit by explosion so it can move on and explosion will be deleted
             {
                 ExplosionEnded();
             }
@@ -312,7 +312,7 @@ namespace KBSGame
             Player.Reset();
             ResetAllObstacles();
             //create new obastakels
-            obstacles = new Obstacles(aantalBoom, aantalBom, aantalMoving, aantalCoin, randomLevel);
+            obstacles = new Obstacles(amountTree, amountBomb, amountMoving, amountCoin, randomLevel);
             PlaceAllObstacles();
             foreach (Obstacle o in Obstacles.obstacles)
             {
@@ -349,7 +349,7 @@ namespace KBSGame
             }            
         }
 
-       public void GameOver()
+        public void GameOver()
         {
             FreezePlayer = true;
             GameLost = true;
@@ -388,7 +388,7 @@ namespace KBSGame
             overBomb = true;
             overBomb2 = true;
             timer2.Tick -= Timer2_Tick; //delete subscriber
-            aantal = 0; //set the amount to check if second is over to zero
+            amount = 0; //set the amount to check if second is over to zero
             timer.Tick -= Timer_Tick; //delete the subscriber
             explosionIsGoingToTakePlace = false;
         }
