@@ -17,7 +17,7 @@ namespace KBSGame.Model
             image.Height = 50;
             //to make sure that the player can't be under the three
             Canvas.SetZIndex(image, 2);
-
+            
             BitmapImage bitmapImage = new BitmapImage();
 
             bitmapImage.BeginInit();
@@ -40,7 +40,7 @@ namespace KBSGame.Model
             bitmapImage.EndInit();
 
             image.Source = bitmapImage;
-
+            
             if(StaticX != -1 && StaticY != -1)
             {
                 //assign the positon of tree

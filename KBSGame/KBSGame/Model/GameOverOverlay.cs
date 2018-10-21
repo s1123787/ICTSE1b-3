@@ -62,7 +62,7 @@ namespace KBSGame.Model
         }
 
         //Actions to perform when play again button is clicked
-        private void Again_Click(object sender, RoutedEventArgs e)
+        public void Again_Click(object sender, RoutedEventArgs e)
         {
             OnAgainIsPressed();
             //Method to reset the game
