@@ -20,7 +20,6 @@ namespace KBSGame.Model
         public event ResumeIsPressed resumeIsPressed;
         public delegate void RestartIspressed(object source, EventArgs e);
         public event RestartIspressed restartIsPressed;
-
         public Image pauseSprite;
         public Button restart, resume;
         public int pauseSpriteX, pauseSpriteY, resumeX, resumeY, restartX, restartY, menuX, menuY;
@@ -69,6 +68,23 @@ namespace KBSGame.Model
             //Subscribe the resume button to the method it needs to run
             resume.Click += Resume_Click;
 
+            //Create new button template for menu button
+            ControlTemplate menuButtonTemplate = new ControlTemplate(typeof(Button));
+            var menuButtonImage = new FrameworkElementFactory(typeof(Image));
+            menuButtonImage.SetValue(Image.SourceProperty, new BitmapImage(new Uri("pack://application:,,,/Images/menu-button-left.png", UriKind.RelativeOrAbsolute)));
+            menuButtonTemplate.VisualTree = menuButtonImage;
+
+            //Create new button to go to the game menu
+            menu = new Button
+            {
+                Width = 125,
+                Height = 45,
+                Name = "menuButton",
+                Template = menuButtonTemplate
+            };
+            //Subscribe the menu button to the method it needs to run
+            menu.Click += Menu_Click;
+
             //Set coardinate values
             pauseSpriteX = 300;
             pauseSpriteY = 120;
@@ -94,6 +110,12 @@ namespace KBSGame.Model
         private void Resume_Click(object sender, RoutedEventArgs e)
         {
             OnResumeIsPressed();
+        }
+
+        //Actions to perform when menu button is clicked
+        private void Menu_Click(object sender, RoutedEventArgs e)
+        {
+            OnPressedOnMenu();
         }
 
         protected virtual void OnResumeIsPressed()

@@ -29,23 +29,29 @@ namespace KBSGameUnitTests
         [Test]
         public void GameVictory_PlayerCantMove_ReturnTrue()
         {
+            //Arrrange
             Player.x = 150;
             Player.y = 150;
+            //Act
             game.GameVictory();
             game.Player.MoveRight();
+            //Assert
             Assert.AreNotEqual(Player.x, 150);
         }
 
         [Test]
         public void GameVictory_BombExplodeStops_ReturnTrue()
         {
+            //Arrange
             Player.x = 150;
             Player.y = 150;
             game.bombx = 150;
             game.bomby = 0;
+            //Act
             game.GameVictory();
             game.bomby = 150;
-            if (game.GameLost == true)
+            //Assert
+            if (Game.GameLost == true)
             {
                 Assert.Fail();
             }
@@ -54,17 +60,17 @@ namespace KBSGameUnitTests
         [Test]
         public void GameVictory_MovingObstacleCantMove_ReturnTrue()
         {
+            //Arrange
             bool test = true;
-            
-            MovingObstacle moving = new MovingObstacle(game, true);
+            MovingObstacle moving = new MovingObstacle(true, 100, 100);
             moving.SetX(100);
             moving.SetY(100);
-            Obstakels.waardes.Add($"100100m");
-
+            Obstacles.waardes.Add($"100100m");
+            //Act
             game.GameVictory();
             moving.MoveObstakelDown();
-            
-            if (Obstakels.waardes.Contains("100150m"))
+            //Assert
+            if (Obstacles.waardes.Contains("100150m"))
             {
                 test = false;
             }
@@ -75,9 +81,12 @@ namespace KBSGameUnitTests
         [Test]
         public void GameVictory_CorrectFlagValues_ReturnTrue()
         {
+            //Arrange
             bool test = false;
+            //Act
             game.GameVictory();
-            if(game.FreezePlayer == true && game.GameLost == false && game.GameWon == true && game.playing == false)
+            //Assert
+            if (game.FreezePlayer == true && Game.GameLost == false && Game.GameWon == true && Game.playing == false)
             {
                 test = true;
             }
